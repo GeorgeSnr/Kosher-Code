@@ -1,0 +1,150 @@
+.services {
+    padding: 6rem 0;
+    width: 100%;
+    background-color: var(--site-bg-alt, #FAF8FF);
+    font-family: 'Poppins', sans-serif;
+    color: var(--site-text-main, #070120);
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.service {
+    margin: 1rem 0;
+    display: flex;
+}
+
+.service-card {
+    background: var(--site-card-bg, #FFFFFF);
+    border: 1px solid var(--site-border, #E5E0FA);
+    border-radius: 4px;
+    padding: 1.75rem;
+    position: relative;
+    box-shadow: var(--site-shadow-sm, 0 4px 18px 0 rgba(115, 85, 247, 0.05));
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--site-primary, #7355F7);
+    box-shadow: var(--site-shadow-md, 0 12px 28px 0 rgba(115, 85, 247, 0.15));
+}
+
+.service-icon-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-icon-box {
+    transform: scale(1.05);
+}
+
+.service-category-badge {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    background-color: var(--site-primary-subtle, #F4F0FF);
+    color: var(--site-primary, #7355F7);
+    border: 1px solid var(--site-border, #E5E0FA);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.service-region-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--site-text-muted, #666666);
+    background-color: var(--site-card-subtle, #FAF8FF);
+    border: 1px solid var(--site-border, #E5E0FA);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+}
+
+.region-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 2px;
+    background-color: var(--site-primary, #7355F7);
+    display: inline-block;
+}
+
+.serviceName {
+    font-weight: 700;
+    font-size: 1.18rem;
+    color: var(--site-text-main, #070120);
+    line-height: 1.4;
+    margin-bottom: 0.65rem;
+    transition: color 0.2s ease;
+}
+
+.service-card:hover .serviceName {
+    color: var(--site-primary, #7355F7);
+}
+
+.serviceDes {
+    color: var(--site-text-muted, #666666);
+    font-weight: 400;
+    line-height: 1.65;
+    font-size: 0.925rem;
+    margin-bottom: 0.75rem;
+}
+
+.price-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--site-text-light, #888888);
+    display: block;
+    line-height: 1;
+    margin-bottom: 3px;
+}
+
+.servicePrice {
+    color: var(--site-primary, #7355F7);
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+}
+
+.service-footer {
+    border-color: var(--site-border, #E5E0FA) !important;
+}
+
+.bookingBtn {
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.88rem;
+    outline: none;
+    color: #FFFFFF;
+    border: none;
+    padding: 0.6rem 1.25rem;
+    background: var(--site-primary, #7355F7);
+    box-shadow: 0 4px 12px rgba(115, 85, 247, 0.25);
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+}
+
+.bookingBtn span {
+    transition: transform 0.2s ease;
+}
+
+.bookingBtn:hover {
+    background: var(--site-primary-hover, #4B24F5);
+    box-shadow: 0 6px 16px rgba(75, 36, 245, 0.35);
+}
+
+.bookingBtn:hover span {
+    transform: translateX(3px);
+}

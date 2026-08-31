@@ -1,0 +1,46 @@
+type User @table {
+  displayName: String!
+  email: String!
+  role: String!
+  bio: String
+  hourlyRate: Float
+  techStack: String
+}
+
+type ConsultationRequest @table {
+  title: String!
+  description: String!
+  status: String!
+  urgency: String!
+  codeSnippetUrl: String
+  deadline: Timestamp
+  requester: User!
+}
+
+type ConsultationSession @table {
+  status: String!
+  startDate: Timestamp!
+  endDate: Timestamp!
+  notes: String
+  recordingUrl: String
+  consultationRequest: ConsultationRequest!
+  mentor: User!
+}
+
+type Review @table {
+  rating: Int!
+  comment: String!
+  timestamp: Timestamp
+  consultationSession: ConsultationSession!
+  reviewer: User!
+}
+
+type Skill @table {
+  name: String!
+  category: String
+}
+
+type UserSkill @table(key: ["user", "skill"]) {
+  user: User!
+  skill: Skill!
+}

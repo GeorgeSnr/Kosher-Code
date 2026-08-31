@@ -1,0 +1,359 @@
+/* =========================================================
+   GLOBAL CSS THEME VARIABLES (Public Site & Full App)
+   ========================================================= */
+:root, [data-theme="light"] {
+    --site-bg: #FFFFFF;
+    --site-bg-alt: #FAF8FF;
+    --site-card-bg: #FFFFFF;
+    --site-card-subtle: #FAF8FF;
+    --site-card-hover: #F4F0FF;
+    --site-border: #E5E0FA;
+    --site-border-subtle: #F0EEFA;
+    --site-text-main: #070120;
+    --site-text-muted: #555555;
+    --site-text-light: #777777;
+    --site-primary: #7355F7;
+    --site-primary-hover: #4B24F5;
+    --site-primary-subtle: #F4F0FF;
+    --site-header-bg: #FFFFFF;
+    --site-nav-bg: #FFFFFF;
+    --site-shadow-sm: 0 2px 8px rgba(64, 60, 67, 0.06);
+    --site-shadow-md: 0 4px 18px 0 rgba(115, 85, 247, 0.08);
+
+    /* Minimal 4px Border Radius */
+    --bs-border-radius: 4px !important;
+    --bs-border-radius-sm: 2px !important;
+    --bs-border-radius-lg: 4px !important;
+    --bs-border-radius-xl: 4px !important;
+    --bs-border-radius-2xl: 4px !important;
+    --bs-border-radius-pill: 4px !important;
+}
+
+[data-theme="dark"], html[data-theme="dark"] body {
+    --site-bg: #0B0F19;
+    --site-bg-alt: #111827;
+    --site-card-bg: #151D2F;
+    --site-card-subtle: #192237;
+    --site-card-hover: #1E293B;
+    --site-border: #232F46;
+    --site-border-subtle: #1E293B;
+    --site-text-main: #F8FAFC;
+    --site-text-muted: #94A3B8;
+    --site-text-light: #64748B;
+    --site-primary: #8B5CF6;
+    --site-primary-hover: #7C3AED;
+    --site-primary-subtle: rgba(139, 92, 246, 0.16);
+    --site-header-bg: #0B0F19;
+    --site-nav-bg: #111827;
+    --site-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+    --site-shadow-md: 0 6px 20px rgba(0, 0, 0, 0.5);
+
+    background-color: var(--site-bg) !important;
+    color: var(--site-text-main) !important;
+    color-scheme: dark;
+}
+
+html[data-theme="dark"],
+html[data-theme="dark"] body,
+html[data-theme="dark"] #root,
+html[data-theme="dark"] main {
+    background-color: #0B0F19 !important;
+    color: #F8FAFC !important;
+}
+
+body {
+    background-color: var(--site-bg);
+    color: var(--site-text-main);
+    transition: background-color 0.25s ease, color 0.25s ease;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+main {
+    background-color: var(--site-bg);
+    color: var(--site-text-main);
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+button,
+input,
+select,
+textarea,
+.btn,
+.form-control,
+.form-select,
+.card,
+.modal-content,
+.badge,
+.toast,
+.dropdown-menu,
+.nav-pills .nav-link,
+.pagination .page-link {
+    border-radius: 4px !important;
+}
+
+/* =========================================================
+   PUBLIC WEBSITE SECTION DARK MODE OVERRIDES
+   ========================================================= */
+
+/* 1. Header & Hero */
+[data-theme="dark"] .header {
+    background: #0B0F19 !important;
+    background-image: radial-gradient(circle at top right, rgba(115, 85, 247, 0.14) 0%, transparent 65%) !important;
+    color: #F8FAFC !important;
+}
+
+/* 2. Navigation */
+[data-theme="dark"] .navStyle,
+[data-theme="dark"] .navDefault {
+    background: #111827 !important;
+    border-bottom: 1px solid #232F46 !important;
+}
+
+[data-theme="dark"] .mainNav .nav-link {
+    color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .navBrn {
+    color: #F8FAFC !important;
+}
+
+/* 3. About Section */
+[data-theme="dark"] .about,
+[data-theme="dark"] #about {
+    background-color: #0B0F19 !important;
+    color: #F8FAFC !important;
+}
+
+/* 4. Services Section */
+[data-theme="dark"] .services,
+[data-theme="dark"] #services {
+    background-color: #111827 !important;
+    color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .service-card {
+    background-color: #151D2F !important;
+    border-color: #232F46 !important;
+    color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .service-card:hover {
+    border-color: #8B5CF6 !important;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="dark"] .service-category-badge {
+    background-color: rgba(139, 92, 246, 0.16) !important;
+    color: #C4B5FD !important;
+    border-color: #3B2E75 !important;
+}
+
+[data-theme="dark"] .service-region-badge {
+    background-color: #192237 !important;
+    color: #94A3B8 !important;
+    border-color: #232F46 !important;
+}
+
+/* 5. Browser Support / Multi-Continental Infrastructure */
+[data-theme="dark"] .css-1bvc4cc,
+[data-theme="dark"] .MuiBox-root {
+    color: #F8FAFC;
+}
+
+/* 6. Happy Client / Value Section */
+[data-theme="dark"] .ourValue {
+    background: #111827 !important;
+    border-top: 1px solid #232F46 !important;
+    border-bottom: 1px solid #232F46 !important;
+}
+
+[data-theme="dark"] .ourValueDetails {
+    background-color: #151D2F !important;
+    border: 1px solid #232F46 !important;
+    color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .valueIcon {
+    background-color: rgba(139, 92, 246, 0.16) !important;
+    color: #8B5CF6 !important;
+    border-color: #3B2E75 !important;
+}
+
+[data-theme="dark"] .ourValueNumber {
+    color: #8B5CF6 !important;
+}
+
+[data-theme="dark"] .ourValueTitle {
+    color: #94A3B8 !important;
+}
+
+/* 7. Pricing Section */
+[data-theme="dark"] .pricing {
+    background-color: #0B0F19 !important;
+    color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .pricingNav .nav-link {
+    background-color: #192237 !important;
+    border-color: #232F46 !important;
+}
+
+[data-theme="dark"] .pricingNav .nav-link.active {
+    background-color: #8B5CF6 !important;
+    border-color: #8B5CF6 !important;
+}
+
+[data-theme="dark"] .pricingCard {
+    background-color: #151D2F !important;
+    border-color: #232F46 !important;
+    color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .pricingCard.featured-card {
+    border-color: #8B5CF6 !important;
+}
+
+[data-theme="dark"] .pricingBox {
+    border-bottom-color: #232F46 !important;
+}
+
+[data-theme="dark"] .plan-tier-badge {
+    background-color: rgba(139, 92, 246, 0.16) !important;
+    color: #C4B5FD !important;
+    border-color: #3B2E75 !important;
+}
+
+[data-theme="dark"] .pricePlan .currency,
+[data-theme="dark"] .price-number {
+    color: #8B5CF6 !important;
+}
+
+[data-theme="dark"] .checkIcon-modern {
+    background-color: rgba(139, 92, 246, 0.16) !important;
+    color: #8B5CF6 !important;
+}
+
+[data-theme="dark"] .pricingBtn {
+    background-color: #192237 !important;
+    color: #F8FAFC !important;
+    border-color: #232F46 !important;
+}
+
+[data-theme="dark"] .pricingBtn.btn-featured {
+    background-color: #8B5CF6 !important;
+    border-color: #8B5CF6 !important;
+    color: #FFFFFF !important;
+}
+
+/* 8. Testimonials Section */
+[data-theme="dark"] #testimonial {
+    background: #0E1424 !important;
+    color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .review {
+    background-color: #151D2F !important;
+    border-color: #232F46 !important;
+    color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .review > img {
+    border-color: #151D2F !important;
+}
+
+[data-theme="dark"] .review > .testimonialName {
+    color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .review > .testimonialAddress {
+    color: #C4B5FD !important;
+}
+
+[data-theme="dark"] .review > p {
+    color: #94A3B8 !important;
+}
+
+/* 9. Contact Section */
+[data-theme="dark"] #contact {
+    background-color: #0B0F19 !important;
+    color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .contactForm input,
+[data-theme="dark"] .contactForm textarea,
+[data-theme="dark"] .contactForm select {
+    background-color: #0F172A !important;
+    border-color: #2A3854 !important;
+    color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .contactForm input::placeholder,
+[data-theme="dark"] .contactForm textarea::placeholder {
+    color: #64748B !important;
+}
+
+[data-theme="dark"] .contactForm select option {
+    background-color: #111827 !important;
+    color: #F8FAFC !important;
+}
+
+/* 10. Footer Section */
+[data-theme="dark"] .footer {
+    background: #111827 !important;
+    background-image: none !important;
+    border-top: 1px solid #232F46 !important;
+}
+
+[data-theme="dark"] .copyRight {
+    background-color: #070B14 !important;
+    border-top: 1px solid #1E293B !important;
+}
+
+/* 11. Universal Typography Rules for Dark Mode */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6,
+[data-theme="dark"] .headerTitle,
+[data-theme="dark"] .sectionTitle,
+[data-theme="dark"] .serviceName,
+[data-theme="dark"] .plan-name,
+[data-theme="dark"] .testimonialName {
+    color: #F8FAFC !important;
+}
+
+[data-theme="dark"] p,
+[data-theme="dark"] .headerContent,
+[data-theme="dark"] .serviceDes,
+[data-theme="dark"] .planDescription,
+[data-theme="dark"] .feature-text,
+[data-theme="dark"] .text-muted,
+[data-theme="dark"] .text-secondary {
+    color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .miniTitle {
+    color: #8B5CF6 !important;
+}
+
+[data-theme="dark"] .headerHighlight {
+    color: #8B5CF6 !important;
+}
+
+[data-theme="dark"] .bg-white {
+    background-color: #151D2F !important;
+}
+
+[data-theme="dark"] .bg-light {
+    background-color: #192237 !important;
+}
+
+[data-theme="dark"] .border-light {
+    border-color: #232F46 !important;
+}
+
+.App {
+    text-align: center;
+}

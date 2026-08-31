@@ -1,0 +1,32 @@
+.popImg {
+    cursor: pointer !important;
+    margin: 0.2rem 0 0 0.5rem;
+    display: inline-flex;
+    vertical-align: middle;
+}
+.popUserImg {
+    margin-bottom: 8px;
+    display: inline-flex;
+}
+.userName, 
+.userEmail{
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--cp-text-main, #0F172A);
+}
+.userEmail {
+    margin: 0.1rem 0 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--cp-text-muted, rgba(0,0,0,.7));
+}
+#popover-contained {
+    background-color: var(--cp-card-bg, #FFFFFF) !important;
+    border-color: var(--cp-border, #E5E0FA) !important;
+    color: var(--cp-text-main, #0F172A) !important;
+}
+#popover-contained .popover-body {
+    background-color: var(--cp-card-bg, #FFFFFF) !important;
+    color: var(--cp-text-main, #0F172A) !important;
+}

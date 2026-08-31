@@ -1,0 +1,27 @@
+mutation SeedData @transaction {
+  user_insertMany(data: [
+    { id: "00000000-0000-0000-0000-000000000001", displayName: "Alice Smith", email: "alice@example.com", role: "Mentor", bio: "Software Engineer", hourlyRate: 150.0 },
+    { id: "00000000-0000-0000-0000-000000000002", displayName: "Bob Jones", email: "bob@example.com", role: "User", bio: "Product Manager", hourlyRate: 100.0 },
+    { id: "00000000-0000-0000-0000-000000000003", displayName: "Charlie Brown", email: "charlie@example.com", role: "Mentor", bio: "Data Scientist", hourlyRate: 200.0 }
+  ])
+  skill_insertMany(data: [
+    { id: "00000000-0000-0000-0000-00000000000A", name: "GraphQL", category: "Backend" },
+    { id: "00000000-0000-0000-0000-00000000000B", name: "React", category: "Frontend" },
+    { id: "00000000-0000-0000-0000-00000000000C", name: "Python", category: "Language" }
+  ])
+  userSkill_insertMany(data: [
+    { userId: "00000000-0000-0000-0000-000000000001", skillId: "00000000-0000-0000-0000-00000000000A" },
+    { userId: "00000000-0000-0000-0000-000000000003", skillId: "00000000-0000-0000-0000-00000000000C" }
+  ])
+  consultationRequest_insertMany(data: [
+    { id: "00000000-0000-0000-0000-000000000011", title: "API Design Review", description: "Need feedback on schema", status: "Open", urgency: "High", requesterId: "00000000-0000-0000-0000-000000000002" },
+    { id: "00000000-0000-0000-0000-000000000012", title: "Python Optimization", description: "Slow code performance", status: "Open", urgency: "Medium", requesterId: "00000000-0000-0000-0000-000000000002" }
+  ])
+  consultationSession_insertMany(data: [
+    { id: "00000000-0000-0000-0000-000000000021", status: "Scheduled", startDate: "2023-11-01T10:00:00Z", endDate: "2023-11-01T11:00:00Z", consultationRequestId: "00000000-0000-0000-0000-000000000011", mentorId: "00000000-0000-0000-0000-000000000001" },
+    { id: "00000000-0000-0000-0000-000000000022", status: "Completed", startDate: "2023-11-02T14:00:00Z", endDate: "2023-11-02T15:00:00Z", consultationRequestId: "00000000-0000-0000-0000-000000000012", mentorId: "00000000-0000-0000-0000-000000000003" }
+  ])
+  review_insertMany(data: [
+    { rating: 5, comment: "Excellent advice!", consultationSessionId: "00000000-0000-0000-0000-000000000022", reviewerId: "00000000-0000-0000-0000-000000000002" }
+  ])
+}

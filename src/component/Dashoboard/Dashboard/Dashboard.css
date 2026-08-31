@@ -1,0 +1,197 @@
+#dashboard {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    align-items: stretch;
+    background: var(--cp-bg, #F8F9FD);
+    color: var(--cp-text-main, #0F172A);
+    font-family: 'Poppins', sans-serif;
+}
+
+#sidebar {
+    min-width: 270px;
+    max-width: 270px;
+    min-height: 100vh;
+    position: sticky;
+    top: 0;
+    background: var(--cp-sidebar-bg, #FFFFFF);
+    border-right: 1px solid var(--cp-border, #E5E0FA);
+    color: var(--cp-text-muted, #555555);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+}
+
+#sidebar.active {
+    margin-left: -270px;
+}
+
+.sidebarContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 1.25rem 0.75rem;
+}
+
+.backBtnBox {
+    padding-top: 1rem;
+    border-top: 1px solid var(--cp-border, #E5E0FA);
+    width: 100%;
+}
+
+.backBtnBox .backBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    background: var(--cp-card-subtle, #FAF8FF);
+    border: 1px solid var(--cp-border, #E5E0FA);
+    font-size: 0.88rem;
+    transition: 0.25s;
+    padding: 0.6rem 1rem;
+    font-weight: 600;
+    color: var(--cp-primary, #7355F7);
+    border-radius: 4px;
+}
+
+.backBtnBox .backBtn:hover {
+    background: var(--cp-primary, #7355F7);
+    color: #FFFFFF;
+    border-color: var(--cp-primary, #7355F7);
+}
+
+.backBtnBox a:hover {
+    text-decoration: none;
+}
+
+#pageContent {
+    flex-grow: 1;
+    width: calc(100% - 270px);
+    min-height: 100vh;
+    transition: all 0.3s;
+    padding: 1.5rem;
+    background: var(--cp-bg, #F8F9FD);
+    color: var(--cp-text-main, #0F172A);
+}
+
+.dashBoardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 1.5rem;
+    margin-bottom: 1.5rem;
+    background: var(--cp-header-bg, #FFFFFF);
+    border-radius: 4px;
+    border: 1px solid var(--cp-border, #E5E0FA);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.dashBoardHeader h4 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--cp-text-main, #070120);
+}
+
+/* Menu Hamburger Icon Animation */
+#nav-icon {
+    width: 36px;
+    height: 32px;
+    position: relative;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 0.75rem;
+    background: var(--cp-card-subtle, #FAF8FF);
+    border: 1px solid var(--cp-border, #E5E0FA);
+    transition: 0.25s ease;
+}
+
+#nav-icon:hover {
+    background: var(--cp-primary-subtle, #F4F0FF);
+}
+
+#nav-icon span {
+    display: block;
+    position: absolute;
+    height: 2.5px;
+    width: 50%;
+    background: var(--cp-primary, #7355F7);
+    opacity: 1;
+    border-radius: 2px;
+    transition: 0.25s ease-in-out;
+}
+
+#nav-icon span:nth-child(even) {
+    left: 35%;
+}
+
+#nav-icon span:nth-child(odd) {
+    left: 0.35rem;
+}
+
+#nav-icon span:nth-child(1), #nav-icon span:nth-child(2) {
+    top: 7px;
+}
+
+#nav-icon span:nth-child(3), #nav-icon span:nth-child(4) {
+    top: 14px;
+}
+
+#nav-icon span:nth-child(5), #nav-icon span:nth-child(6) {
+    top: 21px;
+}
+
+#nav-icon.open span:nth-child(1), #nav-icon.open span:nth-child(6) {
+    transform: rotate(45deg);
+}
+
+#nav-icon.open span:nth-child(2), #nav-icon.open span:nth-child(5) {
+    transform: rotate(-45deg);
+}
+
+#nav-icon.open span:nth-child(1) {
+    left: 8px;
+    top: 13px;
+}
+
+#nav-icon.open span:nth-child(2) {
+    left: calc(50% - 8px);
+    top: 13px;
+}
+
+#nav-icon.open span:nth-child(3) {
+    left: -50%;
+    opacity: 0;
+}
+
+#nav-icon.open span:nth-child(4) {
+    left: 100%;
+    opacity: 0;
+}
+
+#nav-icon.open span:nth-child(5) {
+    left: 8px;
+    top: 14px;
+}
+
+#nav-icon.open span:nth-child(6) {
+    left: calc(50% - 8px);
+    top: 14px;
+}
+
+@media (max-width: 991px) {
+    #sidebar {
+        margin-left: -270px;
+        position: fixed;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #pageContent {
+        width: 100%;
+        padding: 1rem;
+    }
+}

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="avatarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="50%" stop-color="#7355F7"/>
+      <stop offset="100%" stop-color="#4B24F5"/>
+    </linearGradient>
+    <linearGradient id="avatarGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.05"/>
+    </linearGradient>
+  </defs>
+  <!-- Base Circular Background -->
+  <circle cx="256" cy="256" r="256" fill="url(#avatarGrad)"/>
+  <!-- Inner Ring Highlight -->
+  <circle cx="256" cy="256" r="248" fill="none" stroke="url(#avatarGlow)" stroke-width="14"/>
+  <!-- Avatar Head Silhouette -->
+  <circle cx="256" cy="184" r="82" fill="#FFFFFF" fill-opacity="0.96"/>
+  <!-- Avatar Torso / Shoulder Silhouette -->
+  <path d="M120 442 C 130 332, 190 302, 256 302 C 322 302, 382 332, 392 442 C 354 484, 308 508, 256 508 C 204 508, 158 484, 120 442 Z" fill="#FFFFFF" fill-opacity="0.96"/>
+</svg>
+

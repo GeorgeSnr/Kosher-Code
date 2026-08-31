@@ -1,0 +1,122 @@
+.navStyle {
+    box-shadow: var(--site-shadow-sm, 0 2px 5px 1px rgb(64 60 67 / 16%));
+    background: var(--site-nav-bg, white) !important;
+    position: fixed !important;
+    width: 100%;
+    z-index: 99 !important;
+    transition: all 0.3s ease !important;
+    font-family: 'Poppins', sans-serif;
+    border-bottom: 1px solid var(--site-border, #E5E0FA);
+}
+
+.navDefault {
+    background: transparent;
+    transition: 0.3s !important;
+    padding: 14px 0 14px 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.mainNav .nav-link {
+    color: var(--site-text-main, #070120) !important;
+    margin: 0.5rem 1rem !important;
+    font-weight: 500 !important;
+    transition: 0.25s;
+    font-size: 1.02rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.mainNav .nav-link:after {
+    content: '';
+    display: block;
+    margin: auto;
+    height: 3px;
+    width: 0px;
+    background: transparent;
+    transition: width .3s ease, background-color .3s ease;
+}
+
+.mainNav .nav-link:hover:after {
+    width: 100%;
+    background: var(--site-primary, #7355F7);
+}
+
+.navBrn {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--site-text-main, #070120) !important;
+}
+
+.brnIcon,
+.navHighlight {
+    color: var(--site-primary, #7456F7);
+}
+
+.brnIcon {
+    font-weight: 800;
+    font-size: 1.6rem;
+}
+
+/* Site Theme Toggle Button in Navbar */
+.site-theme-btn {
+    background: var(--site-card-subtle, #FAF8FF);
+    border: 1px solid var(--site-border, #E5E0FA);
+    color: var(--site-primary, #7355F7);
+    width: 38px;
+    height: 38px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    outline: none;
+}
+
+.site-theme-btn:hover {
+    background: var(--site-primary, #7355F7);
+    color: #FFFFFF;
+    border-color: var(--site-primary, #7355F7);
+    box-shadow: 0 4px 12px rgba(115, 85, 247, 0.25);
+}
+
+.loginBtn {
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    color: #FFFFFF;
+    background: var(--site-primary, #7355F7);
+    padding: 0.55rem 1.4rem;
+    margin: 0.3rem 0.5rem;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 14px rgba(115, 85, 247, 0.25);
+}
+
+.loginBtn:hover { 
+    background: var(--site-primary-hover, #4B24F5);
+    box-shadow: 0 6px 18px rgba(75, 36, 245, 0.35);
+}
+
+@media (max-width: 991px) {
+    .navDefault,
+    .navStyle {
+        background: var(--site-nav-bg, white) !important;
+        padding: 0.8rem 0.5rem !important;
+        width: 100%;
+        z-index: 99 !important;
+        transition: 0.3s !important;
+        text-align: center;
+        border-bottom: 1px solid var(--site-border, #E5E0FA);
+    }
+    
+    .site-theme-btn {
+        width: auto;
+        padding: 0.5rem 1.2rem;
+    }
+    
+    .navbar-toggler {
+        background-color: var(--site-card-subtle, #FAF8FF) !important;
+        border: 1px solid var(--site-border, #E5E0FA) !important;
+    }
+}

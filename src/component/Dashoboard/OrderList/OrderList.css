@@ -1,0 +1,12 @@
+.orderList {
+    background: var(--cp-card-bg, #FFFFFF);
+    border: 1px solid var(--cp-border, #E5E0FA);
+    padding: 1.5rem;
+    border-radius: 4px;
+    box-shadow: var(--cp-card-shadow, 0 2px 8px rgba(0, 0, 0, 0.02));
+    color: var(--cp-text-main, #0F172A);
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--cp-table-row-hover, #F8FAFC) !important;
+}
