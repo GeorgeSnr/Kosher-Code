@@ -1,11 +1,1 @@
-{
-  "framework": "create-react-app",
-  "buildCommand": "npm run build",
-  "outputDirectory": "build",
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
-}
+{"framework": "create-react-app", "buildCommand": "pnpm build", "installCommand": "pnpm install"}
