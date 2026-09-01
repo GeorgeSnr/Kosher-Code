@@ -87,23 +87,5 @@
     "react-scripts/postcss-safe-parser": "4.0.2",
     "**/postcss-safe-parser": "4.0.2",
     "babel-preset-react-app": "10.0.0"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@fortawesome/fontawesome-common-types",
-      "@fortawesome/fontawesome-svg-core",
-      "@fortawesome/free-brands-svg-icons",
-      "@fortawesome/free-regular-svg-icons",
-      "@fortawesome/free-solid-svg-icons",
-      "core-js",
-      "core-js-pure",
-      "ejs",
-      "es5-ext",
-      "protobufjs",
-      "swiper"
-    ],
-    "overrides": {
-      "postcss-safe-parser": "4.0.2"
-    }
   }
 }
