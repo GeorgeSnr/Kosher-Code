@@ -88,5 +88,10 @@
     "react-scripts/postcss-safe-parser": "4.0.2",
     "**/postcss-safe-parser": "4.0.2",
     "babel-preset-react-app": "10.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "postcss-safe-parser": "^7.0.0"
+    }
   }
 }
