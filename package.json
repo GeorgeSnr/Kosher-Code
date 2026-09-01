@@ -46,6 +46,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider CI=false react-scripts build",
+    "postinstall": "node fix-postcss.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
