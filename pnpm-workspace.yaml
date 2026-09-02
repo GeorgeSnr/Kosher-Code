@@ -1,3 +1,8 @@
+overrides:
+  '@babel/core': '^7.16.0'
+  'postcss-safe-parser': '^7.0.0'
+  'postcss': '^8.4.38'
+
 allowBuilds:
   '@fortawesome/fontawesome-common-types': true
   '@fortawesome/fontawesome-svg-core': true
@@ -10,3 +15,4 @@ allowBuilds:
   es5-ext: true
   protobufjs: true
   swiper: true
+
