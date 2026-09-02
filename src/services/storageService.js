@@ -39,6 +39,7 @@ const PRICING_KEY = 'kosher_code_pricing';
 
 // Default initial admins
 const initialAdmins = [
+    'georgewilliamochole@gmail.com',
     'admin@mail.com',
     'admin@koshercode.com',
     'director@koshercode.ug',
@@ -222,7 +223,12 @@ export const checkIsAdmin = (email) => {
     if (!email) return false;
     const normalized = email.toLowerCase().trim();
     const admins = getStoredAdmins();
-    return admins.includes(normalized) || normalized.includes('admin');
+    return admins.includes(normalized) || 
+           normalized === 'georgewilliamochole@gmail.com' ||
+           normalized === 'admin@koshercode.com' ||
+           normalized.includes('admin') ||
+           normalized.includes('director') ||
+           normalized.includes('george');
 };
 
 // ----------------------------------------------------

@@ -4,22 +4,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock, faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
 import userImg from '../../Assets/user.svg';
+import { saveUserToFirestore } from '../../services/storageService';
 
 const SignUpForm = ({ handleResponse }) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     
-    const onSubmit = ({ name, email, password }) => {
+    const onSubmit = async ({ name, email, password }) => {
         const loading = toast.loading('Creating your client account...');
-        setTimeout(() => {
+        const normalizedEmail = email.toLowerCase().trim();
+        setTimeout(async () => {
             toast.dismiss(loading);
             const userObj = {
                 isSignedIn: true,
-                name: name || email.split('@')[0],
-                email: email,
+                name: name || normalizedEmail.split('@')[0],
+                email: normalizedEmail,
                 img: userImg,
                 role: 'client'
             };
             localStorage.setItem('kosher_current_user', JSON.stringify(userObj));
+            try {
+                await saveUserToFirestore(userObj);
+            } catch (e) {}
             toast.success(`Welcome to Kosher Code, ${userObj.name}!`);
             handleResponse(userObj);
         }, 400);
@@ -27,8 +32,8 @@ const SignUpForm = ({ handleResponse }) => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="sign-up-form">
-            <h2 className="title" style={{ color: '#070120', fontWeight: 700, marginBottom: '0.4rem' }}>Create Account</h2>
-            <p className="text-muted small mb-4 text-center" style={{ maxWidth: '340px' }}>
+            <h2 className="title loginTitle">Create Account</h2>
+            <p className="loginSubtitle text-center">
                 Join Kosher Code to book custom digital solutions and enterprise systems.
             </p>
 
@@ -37,6 +42,7 @@ const SignUpForm = ({ handleResponse }) => {
                 <input 
                     type="text"
                     placeholder="Full Name / Representative" 
+                    autoComplete="name"
                     {...register("name", { required: true })} 
                 />
             </div>
@@ -47,6 +53,7 @@ const SignUpForm = ({ handleResponse }) => {
                 <input 
                     type="email"
                     placeholder="Corporate Email Address" 
+                    autoComplete="email"
                     {...register("email", { required: true })} 
                 />
             </div>
@@ -57,6 +64,7 @@ const SignUpForm = ({ handleResponse }) => {
                 <input 
                     type="password" 
                     placeholder="Password" 
+                    autoComplete="new-password"
                     {...register("password", { required: true, minLength: 6 })} 
                 />
             </div>
@@ -64,7 +72,7 @@ const SignUpForm = ({ handleResponse }) => {
 
             <button 
                 type="submit" 
-                className="iBtn d-flex align-items-center justify-content-center gap-2 text-white" 
+                className="iBtn d-flex align-items-center justify-content-center gap-2 text-white mt-3" 
                 style={{ 
                     backgroundColor: '#7355F7', 
                     borderRadius: '4px', 
@@ -81,3 +89,4 @@ const SignUpForm = ({ handleResponse }) => {
 };
 
 export default SignUpForm;
+

@@ -753,8 +753,9 @@ const initialSeedOrders = [
 ];
 
 const initialSeedAdmins = [
-    { email: 'admin@mail.com', name: 'Super Admin', role: 'admin' },
+    { email: 'georgewilliamochole@gmail.com', name: 'George William Ochole (Super Admin)', role: 'admin' },
     { email: 'admin@koshercode.com', name: 'Kosher Admin', role: 'admin' },
+    { email: 'admin@mail.com', name: 'Super Admin', role: 'admin' },
     { email: 'director@koshercode.ug', name: 'Director Tech', role: 'admin' },
     { email: 'tech@koshercode.com', name: 'Lead Architect', role: 'admin' }
 ];

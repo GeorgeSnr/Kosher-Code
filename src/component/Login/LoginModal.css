@@ -90,17 +90,31 @@
   opacity: 0;
 }
 
+.loginTitle {
+  font-size: 2.2rem;
+  color: var(--site-text-main, #070120);
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+.loginSubtitle {
+  color: #64748B;
+  font-size: 0.88rem;
+  margin-bottom: 1.5rem;
+  max-width: 340px;
+}
+
 .fContainer .title {
   font-size: 2.2rem;
-  color: #444;
-  margin-bottom: 1rem;
-  font-weight: 600;
+  color: var(--site-text-main, #070120);
+  margin-bottom: 0.4rem;
+  font-weight: 700;
 }
 
 .input-field {
     max-width: 380px;
     width: 100%;
-    background-color: #f0f0f0;
+    background-color: #F8FAFC;
     margin: 10px 0;
     height: 50px;
     border-radius: 4px;
@@ -108,28 +122,70 @@
     grid-template-columns: 15% 85%;
     padding: 0 0.4rem;
     position: relative;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #E2E8F0;
+    transition: all 0.25s ease;
+}
+
+.input-field:focus-within {
+    border-color: #7355F7;
+    box-shadow: 0 0 0 3px rgba(115, 85, 247, 0.15);
 }
 
 .input-field .fIcon {
     text-align: center;
     line-height: 50px;
-    color: #acacac;
-    transition: 0.5s;
+    color: #94A3B8;
+    transition: 0.3s;
     font-size: 1.1rem;
 }
 
 .input-field input {
   padding-right: 0.5rem;
-  background-color: #F0F0F0!important;
+  background-color: transparent !important;
   border-radius: 4px;
   outline: none;
   border: none;
   line-height: 1;
   font-weight: 500;
   font-size: 1rem;
-  color: #333;
+  color: #0F172A;
   width: 100%;
+}
+
+[data-theme="dark"] .fContainer {
+  background-color: #0B1120;
+}
+
+[data-theme="dark"] .loginTitle,
+[data-theme="dark"] .fContainer .title {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .loginSubtitle {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .input-field {
+  background-color: #1E293B !important;
+  border-color: #334155 !important;
+}
+
+[data-theme="dark"] .input-field input {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .input-field input::placeholder {
+  color: #64748B !important;
+}
+
+[data-theme="dark"] .input-field .fIcon {
+  color: #818CF8 !important;
+}
+
+[data-theme="dark"] .pageCloseBtn {
+  background: #1E293B;
+  color: #F8FAFC;
+  border-color: #334155;
 }
 
 .social-icon {
@@ -155,8 +211,8 @@
 }
 
 .input-field input::placeholder {
-  color: #aaa;
-  font-weight: 500;
+  color: #94A3B8;
+  font-weight: 400;
 }
 
 .iBtn {
