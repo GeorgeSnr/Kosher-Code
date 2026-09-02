@@ -485,11 +485,13 @@ const AdminPortal = () => {
                 {/* Sub-Routes */}
                 <Routes>
                     <Route index element={<AdminLanding />} />
+                    <Route path="" element={<AdminLanding />} />
                     <Route path="orders" element={<OrderList />} />
                     <Route path="add-service" element={<AddService />} />
                     <Route path="services" element={<ManageServices />} />
                     <Route path="team" element={<MakeAdmin />} />
                     <Route path="profile" element={<AdminProfile />} />
+                    <Route path="*" element={<AdminLanding />} />
                 </Routes>
             </div>
         </div>

@@ -23,7 +23,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
 import { SET_USER, SET_ADMIN, useAppContext } from '../../context';
-import { checkIsAdmin, saveUserToFirestore } from '../../services/storageService';
+import { checkIsAdmin, saveUserToFirestore, authenticateUserAccount, registerUserAccount } from '../../services/storageService';
 import { firebaseLogin, firebaseRegister, firebaseGoogleSignIn } from '../../services/firebaseService';
 import userImg from '../../Assets/user.svg';
 

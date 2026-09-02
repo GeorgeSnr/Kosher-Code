@@ -25,7 +25,14 @@ const Form = () => {
             return;
         }
         const isAdmin = checkIsAdmin(res.email) || res.role === 'admin';
-        dispatch({ type: SET_USER, payload: res });
+        const userObj = {
+            ...res,
+            isSignedIn: true,
+            role: isAdmin ? 'admin' : 'client'
+        };
+        sessionStorage.setItem('kosher_client_session', JSON.stringify(userObj));
+        localStorage.setItem('kosher_current_user', JSON.stringify(userObj));
+        dispatch({ type: SET_USER, payload: userObj });
         dispatch({ type: SET_ADMIN, payload: isAdmin });
 
         if (isAdmin) {

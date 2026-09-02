@@ -4,14 +4,21 @@ import { checkIsAdmin } from "../services/storageService";
 
 const AppContext = createContext();
 
-// Enforce Session-Only Management: Session clears upon leaving / closing tab
+// Resilient Session & Persistence Management
 const getInitialUser = () => {
     try {
         const sessionUser = sessionStorage.getItem('kosher_client_session');
         if (sessionUser) {
             const parsed = JSON.parse(sessionUser);
-            if (parsed && parsed.isSignedIn && parsed.email) {
-                return parsed;
+            if (parsed && (parsed.isSignedIn || parsed.email)) {
+                return { ...parsed, isSignedIn: true };
+            }
+        }
+        const localUser = localStorage.getItem('kosher_current_user');
+        if (localUser) {
+            const parsed = JSON.parse(localUser);
+            if (parsed && (parsed.isSignedIn || parsed.email)) {
+                return { ...parsed, isSignedIn: true };
             }
         }
     } catch (e) {}
@@ -19,7 +26,9 @@ const getInitialUser = () => {
 };
 
 const initialUser = getInitialUser();
-const initialAdmin = initialUser?.email ? checkIsAdmin(initialUser.email) || initialUser.role === 'admin' : false;
+const initialAdmin = initialUser?.email 
+    ? checkIsAdmin(initialUser.email) || initialUser.role === 'admin' 
+    : false;
 
 const initialState = {
     user: initialUser,

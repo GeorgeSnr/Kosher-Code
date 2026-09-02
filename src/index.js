@@ -7,14 +7,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AppProvider } from "./context";
+import ErrorBoundary from "./component/Shared/ErrorBoundary";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <AppProvider>
-        <App />
-      </AppProvider>
-    </Router>
+    <ErrorBoundary>
+      <Router>
+        <AppProvider>
+          <App />
+        </AppProvider>
+      </Router>
+    </ErrorBoundary>
   </React.StrictMode>,
   document.getElementById("root")
 );

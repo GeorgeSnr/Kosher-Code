@@ -509,11 +509,13 @@ const ClientPortal = () => {
                 {/* Sub-Routes */}
                 <Routes>
                     <Route index element={<ClientLanding />} />
+                    <Route path="" element={<ClientLanding />} />
                     <Route path="book" element={<Book />} />
                     <Route path="book/:id" element={<Book />} />
                     <Route path="bookings" element={<BookList />} />
                     <Route path="review" element={<Review />} />
                     <Route path="profile" element={<ClientProfile />} />
+                    <Route path="*" element={<ClientLanding />} />
                 </Routes>
             </div>
         </div>
