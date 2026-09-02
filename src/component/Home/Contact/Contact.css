@@ -64,3 +64,98 @@
 .contactForm textarea {
     height: 120px;
 }
+
+.contactActionGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.whatsappBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: #25D366;
+    color: #FFFFFF !important;
+    border: none;
+    border-radius: 4px;
+    padding: 0.75rem 1.4rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-decoration: none;
+}
+
+.whatsappBtn:hover {
+    background: #1EBE5D;
+    color: #FFFFFF !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+}
+
+.directChannelsContainer {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background: rgba(115, 85, 247, 0.05);
+    border: 1px solid rgba(115, 85, 247, 0.15);
+}
+
+[data-theme="dark"] .directChannelsContainer {
+    background: rgba(15, 23, 42, 0.6);
+    border-color: #2A3854;
+}
+
+.channelItem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.4rem 0;
+    font-size: 0.9rem;
+    color: var(--site-text-main, #070120);
+}
+
+.channelItem a {
+    color: var(--site-primary, #7355F7);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.channelItem a:hover {
+    text-decoration: underline;
+}
+
+.channelIcon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+}
+
+.channelIcon.wa {
+    background: rgba(37, 211, 102, 0.15);
+    color: #25D366;
+}
+
+.channelIcon.email {
+    background: rgba(115, 85, 247, 0.15);
+    color: #7355F7;
+}
+
+.swal-button--whatsapp {
+    background-color: #25D366 !important;
+    color: #FFFFFF !important;
+}
+
+.swal-button--whatsapp:hover {
+    background-color: #1EBE5D !important;
+}
+

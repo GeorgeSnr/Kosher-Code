@@ -4,37 +4,93 @@ import './Contact.css';
 import contactImg from '../../../Assets/contact.svg';
 import swal from 'sweetalert';
 import Fade from 'react-reveal/Fade';
-import { saveContactMessage } from '../../../services/storageService';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope, faPaperPlane, faPhoneAlt, faHeadset } from '@fortawesome/free-solid-svg-icons';
+import { 
+    dispatchConsultationRequest, 
+    getWhatsAppUrl, 
+    getQuickWhatsAppUrl, 
+    RECIPIENT_EMAIL, 
+    WHATSAPP_NUMBER 
+} from '../../../services/contactDispatchService';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
+        phone: '',
         institution: '',
         region: '',
         subject: '',
         description: ''
     });
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = event => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        saveContactMessage(formData);
-        event.target.reset();
+        setIsSubmitting(true);
+
+        const currentData = { ...formData };
+        const result = await dispatchConsultationRequest(currentData);
+
+        setIsSubmitting(false);
+
         setFormData({
             name: '',
             email: '',
+            phone: '',
             institution: '',
             region: '',
             subject: '',
             description: ''
         });
-        swal("Consultation Request Received!", "Thank you for reaching out. Our engineering leadership team in Kampala will review your request and respond within 24 hours.", "success");
+
+        swal({
+            title: "Consultation Request Dispatched!",
+            text: `Thank you for reaching out! Your inquiry has been sent to our Solutions Director at ${RECIPIENT_EMAIL} and our engineering team in Kampala.\n\nWould you like to also connect immediately on WhatsApp (${WHATSAPP_NUMBER})?`,
+            icon: "success",
+            buttons: {
+                cancel: {
+                    text: "Done",
+                    value: null,
+                    visible: true,
+                    className: "",
+                    closeModal: true,
+                },
+                whatsapp: {
+                    text: "💬 Chat on WhatsApp",
+                    value: "whatsapp",
+                    visible: true,
+                    className: "swal-button--whatsapp",
+                    closeModal: true
+                }
+            }
+        }).then((value) => {
+            if (value === 'whatsapp' && result.whatsAppUrl) {
+                window.open(result.whatsAppUrl, '_blank', 'noopener,noreferrer');
+            }
+        });
     };
+
+    const handleDirectWhatsApp = (e) => {
+        e.preventDefault();
+        if (!formData.name && !formData.description && !formData.subject) {
+            // If empty, open general WhatsApp chat
+            window.open(getQuickWhatsAppUrl(), '_blank', 'noopener,noreferrer');
+            return;
+        }
+
+        // Save in background and open WhatsApp with pre-filled details
+        dispatchConsultationRequest(formData);
+        window.open(getWhatsAppUrl(formData), '_blank', 'noopener,noreferrer');
+    };
+
     return (
         <section id="contact">
             <Col md={11} className="mx-auto">
@@ -44,6 +100,7 @@ const Contact = () => {
                             <form onSubmit={handleSubmit} className="contactForm">
                                 <h4 className="miniTitle">CONTACT KOSHER CODE</h4>
                                 <h5 className="sectionTitle">REQUEST AN ENTERPRISE DEMO OR CONSULTATION</h5>
+                                
                                 <Row>
                                     <Col md={12} lg={6}>
                                         <input 
@@ -60,9 +117,18 @@ const Contact = () => {
                                             name="email" 
                                             value={formData.email} 
                                             onChange={handleChange} 
-                                            placeholder="Your Corporate Email *" 
+                                            placeholder="Corporate Email *" 
                                             type="email" 
                                             required
+                                        />
+                                    </Col>
+                                    <Col md={12}>
+                                        <input 
+                                            name="phone" 
+                                            value={formData.phone} 
+                                            onChange={handleChange} 
+                                            placeholder="Phone / WhatsApp Number (e.g. +256 700 000 000)" 
+                                            type="tel" 
                                         />
                                     </Col>
                                     <Col md={12} lg={6}>
@@ -116,13 +182,47 @@ const Contact = () => {
                                         ></textarea>
                                     </Col>
                                 </Row>
-                                <button className="branBtn mt-2" type="submit">Schedule Enterprise Consultation</button>
+
+                                <div className="contactActionGroup">
+                                    <button 
+                                        className="branBtn" 
+                                        type="submit" 
+                                        disabled={isSubmitting}
+                                    >
+                                        <FontAwesomeIcon icon={faPaperPlane} className="me-2" />
+                                        {isSubmitting ? 'Dispatching Request...' : 'Schedule Enterprise Consultation'}
+                                    </button>
+
+                                    <button 
+                                        type="button" 
+                                        className="whatsappBtn"
+                                        onClick={handleDirectWhatsApp}
+                                    >
+                                        <FontAwesomeIcon icon={faWhatsapp} className="me-1 fa-lg" />
+                                        Send via WhatsApp
+                                    </button>
+                                </div>
+
+                                <div className="directChannelsContainer">
+                                    <div className="channelItem">
+                                        <span className="channelIcon email"><FontAwesomeIcon icon={faEnvelope} /></span>
+                                        <span>Direct Email: <a href={`mailto:${RECIPIENT_EMAIL}`}>{RECIPIENT_EMAIL}</a></span>
+                                    </div>
+                                    <div className="channelItem">
+                                        <span className="channelIcon wa"><FontAwesomeIcon icon={faWhatsapp} /></span>
+                                        <span>Direct WhatsApp / Call: <a href={`https://wa.me/256703275790`} target="_blank" rel="noopener noreferrer">{WHATSAPP_NUMBER}</a></span>
+                                    </div>
+                                    <div className="channelItem">
+                                        <span className="channelIcon"><FontAwesomeIcon icon={faHeadset} /></span>
+                                        <span className="text-muted small">Engineering leadership responses within 2-24 hours.</span>
+                                    </div>
+                                </div>
                             </form>
                         </Fade>
                     </Col>
                     <Col md={6}>
                         <Fade duration={2000} right>
-                            <img src={`${contactImg}`} alt="" className="img-fluid"/>
+                            <img src={`${contactImg}`} alt="Contact Kosher Code" className="img-fluid"/>
                         </Fade>
                     </Col>
                 </Row>
@@ -132,3 +232,4 @@ const Contact = () => {
 };
 
 export default Contact;
+
