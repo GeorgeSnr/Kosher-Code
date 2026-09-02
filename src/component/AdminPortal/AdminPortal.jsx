@@ -78,9 +78,8 @@ const AdminPortal = () => {
     const navigate = useNavigate();
 
     const orders = getStoredOrders();
-    const admins = getStoredAdmins();
-    const displayName = user?.name || 'Superadmin';
-    const displayEmail = user?.email || 'admin@koshercode.com';
+    const displayName = user?.name || 'Super Administrator';
+    const displayEmail = user?.email || 'georgewilliamochole@gmail.com';
     const displayImg = user?.img || userImg;
 
     const handleSignOut = () => {

@@ -24,8 +24,8 @@ const AdminProfile = () => {
         navigate('/login');
     };
 
-    const displayName = user?.name || 'Kosher Administrator';
-    const displayEmail = user?.email || 'admin@koshercode.com';
+    const displayName = user?.name || 'Super Administrator';
+    const displayEmail = user?.email || 'georgewilliamochole@gmail.com';
     const displayImg = user?.img || userimg;
 
     return (

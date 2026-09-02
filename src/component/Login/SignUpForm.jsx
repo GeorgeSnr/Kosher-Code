@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock, faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
 import userImg from '../../Assets/user.svg';
-import { saveUserToFirestore } from '../../services/storageService';
+import { registerUserAccount } from '../../services/storageService';
 
 const SignUpForm = ({ handleResponse }) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -14,17 +14,13 @@ const SignUpForm = ({ handleResponse }) => {
         const normalizedEmail = email.toLowerCase().trim();
         setTimeout(async () => {
             toast.dismiss(loading);
-            const userObj = {
-                isSignedIn: true,
+            const userObj = registerUserAccount({
                 name: name || normalizedEmail.split('@')[0],
                 email: normalizedEmail,
                 img: userImg,
-                role: 'client'
-            };
-            localStorage.setItem('kosher_current_user', JSON.stringify(userObj));
-            try {
-                await saveUserToFirestore(userObj);
-            } catch (e) {}
+                role: 'client',
+                isSignedIn: true
+            });
             toast.success(`Welcome to Kosher Code, ${userObj.name}!`);
             handleResponse(userObj);
         }, 400);

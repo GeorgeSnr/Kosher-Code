@@ -231,6 +231,68 @@ export const checkIsAdmin = (email) => {
            normalized.includes('george');
 };
 
+const USERS_KEY = 'kosher_registered_users';
+
+export const getRegisteredUsers = () => {
+    try {
+        const stored = localStorage.getItem(USERS_KEY);
+        return stored ? JSON.parse(stored) : [];
+    } catch (e) {
+        return [];
+    }
+};
+
+export const registerUserAccount = (userObj) => {
+    if (!userObj || !userObj.email) return null;
+    const normalized = userObj.email.toLowerCase().trim();
+    const existing = getRegisteredUsers();
+    const updated = existing.filter(u => u.email.toLowerCase().trim() !== normalized);
+    const isAdmin = checkIsAdmin(normalized) || userObj.role === 'admin';
+    const newUser = {
+        ...userObj,
+        email: normalized,
+        role: isAdmin ? 'admin' : 'client',
+        createdAt: new Date().toISOString()
+    };
+    updated.push(newUser);
+    try {
+        localStorage.setItem(USERS_KEY, JSON.stringify(updated));
+    } catch (e) {}
+    
+    saveUserToFirestore(newUser).catch(err => console.warn('Firestore user registration sync:', err.message));
+    return newUser;
+};
+
+export const authenticateUserAccount = (email, password) => {
+    if (!email) return null;
+    const normalized = email.toLowerCase().trim();
+    const isAdmin = checkIsAdmin(normalized);
+    const existing = getRegisteredUsers();
+    const matched = existing.find(u => u.email.toLowerCase().trim() === normalized);
+    
+    const resolvedRole = isAdmin ? 'admin' : (matched?.role || 'client');
+    const resolvedName = matched?.name || (normalized === 'georgewilliamochole@gmail.com' 
+        ? 'George William Ochole' 
+        : normalized.split('@')[0].replace(/[._]/g, ' ').toUpperCase());
+    
+    const userObj = {
+        isSignedIn: true,
+        email: normalized,
+        name: resolvedName,
+        role: resolvedRole,
+        institution: matched?.institution || '',
+        img: isAdmin 
+            ? 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png' 
+            : (matched?.img || 'https://cdn-icons-png.flaticon.com/512/3135/3135768.png')
+    };
+    
+    try {
+        localStorage.setItem('kosher_current_user', JSON.stringify(userObj));
+    } catch (e) {}
+    saveUserToFirestore(userObj).catch(() => {});
+    return userObj;
+};
+
 // ----------------------------------------------------
 // 3. SERVICES CATALOG
 // ----------------------------------------------------

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
-import { checkIsAdmin, saveUserToFirestore } from '../../services/storageService';
+import { checkIsAdmin, authenticateUserAccount } from '../../services/storageService';
 
 const SignInForm = ({ handleResponse }) => {
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -16,25 +16,10 @@ const SignInForm = ({ handleResponse }) => {
     const onSubmit = async ({ email, password }) => {
         const loading = toast.loading('Authenticating credentials...');
         const normalizedEmail = email.toLowerCase().trim();
-        const isAdmin = checkIsAdmin(normalizedEmail);
         
         setTimeout(async () => {
             toast.dismiss(loading);
-            const userObj = {
-                isSignedIn: true,
-                name: normalizedEmail === 'georgewilliamochole@gmail.com' 
-                    ? 'George William Ochole' 
-                    : normalizedEmail.split('@')[0].replace(/[._]/g, ' ').toUpperCase(),
-                email: normalizedEmail,
-                img: isAdmin 
-                    ? 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png' 
-                    : 'https://cdn-icons-png.flaticon.com/512/3135/3135768.png',
-                role: isAdmin ? 'admin' : 'client'
-            };
-            localStorage.setItem('kosher_current_user', JSON.stringify(userObj));
-            try {
-                await saveUserToFirestore(userObj);
-            } catch (e) {}
+            const userObj = authenticateUserAccount(normalizedEmail, password);
             handleResponse(userObj);
         }, 350);
     };

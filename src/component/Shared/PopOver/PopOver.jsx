@@ -30,8 +30,8 @@ const PopOver = () => {
         navigate('/client/login');
     };
 
-    const displayName = user?.name || (admin ? 'Administrator' : 'Client');
-    const displayEmail = user?.email || (admin ? 'admin@koshercode.com' : 'client@koshercode.com');
+    const displayName = user?.name || (admin ? 'Super Administrator' : 'Client User');
+    const displayEmail = user?.email || (admin ? 'georgewilliamochole@gmail.com' : 'user@organization.com');
     const displayImg = user?.img || userImg;
 
     return (

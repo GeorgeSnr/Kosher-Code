@@ -22,8 +22,8 @@ const Profile = () => {
         navigate('/login');
     };
 
-    const displayName = user?.name || (admin ? 'Administrator' : 'Enterprise Client');
-    const displayEmail = user?.email || (admin ? 'admin@koshercode.com' : 'client@koshercode.com');
+    const displayName = user?.name || (admin ? 'Super Administrator' : 'Client Representative');
+    const displayEmail = user?.email || (admin ? 'georgewilliamochole@gmail.com' : 'client@organization.com');
     const displayImg = user?.img || userimg;
 
     return (

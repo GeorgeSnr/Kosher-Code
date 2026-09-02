@@ -65,17 +65,6 @@ const ClientAuth = ({ defaultPortal }) => {
     const [signUpEmail, setSignUpEmail] = useState('');
     const [signUpPassword, setSignUpPassword] = useState('');
 
-    // Automatically prefill sample email if user changes role tab
-    useEffect(() => {
-        if (authRole === 'admin') {
-            setSignInEmail('admin@koshercode.com');
-            setSignInPassword('admin123');
-        } else {
-            setSignInEmail('client@koshercode.com');
-            setSignInPassword('password123');
-        }
-    }, [authRole]);
-
     const finalizeAuthSession = (userObj) => {
         const isAdmin = userObj.role === 'admin' || authRole === 'admin' || checkIsAdmin(userObj.email);
         const resolvedUser = {
@@ -114,7 +103,7 @@ const ClientAuth = ({ defaultPortal }) => {
         }
 
         setSubmitting(true);
-        const loading = toast.loading('Signing in to portal via Firebase...');
+        const loading = toast.loading('Authenticating credentials...');
 
         try {
             // Attempt real Firebase Auth
@@ -125,29 +114,23 @@ const ClientAuth = ({ defaultPortal }) => {
             if (res.success && res.user) {
                 finalizeAuthSession(res.user);
             } else {
-                // If demo credentials or offline fallback, allow fast authentication
-                if (signInPassword.length >= 6 || signInEmail.includes('koshercode.com') || signInEmail.includes('admin')) {
-                    const fallbackUser = {
-                        name: signInEmail.split('@')[0].toUpperCase(),
-                        email: signInEmail.toLowerCase(),
-                        role: authRole === 'admin' || checkIsAdmin(signInEmail) ? 'admin' : 'client',
-                        isSignedIn: true
-                    };
-                    finalizeAuthSession(fallbackUser);
+                // Fallback to locally registered / administrator accounts
+                const localUser = authenticateUserAccount(signInEmail, signInPassword);
+                if (localUser) {
+                    finalizeAuthSession(localUser);
                 } else {
-                    toast.error(res.error || 'Authentication failed. Please verify credentials.');
+                    toast.error(res.error || 'Authentication failed. Please verify your credentials.');
                 }
             }
         } catch (err) {
             toast.dismiss(loading);
             setSubmitting(false);
-            const fallbackUser = {
-                name: signInEmail.split('@')[0].toUpperCase(),
-                email: signInEmail.toLowerCase(),
-                role: authRole === 'admin' || checkIsAdmin(signInEmail) ? 'admin' : 'client',
-                isSignedIn: true
-            };
-            finalizeAuthSession(fallbackUser);
+            const localUser = authenticateUserAccount(signInEmail, signInPassword);
+            if (localUser) {
+                finalizeAuthSession(localUser);
+            } else {
+                toast.error(err.message || 'Authentication failed. Please check your credentials.');
+            }
         }
     };
 
@@ -158,8 +141,13 @@ const ClientAuth = ({ defaultPortal }) => {
             return;
         }
 
+        if (signUpPassword.length < 6) {
+            toast.error('Password must be at least 6 characters');
+            return;
+        }
+
         setSubmitting(true);
-        const loading = toast.loading('Creating account in Firebase...');
+        const loading = toast.loading('Creating your account...');
 
         try {
             const res = await firebaseRegister(signUpEmail, signUpPassword, signUpName, 'client', signUpOrg);
@@ -167,29 +155,29 @@ const ClientAuth = ({ defaultPortal }) => {
             setSubmitting(false);
 
             if (res.success && res.user) {
+                registerUserAccount({ ...res.user, institution: signUpOrg });
                 finalizeAuthSession(res.user);
             } else {
-                // If offline or registration error fallback
-                const fallbackUser = {
+                const registeredUser = registerUserAccount({
                     name: signUpName,
                     email: signUpEmail.toLowerCase(),
                     institution: signUpOrg,
                     role: 'client',
                     isSignedIn: true
-                };
-                finalizeAuthSession(fallbackUser);
+                });
+                finalizeAuthSession(registeredUser);
             }
         } catch (err) {
             toast.dismiss(loading);
             setSubmitting(false);
-            const fallbackUser = {
+            const registeredUser = registerUserAccount({
                 name: signUpName,
                 email: signUpEmail.toLowerCase(),
                 institution: signUpOrg,
                 role: 'client',
                 isSignedIn: true
-            };
-            finalizeAuthSession(fallbackUser);
+            });
+            finalizeAuthSession(registeredUser);
         }
     };
 
@@ -199,6 +187,7 @@ const ClientAuth = ({ defaultPortal }) => {
             const res = await firebaseGoogleSignIn();
             toast.dismiss(loading);
             if (res.success && res.user) {
+                registerUserAccount(res.user);
                 finalizeAuthSession(res.user);
             } else if (res.error) {
                 toast.error(res.error);
@@ -207,19 +196,6 @@ const ClientAuth = ({ defaultPortal }) => {
             toast.dismiss(loading);
             toast.error(err.message || 'Google authentication error');
         }
-    };
-
-    const handleQuickSampleLogin = (email, pass, defaultName, role) => {
-        const loading = toast.loading(`Logging in as ${role === 'admin' ? 'Superadmin' : 'Client'}...`);
-        setTimeout(() => {
-            toast.dismiss(loading);
-            finalizeAuthSession({
-                name: defaultName,
-                email: email.toLowerCase(),
-                role: role,
-                isSignedIn: true
-            });
-        }, 300);
     };
 
     return (
@@ -366,7 +342,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                     <Form onSubmit={handleSignInSubmit}>
                                         <Form.Group className="mb-3">
                                             <Form.Label className="fw-semibold small" style={{ color: 'var(--site-text-main, #0F172A)' }}>
-                                                {authRole === 'admin' ? 'Administrator Email *' : 'Corporate / Client Email *'}
+                                                {authRole === 'admin' ? 'Administrator Email *' : 'Corporate / Personal Email *'}
                                             </Form.Label>
                                             <div className="input-group">
                                                 <span className="input-group-text border-end-0" style={{ backgroundColor: 'var(--site-card-subtle)', borderColor: 'var(--site-border)', borderRadius: '4px 0 0 4px', color: 'var(--site-text-muted)' }}>
@@ -375,9 +351,10 @@ const ClientAuth = ({ defaultPortal }) => {
                                                 <Form.Control
                                                     type="email"
                                                     required
+                                                    autoComplete="email"
                                                     value={signInEmail}
                                                     onChange={(e) => setSignInEmail(e.target.value)}
-                                                    placeholder={authRole === 'admin' ? "admin@koshercode.com" : "client@koshercode.com"}
+                                                    placeholder="Corporate / Personal Email"
                                                     style={{ 
                                                         backgroundColor: 'var(--site-card-bg)', 
                                                         borderColor: 'var(--site-border)', 
@@ -398,9 +375,10 @@ const ClientAuth = ({ defaultPortal }) => {
                                                 <Form.Control
                                                     type="password"
                                                     required
+                                                    autoComplete="current-password"
                                                     value={signInPassword}
                                                     onChange={(e) => setSignInPassword(e.target.value)}
-                                                    placeholder="••••••••"
+                                                    placeholder="Password"
                                                     style={{ 
                                                         backgroundColor: 'var(--site-card-bg)', 
                                                         borderColor: 'var(--site-border)', 
@@ -462,33 +440,34 @@ const ClientAuth = ({ defaultPortal }) => {
                                                 <Form.Control
                                                     type="text"
                                                     required
+                                                    autoComplete="name"
                                                     value={signUpName}
                                                     onChange={(e) => setSignUpName(e.target.value)}
-                                                    placeholder="David Mukasa"
+                                                    placeholder="Full Name / Representative"
                                                     style={{ backgroundColor: 'var(--site-card-bg)', borderColor: 'var(--site-border)', color: 'var(--site-text-main)', borderRadius: '0 4px 4px 0', padding: '0.65rem 0.85rem' }}
                                                 />
                                             </div>
                                         </Form.Group>
 
                                         <Form.Group className="mb-3">
-                                            <Form.Label className="fw-semibold small" style={{ color: 'var(--site-text-main)' }}>Organization / Institution *</Form.Label>
+                                            <Form.Label className="fw-semibold small" style={{ color: 'var(--site-text-main)' }}>Organization / Institution</Form.Label>
                                             <div className="input-group">
                                                 <span className="input-group-text border-end-0" style={{ backgroundColor: 'var(--site-card-subtle)', borderColor: 'var(--site-border)', borderRadius: '4px 0 0 4px', color: 'var(--site-text-muted)' }}>
                                                     <FontAwesomeIcon icon={faBuilding} className="small" />
                                                 </span>
                                                 <Form.Control
                                                     type="text"
-                                                    required
+                                                    autoComplete="organization"
                                                     value={signUpOrg}
                                                     onChange={(e) => setSignUpOrg(e.target.value)}
-                                                    placeholder="Kampala Metropolitan SACCO"
+                                                    placeholder="Organization / Company Name"
                                                     style={{ backgroundColor: 'var(--site-card-bg)', borderColor: 'var(--site-border)', color: 'var(--site-text-main)', borderRadius: '0 4px 4px 0', padding: '0.65rem 0.85rem' }}
                                                 />
                                             </div>
                                         </Form.Group>
 
                                         <Form.Group className="mb-3">
-                                            <Form.Label className="fw-semibold small" style={{ color: 'var(--site-text-main)' }}>Corporate Email *</Form.Label>
+                                            <Form.Label className="fw-semibold small" style={{ color: 'var(--site-text-main)' }}>Corporate / Personal Email *</Form.Label>
                                             <div className="input-group">
                                                 <span className="input-group-text border-end-0" style={{ backgroundColor: 'var(--site-card-subtle)', borderColor: 'var(--site-border)', borderRadius: '4px 0 0 4px', color: 'var(--site-text-muted)' }}>
                                                     <FontAwesomeIcon icon={faEnvelope} className="small" />
@@ -496,9 +475,10 @@ const ClientAuth = ({ defaultPortal }) => {
                                                 <Form.Control
                                                     type="email"
                                                     required
+                                                    autoComplete="email"
                                                     value={signUpEmail}
                                                     onChange={(e) => setSignUpEmail(e.target.value)}
-                                                    placeholder="mukasa@kampalasacco.ug"
+                                                    placeholder="Corporate / Personal Email Address"
                                                     style={{ backgroundColor: 'var(--site-card-bg)', borderColor: 'var(--site-border)', color: 'var(--site-text-main)', borderRadius: '0 4px 4px 0', padding: '0.65rem 0.85rem' }}
                                                 />
                                             </div>
@@ -514,9 +494,10 @@ const ClientAuth = ({ defaultPortal }) => {
                                                     type="password"
                                                     required
                                                     minLength={6}
+                                                    autoComplete="new-password"
                                                     value={signUpPassword}
                                                     onChange={(e) => setSignUpPassword(e.target.value)}
-                                                    placeholder="••••••••"
+                                                    placeholder="Password (minimum 6 characters)"
                                                     style={{ backgroundColor: 'var(--site-card-bg)', borderColor: 'var(--site-border)', color: 'var(--site-text-main)', borderRadius: '0 4px 4px 0', padding: '0.65rem 0.85rem' }}
                                                 />
                                             </div>
@@ -534,7 +515,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                 boxShadow: '0 4px 14px rgba(115, 85, 247, 0.3)'
                                             }}
                                         >
-                                            <FontAwesomeIcon icon={faUserPlus} /> Create Account & Proceed to Booking
+                                            <FontAwesomeIcon icon={faUserPlus} /> Create Account & Proceed
                                         </Button>
 
                                         <div className="d-flex align-items-center my-3">
@@ -559,49 +540,6 @@ const ClientAuth = ({ defaultPortal }) => {
                                         </Button>
                                     </Form>
                                 )}
-
-                                {/* SAMPLE CREDENTIALS SHORTCUT BOX */}
-                                <div className="mt-4 pt-3 border-top" style={{ borderColor: 'var(--site-border, #E5E0FA)' }}>
-                                    <div 
-                                        className="p-3 border rounded" 
-                                        style={{ backgroundColor: 'var(--site-card-subtle, #FAF8FF)', borderColor: 'var(--site-border, #E5E0FA)', borderRadius: '4px' }}
-                                    >
-                                        <div className="d-flex align-items-center justify-content-between mb-2">
-                                            <div className="d-flex align-items-center gap-1.5 fw-bold small" style={{ color: 'var(--site-text-main)' }}>
-                                                <FontAwesomeIcon icon={faKey} style={{ color: 'var(--site-primary, #7355F7)' }} /> 1-Click Quick Access:
-                                            </div>
-                                            <span className="badge" style={{ backgroundColor: 'var(--site-primary-subtle)', color: 'var(--site-primary)', border: '1px solid var(--site-border)' }}>
-                                                Fast Demo
-                                            </span>
-                                        </div>
-
-                                        <div className="d-flex flex-column gap-2">
-                                            <button
-                                                type="button"
-                                                onClick={() => handleQuickSampleLogin('admin@koshercode.com', 'admin123', 'Superadmin', 'admin')}
-                                                className="btn btn-sm w-100 py-1.5 fw-semibold text-white d-flex align-items-center justify-content-center gap-1.5"
-                                                style={{ backgroundColor: 'var(--site-primary, #7355F7)', borderRadius: '4px', fontSize: '0.82rem' }}
-                                            >
-                                                <FontAwesomeIcon icon={faUserShield} /> 1-Click Superadmin Login &rarr; /admin
-                                            </button>
-
-                                            <button
-                                                type="button"
-                                                onClick={() => handleQuickSampleLogin('client@koshercode.com', 'password123', 'Enterprise Client', 'client')}
-                                                className="btn btn-sm w-100 py-1.5 fw-semibold d-flex align-items-center justify-content-center gap-1.5"
-                                                style={{ 
-                                                    backgroundColor: 'var(--site-card-bg)', 
-                                                    color: 'var(--site-text-main)', 
-                                                    border: '1px solid var(--site-border)',
-                                                    borderRadius: '4px', 
-                                                    fontSize: '0.82rem' 
-                                                }}
-                                            >
-                                                <FontAwesomeIcon icon={faCheckCircle} /> 1-Click Client Login &rarr; /client/book
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </Col>
                     </Row>
