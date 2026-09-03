@@ -137,10 +137,10 @@ const AdminPortal = () => {
             ></div>
 
             {/* Sidebar */}
-            <aside className={`client-sidebar ${mobileOpen ? 'mobile-open' : ''} ${!sidebarOpen ? 'desktop-closed' : ''}`}>
+            <aside className={`client-sidebar ${mobileOpen ? 'mobile-open' : ''} ${!sidebarOpen ? 'desktop-collapsed' : ''}`}>
                 {/* 1. Header with Brand & Interactive Theme Switch Toggle */}
                 <div className="cs-header">
-                    <Link to="/" onClick={() => setMobileOpen(false)} className="cs-brand">
+                    <Link to="/" onClick={() => setMobileOpen(false)} className="cs-brand" title="Kosher Code Home">
                         <div className="cs-brand-icon">
                             <FontAwesomeIcon icon={faBuffer} />
                         </div>
@@ -159,7 +159,7 @@ const AdminPortal = () => {
                 </div>
 
                 {/* Distinct Admin Badge */}
-                <div className="px-2 mb-2">
+                <div className="cs-admin-badge-box px-2 mb-2">
                     <div 
                         className="py-1.5 px-2.5 text-center small fw-semibold d-flex align-items-center justify-content-center gap-1.5"
                         style={{
@@ -186,6 +186,7 @@ const AdminPortal = () => {
                             end
                             onClick={() => handleNavClick('Command Center Overview')}
                             className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                            title="Command Center Overview"
                         >
                             <div className="cs-nav-item-left">
                                 <FontAwesomeIcon icon={faTachometerAlt} className="cs-icon" />
@@ -197,6 +198,7 @@ const AdminPortal = () => {
                             to="/admin/orders" 
                             onClick={() => handleNavClick('Incoming Inquiries & Pipeline')}
                             className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                            title="Incoming Inquiries & Pipeline"
                         >
                             <div className="cs-nav-item-left">
                                 <FontAwesomeIcon icon={faInbox} className="cs-icon" />
@@ -229,6 +231,7 @@ const AdminPortal = () => {
                                     to="/admin/orders" 
                                     onClick={() => handleNavClick('Incoming Inquiries & Pipeline')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="Client Inquiries"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faInbox} className="cs-icon" />
@@ -243,6 +246,7 @@ const AdminPortal = () => {
                                     to="/admin/add-service" 
                                     onClick={() => handleNavClick('Publish New Solution')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="Publish Solution"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faFileMedical} className="cs-icon" />
@@ -257,6 +261,7 @@ const AdminPortal = () => {
                                     to="/admin/services" 
                                     onClick={() => handleNavClick('Manage Solution Catalog')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="Manage Catalog"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faCog} className="cs-icon" />
@@ -270,6 +275,7 @@ const AdminPortal = () => {
                                     to="/admin/team" 
                                     onClick={() => handleNavClick('Administrator Privileges')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="Admin Team"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faUserShield} className="cs-icon" />
@@ -284,6 +290,7 @@ const AdminPortal = () => {
                                     to="/admin/profile" 
                                     onClick={() => handleNavClick('Executive Profile & Access')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="Admin Profile"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faUserCircle} className="cs-icon" />
@@ -313,6 +320,7 @@ const AdminPortal = () => {
                                     to="/admin/services" 
                                     onClick={() => handleNavClick('Core Banking & FinTech Solutions')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="Core Banking Solutions"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faUniversity} className="cs-icon" />
@@ -327,6 +335,7 @@ const AdminPortal = () => {
                                     to="/admin/services" 
                                     onClick={() => handleNavClick('SACCO & Microfinance Solutions')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="SACCO Systems"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faPiggyBank} className="cs-icon" />
@@ -341,6 +350,7 @@ const AdminPortal = () => {
                                     to="/admin/services" 
                                     onClick={() => handleNavClick('MSME Enterprise ERP Solutions')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="MSME ERPs"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faChartLine} className="cs-icon" />
@@ -355,6 +365,7 @@ const AdminPortal = () => {
                                     to="/admin/services" 
                                     onClick={() => handleNavClick('Web, Mobile & Cloud Solutions')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="Web & Mobile"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faMobileAlt} className="cs-icon" />
@@ -385,6 +396,7 @@ const AdminPortal = () => {
                                     to="/admin/profile" 
                                     onClick={() => handleNavClick('System Health & Infrastructure Telemetry')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="System Health & Infrastructure Telemetry"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faServer} className="cs-icon text-success" />
@@ -468,10 +480,10 @@ const AdminPortal = () => {
                                     handleToggleSidebar();
                                 }
                             }}
-                            title={(isMobile ? mobileOpen : sidebarOpen) ? "Close Sidebar" : "Open Sidebar"}
+                            title={(isMobile ? mobileOpen : sidebarOpen) ? "Collapse Sidebar (Compact Mode)" : "Expand Sidebar (Full Mode)"}
                             role="button"
                             tabIndex={0}
-                            aria-label={(isMobile ? mobileOpen : sidebarOpen) ? "Close Sidebar" : "Open Sidebar"}
+                            aria-label={(isMobile ? mobileOpen : sidebarOpen) ? "Collapse Sidebar" : "Expand Sidebar"}
                         >
                             <span></span>
                             <span></span>

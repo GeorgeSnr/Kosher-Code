@@ -98,15 +98,16 @@
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     position: relative;
     transition: background-color 0.25s ease, color 0.25s ease;
+    overflow-x: hidden;
 }
 
 /* =========================================================
    SIDEBAR (Matching Dribbble Reference)
    ========================================================= */
 .client-sidebar {
-    width: 280px;
-    min-width: 280px;
-    max-width: 280px;
+    width: 270px;
+    min-width: 270px;
+    max-width: 270px;
     min-height: 100vh;
     height: 100vh;
     position: sticky;
@@ -118,8 +119,15 @@
     justify-content: space-between;
     padding: 20px 14px 14px 14px;
     z-index: 100;
-    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s ease, border-color 0.25s ease;
+    transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                min-width 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                max-width 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                padding 0.25s ease,
+                transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+                background-color 0.25s ease,
+                border-color 0.25s ease;
     box-sizing: border-box;
+    flex-shrink: 0;
 }
 
 /* Header Brand */
@@ -466,14 +474,19 @@
    MAIN CONTENT AREA & HEADER
    ========================================================= */
 #pageContent {
-    flex-grow: 1;
-    width: calc(100% - 280px);
+    flex: 1 1 auto;
+    width: calc(100% - 270px);
+    max-width: calc(100% - 270px);
+    min-width: 0;
     min-height: 100vh;
     padding: 20px 24px;
     background-color: var(--cp-bg);
     color: var(--cp-text-main);
     box-sizing: border-box;
-    transition: background-color 0.25s ease, color 0.25s ease;
+    transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                max-width 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                background-color 0.25s ease,
+                color 0.25s ease;
 }
 
 /* Top App Header */
@@ -862,42 +875,152 @@ select option {
 }
 
 /* =========================================================
-   DESKTOP SIDEBAR TOGGLE & TRANSITION (COLLAPSE / EXPAND)
+   DESKTOP COLLAPSED ICON-ONLY SIDEBAR (PRO ENTERPRISE MODE)
    ========================================================= */
 @media (min-width: 992px) {
-    .client-sidebar {
-        transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                    opacity 0.25s ease,
-                    visibility 0.3s ease,
-                    background-color 0.25s ease,
-                    border-color 0.25s ease;
+    /* 1. Sidebar Container Collapsed into Sleek 76px Icon Rail */
+    .client-sidebar.desktop-collapsed {
+        width: 76px !important;
+        min-width: 76px !important;
+        max-width: 76px !important;
+        padding: 18px 8px 14px 8px !important;
+        overflow-x: hidden;
     }
 
-    .client-sidebar.desktop-closed {
-        margin-left: -280px !important;
-        min-width: 0 !important;
-        max-width: 0 !important;
-        width: 0 !important;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-        border-right-width: 0 !important;
-        opacity: 0 !important;
-        visibility: hidden !important;
-        pointer-events: none !important;
-        overflow: hidden !important;
-    }
-
-    #pageContent {
-        transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                    max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                    padding 0.25s ease,
-                    background-color 0.25s ease;
-    }
-
+    /* 2. Main Page Content stretches smoothly to 100% with no gap on right */
     #pageContent.sidebar-collapsed {
+        width: calc(100% - 76px) !important;
+        max-width: calc(100% - 76px) !important;
+        flex: 1 1 auto !important;
+    }
+
+    /* 3. Header: center brand icon, hide text & theme toggle */
+    .client-sidebar.desktop-collapsed .cs-header {
+        padding: 0 0 14px 0 !important;
+        justify-content: center !important;
+        border-bottom: 1px solid var(--cp-border-subtle);
+        margin-bottom: 10px;
+    }
+
+    .client-sidebar.desktop-collapsed .cs-brand {
+        justify-content: center;
+        gap: 0;
+    }
+
+    .client-sidebar.desktop-collapsed .cs-brand-name,
+    .client-sidebar.desktop-collapsed .cs-toggle-pill {
+        display: none !important;
+    }
+
+    .client-sidebar.desktop-collapsed .cs-brand-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 1.45rem;
+        margin: 0 auto;
+    }
+
+    /* Admin Badge Box in AdminPortal */
+    .client-sidebar.desktop-collapsed .cs-admin-badge-box,
+    .client-sidebar.desktop-collapsed .px-2.mb-2 {
+        display: none !important;
+    }
+
+    /* 4. Section Headers: convert to subtle clean divider line */
+    .client-sidebar.desktop-collapsed .cs-section-header {
+        padding: 6px 0 !important;
+        justify-content: center !important;
+        margin: 8px 0 4px 0 !important;
+        pointer-events: none;
+        background: transparent !important;
+    }
+
+    .client-sidebar.desktop-collapsed .cs-section-title,
+    .client-sidebar.desktop-collapsed .cs-section-chevron {
+        display: none !important;
+    }
+
+    .client-sidebar.desktop-collapsed .cs-section-header::after {
+        content: '';
+        display: block;
+        width: 24px;
+        height: 1px;
+        background-color: var(--cp-border);
+        margin: 0 auto;
+    }
+
+    /* Ensure all nav lists are visible in collapsed mode */
+    .client-sidebar.desktop-collapsed .cs-nav-list {
+        display: flex !important;
+        flex-direction: column !important;
+        margin: 0 0 4px 0 !important;
+        padding: 0 !important;
+    }
+
+    /* 5. Nav Items: center icons, hide labels & badges */
+    .client-sidebar.desktop-collapsed .cs-nav-item {
+        padding: 9px 0 !important;
+        justify-content: center !important;
+        border-radius: 6px;
+        margin-bottom: 4px;
+        position: relative;
+    }
+
+    .client-sidebar.desktop-collapsed .cs-nav-item-left {
+        gap: 0 !important;
+        justify-content: center !important;
         width: 100% !important;
-        max-width: 100% !important;
-        flex: 1 1 100% !important;
+    }
+
+    .client-sidebar.desktop-collapsed .cs-icon {
+        width: 22px !important;
+        height: 22px !important;
+        font-size: 1.12rem !important;
+        margin: 0 auto !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .client-sidebar.desktop-collapsed .cs-nav-item span:not(.cs-icon),
+    .client-sidebar.desktop-collapsed .cs-nav-item .cs-nav-text,
+    .client-sidebar.desktop-collapsed .cs-nav-item .badge,
+    .client-sidebar.desktop-collapsed .cs-nav-item .cs-badge-pill,
+    .client-sidebar.desktop-collapsed .cs-nav-item .cs-plus-indicator,
+    .client-sidebar.desktop-collapsed .cs-nav-item .cs-dot-indicator {
+        display: none !important;
+    }
+
+    /* 6. Footer User Profile: center avatar, hide name/email/gear */
+    .client-sidebar.desktop-collapsed .cs-footer {
+        padding-top: 8px !important;
+    }
+
+    .client-sidebar.desktop-collapsed .cs-user-card {
+        padding: 4px 0 !important;
+        justify-content: center !important;
+    }
+
+    .client-sidebar.desktop-collapsed .cs-user-left {
+        gap: 0 !important;
+        justify-content: center !important;
+        width: 100% !important;
+    }
+
+    .client-sidebar.desktop-collapsed .cs-avatar-wrap {
+        margin: 0 auto;
+    }
+
+    .client-sidebar.desktop-collapsed .cs-user-info,
+    .client-sidebar.desktop-collapsed .cs-settings-btn {
+        display: none !important;
+    }
+
+    .client-sidebar.desktop-collapsed .cs-popover-menu {
+        left: 78px;
+        bottom: 8px;
+        right: auto;
+        width: 210px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
     }
 }
 

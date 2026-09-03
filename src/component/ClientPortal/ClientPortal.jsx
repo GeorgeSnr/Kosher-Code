@@ -142,10 +142,10 @@ const ClientPortal = () => {
             ></div>
 
             {/* Sidebar */}
-            <aside className={`client-sidebar ${mobileOpen ? 'mobile-open' : ''} ${!sidebarOpen ? 'desktop-closed' : ''}`}>
+            <aside className={`client-sidebar ${mobileOpen ? 'mobile-open' : ''} ${!sidebarOpen ? 'desktop-collapsed' : ''}`}>
                 {/* 1. Header with Brand & Interactive Theme Switch Toggle */}
                 <div className="cs-header">
-                    <Link to="/" onClick={() => setMobileOpen(false)} className="cs-brand">
+                    <Link to="/" onClick={() => setMobileOpen(false)} className="cs-brand" title="Kosher Code Home">
                         <div className="cs-brand-icon">
                             <FontAwesomeIcon icon={faBuffer} />
                         </div>
@@ -172,6 +172,7 @@ const ClientPortal = () => {
                             end
                             onClick={() => handleNavClick('Workspace Dashboard')}
                             className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                            title="Workspace Dashboard"
                         >
                             <div className="cs-nav-item-left">
                                 <FontAwesomeIcon icon={faHome} className="cs-icon" />
@@ -183,6 +184,7 @@ const ClientPortal = () => {
                             to="/client/bookings" 
                             onClick={() => handleNavClick('Reports & Deliverables')}
                             className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                            title="Reports & Deliverables"
                         >
                             <div className="cs-nav-item-left">
                                 <FontAwesomeIcon icon={faFileAlt} className="cs-icon" />
@@ -212,6 +214,7 @@ const ClientPortal = () => {
                                     end
                                     onClick={() => handleNavClick('Overview & Analytics')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="Overview & Analytics"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faChartBar} className="cs-icon" />
@@ -225,6 +228,7 @@ const ClientPortal = () => {
                                     to="/client/book" 
                                     onClick={() => handleNavClick('Book Enterprise Solution')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="Book Solution"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faPlusCircle} className="cs-icon" />
@@ -239,6 +243,7 @@ const ClientPortal = () => {
                                     to="/client/bookings" 
                                     onClick={() => handleNavClick('Active Engagements & Pipeline')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="Active Engagements"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faFolderOpen} className="cs-icon" />
@@ -257,6 +262,7 @@ const ClientPortal = () => {
                                     to="/client/bookings" 
                                     onClick={() => handleNavClick('Invoices & Milestone Billing')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="Invoices & Quotes"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faFileInvoiceDollar} className="cs-icon" />
@@ -271,6 +277,7 @@ const ClientPortal = () => {
                                     to="/client/review" 
                                     onClick={() => handleNavClick('Project Feedback & Testimonials')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="Project Reviews"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faStar} className="cs-icon" />
@@ -284,6 +291,7 @@ const ClientPortal = () => {
                                     to="/client/profile" 
                                     onClick={() => handleNavClick('Client Account & SLA Profile')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="Account Profile"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faUserShield} className="cs-icon" />
@@ -313,6 +321,7 @@ const ClientPortal = () => {
                                     to="/client/book?category=banking" 
                                     onClick={() => handleNavClick('Core Banking & FinTech Architecture')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="Core Banking Suite"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faUniversity} className="cs-icon" />
@@ -327,6 +336,7 @@ const ClientPortal = () => {
                                     to="/client/book?category=sacco" 
                                     onClick={() => handleNavClick('SACCO & Microfinance ERP')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="SACCO ERP Systems"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faPiggyBank} className="cs-icon" />
@@ -341,6 +351,7 @@ const ClientPortal = () => {
                                     to="/client/book?category=msme" 
                                     onClick={() => handleNavClick('MSME Enterprise Cloud Solutions')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="MSME Growth Engine"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faChartLine} className="cs-icon" />
@@ -355,6 +366,7 @@ const ClientPortal = () => {
                                     to="/client/book?category=digital" 
                                     onClick={() => handleNavClick('Web & Mobile Digital Platforms')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="Web & Mobile Apps"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faMobileAlt} className="cs-icon" />
@@ -385,6 +397,7 @@ const ClientPortal = () => {
                                     to="/client/profile" 
                                     onClick={() => handleNavClick('Kampala Tech Hub Lead Assignment')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="Kampala HQ Desk"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faBuilding} className="cs-icon" />
@@ -398,6 +411,7 @@ const ClientPortal = () => {
                                     to="/client/profile" 
                                     onClick={() => handleNavClick('Priority 24/7 SLA Telemetry')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="24/7 Priority SLA"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faBolt} className="cs-icon" />
@@ -410,6 +424,7 @@ const ClientPortal = () => {
                                 <a 
                                     href="mailto:support@koshercode.com"
                                     className="cs-nav-item"
+                                    title="Direct Tech Hotline"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faHeadset} className="cs-icon" />
@@ -493,10 +508,10 @@ const ClientPortal = () => {
                                     handleToggleSidebar();
                                 }
                             }}
-                            title={(isMobile ? mobileOpen : sidebarOpen) ? "Close Sidebar" : "Open Sidebar"}
+                            title={(isMobile ? mobileOpen : sidebarOpen) ? "Collapse Sidebar (Compact Mode)" : "Expand Sidebar (Full Mode)"}
                             role="button"
                             tabIndex={0}
-                            aria-label={(isMobile ? mobileOpen : sidebarOpen) ? "Close Sidebar" : "Open Sidebar"}
+                            aria-label={(isMobile ? mobileOpen : sidebarOpen) ? "Collapse Sidebar" : "Expand Sidebar"}
                         >
                             <span></span>
                             <span></span>

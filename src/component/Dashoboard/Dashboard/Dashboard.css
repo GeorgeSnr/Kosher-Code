@@ -68,13 +68,17 @@
 }
 
 #pageContent {
-    flex-grow: 1;
+    flex: 1 1 auto;
     width: calc(100% - 270px);
+    max-width: calc(100% - 270px);
+    min-width: 0;
     min-height: 100vh;
-    transition: all 0.3s;
+    transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                max-width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 1.5rem;
     background: var(--cp-bg, #F8F9FD);
     color: var(--cp-text-main, #0F172A);
+    box-sizing: border-box;
 }
 
 .dashBoardHeader {
@@ -185,27 +189,43 @@
 
 @media (min-width: 992px) {
     #sidebar {
-        transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                    opacity 0.25s ease,
-                    visibility 0.3s ease;
+        width: 270px;
+        min-width: 270px;
+        max-width: 270px;
+        flex-shrink: 0;
+        transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                    min-width 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                    max-width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     #sidebar.active {
-        margin-left: -270px !important;
-        min-width: 0 !important;
-        max-width: 0 !important;
-        width: 0 !important;
-        opacity: 0 !important;
-        visibility: hidden !important;
-        overflow: hidden !important;
+        width: 76px !important;
+        min-width: 76px !important;
+        max-width: 76px !important;
+        margin-left: 0 !important;
+        padding: 1rem 0.5rem !important;
+        overflow-x: hidden;
+    }
+
+    #sidebar.active .sidebarContent {
+        padding: 0.5rem 0.25rem !important;
+        align-items: center;
+    }
+
+    #sidebar.active .backBtnBox button span,
+    #sidebar.active span:not(.fa),
+    #sidebar.active h5,
+    #sidebar.active h6,
+    #sidebar.active p {
+        display: none !important;
     }
 
     #pageContent.sidebar-collapsed,
     #sidebar.active + #pageContent,
     #sidebar.active ~ #pageContent {
-        width: 100% !important;
-        max-width: 100% !important;
-        flex: 1 1 100% !important;
+        width: calc(100% - 76px) !important;
+        max-width: calc(100% - 76px) !important;
+        flex: 1 1 auto !important;
     }
 }
 
