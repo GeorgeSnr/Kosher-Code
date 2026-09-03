@@ -26,11 +26,12 @@ const Dashboard = () => {
 
     const handleNavClick = (pageTitle) => {
         setTitle(pageTitle);
-        if (typeof window !== 'undefined' && window.innerWidth <= 991) {
-            setTimeout(() => {
-                setSideToggle(false);
-            }, 140);
-        } else {
+        // Mobile: closes #sidebar drawer unconditionally upon selection
+        setTimeout(() => {
+            setSideToggle(false);
+        }, 140);
+        // Desktop: collapses to compact 76px rail
+        if (typeof window !== 'undefined' && window.innerWidth > 991) {
             setTimeout(() => {
                 setSideToggle(true);
             }, 140);

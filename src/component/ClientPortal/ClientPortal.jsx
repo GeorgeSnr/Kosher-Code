@@ -135,13 +135,13 @@ const ClientPortal = () => {
         setSolutionsOpen(false);
         setSupportOpen(false);
 
-        if (isMobile || (typeof window !== 'undefined' && window.innerWidth <= 991)) {
-            // Mobile: gently roll back drawer
-            setTimeout(() => {
-                setMobileOpen(false);
-            }, 140);
-        } else {
-            // Desktop: roll back to compact icon rail automatically
+        // Mobile: gently roll back drawer unconditionally upon selection
+        setTimeout(() => {
+            setMobileOpen(false);
+        }, 140);
+
+        // Desktop: roll back to compact icon rail automatically
+        if (typeof window !== 'undefined' && window.innerWidth > 991) {
             setTimeout(() => {
                 setSidebarOpen(false);
                 localStorage.setItem('kosher_client_sidebar_open', 'false');
@@ -151,13 +151,9 @@ const ClientPortal = () => {
 
     const handleBrandClick = () => {
         setShowUserMenu(false);
-        if (isMobile || (typeof window !== 'undefined' && window.innerWidth <= 991)) {
-            setTimeout(() => {
-                setMobileOpen(false);
-            }, 140);
-        } else {
+        setTimeout(() => {
             setMobileOpen(false);
-        }
+        }, 140);
     };
 
     return (

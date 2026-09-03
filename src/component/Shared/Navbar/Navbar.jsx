@@ -47,28 +47,45 @@ const NavBar = () => {
         });
     };
 
+    const [expanded, setExpanded] = useState(false);
+
     const scrollTop = () => window['scrollTo']({ top: 0, behavior: 'smooth' });
 
+    const handleNavItemClick = (callback) => {
+        if (typeof callback === 'function') {
+            callback();
+        }
+        // Micro-delay gives tactile visual confirmation before rolling back
+        setTimeout(() => {
+            setExpanded(false);
+        }, 140);
+    };
+
     return (
-        <Navbar className={`navbar navbar-expand-lg ${isSticky ? "navStyle" : "navDefault"}`} expand="lg">
+        <Navbar 
+            expanded={expanded} 
+            onToggle={setExpanded} 
+            className={`navbar navbar-expand-lg ${isSticky ? "navStyle" : "navDefault"}`} 
+            expand="lg"
+        >
             <Container>
-                <Navbar.Brand as={Link} to="/" onClick={scrollTop} className="navBrn">
+                <Navbar.Brand as={Link} to="/" onClick={() => handleNavItemClick(scrollTop)} className="navBrn">
                     <FontAwesomeIcon icon={faBuffer} className="brnIcon" /> Kosher <span className="navHighlight">Code</span>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto mainNav align-items-center" activeKey="/home">
                         <Nav.Item>
-                            <Nav.Link as={Link} to="/" className="nav-link" onClick={scrollTop}>Home</Nav.Link>
+                            <Nav.Link as={Link} to="/" className="nav-link" onClick={() => handleNavItemClick(scrollTop)}>Home</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link href="#services" className="nav-link">Solutions</Nav.Link>
+                            <Nav.Link href="#services" className="nav-link" onClick={() => handleNavItemClick()}>Solutions</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link href="#testimonial" className="nav-link">Reviews</Nav.Link>
+                            <Nav.Link href="#testimonial" className="nav-link" onClick={() => handleNavItemClick()}>Reviews</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link href="#contact" className="nav-link">Contact Us</Nav.Link>
+                            <Nav.Link href="#contact" className="nav-link" onClick={() => handleNavItemClick()}>Contact Us</Nav.Link>
                         </Nav.Item>
 
                         {/* Theme Toggle Button */}
@@ -91,6 +108,7 @@ const NavBar = () => {
                                         as={Link} 
                                         to={admin ? "/admin" : "/client"} 
                                         className="nav-link fw-semibold"
+                                        onClick={() => handleNavItemClick()}
                                         style={{ color: 'var(--site-primary, #7355F7)' }}
                                     >
                                         <FontAwesomeIcon icon={faUserTie} className="me-1" />
@@ -103,7 +121,7 @@ const NavBar = () => {
                             </>
                         ) : (
                             <Nav.Item className="ms-lg-2">
-                                <Link to="/login">
+                                <Link to="/login" onClick={() => handleNavItemClick()}>
                                     <button className="loginBtn d-flex align-items-center gap-1.5">
                                         <FontAwesomeIcon icon={faSignInAlt} /> Portal Login
                                     </button>
