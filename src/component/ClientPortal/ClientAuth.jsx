@@ -594,7 +594,7 @@ const ClientAuth = ({ defaultPortal }) => {
 
                                 {/* Mode Switcher Tabs (Sign In vs Sign Up) - Hidden during Forgot Password */}
                                 {authRole === 'client' && mode !== 'forgot' && (
-                                    <div className="d-flex mb-4 p-1 rounded" style={{ backgroundColor: 'var(--site-card-subtle, #FAF8FF)', border: '1px solid var(--site-border, #E5E0FA)' }}>
+                                    <div className="d-flex gap-2 mb-4 p-1.5 rounded" style={{ backgroundColor: 'var(--site-card-subtle, #FAF8FF)', border: '1px solid var(--site-border, #E5E0FA)' }}>
                                         <button
                                             type="button"
                                             onClick={() => handleSwitchMode('signin')}

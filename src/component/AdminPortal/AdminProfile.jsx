@@ -89,7 +89,7 @@ const AdminProfile = () => {
                             </div>
                         </div>
 
-                        <div className="d-grid gap-2.5">
+                        <div className="d-grid gap-3">
                             <Link to="/admin/orders" className="btn text-white py-2.5" style={{ backgroundColor: 'var(--cp-primary)', borderRadius: '6px', fontWeight: 600 }}>
                                 <FontAwesomeIcon icon={faList} className="me-2" /> Inbound Inquiries Table
                             </Link>
@@ -101,7 +101,7 @@ const AdminProfile = () => {
                             </Link>
                             <Button 
                                 variant="outline-danger" 
-                                className="py-2.5 mt-2 d-flex align-items-center justify-content-center gap-2"
+                                className="py-2.5 d-flex align-items-center justify-content-center gap-2"
                                 style={{ borderRadius: '6px', fontWeight: 600 }}
                                 onClick={signOut}
                             >

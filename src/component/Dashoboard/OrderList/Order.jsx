@@ -170,9 +170,9 @@ const Order = ({ order, handleAction, handleDelete }) => {
 
                 {/* Actions */}
                 <td className="align-middle text-end">
-                    <div className="d-inline-flex gap-1.5">
+                    <div className="d-inline-flex align-items-center gap-2.5">
                         <button
-                            className="btn btn-sm p-1.5"
+                            className="btn btn-sm px-2.5 py-1.5"
                             style={{ 
                                 borderRadius: '4px',
                                 backgroundColor: 'var(--cp-card-subtle)',
@@ -185,7 +185,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                             <FontAwesomeIcon icon={faEye} />
                         </button>
                         <button
-                            className="btn btn-outline-danger btn-sm p-1.5"
+                            className="btn btn-outline-danger btn-sm px-2.5 py-1.5"
                             style={{ borderRadius: '4px' }}
                             title="Delete / Archive Request"
                             onClick={() => handleDelete(_id)}
@@ -326,7 +326,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                         <small className="fw-bold text-uppercase d-block mb-2.5" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
                             Update Live Project Status:
                         </small>
-                        <div className="d-flex flex-wrap gap-2">
+                        <div className="d-flex flex-wrap gap-2.5 gap-sm-3">
                             {['Pending', 'In Review', 'In Progress', 'Done'].map(st => {
                                 const isCurrent = status === st;
                                 return (
@@ -354,7 +354,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                 </Modal.Body>
 
                 <Modal.Footer style={{ backgroundColor: 'var(--cp-card-subtle)', borderTop: '1px solid var(--cp-border)' }}>
-                    <div className="d-flex justify-content-between align-items-center w-100">
+                    <div className="d-flex justify-content-between align-items-center w-100 gap-3">
                         <Button 
                             variant="outline-danger" 
                             size="sm"

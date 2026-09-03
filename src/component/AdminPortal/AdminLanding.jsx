@@ -102,7 +102,7 @@ const AdminLanding = () => {
                         <p className="mb-4 small" style={{ color: '#E2E8F0', maxWidth: '580px', lineHeight: 1.65 }}>
                             Supervise inbound enterprise requests across Uganda, East Africa, and multi-continental markets. Manage system catalog solutions and administrator access.
                         </p>
-                        <div className="d-flex flex-wrap gap-2.5">
+                        <div className="d-flex flex-wrap gap-3 gap-sm-3.5 mt-2">
                             <Link to="/admin/add-service" className="text-decoration-none">
                                 <Button 
                                     className="px-4 py-2.5 fw-semibold text-white d-inline-flex align-items-center gap-2 border-0"
@@ -213,7 +213,7 @@ const AdminLanding = () => {
 
             {/* Filter and Search Bar */}
             <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4 cp-card p-3.5">
-                <div className="d-flex flex-wrap gap-2">
+                <div className="d-flex flex-wrap gap-2.5 gap-sm-3">
                     {['All', 'Pending', 'In Review', 'In Progress', 'Done'].map(st => {
                         const isActive = filterStatus === st;
                         const count = st === 'All' ? orders.length : orders.filter(o => o.status === st).length;

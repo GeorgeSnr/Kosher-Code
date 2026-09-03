@@ -101,15 +101,15 @@ const ClientLanding = () => {
                         <p className="mb-3.5 text-white text-opacity-85 small" style={{ maxWidth: '580px', lineHeight: 1.6, fontSize: '0.88rem' }}>
                             Supervise your active digital systems, core banking modules, and SACCO ERP requests. Our software engineering teams in Kampala, Uganda are actively maintaining your infrastructure under 24/7 SLA.
                         </p>
-                        <div className="d-flex flex-wrap gap-2.5">
+                        <div className="d-flex flex-wrap gap-3 gap-sm-3.5 mt-2">
                             <Link to="/client/book">
                                 <Button 
-                                    className="px-3.5 py-2 fw-semibold text-white d-inline-flex align-items-center gap-2"
+                                    className="px-4 py-2.5 fw-semibold text-white d-inline-flex align-items-center gap-2"
                                     style={{
                                         backgroundColor: '#070120',
                                         borderColor: '#070120',
                                         borderRadius: '4px',
-                                        fontSize: '0.85rem',
+                                        fontSize: '0.88rem',
                                         boxShadow: '0 4px 12px rgba(7, 1, 32, 0.25)'
                                     }}
                                 >
@@ -119,8 +119,8 @@ const ClientLanding = () => {
                             <Link to="/client/bookings">
                                 <Button 
                                     variant="outline-light" 
-                                    className="px-3.5 py-2 fw-semibold d-inline-flex align-items-center gap-2"
-                                    style={{ borderRadius: '4px', fontSize: '0.85rem' }}
+                                    className="px-4 py-2.5 fw-semibold d-inline-flex align-items-center gap-2"
+                                    style={{ borderRadius: '4px', fontSize: '0.88rem' }}
                                 >
                                     <FontAwesomeIcon icon={faFolderOpen} /> View Engagements ({bookings.length})
                                 </Button>
@@ -390,11 +390,11 @@ const ClientLanding = () => {
                             </div>
                         </div>
 
-                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-2 pt-2.5 border-top" style={{ borderColor: 'var(--cp-border)' }}>
+                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3 pt-3 border-top" style={{ borderColor: 'var(--cp-border)' }}>
                             <a 
                                 href="mailto:support@koshercode.com" 
-                                className="btn btn-sm fw-semibold text-white d-inline-flex align-items-center gap-1.5"
-                                style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', borderRadius: '4px', fontSize: '0.82rem', padding: '7px 14px' }}
+                                className="btn btn-sm fw-semibold text-white d-inline-flex align-items-center gap-2"
+                                style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', borderRadius: '4px', fontSize: '0.82rem', padding: '8px 16px' }}
                             >
                                 Email Lead Architect <FontAwesomeIcon icon={faArrowRight} style={{ fontSize: '0.7rem' }} />
                             </a>
@@ -437,11 +437,11 @@ const ClientLanding = () => {
                             </div>
                         </div>
 
-                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-2 pt-2.5 border-top" style={{ borderColor: 'var(--cp-border)' }}>
+                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3 pt-3 border-top" style={{ borderColor: 'var(--cp-border)' }}>
                             <Link 
                                 to="/client/review" 
-                                className="btn btn-sm btn-outline-success fw-semibold d-inline-flex align-items-center gap-1.5" 
-                                style={{ borderRadius: '4px', fontSize: '0.82rem', padding: '7px 14px' }}
+                                className="btn btn-sm btn-outline-success fw-semibold d-inline-flex align-items-center gap-2" 
+                                style={{ borderRadius: '4px', fontSize: '0.82rem', padding: '8px 16px' }}
                             >
                                 Submit Milestone Review <FontAwesomeIcon icon={faArrowRight} style={{ fontSize: '0.7rem' }} />
                             </Link>

@@ -102,7 +102,7 @@ const MakeAdmin = () => {
     return (
         <div className="p-1 p-sm-2">
             {/* Top Navigation Tabs */}
-            <div className="d-flex flex-wrap gap-2 mb-4">
+            <div className="d-flex flex-wrap gap-2.5 gap-sm-3 mb-4">
                 <button
                     type="button"
                     className={`btn btn-sm px-3 py-2 fw-semibold d-inline-flex align-items-center gap-2 ${activeTab === 'admins' ? 'btn-primary' : 'btn-outline-secondary'}`}
@@ -336,18 +336,18 @@ const MakeAdmin = () => {
                             <h5 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)' }}>Cloud Firestore Database Management</h5>
                             <p className="small mb-0" style={{ color: 'var(--cp-text-muted)' }}>Real-time database health, document collections, and cloud seeding controls.</p>
                         </div>
-                        <div className="d-flex gap-2">
+                        <div className="d-flex flex-wrap gap-2.5 gap-sm-3">
                             <Button 
                                 size="sm" 
                                 variant="outline-primary"
                                 onClick={loadData}
-                                className="d-flex align-items-center gap-1.5"
+                                className="d-flex align-items-center gap-1.5 px-3 py-1.5"
                             >
                                 <FontAwesomeIcon icon={faSyncAlt} /> Refresh Status
                             </Button>
                             <Button 
                                 size="sm" 
-                                className="text-white d-flex align-items-center gap-1.5"
+                                className="text-white d-flex align-items-center gap-1.5 px-3 py-1.5"
                                 style={{ backgroundColor: 'var(--cp-primary)', border: 'none' }}
                                 disabled={isSeeding}
                                 onClick={() => handleSeedDatabase(false)}
@@ -451,12 +451,13 @@ const MakeAdmin = () => {
                         <p className="small text-muted mb-3">
                             The application reads and writes directly to Cloud Firestore. If you want to populate all catalog collections with the latest comprehensive datasets, click below:
                         </p>
-                        <div className="d-flex flex-wrap gap-2">
+                        <div className="d-flex flex-wrap gap-3">
                             <Button 
                                 variant="primary" 
                                 size="sm" 
                                 disabled={isSeeding}
                                 onClick={() => handleSeedDatabase(false)}
+                                className="px-3.5 py-2 fw-semibold"
                                 style={{ borderRadius: '4px' }}
                             >
                                 Populate Missing Firestore Documents
@@ -465,6 +466,7 @@ const MakeAdmin = () => {
                                 variant="outline-warning" 
                                 size="sm" 
                                 disabled={isSeeding}
+                                className="px-3.5 py-2 fw-semibold"
                                 onClick={() => {
                                     swal({
                                         title: "Overwrite / Re-seed Database?",

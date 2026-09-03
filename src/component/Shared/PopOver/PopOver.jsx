@@ -107,12 +107,12 @@ const PopOver = () => {
                             </span>
                         </div>
                         
-                        <div className="d-flex flex-column gap-1.5 pt-2 border-top">
+                        <div className="d-flex flex-column gap-2.5 pt-2.5 border-top">
                             <Link 
                                 to={admin ? "/admin" : "/client"} 
                                 onClick={() => setShow(false)}
-                                className="btn btn-sm btn-light text-start d-flex align-items-center justify-content-between fw-semibold"
-                                style={{ fontSize: '0.8rem', borderRadius: '4px' }}
+                                className="btn btn-sm btn-light text-start d-flex align-items-center justify-content-between fw-semibold py-1.5"
+                                style={{ fontSize: '0.82rem', borderRadius: '4px' }}
                             >
                                 <span><FontAwesomeIcon icon={admin ? faShieldAlt : faUser} className="me-1.5" /> Workspace</span>
                                 <FontAwesomeIcon icon={faArrowRight} style={{ fontSize: '0.7rem' }} />
@@ -120,8 +120,8 @@ const PopOver = () => {
                             <Button 
                                 variant="outline-danger" 
                                 size="sm" 
-                                className="w-100 d-flex align-items-center justify-content-center gap-1.5 mt-1" 
-                                style={{ borderRadius: '4px', fontWeight: 600, fontSize: '0.8rem' }}
+                                className="w-100 d-flex align-items-center justify-content-center gap-1.5 py-1.5" 
+                                style={{ borderRadius: '4px', fontWeight: 600, fontSize: '0.82rem' }}
                                 onClick={signOut}
                             >
                                 <FontAwesomeIcon icon={faSignOutAlt} /> Sign Out

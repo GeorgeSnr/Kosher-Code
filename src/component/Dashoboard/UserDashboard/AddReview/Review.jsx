@@ -97,13 +97,13 @@ const Review = () => {
                         <span className="badge" style={{ backgroundColor: 'rgba(16, 185, 129, 0.12)', color: '#10B981', fontSize: '0.78rem' }}>
                             <FontAwesomeIcon icon={faCheckCircle} className="me-1" /> Published Testimonial
                         </span>
-                        <div className="d-flex gap-2">
+                        <div className="d-flex align-items-center gap-2.5 gap-sm-3">
                             <Button 
                                 variant="outline-primary" 
                                 size="sm"
                                 onClick={() => setIsEditing(true)}
-                                className="d-flex align-items-center gap-1.5"
-                                style={{ borderRadius: '4px', fontSize: '0.78rem' }}
+                                className="d-flex align-items-center gap-1.5 px-3 py-1.5"
+                                style={{ borderRadius: '4px', fontSize: '0.8rem' }}
                             >
                                 <FontAwesomeIcon icon={faEdit} /> Edit Review
                             </Button>
@@ -111,8 +111,8 @@ const Review = () => {
                                 variant="outline-danger" 
                                 size="sm"
                                 onClick={handleDelete}
-                                className="d-flex align-items-center gap-1.5"
-                                style={{ borderRadius: '4px', fontSize: '0.78rem' }}
+                                className="d-flex align-items-center gap-1.5 px-3 py-1.5"
+                                style={{ borderRadius: '4px', fontSize: '0.8rem' }}
                             >
                                 <FontAwesomeIcon icon={faTrashAlt} /> Remove
                             </Button>

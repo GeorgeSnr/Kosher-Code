@@ -102,23 +102,26 @@ const ManageServices = () => {
                                             </td>
                                             <td className="fw-bold py-3 px-3" style={{ color: 'var(--cp-text-main)' }}>${price}</td>
                                             <td className="text-end py-3 px-3">
-                                                <Button 
-                                                    variant="outline-primary" 
-                                                    size="sm" 
-                                                    className="me-2"
-                                                    style={{ borderRadius: '4px' }}
-                                                    onClick={() => setEdit(serviceId)}
-                                                >
-                                                    <FontAwesomeIcon icon={faEdit} /> Edit
-                                                </Button>
-                                                <Button 
-                                                    variant="outline-danger" 
-                                                    size="sm" 
-                                                    style={{ borderRadius: '4px' }}
-                                                    onClick={() => handleDelete(serviceId, name)}
-                                                >
-                                                    <FontAwesomeIcon icon={faTrashAlt} /> Delete
-                                                </Button>
+                                                <div className="d-inline-flex align-items-center gap-2.5 gap-sm-3">
+                                                    <Button 
+                                                        variant="outline-primary" 
+                                                        size="sm" 
+                                                        className="px-3 py-1.5 d-inline-flex align-items-center gap-1.5"
+                                                        style={{ borderRadius: '4px' }}
+                                                        onClick={() => setEdit(serviceId)}
+                                                    >
+                                                        <FontAwesomeIcon icon={faEdit} /> Edit
+                                                    </Button>
+                                                    <Button 
+                                                        variant="outline-danger" 
+                                                        size="sm" 
+                                                        className="px-3 py-1.5 d-inline-flex align-items-center gap-1.5"
+                                                        style={{ borderRadius: '4px' }}
+                                                        onClick={() => handleDelete(serviceId, name)}
+                                                    >
+                                                        <FontAwesomeIcon icon={faTrashAlt} /> Delete
+                                                    </Button>
+                                                </div>
                                             </td>
                                         </tr>
                                     );

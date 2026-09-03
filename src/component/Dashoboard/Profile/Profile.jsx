@@ -72,20 +72,20 @@ const Profile = () => {
                     </div>
                 </div>
 
-                <div className="d-grid gap-2">
+                <div className="d-grid gap-3">
                     {admin ? (
-                        <Link to="/admin/orders" className="btn text-white py-2" style={{ backgroundColor: '#7355F7', borderRadius: '4px', fontWeight: 600 }}>
+                        <Link to="/admin/orders" className="btn text-white py-2.5" style={{ backgroundColor: '#7355F7', borderRadius: '4px', fontWeight: 600 }}>
                             <FontAwesomeIcon icon={faList} className="me-2" /> View Incoming Requests
                         </Link>
                     ) : (
-                        <Link to="/client/book" className="btn text-white py-2" style={{ backgroundColor: '#7355F7', borderRadius: '4px', fontWeight: 600 }}>
+                        <Link to="/client/book" className="btn text-white py-2.5" style={{ backgroundColor: '#7355F7', borderRadius: '4px', fontWeight: 600 }}>
                             <FontAwesomeIcon icon={faShoppingCart} className="me-2" /> Book New Solution
                         </Link>
                     )}
                     
                     <Button 
                         variant="outline-danger" 
-                        className="py-2 mt-1 d-flex align-items-center justify-content-center gap-2"
+                        className="py-2.5 d-flex align-items-center justify-content-center gap-2"
                         style={{ borderRadius: '4px', fontWeight: 600 }}
                         onClick={signOut}
                     >

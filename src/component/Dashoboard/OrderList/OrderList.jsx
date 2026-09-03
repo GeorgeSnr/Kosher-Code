@@ -152,7 +152,7 @@ const OrderList = () => {
 
             {/* Filter & Search Bar */}
             <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4 cp-card p-3.5">
-                <div className="d-flex flex-wrap gap-2">
+                <div className="d-flex flex-wrap gap-2.5 gap-sm-3">
                     {['All', 'Pending', 'In Review', 'In Progress', 'Done'].map(st => {
                         const isActive = filterStatus === st;
                         const count = st === 'All' ? orders.length : orders.filter(o => o.status === st).length;

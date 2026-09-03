@@ -112,16 +112,16 @@ const ClientProfile = () => {
                         </div>
 
                         {/* Action Buttons */}
-                        <div className="d-grid gap-2">
+                        <div className="d-grid gap-3">
                             <Link to="/client/book" className="btn py-2.5 text-white fw-semibold" style={{ backgroundColor: 'var(--cp-primary)', borderRadius: '4px' }}>
                                 <FontAwesomeIcon icon={faShoppingCart} className="me-2" /> Book New Solution
                             </Link>
-                            <Link to="/client/bookings" className="btn btn-outline-secondary py-2 fw-semibold" style={{ borderRadius: '4px', borderColor: 'var(--cp-border)', color: 'var(--cp-text-main)' }}>
+                            <Link to="/client/bookings" className="btn btn-outline-secondary py-2.5 fw-semibold" style={{ borderRadius: '4px', borderColor: 'var(--cp-border)', color: 'var(--cp-text-main)' }}>
                                 <FontAwesomeIcon icon={faCalendarCheck} className="me-2" /> View My Engagements ({bookings.length})
                             </Link>
                             <button 
                                 onClick={signOut} 
-                                className="btn btn-outline-danger py-2 fw-semibold mt-2" 
+                                className="btn btn-outline-danger py-2.5 fw-semibold" 
                                 style={{ borderRadius: '4px' }}
                             >
                                 <FontAwesomeIcon icon={faSignOutAlt} className="me-2" /> Exit Session & Log Out

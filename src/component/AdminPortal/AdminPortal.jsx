@@ -469,7 +469,7 @@ const AdminPortal = () => {
             <div id="pageContent" className={!sidebarOpen ? 'sidebar-collapsed' : ''}>
                 {/* Clean Top Header */}
                 <div className="dashBoardHeader">
-                    <div className="d-flex align-items-center">
+                    <div className="d-flex align-items-center gap-2.5 gap-sm-3">
                         <div 
                             id="nav-icon"
                             className={(isMobile ? mobileOpen : sidebarOpen) ? "menu-btn open" : "menu-btn"}
@@ -493,21 +493,21 @@ const AdminPortal = () => {
                             <span></span>
                         </div>
                         <div>
-                            <h4 className="fw-bold mb-0 ms-1 ms-sm-2" style={{ color: 'var(--cp-text-main)' }}>{title}</h4>
+                            <h4 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{title}</h4>
                         </div>
                     </div>
 
-                    <div className="d-flex align-items-center gap-2 gap-sm-3">
+                    <div className="d-flex align-items-center gap-2.5 gap-sm-3.5 gap-md-4">
                         <button 
                             type="button"
                             onClick={toggleTheme}
-                            className="btn btn-sm d-flex align-items-center gap-1.5 py-1 px-2.5"
+                            className="btn btn-sm d-flex align-items-center gap-2 py-1.5 px-3"
                             style={{ 
                                 backgroundColor: 'var(--cp-card-subtle)', 
                                 border: '1px solid var(--cp-border)',
                                 color: 'var(--cp-text-main)',
                                 borderRadius: '4px',
-                                fontSize: '0.8rem',
+                                fontSize: '0.82rem',
                                 fontWeight: 500
                             }}
                             title={`Switch to ${theme === 'light' ? 'Dark' : 'Light'} Mode`}
@@ -516,18 +516,18 @@ const AdminPortal = () => {
                             <span className="d-none d-md-inline">{theme === 'dark' ? 'Light' : 'Dark'}</span>
                         </button>
 
-                        <div className="d-none d-md-flex align-items-center gap-1.5 px-2.5 py-1 rounded" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', fontSize: '0.78rem' }}>
+                        <div className="d-none d-md-flex align-items-center gap-2 px-3 py-1.5 rounded" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', fontSize: '0.78rem' }}>
                             <FontAwesomeIcon icon={faClock} style={{ color: 'var(--cp-primary)' }} />
                             <span className="fw-semibold" style={{ color: 'var(--cp-text-muted)' }}>Kampala Admin Desk</span>
                         </div>
-                        <span className="badge px-2.5 py-1.5 d-none d-sm-inline-flex align-items-center gap-1" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', border: '1px solid var(--cp-border-highlight)', fontSize: '0.78rem' }}>
+                        <span className="badge px-3 py-1.5 d-none d-sm-inline-flex align-items-center gap-1.5" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', border: '1px solid var(--cp-border-highlight)', fontSize: '0.78rem' }}>
                             <FontAwesomeIcon icon={faCheckCircle} /> Superadmin Access
                         </span>
                         <button 
                             type="button" 
                             onClick={handleSignOut}
-                            className="btn btn-sm btn-outline-danger d-inline-flex align-items-center gap-1.5 py-1 px-2.5"
-                            style={{ borderRadius: '4px', fontSize: '0.78rem', fontWeight: 600 }}
+                            className="btn btn-sm btn-outline-danger d-inline-flex align-items-center gap-2 py-1.5 px-3"
+                            style={{ borderRadius: '4px', fontSize: '0.8rem', fontWeight: 600 }}
                         >
                             <FontAwesomeIcon icon={faSignOutAlt} /> <span className="d-none d-sm-inline">Exit</span>
                         </button>
