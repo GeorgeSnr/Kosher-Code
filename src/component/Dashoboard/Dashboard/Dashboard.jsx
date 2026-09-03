@@ -24,13 +24,28 @@ const Dashboard = () => {
         }
     }, [dispatch, user?.email]);
 
+    const handleNavClick = (pageTitle) => {
+        setTitle(pageTitle);
+        if (typeof window !== 'undefined' && window.innerWidth <= 991) {
+            setTimeout(() => {
+                setSideToggle(false);
+            }, 140);
+        }
+    };
+
     return (
         <div id="dashboard">
+            {/* Mobile Backdrop */}
+            <div 
+                className={`client-sidebar-backdrop ${sideToggle ? 'active' : ''}`}
+                onClick={() => setSideToggle(false)}
+            ></div>
+
             <div id="sidebar" className={ sideToggle ? "active" : "" }>
                 <div className="sidebarContent">
-                    <Sidebar setTitle={setTitle}/>
+                    <Sidebar setTitle={setTitle} onNavClick={handleNavClick} />
                     <div className="backBtnBox">
-                        <Link to="/">
+                        <Link to="/" onClick={() => { if (typeof window !== 'undefined' && window.innerWidth <= 991) setTimeout(() => setSideToggle(false), 140); }}>
                             <button className="backBtn"> 
                             <FontAwesomeIcon icon={faSignOutAlt}/>
                              back to home</button>

@@ -18,8 +18,16 @@ import {
 import { faBuffer } from '@fortawesome/free-brands-svg-icons';
 import { useAppContext } from '../../../context';
 
-const Sidebar = ({ setTitle }) => {
+const Sidebar = ({ setTitle, onNavClick }) => {
     const { state: { admin } } = useAppContext();
+
+    const handleItemClick = (pageTitle) => {
+        if (onNavClick) {
+            onNavClick(pageTitle);
+        } else {
+            setTitle(pageTitle);
+        }
+    };
 
     return (
         <div>
@@ -50,7 +58,7 @@ const Sidebar = ({ setTitle }) => {
             <nav id="sideNavbar">
                 <ul>    
                     <li>
-                        <NavLink onClick={() => setTitle('Profile')} className={({ isActive }) => isActive ? "activePage" : ""} end to="/dashboard/profile">
+                        <NavLink onClick={() => handleItemClick('Profile')} className={({ isActive }) => isActive ? "activePage" : ""} end to="/dashboard/profile">
                             <FontAwesomeIcon icon={faUserCircle} className="iconC"/> 
                             Profile
                         </NavLink>
@@ -58,25 +66,25 @@ const Sidebar = ({ setTitle }) => {
                     {admin ? (
                         <>
                             <li>
-                                <NavLink onClick={() => setTitle('Incoming Requests')} className={({ isActive }) => isActive ? "activePage" : ""} to="/dashboard/orderList">
+                                <NavLink onClick={() => handleItemClick('Incoming Requests')} className={({ isActive }) => isActive ? "activePage" : ""} to="/dashboard/orderList">
                                     <FontAwesomeIcon icon={faInbox} className="iconC"/> 
                                     Incoming Requests
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink onClick={() => setTitle('Add Solution')} className={({ isActive }) => isActive ? "activePage" : ""} to="/dashboard/addService">
+                                <NavLink onClick={() => handleItemClick('Add Solution')} className={({ isActive }) => isActive ? "activePage" : ""} to="/dashboard/addService">
                                     <FontAwesomeIcon icon={faFileMedical} className="iconC"/> 
                                     Add Solution
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink onClick={() => setTitle('Make Admin')} className={({ isActive }) => isActive ? "activePage" : ""} to="/dashboard/makeAdmin">
+                                <NavLink onClick={() => handleItemClick('Make Admin')} className={({ isActive }) => isActive ? "activePage" : ""} to="/dashboard/makeAdmin">
                                     <FontAwesomeIcon icon={faUserPlus} className="iconC"/> 
                                     Make Admin
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink onClick={() => setTitle('Manage Solutions')} className={({ isActive }) => isActive ? "activePage" : ""} to="/dashboard/manageServices">
+                                <NavLink onClick={() => handleItemClick('Manage Solutions')} className={({ isActive }) => isActive ? "activePage" : ""} to="/dashboard/manageServices">
                                     <FontAwesomeIcon icon={faCog} className="iconC"/>
                                     Manage Solutions
                                 </NavLink>
@@ -85,19 +93,19 @@ const Sidebar = ({ setTitle }) => {
                     ) : (
                         <>
                             <li>
-                                <NavLink onClick={() => setTitle('Book Solution')} className={({ isActive }) => isActive ? "activePage" : ""} end to="/dashboard/book">
+                                <NavLink onClick={() => handleItemClick('Book Solution')} className={({ isActive }) => isActive ? "activePage" : ""} end to="/dashboard/book">
                                     <FontAwesomeIcon icon={faShoppingCart} className="iconC"/> 
                                     Book Solution
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink onClick={() => setTitle('My Bookings')} className={({ isActive }) => isActive ? "activePage" : ""} to="/dashboard/booking">
+                                <NavLink onClick={() => handleItemClick('My Bookings')} className={({ isActive }) => isActive ? "activePage" : ""} to="/dashboard/booking">
                                     <FontAwesomeIcon icon={faCalendarCheck} className="iconC"/> 
                                     My Bookings
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink onClick={() => setTitle('Review & Feedback')} className={({ isActive }) => isActive ? "activePage" : ""} to="/dashboard/review">
+                                <NavLink onClick={() => handleItemClick('Review & Feedback')} className={({ isActive }) => isActive ? "activePage" : ""} to="/dashboard/review">
                                     <FontAwesomeIcon icon={faCommentAlt} className="iconC"/>
                                     Feedback & Review
                                 </NavLink>

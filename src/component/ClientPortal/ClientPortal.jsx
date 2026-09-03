@@ -129,8 +129,27 @@ const ClientPortal = () => {
 
     const handleNavClick = (pageTitle) => {
         setTitle(pageTitle);
-        setMobileOpen(false);
         setShowUserMenu(false);
+        if (isMobile || (typeof window !== 'undefined' && window.innerWidth <= 991)) {
+            // Gentle micro-delay gives the user instant visual tap confirmation,
+            // then gently glides the sidebar away so they can continue with their selection
+            setTimeout(() => {
+                setMobileOpen(false);
+            }, 140);
+        } else {
+            setMobileOpen(false);
+        }
+    };
+
+    const handleBrandClick = () => {
+        setShowUserMenu(false);
+        if (isMobile || (typeof window !== 'undefined' && window.innerWidth <= 991)) {
+            setTimeout(() => {
+                setMobileOpen(false);
+            }, 140);
+        } else {
+            setMobileOpen(false);
+        }
     };
 
     return (
@@ -145,7 +164,7 @@ const ClientPortal = () => {
             <aside className={`client-sidebar ${mobileOpen ? 'mobile-open' : ''} ${!sidebarOpen ? 'desktop-collapsed' : ''}`}>
                 {/* 1. Header with Brand & Interactive Theme Switch Toggle */}
                 <div className="cs-header">
-                    <Link to="/" onClick={() => setMobileOpen(false)} className="cs-brand" title="Kosher Code Home">
+                    <Link to="/" onClick={handleBrandClick} className="cs-brand" title="Kosher Code Home">
                         <div className="cs-brand-icon">
                             <FontAwesomeIcon icon={faBuffer} />
                         </div>
@@ -423,6 +442,11 @@ const ClientPortal = () => {
                             <li>
                                 <a 
                                     href="mailto:support@koshercode.com"
+                                    onClick={() => {
+                                        if (isMobile || (typeof window !== 'undefined' && window.innerWidth <= 991)) {
+                                            setTimeout(() => setMobileOpen(false), 140);
+                                        }
+                                    }}
                                     className="cs-nav-item"
                                     title="Direct Tech Hotline"
                                 >
@@ -449,13 +473,22 @@ const ClientPortal = () => {
                             </Link>
                             <Link 
                                 to="/" 
-                                onClick={() => setShowUserMenu(false)}
+                                onClick={() => {
+                                    setShowUserMenu(false);
+                                    if (isMobile || (typeof window !== 'undefined' && window.innerWidth <= 991)) {
+                                        setTimeout(() => setMobileOpen(false), 140);
+                                    }
+                                }}
                                 className="cs-popover-item"
                             >
                                 <FontAwesomeIcon icon={faGlobe} /> Back to Website
                             </Link>
                             <button 
-                                onClick={handleSignOut}
+                                onClick={() => {
+                                    setShowUserMenu(false);
+                                    setMobileOpen(false);
+                                    handleSignOut();
+                                }}
                                 className="cs-popover-item logout"
                             >
                                 <FontAwesomeIcon icon={faSignOutAlt} /> Log Out
