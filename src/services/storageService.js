@@ -242,6 +242,13 @@ export const getRegisteredUsers = () => {
     }
 };
 
+export const findRegisteredUser = (email) => {
+    if (!email) return null;
+    const normalized = email.toLowerCase().trim();
+    const existing = getRegisteredUsers();
+    return existing.find(u => u.email.toLowerCase().trim() === normalized) || null;
+};
+
 export const registerUserAccount = (userObj) => {
     if (!userObj || !userObj.email) return null;
     const normalized = userObj.email.toLowerCase().trim();
@@ -269,6 +276,28 @@ export const registerUserAccount = (userObj) => {
     const { password, ...safeUser } = newUser;
     saveUserToFirestore(safeUser).catch(err => console.warn('Firestore user registration sync:', err.message));
     return newUser;
+};
+
+export const verifyUserCredentials = (email, password) => {
+    if (!email) return { success: false, reason: 'missing_email', message: 'Please enter your email address.' };
+    const normalized = email.toLowerCase().trim();
+    const isAdmin = checkIsAdmin(normalized);
+    const existing = getRegisteredUsers();
+    const matched = existing.find(u => u.email.toLowerCase().trim() === normalized);
+
+    if (!isAdmin && !matched) {
+        return { success: false, reason: 'user_not_found', message: 'No account found with this email address.' };
+    }
+
+    if (matched && matched.password && password && matched.password !== password) {
+        return { success: false, reason: 'wrong_password', message: 'Incorrect password. Please verify your credentials.' };
+    }
+
+    const userObj = authenticateUserAccount(email, password);
+    if (userObj) {
+        return { success: true, user: userObj };
+    }
+    return { success: false, reason: 'invalid_credentials', message: 'Invalid credentials. Please verify your email and password.' };
 };
 
 export const authenticateUserAccount = (email, password) => {
