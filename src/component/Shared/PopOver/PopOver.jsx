@@ -1,23 +1,36 @@
-import React, { useState, useRef } from 'react';
-import { Button, Overlay, Popover } from 'react-bootstrap';
+import React, { useState, useRef, useEffect } from 'react';
+import { Button } from 'react-bootstrap';
 import './PopOver.css';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { SET_USER, SET_ADMIN, useAppContext } from '../../../context';
 import userImg from '../../../Assets/user.svg';
 import UserAvatar from '../UserAvatar/UserAvatar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignOutAlt, faUser, faShieldAlt, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 const PopOver = () => {
     const { state: { user, admin }, dispatch } = useAppContext();
     const [show, setShow] = useState(false);
-    const [target, setTarget] = useState(null);
-    const ref = useRef(null);
+    const containerRef = useRef(null);
     const navigate = useNavigate();
 
-    const handleClick = (event) => {
-        setShow(!show);
-        setTarget(event.target);
-    };
+    // Close on click outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (containerRef.current && !containerRef.current.contains(event.target)) {
+                setShow(false);
+            }
+        };
+        if (show) {
+            document.addEventListener('mousedown', handleClickOutside);
+            document.addEventListener('touchstart', handleClickOutside);
+        }
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('touchstart', handleClickOutside);
+        };
+    }, [show]);
 
     const signOut = () => {
         sessionStorage.removeItem('kosher_client_session');
@@ -31,11 +44,11 @@ const PopOver = () => {
     };
 
     const displayName = user?.name || (admin ? 'Super Administrator' : 'Client User');
-    const displayEmail = user?.email || (admin ? 'georgewilliamochole@gmail.com' : 'user@organization.com');
+    const displayEmail = user?.email || (admin ? 'admin@koshercode.com' : 'user@organization.com');
     const displayImg = user?.img || userImg;
 
     return (
-        <div ref={ref} className="d-inline-flex align-items-center">
+        <div ref={containerRef} className="position-relative d-inline-flex align-items-center">
             <UserAvatar 
                 src={displayImg} 
                 name={displayName}
@@ -45,51 +58,77 @@ const PopOver = () => {
                 ring={true}
                 ringType="glow"
                 interactive={true}
-                onClick={handleClick}
-                className="popImg"
+                onClick={() => setShow(prev => !prev)}
+                className="popImg cursor-pointer"
             />
-            <Overlay
-                show={show}
-                target={target}
-                placement="bottom-end"
-                container={ref.current}
-                rootClose={true}
-                onHide={() => setShow(false)}
-            >
-                <Popover id="popover-contained" style={{ borderRadius: '8px', border: '1px solid var(--cp-border, #E5E0FA)', backgroundColor: 'var(--cp-card-bg, #FFFFFF)', boxShadow: 'var(--cp-shadow-md, 0 8px 24px rgba(0,0,0,0.1))', minWidth: '220px' }}>
-                    <Popover.Body className="text-center p-3">
-                        <UserAvatar 
-                            src={displayImg} 
-                            name={displayName}
-                            role={admin ? 'admin' : 'client'}
-                            size="lg"
-                            showStatus={true}
-                            ring={true}
-                            ringType="glow"
-                            className="popUserImg mb-2.5"
-                        />
-                        <p className="userName fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{displayName}</p>
-                        <p className="userEmail small text-muted mb-2">{displayEmail}</p>
-                        <span 
-                            className="badge mb-3 d-inline-block"
-                            style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', border: '1px solid var(--cp-border-highlight)' }}
-                        >
-                            {admin ? '🛡️ Admin Portal' : '👤 Client Portal'}
-                        </span>
-                        <div>
+
+            {show && (
+                <div 
+                    className="shadow-lg p-3"
+                    style={{
+                        position: 'absolute',
+                        top: 'calc(100% + 10px)',
+                        right: 0,
+                        zIndex: 9999,
+                        minWidth: '240px',
+                        borderRadius: '8px',
+                        border: '1px solid var(--cp-border, #E5E0FA)',
+                        backgroundColor: 'var(--cp-card-bg, #FFFFFF)',
+                        boxShadow: '0 12px 32px rgba(0, 0, 0, 0.15)',
+                    }}
+                >
+                    <div className="text-center">
+                        <div className="d-flex justify-content-center mb-2">
+                            <UserAvatar 
+                                src={displayImg} 
+                                name={displayName}
+                                role={admin ? 'admin' : 'client'}
+                                size="lg"
+                                showStatus={true}
+                                ring={true}
+                                ringType="glow"
+                            />
+                        </div>
+                        <p className="userName fw-bold mb-0 text-truncate" style={{ color: 'var(--cp-text-main, #0F172A)', fontSize: '0.95rem' }}>{displayName}</p>
+                        <p className="userEmail small text-muted mb-2 text-truncate" style={{ fontSize: '0.78rem' }}>{displayEmail}</p>
+                        <div className="mb-2.5">
+                            <span 
+                                className="badge px-2.5 py-1"
+                                style={{ 
+                                    backgroundColor: 'var(--cp-primary-subtle, rgba(115, 85, 247, 0.12))', 
+                                    color: 'var(--cp-primary-text, #7355F7)', 
+                                    border: '1px solid var(--cp-border-highlight, rgba(115, 85, 247, 0.25))',
+                                    fontSize: '0.72rem'
+                                }}
+                            >
+                                <FontAwesomeIcon icon={admin ? faShieldAlt : faUser} className="me-1" />
+                                {admin ? 'Administrator' : 'Enterprise Client'}
+                            </span>
+                        </div>
+                        
+                        <div className="d-flex flex-column gap-1.5 pt-2 border-top">
+                            <Link 
+                                to={admin ? "/admin" : "/client"} 
+                                onClick={() => setShow(false)}
+                                className="btn btn-sm btn-light text-start d-flex align-items-center justify-content-between fw-semibold"
+                                style={{ fontSize: '0.8rem', borderRadius: '4px' }}
+                            >
+                                <span><FontAwesomeIcon icon={admin ? faShieldAlt : faUser} className="me-1.5" /> Workspace</span>
+                                <FontAwesomeIcon icon={faArrowRight} style={{ fontSize: '0.7rem' }} />
+                            </Link>
                             <Button 
                                 variant="outline-danger" 
                                 size="sm" 
-                                className="w-100" 
-                                style={{ borderRadius: '4px', fontWeight: 600 }}
+                                className="w-100 d-flex align-items-center justify-content-center gap-1.5 mt-1" 
+                                style={{ borderRadius: '4px', fontWeight: 600, fontSize: '0.8rem' }}
                                 onClick={signOut}
                             >
-                                Sign Out
+                                <FontAwesomeIcon icon={faSignOutAlt} /> Sign Out
                             </Button>
                         </div>
-                    </Popover.Body>
-                </Popover> 
-            </Overlay> 
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

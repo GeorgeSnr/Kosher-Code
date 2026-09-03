@@ -152,20 +152,29 @@ export const firebaseSignOut = async () => {
 export const saveUserToFirestore = async (user) => {
     if (!user || !user.email) return null;
     try {
-        const normalizedEmail = user.email.toLowerCase();
+        const normalizedEmail = user.email.toLowerCase().trim();
         const userDocRef = db.collection('users').doc(normalizedEmail);
         const payload = {
             name: user.name || normalizedEmail.split('@')[0],
             email: normalizedEmail,
-            role: user.role || 'client',
+            role: user.role === 'admin' ? 'admin' : 'client',
             institution: user.institution || '',
             phone: user.phone || '',
-            img: user.img || '',
+            img: typeof user.img === 'string' ? user.img : '',
             lastLogin: firebase.firestore.FieldValue.serverTimestamp(),
             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
         };
         await userDocRef.set(payload, { merge: true });
-        return { ...user, ...payload };
+        return { 
+            ...user, 
+            name: payload.name,
+            email: payload.email,
+            role: payload.role,
+            institution: payload.institution,
+            phone: payload.phone,
+            img: payload.img,
+            updatedAt: new Date().toISOString()
+        };
     } catch (error) {
         console.warn('Firestore saveUser warning:', error.message);
         return user;

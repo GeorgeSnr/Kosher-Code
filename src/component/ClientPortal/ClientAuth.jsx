@@ -172,59 +172,40 @@ const ClientAuth = ({ defaultPortal }) => {
             setSubmitting(false);
 
             if (res.success && res.user) {
-                registerUserAccount({ ...res.user, institution: signUpOrg, password: signUpPassword });
-                toast.success('Account successfully created! Please sign in with your credentials.', { duration: 4500 });
-                // Populate sign-in inputs and transition to Sign In tab
-                setSignInEmail(signUpEmail);
-                setSignInPassword(signUpPassword);
-                setSignUpName('');
-                setSignUpOrg('');
-                setSignUpEmail('');
-                setSignUpPassword('');
-                setMode('signin');
+                const userRecord = { ...res.user, institution: signUpOrg, password: signUpPassword };
+                registerUserAccount(userRecord);
+                toast.success('Account successfully created! Entering your client workspace...');
+                finalizeAuthSession(userRecord);
             } else {
                 if (res.error && res.error.toLowerCase().includes('already in use')) {
-                    toast.error('This email is already registered. Please sign in instead.');
+                    toast.error('This email is already registered. Please sign in with your password.');
                     setMode('signin');
                     setSignInEmail(signUpEmail);
                     return;
                 }
                 const registeredUser = registerUserAccount({
                     name: signUpName,
-                    email: signUpEmail.toLowerCase(),
+                    email: signUpEmail.toLowerCase().trim(),
                     institution: signUpOrg,
                     role: 'client',
                     password: signUpPassword,
                     isSignedIn: true
                 });
-                toast.success('Account successfully registered! Please sign in with your credentials.', { duration: 4500 });
-                setSignInEmail(signUpEmail);
-                setSignInPassword(signUpPassword);
-                setSignUpName('');
-                setSignUpOrg('');
-                setSignUpEmail('');
-                setSignUpPassword('');
-                setMode('signin');
+                toast.success('Workspace profile created! Entering your workspace...');
+                finalizeAuthSession(registeredUser);
             }
         } catch (err) {
             toast.dismiss(loading);
             setSubmitting(false);
-            registerUserAccount({
+            const fallbackUser = registerUserAccount({
                 name: signUpName,
-                email: signUpEmail.toLowerCase(),
+                email: signUpEmail.toLowerCase().trim(),
                 institution: signUpOrg,
                 role: 'client',
                 password: signUpPassword,
                 isSignedIn: true
             });
-            toast.success('Account registered successfully! Please sign in with your credentials.', { duration: 4500 });
-            setSignInEmail(signUpEmail);
-            setSignInPassword(signUpPassword);
-            setSignUpName('');
-            setSignUpOrg('');
-            setSignUpEmail('');
-            setSignUpPassword('');
-            setMode('signin');
+            finalizeAuthSession(fallbackUser);
         }
     };
 
