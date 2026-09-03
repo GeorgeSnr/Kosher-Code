@@ -46,8 +46,38 @@ import { firebaseSignOut } from '../../services/firebaseService';
 
 const ClientPortal = () => {
     const { state: { user }, dispatch } = useAppContext();
+    const [sidebarOpen, setSidebarOpen] = useState(() => {
+        const saved = localStorage.getItem('kosher_client_sidebar_open');
+        if (saved !== null) return saved === 'true';
+        return true;
+    });
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' ? window.innerWidth <= 991 : false);
     const [title, setTitle] = useState('Overview');
+
+    useEffect(() => {
+        const handleResize = () => {
+            const mobile = window.innerWidth <= 991;
+            setIsMobile(mobile);
+            if (!mobile) {
+                setMobileOpen(false);
+            }
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const handleToggleSidebar = () => {
+        if (window.innerWidth <= 991) {
+            setMobileOpen(prev => !prev);
+        } else {
+            setSidebarOpen(prev => {
+                const next = !prev;
+                localStorage.setItem('kosher_client_sidebar_open', next.toString());
+                return next;
+            });
+        }
+    };
     
     // Theme Switch Engine: 'light' | 'dark'
     const [theme, setTheme] = useState(() => {
@@ -112,7 +142,7 @@ const ClientPortal = () => {
             ></div>
 
             {/* Sidebar */}
-            <aside className={`client-sidebar ${mobileOpen ? 'mobile-open' : ''}`}>
+            <aside className={`client-sidebar ${mobileOpen ? 'mobile-open' : ''} ${!sidebarOpen ? 'desktop-closed' : ''}`}>
                 {/* 1. Header with Brand & Interactive Theme Switch Toggle */}
                 <div className="cs-header">
                     <Link to="/" onClick={() => setMobileOpen(false)} className="cs-brand">
@@ -449,15 +479,24 @@ const ClientPortal = () => {
             </aside>
 
             {/* Main Page Content */}
-            <div id="pageContent">
+            <div id="pageContent" className={!sidebarOpen ? 'sidebar-collapsed' : ''}>
                 {/* Clean Responsive Top Header */}
                 <div className="dashBoardHeader">
                     <div className="d-flex align-items-center">
                         <div 
                             id="nav-icon"
-                            className={mobileOpen ? "menu-btn open" : "menu-btn"}
-                            onClick={() => setMobileOpen(!mobileOpen)}
-                            title="Toggle Sidebar"
+                            className={(isMobile ? mobileOpen : sidebarOpen) ? "menu-btn open" : "menu-btn"}
+                            onClick={handleToggleSidebar}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault();
+                                    handleToggleSidebar();
+                                }
+                            }}
+                            title={(isMobile ? mobileOpen : sidebarOpen) ? "Close Sidebar" : "Open Sidebar"}
+                            role="button"
+                            tabIndex={0}
+                            aria-label={(isMobile ? mobileOpen : sidebarOpen) ? "Close Sidebar" : "Open Sidebar"}
                         >
                             <span></span>
                             <span></span>

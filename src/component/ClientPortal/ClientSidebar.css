@@ -861,7 +861,47 @@ select option {
     display: none;
 }
 
-/* RESPONSIVENESS */
+/* =========================================================
+   DESKTOP SIDEBAR TOGGLE & TRANSITION (COLLAPSE / EXPAND)
+   ========================================================= */
+@media (min-width: 992px) {
+    .client-sidebar {
+        transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    opacity 0.25s ease,
+                    visibility 0.3s ease,
+                    background-color 0.25s ease,
+                    border-color 0.25s ease;
+    }
+
+    .client-sidebar.desktop-closed {
+        margin-left: -280px !important;
+        min-width: 0 !important;
+        max-width: 0 !important;
+        width: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        border-right-width: 0 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        overflow: hidden !important;
+    }
+
+    #pageContent {
+        transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    padding 0.25s ease,
+                    background-color 0.25s ease;
+    }
+
+    #pageContent.sidebar-collapsed {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 1 1 100% !important;
+    }
+}
+
+/* RESPONSIVENESS (TABLETS & MOBILE) */
 @media (max-width: 991px) {
     .client-sidebar {
         position: fixed;

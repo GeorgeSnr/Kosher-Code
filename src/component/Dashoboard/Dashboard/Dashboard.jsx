@@ -38,7 +38,7 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
-            <div id="pageContent">
+            <div id="pageContent" className={sideToggle ? "sidebar-collapsed" : ""}>
                 <div className="dashBoardHeader">
                     <div className="d-flex align-items-center">
                         <div id="nav-icon"
