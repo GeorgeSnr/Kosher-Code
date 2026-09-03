@@ -8,6 +8,8 @@ import userImg from '../../../Assets/user.svg';
 import UserAvatar from '../UserAvatar/UserAvatar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt, faUser, faShieldAlt, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { clearSessionStorage } from '../../../services/sessionService';
+import { firebaseSignOut } from '../../../services/firebaseService';
 
 const PopOver = () => {
     const { state: { user, admin }, dispatch } = useAppContext();
@@ -33,9 +35,8 @@ const PopOver = () => {
     }, [show]);
 
     const signOut = () => {
-        sessionStorage.removeItem('kosher_client_session');
-        localStorage.removeItem('kosher_current_user');
-        localStorage.removeItem('token');
+        clearSessionStorage();
+        firebaseSignOut().catch(() => {});
         dispatch({ type: SET_USER, payload: { isSignedIn: false, email: '', name: '' } });
         dispatch({ type: SET_ADMIN, payload: false });
         setShow(false);

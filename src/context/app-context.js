@@ -1,12 +1,19 @@
 import React, { useReducer, useContext, createContext } from "react";
 import { reducer } from "./reducer";
 import { checkIsAdmin } from "../services/storageService";
+import { isSessionExpired, clearSessionStorage } from "../services/sessionService";
 
 const AppContext = createContext();
 
-// Resilient Session & Persistence Management
+// Resilient Session & Persistence Management with Inactivity Expiration
 const getInitialUser = () => {
     try {
+        // Enforce 10-minute inactivity timeout even across page refreshes
+        if (isSessionExpired()) {
+            clearSessionStorage();
+            return { isSignedIn: false, email: '', name: '', sessionExpired: true };
+        }
+
         const sessionUser = sessionStorage.getItem('kosher_client_session');
         if (sessionUser) {
             const parsed = JSON.parse(sessionUser);

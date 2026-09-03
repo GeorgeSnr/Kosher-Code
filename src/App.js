@@ -7,6 +7,7 @@ import PrivateRoute from "./component/Login/PrivateRoute";
 import ClientPortal from "./component/ClientPortal/ClientPortal";
 import AdminPortal from "./component/AdminPortal/AdminPortal";
 import NotFound from "./component/NotFound";
+import SessionWatcher from "./component/Shared/SessionWatcher/SessionWatcher";
 import { useAppContext } from "./context";
 import { seedFirestoreDatabase } from "./services/storageService";
 
@@ -31,6 +32,7 @@ const App = () => {
 
     return (
         <div>
+            <SessionWatcher />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />

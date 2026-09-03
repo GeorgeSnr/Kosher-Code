@@ -16,6 +16,8 @@ import {
     faLock
 } from '@fortawesome/free-solid-svg-icons';
 import { getUserOrders } from '../../services/storageService';
+import { clearSessionStorage } from '../../services/sessionService';
+import { firebaseSignOut } from '../../services/firebaseService';
 
 const ClientProfile = () => {
     const { state: { user }, dispatch } = useAppContext();
@@ -24,9 +26,8 @@ const ClientProfile = () => {
     const bookings = getUserOrders(user?.email);
 
     const signOut = () => {
-        sessionStorage.removeItem('kosher_client_session');
-        localStorage.removeItem('kosher_current_user');
-        localStorage.removeItem('token');
+        clearSessionStorage();
+        firebaseSignOut().catch(() => {});
         dispatch({ type: SET_USER, payload: { isSignedIn: false, email: '', name: '' } });
         toast.success('Client session closed');
         navigate('/client/login');

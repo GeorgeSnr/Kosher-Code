@@ -8,6 +8,8 @@ import { SET_USER, SET_ADMIN, useAppContext } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt, faShieldAlt, faEnvelope, faList, faPlus, faUserShield, faServer } from '@fortawesome/free-solid-svg-icons';
 import { getStoredAdmins, getStoredOrders } from '../../services/storageService';
+import { clearSessionStorage } from '../../services/sessionService';
+import { firebaseSignOut } from '../../services/firebaseService';
 
 const AdminProfile = () => {
     const { state: { user }, dispatch } = useAppContext();
@@ -16,12 +18,12 @@ const AdminProfile = () => {
     const orders = getStoredOrders();
 
     const signOut = () => {
-        localStorage.removeItem('kosher_current_user');
-        localStorage.removeItem('token');
+        clearSessionStorage();
+        firebaseSignOut().catch(() => {});
         dispatch({ type: SET_USER, payload: { isSignedIn: false } });
         dispatch({ type: SET_ADMIN, payload: false });
         toast.success('Administrator session closed');
-        navigate('/login');
+        navigate('/admin/login');
     };
 
     const displayName = user?.name || 'Super Administrator';

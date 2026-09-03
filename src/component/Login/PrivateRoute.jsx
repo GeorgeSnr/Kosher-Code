@@ -1,10 +1,17 @@
 import React from 'react';
 import { Navigate, useLocation } from "react-router-dom";
 import { useAppContext } from '../../context';
+import { isSessionExpired, clearSessionStorage } from '../../services/sessionService';
 
 const PrivateRoute = ({ children, redirectTo = "/client/login", requiredRole }) => {
     const { state: { user, admin } } = useAppContext();
     const location = useLocation();
+
+    // Strict 10-minute inactivity check upon route access & refresh
+    if (isSessionExpired()) {
+        clearSessionStorage();
+        return <Navigate to={redirectTo} state={{ from: location, sessionExpired: true }} replace />;
+    }
     
     let activeUser = user;
     if (!activeUser || !activeUser.email) {

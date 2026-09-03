@@ -24,7 +24,6 @@ import {
     faEyeSlash,
     faExclamationCircle,
     faExclamationTriangle,
-    faTimesCircle,
     faInfoCircle
 } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
@@ -38,7 +37,13 @@ import {
     verifyUserCredentials,
     getUserFromFirestore
 } from '../../services/storageService';
-import { firebaseLogin, firebaseRegister, firebaseGoogleSignIn } from '../../services/firebaseService';
+import { 
+    firebaseLogin, 
+    firebaseRegister, 
+    firebaseGoogleSignIn,
+    firebaseSendPasswordReset 
+} from '../../services/firebaseService';
+import { updateLastActivity } from '../../services/sessionService';
 import userImg from '../../Assets/user.svg';
 
 const ClientAuth = ({ defaultPortal }) => {
@@ -65,7 +70,8 @@ const ClientAuth = ({ defaultPortal }) => {
     const isExplicitAdminPortal = defaultPortal === 'admin' || location.pathname === '/admin/login';
     const authRole = isExplicitAdminPortal ? 'admin' : 'client';
 
-    const [mode, setMode] = useState('signin'); // 'signin' | 'signup'
+    // Modes: 'signin' | 'signup' | 'forgot'
+    const [mode, setMode] = useState('signin');
     const [submitting, setSubmitting] = useState(false);
 
     // Password visibility toggles
@@ -76,7 +82,7 @@ const ClientAuth = ({ defaultPortal }) => {
     const [signInEmail, setSignInEmail] = useState('');
     const [signInPassword, setSignInPassword] = useState('');
     const [signInErrors, setSignInErrors] = useState({ email: '', password: '' });
-    const [signInAlert, setSignInAlert] = useState(null); // { type: 'danger'|'warning'|'info', title: '', message: '', action?: 'signup' }
+    const [signInAlert, setSignInAlert] = useState(null); // { type, title, message, action }
 
     // Sign Up Form State & Validation
     const [signUpName, setSignUpName] = useState('');
@@ -84,7 +90,25 @@ const ClientAuth = ({ defaultPortal }) => {
     const [signUpEmail, setSignUpEmail] = useState('');
     const [signUpPassword, setSignUpPassword] = useState('');
     const [signUpErrors, setSignUpErrors] = useState({ name: '', email: '', password: '' });
-    const [signUpAlert, setSignUpAlert] = useState(null); // { type: 'danger'|'warning'|'info', title: '', message: '', action?: 'signin' }
+    const [signUpAlert, setSignUpAlert] = useState(null); // { type, title, message, action }
+
+    // Forgot Password Form State
+    const [forgotEmail, setForgotEmail] = useState('');
+    const [forgotSubmitting, setForgotSubmitting] = useState(false);
+    const [forgotError, setForgotError] = useState('');
+    const [forgotAlert, setForgotAlert] = useState(null); // { type, title, message }
+    const [forgotSuccess, setForgotSuccess] = useState(false);
+
+    // Detect session expiration notice passed via navigation state
+    useEffect(() => {
+        if (location.state?.sessionExpired) {
+            setSignInAlert({
+                type: 'warning',
+                title: 'Session Expired',
+                message: 'You have been automatically logged out due to 10 minutes of inactivity. Please sign in to resume your workspace.'
+            });
+        }
+    }, [location.state]);
 
     // Validation Helpers
     const validateEmailFormat = (email) => {
@@ -131,8 +155,11 @@ const ClientAuth = ({ defaultPortal }) => {
         setMode(targetMode);
         setSignInAlert(null);
         setSignUpAlert(null);
+        setForgotAlert(null);
+        setForgotSuccess(false);
         setSignInErrors({ email: '', password: '' });
         setSignUpErrors({ name: '', email: '', password: '' });
+        setForgotError('');
     };
 
     const finalizeAuthSession = (userObj) => {
@@ -163,6 +190,8 @@ const ClientAuth = ({ defaultPortal }) => {
 
         sessionStorage.setItem('kosher_client_session', JSON.stringify(resolvedUser));
         localStorage.setItem('kosher_current_user', JSON.stringify(resolvedUser));
+        updateLastActivity();
+
         dispatch({ type: SET_USER, payload: resolvedUser });
         dispatch({ type: SET_ADMIN, payload: finalRole === 'admin' });
 
@@ -250,14 +279,13 @@ const ClientAuth = ({ defaultPortal }) => {
                 toast.error('No account found with this email.');
             } else if (errorCode === 'auth/invalid-login-credentials' || errorCode === 'auth/invalid-credential' || errorMsg.includes('invalid-login-credentials')) {
                 // In modern Firebase SDKs, 'invalid-login-credentials' covers both wrong password and missing user.
-                // Check if the user exists in Firestore or local accounts to provide precise feedback:
                 const existingUser = findRegisteredUser(signInEmail.trim()) || await getUserFromFirestore(signInEmail.trim());
                 if (existingUser) {
                     setSignInErrors(prev => ({ ...prev, password: 'Incorrect password.' }));
                     setSignInAlert({
                         type: 'danger',
                         title: 'Incorrect Password',
-                        message: 'The password you entered is incorrect. Please check your password and try again.'
+                        message: 'The password you entered is incorrect. Please check your password or use "Forgot password".'
                     });
                     toast.error('Incorrect password. Please verify your credentials.');
                 } else {
@@ -422,6 +450,70 @@ const ClientAuth = ({ defaultPortal }) => {
         }
     };
 
+    // Forgot Password Submit Handler
+    const handleForgotSubmit = async (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        setForgotAlert(null);
+
+        const emailErr = validateEmailFormat(forgotEmail);
+        if (emailErr) {
+            setForgotError(emailErr);
+            toast.error(emailErr);
+            return;
+        }
+
+        setForgotSubmitting(true);
+        const loading = toast.loading('Sending password reset email...');
+
+        try {
+            const res = await firebaseSendPasswordReset(forgotEmail.trim());
+            toast.dismiss(loading);
+            setForgotSubmitting(false);
+
+            if (res.success) {
+                setForgotSuccess(true);
+                toast.success('Password reset email dispatched! Check your inbox.');
+            } else {
+                const errorCode = res.code || '';
+                const errorMsg = (res.error || '').toLowerCase();
+
+                if (errorCode === 'auth/user-not-found' || errorMsg.includes('user-not-found')) {
+                    setForgotError('No account found with this email address.');
+                    setForgotAlert({
+                        type: 'warning',
+                        title: 'Account Not Found',
+                        message: `We could not find an account associated with "${forgotEmail.trim()}". Please verify the address or create a new account.`
+                    });
+                    toast.error('No account found with this email.');
+                } else if (errorCode === 'auth/invalid-email' || errorMsg.includes('invalid-email')) {
+                    setForgotError('Invalid email format.');
+                    setForgotAlert({
+                        type: 'danger',
+                        title: 'Invalid Email',
+                        message: 'Please provide a valid corporate or personal email address.'
+                    });
+                    toast.error('Invalid email address format.');
+                } else {
+                    setForgotAlert({
+                        type: 'danger',
+                        title: 'Reset Notice',
+                        message: res.error || 'Unable to dispatch reset email right now. Please try again later.'
+                    });
+                    toast.error(res.error || 'Password reset request failed.');
+                }
+            }
+        } catch (err) {
+            toast.dismiss(loading);
+            setForgotSubmitting(false);
+            setForgotAlert({
+                type: 'danger',
+                title: 'Reset Error',
+                message: err.message || 'An unexpected error occurred. Please try again.'
+            });
+            toast.error(err.message || 'Reset error');
+        }
+    };
+
     const pwdStrength = getPasswordStrength(signUpPassword);
 
     return (
@@ -481,20 +573,27 @@ const ClientAuth = ({ defaultPortal }) => {
                                             border: '1px solid var(--site-border, #E5E0FA)'
                                         }}
                                     >
-                                        <FontAwesomeIcon icon={authRole === 'admin' ? faUserShield : faUser} style={{ fontSize: '1.45rem' }} />
+                                        <FontAwesomeIcon 
+                                            icon={mode === 'forgot' ? faKey : (authRole === 'admin' ? faUserShield : faUser)} 
+                                            style={{ fontSize: '1.45rem' }} 
+                                        />
                                     </div>
                                     <h4 className="fw-bold mb-1" style={{ color: 'var(--site-text-main, #070120)' }}>
-                                        {authRole === 'admin' ? 'Administrator Command Portal' : 'Enterprise Client Workspace'}
+                                        {mode === 'forgot' 
+                                            ? 'Password Recovery' 
+                                            : (authRole === 'admin' ? 'Administrator Command Portal' : 'Enterprise Client Workspace')}
                                     </h4>
                                     <p className="small mb-0" style={{ color: 'var(--site-text-muted, #666666)' }}>
-                                        {authRole === 'admin'
-                                            ? 'Sign in to access inbound requests, publish catalog solutions, and manage privileges.'
-                                            : 'Sign in or create an account to book bank-grade solutions and manage deployments.'}
+                                        {mode === 'forgot'
+                                            ? 'Request a secure password reset link to be sent to your inbox.'
+                                            : (authRole === 'admin'
+                                                ? 'Sign in to access inbound requests, publish catalog solutions, and manage privileges.'
+                                                : 'Sign in or create an account to book bank-grade solutions and manage deployments.')}
                                     </p>
                                 </div>
 
-                                {/* Mode Switcher Tabs (Sign In vs Sign Up) */}
-                                {authRole === 'client' && (
+                                {/* Mode Switcher Tabs (Sign In vs Sign Up) - Hidden during Forgot Password */}
+                                {authRole === 'client' && mode !== 'forgot' && (
                                     <div className="d-flex mb-4 p-1 rounded" style={{ backgroundColor: 'var(--site-card-subtle, #FAF8FF)', border: '1px solid var(--site-border, #E5E0FA)' }}>
                                         <button
                                             type="button"
@@ -643,7 +742,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                     </div>
                                 )}
 
-                                {/* SIGN IN FORM */}
+                                {/* 1. SIGN IN FORM */}
                                 {mode === 'signin' && (
                                     <Form onSubmit={handleSignInSubmit} noValidate>
                                         <Form.Group className="mb-3">
@@ -694,6 +793,20 @@ const ClientAuth = ({ defaultPortal }) => {
                                                 <Form.Label className="fw-semibold small mb-0" style={{ color: 'var(--site-text-main, #0F172A)' }}>
                                                     Password *
                                                 </Form.Label>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => {
+                                                        setMode('forgot');
+                                                        setForgotEmail(signInEmail || '');
+                                                        setForgotAlert(null);
+                                                        setForgotSuccess(false);
+                                                        setForgotError('');
+                                                    }}
+                                                    className="btn btn-link p-0 small text-decoration-none fw-semibold"
+                                                    style={{ color: 'var(--site-primary, #7355F7)', fontSize: '0.8rem' }}
+                                                >
+                                                    Forgot password?
+                                                </button>
                                             </div>
                                             <div className="input-group">
                                                 <span 
@@ -810,7 +923,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                     </Form>
                                 )}
 
-                                {/* SIGN UP FORM */}
+                                {/* 2. SIGN UP FORM */}
                                 {mode === 'signup' && authRole === 'client' && (
                                     <Form onSubmit={handleSignUpSubmit} noValidate>
                                         <Form.Group className="mb-3">
@@ -861,7 +974,15 @@ const ClientAuth = ({ defaultPortal }) => {
                                                 Organization / Institution
                                             </Form.Label>
                                             <div className="input-group">
-                                                <span className="input-group-text border-end-0" style={{ backgroundColor: 'var(--site-card-subtle)', borderColor: 'var(--site-border)', borderRadius: '4px 0 0 4px', color: 'var(--site-text-muted)' }}>
+                                                <span 
+                                                    className="input-group-text border-end-0" 
+                                                    style={{ 
+                                                        backgroundColor: 'var(--site-card-subtle)', 
+                                                        borderColor: 'var(--site-border)', 
+                                                        borderRadius: '4px 0 0 4px', 
+                                                        color: 'var(--site-text-muted)' 
+                                                    }}
+                                                >
                                                     <FontAwesomeIcon icon={faBuilding} className="small" />
                                                 </span>
                                                 <Form.Control
@@ -1049,6 +1170,182 @@ const ClientAuth = ({ defaultPortal }) => {
                                             </button>
                                         </div>
                                     </Form>
+                                )}
+
+                                {/* 3. FORGOT PASSWORD VIEW */}
+                                {mode === 'forgot' && (
+                                    <div>
+                                        {forgotSuccess ? (
+                                            /* Confirmation Sent View */
+                                            <div className="text-center py-2">
+                                                <div 
+                                                    className="d-inline-flex align-items-center justify-content-center mb-3"
+                                                    style={{
+                                                        width: '64px',
+                                                        height: '64px',
+                                                        borderRadius: '50%',
+                                                        backgroundColor: 'rgba(16, 185, 129, 0.12)',
+                                                        color: '#10B981'
+                                                    }}
+                                                >
+                                                    <FontAwesomeIcon icon={faCheckCircle} style={{ fontSize: '2.2rem' }} />
+                                                </div>
+                                                <h5 className="fw-bold mb-2" style={{ color: 'var(--site-text-main)' }}>Reset Link Dispatched!</h5>
+                                                <p className="small mb-4" style={{ color: 'var(--site-text-muted)', lineHeight: '1.6' }}>
+                                                    A confirmation email with secure password reset instructions has been sent to <br />
+                                                    <span className="fw-bold" style={{ color: 'var(--site-text-main)' }}>{forgotEmail}</span>.
+                                                </p>
+
+                                                <div 
+                                                    className="p-3 mb-4 rounded text-start" 
+                                                    style={{ 
+                                                        backgroundColor: 'var(--site-card-subtle)', 
+                                                        border: '1px solid var(--site-border)', 
+                                                        fontSize: '0.82rem', 
+                                                        color: 'var(--site-text-muted)' 
+                                                    }}
+                                                >
+                                                    <div className="fw-bold mb-1.5" style={{ color: 'var(--site-text-main)' }}>
+                                                        <FontAwesomeIcon icon={faInfoCircle} className="me-1.5" style={{ color: 'var(--site-primary)' }} /> Next Steps:
+                                                    </div>
+                                                    <ol className="ps-3 mb-0" style={{ lineHeight: '1.6' }}>
+                                                        <li>Open your email inbox and look for the email from Kosher Code.</li>
+                                                        <li>Check your spam or junk folder if it doesn't appear within 2 minutes.</li>
+                                                        <li>Click the password reset link inside the email and choose a new password.</li>
+                                                    </ol>
+                                                </div>
+
+                                                <Button
+                                                    type="button"
+                                                    onClick={() => {
+                                                        handleSwitchMode('signin');
+                                                        setSignInEmail(forgotEmail);
+                                                        setSignInPassword('');
+                                                    }}
+                                                    className="w-100 py-2.5 fw-semibold text-white d-flex align-items-center justify-content-center gap-2 mb-3"
+                                                    style={{
+                                                        backgroundColor: 'var(--site-primary, #7355F7)',
+                                                        borderColor: 'var(--site-primary, #7355F7)',
+                                                        borderRadius: '4px',
+                                                        fontSize: '0.92rem'
+                                                    }}
+                                                >
+                                                    <FontAwesomeIcon icon={faSignInAlt} /> Return to Sign In
+                                                </Button>
+
+                                                <button
+                                                    type="button"
+                                                    disabled={forgotSubmitting}
+                                                    onClick={handleForgotSubmit}
+                                                    className="btn btn-link p-0 small text-decoration-none"
+                                                    style={{ color: 'var(--site-primary, #7355F7)', fontSize: '0.82rem' }}
+                                                >
+                                                    Didn't receive email? Click here to resend
+                                                </button>
+                                            </div>
+                                        ) : (
+                                            /* Email Request Input Form */
+                                            <Form onSubmit={handleForgotSubmit} noValidate>
+                                                {forgotAlert && (
+                                                    <div 
+                                                        className="d-flex align-items-start gap-2.5 p-3 mb-3.5 rounded"
+                                                        style={{ 
+                                                            fontSize: '0.85rem',
+                                                            border: forgotAlert.type === 'danger' ? '1px solid #FECDD3' : '1px solid #FED7AA',
+                                                            backgroundColor: forgotAlert.type === 'danger' ? 'rgba(239, 68, 68, 0.08)' : 'rgba(245, 158, 11, 0.1)',
+                                                            color: forgotAlert.type === 'danger' ? '#991B1B' : '#9A3412'
+                                                        }}
+                                                    >
+                                                        <FontAwesomeIcon 
+                                                            icon={forgotAlert.type === 'danger' ? faExclamationCircle : faExclamationTriangle} 
+                                                            className="mt-0.5" 
+                                                            style={{ fontSize: '1rem', flexShrink: 0 }}
+                                                        />
+                                                        <div className="flex-grow-1">
+                                                            {forgotAlert.title && <div className="fw-bold mb-0.5">{forgotAlert.title}</div>}
+                                                            <div>{forgotAlert.message}</div>
+                                                        </div>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => setForgotAlert(null)}
+                                                            className="btn-close ms-1"
+                                                            aria-label="Close"
+                                                            style={{ fontSize: '0.65rem', flexShrink: 0 }}
+                                                        />
+                                                    </div>
+                                                )}
+
+                                                <Form.Group className="mb-4">
+                                                    <Form.Label className="fw-semibold small" style={{ color: 'var(--site-text-main)' }}>
+                                                        Registered Account Email *
+                                                    </Form.Label>
+                                                    <div className="input-group">
+                                                        <span 
+                                                            className="input-group-text border-end-0" 
+                                                            style={{ 
+                                                                backgroundColor: 'var(--site-card-subtle)', 
+                                                                borderColor: forgotError ? '#EF4444' : 'var(--site-border)', 
+                                                                borderRadius: '4px 0 0 4px', 
+                                                                color: forgotError ? '#EF4444' : 'var(--site-text-muted)' 
+                                                            }}
+                                                        >
+                                                            <FontAwesomeIcon icon={faEnvelope} className="small" />
+                                                        </span>
+                                                        <Form.Control
+                                                            type="email"
+                                                            autoComplete="email"
+                                                            value={forgotEmail}
+                                                            onChange={(e) => {
+                                                                setForgotEmail(e.target.value);
+                                                                if (forgotError) setForgotError('');
+                                                                if (forgotAlert) setForgotAlert(null);
+                                                            }}
+                                                            placeholder="e.g. name@organization.com"
+                                                            isInvalid={!!forgotError}
+                                                            style={{ 
+                                                                backgroundColor: 'var(--site-card-bg)', 
+                                                                borderColor: forgotError ? '#EF4444' : 'var(--site-border)', 
+                                                                color: 'var(--site-text-main)', 
+                                                                borderRadius: '0 4px 4px 0', 
+                                                                padding: '0.7rem 0.85rem' 
+                                                            }}
+                                                        />
+                                                    </div>
+                                                    {forgotError && (
+                                                        <div className="text-danger small mt-1 d-flex align-items-center gap-1.5" style={{ fontSize: '0.8rem' }}>
+                                                            <FontAwesomeIcon icon={faExclamationCircle} /> {forgotError}
+                                                        </div>
+                                                    )}
+                                                </Form.Group>
+
+                                                <Button
+                                                    type="submit"
+                                                    disabled={forgotSubmitting}
+                                                    className="w-100 py-2.5 fw-semibold text-white d-flex align-items-center justify-content-center gap-2 mb-3"
+                                                    style={{
+                                                        backgroundColor: 'var(--site-primary, #7355F7)',
+                                                        borderColor: 'var(--site-primary, #7355F7)',
+                                                        borderRadius: '4px',
+                                                        fontSize: '0.95rem',
+                                                        boxShadow: '0 4px 14px rgba(115, 85, 247, 0.3)'
+                                                    }}
+                                                >
+                                                    <FontAwesomeIcon icon={faKey} /> {forgotSubmitting ? 'Sending Reset Link...' : 'Send Password Reset Link'}
+                                                </Button>
+
+                                                <div className="text-center pt-3 border-top" style={{ borderColor: 'var(--site-border)' }}>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => handleSwitchMode('signin')}
+                                                        className="btn btn-link p-0 small fw-semibold text-decoration-none d-inline-flex align-items-center gap-1.5"
+                                                        style={{ color: 'var(--site-text-muted)' }}
+                                                    >
+                                                        <FontAwesomeIcon icon={faArrowLeft} /> Back to Sign In
+                                                    </button>
+                                                </div>
+                                            </Form>
+                                        )}
+                                    </div>
                                 )}
                             </div>
                         </Col>

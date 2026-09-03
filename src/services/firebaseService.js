@@ -135,10 +135,27 @@ export const firebaseSignOut = async () => {
         sessionStorage.removeItem('kosher_client_session');
         localStorage.removeItem('kosher_current_user');
         localStorage.removeItem('token');
+        localStorage.removeItem('kosher_last_activity_timestamp');
         return true;
     } catch (error) {
         console.warn('Firebase sign out error:', error.message);
         return false;
+    }
+};
+
+/**
+ * Send Password Reset Email with confirmation link
+ */
+export const firebaseSendPasswordReset = async (email) => {
+    if (!email || !email.trim()) {
+        return { success: false, error: 'Please enter your email address.', code: 'auth/invalid-email' };
+    }
+    try {
+        await auth.sendPasswordResetEmail(email.trim().toLowerCase());
+        return { success: true };
+    } catch (error) {
+        console.warn('Firebase password reset error:', error.message);
+        return { success: false, error: error.message, code: error.code };
     }
 };
 

@@ -41,6 +41,8 @@ import { getUserOrders } from '../../services/storageService';
 import userImg from '../../Assets/user.svg';
 import UserAvatar from '../Shared/UserAvatar/UserAvatar';
 import toast from 'react-hot-toast';
+import { clearSessionStorage } from '../../services/sessionService';
+import { firebaseSignOut } from '../../services/firebaseService';
 
 const ClientPortal = () => {
     const { state: { user }, dispatch } = useAppContext();
@@ -82,14 +84,14 @@ const ClientPortal = () => {
     const navigate = useNavigate();
 
     const bookings = getUserOrders(user?.email);
+
     const displayName = user?.name || 'Enterprise Client';
     const displayEmail = user?.email || 'client@koshercode.com';
     const displayImg = user?.img || userImg;
 
     const handleSignOut = () => {
-        sessionStorage.removeItem('kosher_client_session');
-        localStorage.removeItem('kosher_current_user');
-        localStorage.removeItem('token');
+        clearSessionStorage();
+        firebaseSignOut().catch(() => {});
         dispatch({ type: SET_USER, payload: { isSignedIn: false, email: '', name: '' } });
         toast.success('Client session ended');
         navigate('/client/login');
