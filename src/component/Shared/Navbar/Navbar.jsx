@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
 import './Navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -48,6 +48,7 @@ const NavBar = () => {
     };
 
     const [expanded, setExpanded] = useState(false);
+    const navRef = useRef(null);
 
     const scrollTop = () => window['scrollTo']({ top: 0, behavior: 'smooth' });
 
@@ -61,13 +62,53 @@ const NavBar = () => {
         }, 140);
     };
 
+    // Gently close the dropdown menu when clicking or tapping outside the menu bar, or pressing Escape
+    useEffect(() => {
+        if (!expanded) return;
+
+        const handleClickOutside = (event) => {
+            if (navRef.current && !navRef.current.contains(event.target)) {
+                setExpanded(false);
+            }
+        };
+
+        const handleKeyDown = (event) => {
+            if (event.key === 'Escape') {
+                setExpanded(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener('touchstart', handleClickOutside, { passive: true });
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('touchstart', handleClickOutside);
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [expanded]);
+
+    // Reset mobile dropdown if viewport is resized to desktop width
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth > 991 && expanded) {
+                setExpanded(false);
+            }
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [expanded]);
+
     return (
-        <Navbar 
-            expanded={expanded} 
-            onToggle={setExpanded} 
-            className={`navbar navbar-expand-lg ${isSticky ? "navStyle" : "navDefault"}`} 
-            expand="lg"
-        >
+        <>
+            <Navbar 
+                ref={navRef}
+                expanded={expanded} 
+                onToggle={setExpanded} 
+                className={`navbar navbar-expand-lg ${isSticky ? "navStyle" : "navDefault"}`} 
+                expand="lg"
+            >
             <Container>
                 <Navbar.Brand as={Link} to="/" onClick={() => handleNavItemClick(scrollTop)} className="navBrn">
                     <FontAwesomeIcon icon={faBuffer} className="brnIcon" /> Kosher <span className="navHighlight">Code</span>
@@ -132,6 +173,13 @@ const NavBar = () => {
                 </Navbar.Collapse>
             </Container>
         </Navbar>
+        {/* Gentle backdrop overlay for mobile menu dropdown */}
+        <div 
+            className={`navbar-mobile-backdrop ${expanded ? 'active' : ''}`}
+            onClick={() => setExpanded(false)}
+            aria-hidden="true"
+        />
+        </>
     );
 };
 

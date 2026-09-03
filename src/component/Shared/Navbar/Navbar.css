@@ -104,10 +104,17 @@
         background: var(--site-nav-bg, white) !important;
         padding: 0.8rem 0.5rem !important;
         width: 100%;
+        position: relative;
         z-index: 99 !important;
         transition: 0.3s !important;
         text-align: center;
         border-bottom: 1px solid var(--site-border, #E5E0FA);
+    }
+
+    .navStyle {
+        position: fixed !important;
+        top: 0;
+        left: 0;
     }
     
     .site-theme-btn {
@@ -147,7 +154,7 @@
 /* Mobile Navbar Collapse: Smooth Roll-Down & Roll-Back */
 @media (max-width: 991px) {
     .navbar-collapse.collapsing {
-        transition: height 0.32s cubic-bezier(0.22, 1, 0.36, 1) !important;
+        transition: height 0.35s cubic-bezier(0.22, 1, 0.36, 1) !important;
     }
 
     .mainNav {
@@ -169,6 +176,39 @@
 
     .loginBtn:active {
         transform: scale(0.97);
+    }
+}
+
+/* Mobile Navigation Backdrop: gentle dim & blur, gently closes when tapping outside */
+.navbar-mobile-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.38);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    z-index: 98;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.navbar-mobile-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+[data-theme="dark"] .navbar-mobile-backdrop {
+    background: rgba(3, 7, 18, 0.58);
+}
+
+@media (min-width: 992px) {
+    .navbar-mobile-backdrop {
+        display: none !important;
     }
 }
 
