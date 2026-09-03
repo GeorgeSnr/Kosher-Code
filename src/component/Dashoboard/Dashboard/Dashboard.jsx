@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import PopOver from '../../Shared/PopOver/PopOver';
 import AdminDashboard from '../AdminDashboard/AdminDashboard';
@@ -12,9 +12,11 @@ import { SET_ADMIN, useAppContext } from '../../../context';
 import { checkIsAdmin } from '../../../services/storageService';
 
 const Dashboard = () => {
-    const { state: { user, admin }, dispatch } = useAppContext()
-    const [sideToggle, setSideToggle] = useState(false)
-    const [title, setTitle] = useState(admin ? 'Order List' : 'Book Solution')
+    const { state: { user, admin }, dispatch } = useAppContext();
+    const [sideToggle, setSideToggle] = useState(false);
+    const [title, setTitle] = useState(admin ? 'Order List' : 'Book Solution');
+    const sidebarRef = useRef(null);
+    const toggleBtnRef = useRef(null);
 
     useEffect(() => {
         if (user && user.email) {
@@ -23,6 +25,48 @@ const Dashboard = () => {
             setTitle(isAdminUser ? 'Order List' : 'Book Solution');
         }
     }, [dispatch, user?.email]);
+
+    // Gently close / collapse sidebar when clicking outside or pressing Escape
+    useEffect(() => {
+        const isMobile = typeof window !== 'undefined' && window.innerWidth <= 991;
+        const isOpen = isMobile ? sideToggle : !sideToggle;
+        if (!isOpen) return;
+
+        const handleClickOutside = (event) => {
+            if (
+                (sidebarRef.current && sidebarRef.current.contains(event.target)) ||
+                (toggleBtnRef.current && toggleBtnRef.current.contains(event.target))
+            ) {
+                return;
+            }
+
+            if (typeof window !== 'undefined' && window.innerWidth <= 991) {
+                setSideToggle(false);
+            } else {
+                setSideToggle(true);
+            }
+        };
+
+        const handleKeyDown = (event) => {
+            if (event.key === 'Escape') {
+                if (typeof window !== 'undefined' && window.innerWidth <= 991) {
+                    setSideToggle(false);
+                } else {
+                    setSideToggle(true);
+                }
+            }
+        };
+
+        document.addEventListener('pointerdown', handleClickOutside, true);
+        document.addEventListener('click', handleClickOutside, true);
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.removeEventListener('pointerdown', handleClickOutside, true);
+            document.removeEventListener('click', handleClickOutside, true);
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [sideToggle]);
 
     const handleNavClick = (pageTitle) => {
         setTitle(pageTitle);
@@ -44,9 +88,11 @@ const Dashboard = () => {
             <div 
                 className={`client-sidebar-backdrop ${sideToggle ? 'active' : ''}`}
                 onClick={() => setSideToggle(false)}
+                onTouchStart={() => setSideToggle(false)}
+                aria-hidden="true"
             ></div>
 
-            <div id="sidebar" className={ sideToggle ? "active" : "" }>
+            <div ref={sidebarRef} id="sidebar" className={ sideToggle ? "active" : "" }>
                 <div className="sidebarContent">
                     <Sidebar setTitle={setTitle} onNavClick={handleNavClick} />
                     <div className="backBtnBox">
@@ -61,9 +107,11 @@ const Dashboard = () => {
             <div id="pageContent" className={sideToggle ? "sidebar-collapsed" : ""}>
                 <div className="dashBoardHeader">
                     <div className="d-flex align-items-center">
-                        <div id="nav-icon"
-                        className={sideToggle ? "menu-btn" : "menu-btn open"}
-                        onClick={() => setSideToggle(!sideToggle)}>
+                        <div 
+                            ref={toggleBtnRef}
+                            id="nav-icon"
+                            className={sideToggle ? "menu-btn" : "menu-btn open"}
+                            onClick={() => setSideToggle(!sideToggle)}>
                             <span></span>
                             <span></span>
                             <span></span>

@@ -282,8 +282,14 @@
         pointer-events: auto;
     }
 
-    #pageContent {
-        width: 100%;
-        padding: 1rem;
+    #pageContent,
+    #pageContent.sidebar-collapsed,
+    #sidebar.active + #pageContent,
+    #sidebar.active ~ #pageContent {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 1 1 100% !important;
+        min-width: 0 !important;
+        padding: 1rem !important;
     }
 }

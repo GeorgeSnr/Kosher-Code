@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Routes, Route, NavLink, Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
@@ -48,6 +48,8 @@ const AdminPortal = () => {
     const [mobileOpen, setMobileOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' ? window.innerWidth <= 991 : false);
     const [title, setTitle] = useState('Command Center');
+    const sidebarRef = useRef(null);
+    const toggleBtnRef = useRef(null);
 
     useEffect(() => {
         const handleResize = () => {
@@ -60,6 +62,49 @@ const AdminPortal = () => {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+
+    // Gently close / collapse sidebar when clicking or tapping outside or pressing Escape
+    useEffect(() => {
+        const isCurrentlyOpen = isMobile ? mobileOpen : sidebarOpen;
+        if (!isCurrentlyOpen) return;
+
+        const handleClickOutside = (event) => {
+            if (
+                (sidebarRef.current && sidebarRef.current.contains(event.target)) ||
+                (toggleBtnRef.current && toggleBtnRef.current.contains(event.target))
+            ) {
+                return;
+            }
+
+            if (isMobile || (typeof window !== 'undefined' && window.innerWidth <= 991)) {
+                setMobileOpen(false);
+            } else {
+                setSidebarOpen(false);
+                localStorage.setItem('kosher_admin_sidebar_open', 'false');
+            }
+        };
+
+        const handleKeyDown = (event) => {
+            if (event.key === 'Escape') {
+                if (isMobile || (typeof window !== 'undefined' && window.innerWidth <= 991)) {
+                    setMobileOpen(false);
+                } else {
+                    setSidebarOpen(false);
+                    localStorage.setItem('kosher_admin_sidebar_open', 'false');
+                }
+            }
+        };
+
+        document.addEventListener('pointerdown', handleClickOutside, true);
+        document.addEventListener('click', handleClickOutside, true);
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.removeEventListener('pointerdown', handleClickOutside, true);
+            document.removeEventListener('click', handleClickOutside, true);
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [isMobile, mobileOpen, sidebarOpen]);
 
     const handleToggleSidebar = () => {
         if (window.innerWidth <= 991) {
@@ -157,10 +202,12 @@ const AdminPortal = () => {
             <div 
                 className={`client-sidebar-backdrop ${mobileOpen ? 'active' : ''}`}
                 onClick={() => setMobileOpen(false)}
+                onTouchStart={() => setMobileOpen(false)}
+                aria-hidden="true"
             ></div>
 
             {/* Sidebar */}
-            <aside className={`client-sidebar ${mobileOpen ? 'mobile-open' : ''} ${!sidebarOpen ? 'desktop-collapsed' : ''}`}>
+            <aside ref={sidebarRef} className={`client-sidebar ${mobileOpen ? 'mobile-open' : ''} ${!sidebarOpen ? 'desktop-collapsed' : ''}`}>
                 {/* 1. Header with Brand & Interactive Theme Switch Toggle */}
                 <div className="cs-header">
                     <Link to="/" onClick={handleBrandClick} className="cs-brand" title="Kosher Code Home">
@@ -503,6 +550,7 @@ const AdminPortal = () => {
                 <div className="dashBoardHeader">
                     <div className="d-flex align-items-center gap-2.5 gap-sm-3">
                         <div 
+                            ref={toggleBtnRef}
                             id="nav-icon"
                             className={(isMobile ? mobileOpen : sidebarOpen) ? "menu-btn open" : "menu-btn"}
                             onClick={handleToggleSidebar}

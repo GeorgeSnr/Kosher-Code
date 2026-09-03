@@ -78,13 +78,17 @@ const NavBar = () => {
             }
         };
 
-        document.addEventListener('mousedown', handleClickOutside);
-        document.addEventListener('touchstart', handleClickOutside, { passive: true });
+        document.addEventListener('pointerdown', handleClickOutside, true);
+        document.addEventListener('mousedown', handleClickOutside, true);
+        document.addEventListener('touchstart', handleClickOutside, { passive: true, capture: true });
+        document.addEventListener('click', handleClickOutside, true);
         document.addEventListener('keydown', handleKeyDown);
 
         return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-            document.removeEventListener('touchstart', handleClickOutside);
+            document.removeEventListener('pointerdown', handleClickOutside, true);
+            document.removeEventListener('mousedown', handleClickOutside, true);
+            document.removeEventListener('touchstart', handleClickOutside, { capture: true });
+            document.removeEventListener('click', handleClickOutside, true);
             document.removeEventListener('keydown', handleKeyDown);
         };
     }, [expanded]);
@@ -177,6 +181,7 @@ const NavBar = () => {
         <div 
             className={`navbar-mobile-backdrop ${expanded ? 'active' : ''}`}
             onClick={() => setExpanded(false)}
+            onTouchStart={() => setExpanded(false)}
             aria-hidden="true"
         />
         </>
