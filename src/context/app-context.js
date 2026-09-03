@@ -26,9 +26,7 @@ const getInitialUser = () => {
 };
 
 const initialUser = getInitialUser();
-const initialAdmin = initialUser?.email 
-    ? checkIsAdmin(initialUser.email) || initialUser.role === 'admin' 
-    : false;
+const initialAdmin = initialUser?.role === 'admin';
 
 const initialState = {
     user: initialUser,

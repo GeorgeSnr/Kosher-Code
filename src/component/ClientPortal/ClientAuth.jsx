@@ -49,7 +49,7 @@ const ClientAuth = ({ defaultPortal }) => {
 
     // Determine intended target portal: 'client' | 'admin'
     const fromPath = location.state?.from?.pathname || '';
-    const isExplicitAdminPortal = defaultPortal === 'admin' || fromPath.includes('/admin') || location.pathname.includes('/admin');
+    const isExplicitAdminPortal = defaultPortal === 'admin' || location.pathname === '/admin/login';
     const authRole = isExplicitAdminPortal ? 'admin' : 'client';
 
     const [mode, setMode] = useState('signin'); // 'signin' | 'signup'
@@ -66,20 +66,22 @@ const ClientAuth = ({ defaultPortal }) => {
     const [signUpPassword, setSignUpPassword] = useState('');
 
     const finalizeAuthSession = (userObj) => {
-        const isSystemAdmin = checkIsAdmin(userObj.email);
-        const isAdmin = userObj.role === 'admin' || (authRole === 'admin' && isSystemAdmin);
+        // Strict role definition: client vs admin
+        const isClient = userObj.role === 'client';
+        const isAdmin = userObj.role === 'admin' || (!isClient && checkIsAdmin(userObj.email));
+        const finalRole = isAdmin ? 'admin' : 'client';
         
         // If user targeted Admin Portal but does not have admin privileges, block and redirect to client login
-        if (authRole === 'admin' && !isAdmin && !isSystemAdmin) {
-            toast.error('Access restricted: This account does not have Administrator privileges. Please sign in via the Client Portal.');
+        if (authRole === 'admin' && finalRole !== 'admin') {
+            toast.error('Access restricted: This account is a Client account. Please sign in via the Client Portal.');
             navigate('/client/login');
             return;
         }
 
         const resolvedUser = {
             ...userObj,
-            role: (isAdmin || isSystemAdmin) ? 'admin' : 'client',
-            img: userObj.img || ((isAdmin || isSystemAdmin) 
+            role: finalRole,
+            img: userObj.img || (finalRole === 'admin' 
                 ? 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png' 
                 : userImg)
         };
@@ -87,20 +89,17 @@ const ClientAuth = ({ defaultPortal }) => {
         sessionStorage.setItem('kosher_client_session', JSON.stringify(resolvedUser));
         localStorage.setItem('kosher_current_user', JSON.stringify(resolvedUser));
         dispatch({ type: SET_USER, payload: resolvedUser });
-        dispatch({ type: SET_ADMIN, payload: Boolean(isAdmin || isSystemAdmin) });
+        dispatch({ type: SET_ADMIN, payload: finalRole === 'admin' });
 
         // Save / update in Firestore in real-time
         saveUserToFirestore(resolvedUser).catch(err => console.log('Firestore user profile sync:', err.message));
 
-        if (isAdmin || isSystemAdmin) {
+        if (finalRole === 'admin') {
             toast.success('Welcome to the Administrator Command Center!');
             navigate('/admin');
         } else {
             toast.success(`Welcome to Kosher Code, ${resolvedUser.name}!`);
-            const targetDest = fromPath && !fromPath.includes('/admin') && fromPath !== '/login' && fromPath !== '/client/login'
-                ? fromPath
-                : '/client';
-            navigate(targetDest);
+            navigate('/client');
         }
     };
 

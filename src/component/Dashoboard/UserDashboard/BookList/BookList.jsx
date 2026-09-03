@@ -25,18 +25,21 @@ const BookList = () => {
     const [bookings, setBookings] = useState(() => getUserOrders(user?.email));
 
     useEffect(() => {
+        if (!user?.email) {
+            setBookings([]);
+            return;
+        }
+
         // Initial load
-        getUserOrdersAsync(user?.email).then(orders => {
-            if (orders && orders.length > 0) setBookings(orders);
+        getUserOrdersAsync(user.email).then(orders => {
+            setBookings(orders || []);
         });
 
         // Real-time Firestore listener
         const unsubscribe = subscribeToUserOrders(
-            user?.email,
+            user.email,
             (cloudOrders) => {
-                if (cloudOrders && cloudOrders.length > 0) {
-                    setBookings(cloudOrders);
-                }
+                setBookings(cloudOrders || []);
             },
             (err) => {
                 console.log('Live user orders subscription:', err.message);

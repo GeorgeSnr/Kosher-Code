@@ -40,21 +40,21 @@ const App = () => {
                 <Route path="/client/login" element={<ClientAuth defaultPortal="client" />} />
                 <Route path="/admin/login" element={<ClientAuth defaultPortal="admin" />} />
 
-                {/* Dedicated Client Portal (Gated by Login / Signup) */}
+                {/* Dedicated Client Portal (Gated by Login / Client Role) */}
                 <Route
                     path="/client/*"
                     element={
-                        <PrivateRoute redirectTo="/client/login">
+                        <PrivateRoute redirectTo="/client/login" requiredRole="client">
                             <ClientPortal />
                         </PrivateRoute>
                     }
                 />
 
-                {/* Dedicated Administrator Portal (Gated by Login / Role) */}
+                {/* Dedicated Administrator Portal (Gated by Login / Admin Role) */}
                 <Route
                     path="/admin/*"
                     element={
-                        <PrivateRoute redirectTo="/admin/login">
+                        <PrivateRoute redirectTo="/admin/login" requiredRole="admin">
                             <AdminPortal />
                         </PrivateRoute>
                     }

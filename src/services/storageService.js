@@ -163,17 +163,17 @@ export const deleteStoredOrder = (orderId) => {
 };
 
 export const getUserOrders = (userEmail) => {
+    if (!userEmail) return [];
     const orders = getStoredOrders();
-    if (!userEmail) return orders;
-    const normalized = userEmail.toLowerCase();
-    return orders.filter(o => o.email?.toLowerCase() === normalized);
+    const normalized = userEmail.toLowerCase().trim();
+    return orders.filter(o => o.email?.toLowerCase().trim() === normalized);
 };
 
 export const getUserOrdersAsync = async (userEmail) => {
-    if (!userEmail) return getUserOrders(userEmail);
+    if (!userEmail) return [];
     try {
         const cloudOrders = await fetchUserOrdersFromFirestore(userEmail);
-        if (cloudOrders && cloudOrders.length > 0) {
+        if (Array.isArray(cloudOrders)) {
             return cloudOrders;
         }
     } catch (err) {
@@ -296,7 +296,7 @@ export const authenticateUserAccount = (email, password) => {
         } catch (e) {}
     }
 
-    const resolvedRole = isAdmin ? 'admin' : (matched?.role || 'client');
+    const resolvedRole = matched?.role ? matched.role : (isAdmin ? 'admin' : 'client');
     const resolvedName = matched?.name || (normalized === 'georgewilliamochole@gmail.com' 
         ? 'George William Ochole' 
         : normalized.split('@')[0].replace(/[._]/g, ' ').toUpperCase());

@@ -34,9 +34,14 @@ const ClientLanding = () => {
     const [services, setServices] = useState(() => getStoredServices());
 
     useEffect(() => {
+        if (!user?.email) {
+            setBookings([]);
+            return;
+        }
+
         // Fetch user orders and services
-        getUserOrdersAsync(user?.email).then(orders => {
-            if (orders && orders.length > 0) setBookings(orders);
+        getUserOrdersAsync(user.email).then(orders => {
+            setBookings(orders || []);
         });
 
         fetchServicesAsync().then(srv => {
@@ -44,8 +49,8 @@ const ClientLanding = () => {
         });
 
         // Real-time listener for user orders
-        const unsubOrders = subscribeToUserOrders(user?.email, (cloudOrders) => {
-            if (cloudOrders && cloudOrders.length > 0) setBookings(cloudOrders);
+        const unsubOrders = subscribeToUserOrders(user.email, (cloudOrders) => {
+            setBookings(cloudOrders || []);
         });
 
         // Real-time listener for services
