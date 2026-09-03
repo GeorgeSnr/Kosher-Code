@@ -46,9 +46,9 @@ export const firebaseRegister = async (email, password, displayName, role = 'cli
             uid: user.uid,
             email: user.email.toLowerCase(),
             name: displayName || email.split('@')[0],
-            role: role || (email.toLowerCase().includes('admin') ? 'admin' : 'client'),
+            role: role || 'client',
             institution: institution || '',
-            img: role === 'admin' || email.toLowerCase().includes('admin')
+            img: role === 'admin'
                 ? 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'
                 : 'https://assets.maccarianagency.com/svg/illustrations/designer.svg',
             isSignedIn: true
@@ -72,7 +72,7 @@ export const firebaseLogin = async (email, password) => {
 
         // Hydrate profile from Firestore
         let profile = await getUserFromFirestore(email);
-        const isAdmin = profile?.role === 'admin' || email.toLowerCase().includes('admin');
+        const isAdmin = profile?.role === 'admin';
 
         const userProfile = {
             uid: user.uid,
@@ -105,7 +105,7 @@ export const firebaseGoogleSignIn = async () => {
         const user = userCredential.user;
 
         let profile = await getUserFromFirestore(user.email);
-        const isAdmin = profile?.role === 'admin' || user.email.toLowerCase().includes('admin');
+        const isAdmin = profile?.role === 'admin';
 
         const userProfile = {
             uid: user.uid,

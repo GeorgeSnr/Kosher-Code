@@ -49,9 +49,9 @@ const ClientAuth = ({ defaultPortal }) => {
 
     // Determine intended target portal: 'client' | 'admin'
     const fromPath = location.state?.from?.pathname || '';
-    const initialRole = (defaultPortal === 'admin' || fromPath.includes('/admin') || location.pathname.includes('/admin')) ? 'admin' : 'client';
+    const isExplicitAdminPortal = defaultPortal === 'admin' || fromPath.includes('/admin') || location.pathname.includes('/admin');
+    const authRole = isExplicitAdminPortal ? 'admin' : 'client';
 
-    const [authRole, setAuthRole] = useState(initialRole); // 'client' | 'admin'
     const [mode, setMode] = useState('signin'); // 'signin' | 'signup'
     const [submitting, setSubmitting] = useState(false);
 
@@ -69,10 +69,10 @@ const ClientAuth = ({ defaultPortal }) => {
         const isSystemAdmin = checkIsAdmin(userObj.email);
         const isAdmin = userObj.role === 'admin' || (authRole === 'admin' && isSystemAdmin);
         
-        // If user targeted Admin Portal but does not have admin privileges, block and notify
+        // If user targeted Admin Portal but does not have admin privileges, block and redirect to client login
         if (authRole === 'admin' && !isAdmin && !isSystemAdmin) {
             toast.error('Access restricted: This account does not have Administrator privileges. Please sign in via the Client Portal.');
-            setAuthRole('client');
+            navigate('/client/login');
             return;
         }
 
@@ -89,7 +89,7 @@ const ClientAuth = ({ defaultPortal }) => {
         dispatch({ type: SET_USER, payload: resolvedUser });
         dispatch({ type: SET_ADMIN, payload: Boolean(isAdmin || isSystemAdmin) });
 
-        // Save / update in Firestore
+        // Save / update in Firestore in real-time
         saveUserToFirestore(resolvedUser).catch(err => console.log('Firestore user profile sync:', err.message));
 
         if (isAdmin || isSystemAdmin) {
@@ -112,10 +112,10 @@ const ClientAuth = ({ defaultPortal }) => {
         }
 
         setSubmitting(true);
-        const loading = toast.loading('Authenticating credentials...');
+        const loading = toast.loading('Signing in to workspace...');
 
         try {
-            // Attempt real Firebase Auth
+            // Attempt real-time Firebase Auth login
             const res = await firebaseLogin(signInEmail, signInPassword);
             toast.dismiss(loading);
             setSubmitting(false);
@@ -129,7 +129,14 @@ const ClientAuth = ({ defaultPortal }) => {
                 if (localUser) {
                     finalizeAuthSession(localUser);
                 } else {
-                    const errorMsg = res.error ? `Authentication error: ${res.error}` : 'Invalid email or password. Please verify your credentials or create an account.';
+                    let errorMsg = 'Invalid email or password. Please verify your credentials or create an account.';
+                    if (res.error) {
+                        if (res.error.includes('invalid-login-credentials') || res.error.includes('wrong-password') || res.error.includes('user-not-found')) {
+                            errorMsg = 'Invalid email or password. Please verify your credentials or create an account.';
+                        } else {
+                            errorMsg = res.error;
+                        }
+                    }
                     toast.error(errorMsg);
                 }
             }
@@ -140,7 +147,7 @@ const ClientAuth = ({ defaultPortal }) => {
             if (localUser) {
                 finalizeAuthSession(localUser);
             } else {
-                toast.error(err.message || 'Invalid credentials. Please verify your details or create an account.');
+                toast.error(err.message || 'Authentication failed. Please verify your credentials.');
             }
         }
     };
@@ -158,7 +165,7 @@ const ClientAuth = ({ defaultPortal }) => {
         }
 
         setSubmitting(true);
-        const loading = toast.loading('Creating your account...');
+        const loading = toast.loading('Creating account in database realtime...');
 
         try {
             const res = await firebaseRegister(signUpEmail, signUpPassword, signUpName, 'client', signUpOrg);
@@ -167,7 +174,15 @@ const ClientAuth = ({ defaultPortal }) => {
 
             if (res.success && res.user) {
                 registerUserAccount({ ...res.user, institution: signUpOrg, password: signUpPassword });
-                finalizeAuthSession(res.user);
+                toast.success('Account successfully created! Please sign in with your credentials.', { duration: 4500 });
+                // Populate sign-in inputs and transition to Sign In tab
+                setSignInEmail(signUpEmail);
+                setSignInPassword(signUpPassword);
+                setSignUpName('');
+                setSignUpOrg('');
+                setSignUpEmail('');
+                setSignUpPassword('');
+                setMode('signin');
             } else {
                 if (res.error && res.error.toLowerCase().includes('already in use')) {
                     toast.error('This email is already registered. Please sign in instead.');
@@ -183,12 +198,19 @@ const ClientAuth = ({ defaultPortal }) => {
                     password: signUpPassword,
                     isSignedIn: true
                 });
-                finalizeAuthSession(registeredUser);
+                toast.success('Account successfully registered! Please sign in with your credentials.', { duration: 4500 });
+                setSignInEmail(signUpEmail);
+                setSignInPassword(signUpPassword);
+                setSignUpName('');
+                setSignUpOrg('');
+                setSignUpEmail('');
+                setSignUpPassword('');
+                setMode('signin');
             }
         } catch (err) {
             toast.dismiss(loading);
             setSubmitting(false);
-            const registeredUser = registerUserAccount({
+            registerUserAccount({
                 name: signUpName,
                 email: signUpEmail.toLowerCase(),
                 institution: signUpOrg,
@@ -196,7 +218,14 @@ const ClientAuth = ({ defaultPortal }) => {
                 password: signUpPassword,
                 isSignedIn: true
             });
-            finalizeAuthSession(registeredUser);
+            toast.success('Account registered successfully! Please sign in with your credentials.', { duration: 4500 });
+            setSignInEmail(signUpEmail);
+            setSignInPassword(signUpPassword);
+            setSignUpName('');
+            setSignUpOrg('');
+            setSignUpEmail('');
+            setSignUpPassword('');
+            setMode('signin');
         }
     };
 
@@ -274,7 +303,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                             border: '1px solid var(--site-border, #E5E0FA)'
                                         }}
                                     >
-                                        <FontAwesomeIcon icon={authRole === 'admin' ? faUserShield : faShieldAlt} style={{ fontSize: '1.4rem' }} />
+                                        <FontAwesomeIcon icon={authRole === 'admin' ? faUserShield : faUser} style={{ fontSize: '1.4rem' }} />
                                     </div>
                                     <h4 className="fw-bold mb-1" style={{ color: 'var(--site-text-main, #070120)' }}>
                                         {authRole === 'admin' ? 'Administrator Command Portal' : 'Enterprise Client Workspace'}
@@ -284,40 +313,6 @@ const ClientAuth = ({ defaultPortal }) => {
                                             ? 'Sign in to access inbound requests, publish catalog solutions, and manage privileges.'
                                             : 'Sign in or create an account to book bank-grade solutions and manage deployments.'}
                                     </p>
-                                </div>
-
-                                {/* Portal Destination Toggle: Client vs Admin */}
-                                <div className="d-flex mb-3 p-1 rounded" style={{ backgroundColor: 'var(--site-card-subtle, #FAF8FF)', border: '1px solid var(--site-border, #E5E0FA)' }}>
-                                    <button
-                                        type="button"
-                                        onClick={() => { setAuthRole('client'); setMode('signin'); }}
-                                        className="btn btn-sm flex-fill py-1.5 fw-semibold"
-                                        style={{
-                                            borderRadius: '3px',
-                                            fontSize: '0.82rem',
-                                            backgroundColor: authRole === 'client' ? 'var(--site-primary, #7355F7)' : 'transparent',
-                                            color: authRole === 'client' ? '#FFFFFF' : 'var(--site-text-muted, #555555)',
-                                            border: 'none',
-                                            transition: 'all 0.2s ease'
-                                        }}
-                                    >
-                                        <FontAwesomeIcon icon={faUser} className="me-1" /> Client Portal
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => { setAuthRole('admin'); setMode('signin'); }}
-                                        className="btn btn-sm flex-fill py-1.5 fw-semibold"
-                                        style={{
-                                            borderRadius: '3px',
-                                            fontSize: '0.82rem',
-                                            backgroundColor: authRole === 'admin' ? 'var(--site-primary, #7355F7)' : 'transparent',
-                                            color: authRole === 'admin' ? '#FFFFFF' : 'var(--site-text-muted, #555555)',
-                                            border: 'none',
-                                            transition: 'all 0.2s ease'
-                                        }}
-                                    >
-                                        <FontAwesomeIcon icon={faShieldAlt} className="me-1" /> Admin Portal
-                                    </button>
                                 </div>
 
                                 {/* Mode Switcher Tabs (Sign In vs Sign Up) */}
@@ -444,6 +439,27 @@ const ClientAuth = ({ defaultPortal }) => {
                                         >
                                             <FontAwesomeIcon icon={faGoogle} style={{ color: '#EA4335' }} /> Sign In with Google
                                         </Button>
+
+                                        {authRole === 'client' && (
+                                            <div className="text-center mt-3 pt-3 border-top" style={{ borderColor: 'var(--site-border)' }}>
+                                                <span className="small" style={{ color: 'var(--site-text-muted)' }}>Don't have a client account? </span>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setMode('signup')}
+                                                    className="btn btn-link p-0 small fw-semibold text-decoration-none"
+                                                    style={{ color: 'var(--site-primary, #7355F7)' }}
+                                                >
+                                                    Create an account
+                                                </button>
+                                            </div>
+                                        )}
+                                        {authRole === 'admin' && (
+                                            <div className="text-center mt-3 pt-3 border-top" style={{ borderColor: 'var(--site-border)' }}>
+                                                <Link to="/client/login" className="small text-decoration-none" style={{ color: 'var(--site-text-muted)' }}>
+                                                    &larr; Switch to Client Portal Login
+                                                </Link>
+                                            </div>
+                                        )}
                                     </Form>
                                 )}
 
@@ -557,6 +573,18 @@ const ClientAuth = ({ defaultPortal }) => {
                                         >
                                             <FontAwesomeIcon icon={faGoogle} style={{ color: '#EA4335' }} /> Sign Up with Google
                                         </Button>
+
+                                        <div className="text-center mt-3 pt-3 border-top" style={{ borderColor: 'var(--site-border)' }}>
+                                            <span className="small" style={{ color: 'var(--site-text-muted)' }}>Already have a client account? </span>
+                                            <button
+                                                type="button"
+                                                onClick={() => setMode('signin')}
+                                                className="btn btn-link p-0 small fw-semibold text-decoration-none"
+                                                style={{ color: 'var(--site-primary, #7355F7)' }}
+                                            >
+                                                Sign in here
+                                            </button>
+                                        </div>
                                     </Form>
                                 )}
                             </div>
