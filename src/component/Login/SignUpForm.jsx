@@ -19,6 +19,7 @@ const SignUpForm = ({ handleResponse }) => {
                 email: normalizedEmail,
                 img: userImg,
                 role: 'client',
+                password,
                 isSignedIn: true
             });
             toast.success(`Welcome to Kosher Code, ${userObj.name}!`);

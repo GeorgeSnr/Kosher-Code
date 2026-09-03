@@ -66,6 +66,15 @@ class ErrorBoundary extends React.Component {
                         <p style={{ color: '#94A3B8', fontSize: '0.92rem', lineHeight: 1.6, marginBottom: '1.75rem' }}>
                             We encountered a display initialization issue loading this portal view. You can reload the workspace or return to the main site.
                         </p>
+                        {this.state.error && (
+                            <details style={{ textAlign: 'left', marginBottom: '1.5rem', backgroundColor: 'rgba(0,0,0,0.3)', borderRadius: '4px', padding: '0.75rem 1rem', border: '1px solid rgba(255,255,255,0.08)' }}>
+                                <summary style={{ cursor: 'pointer', color: '#CBD5E1', fontSize: '0.8rem', fontWeight: 600 }}>Diagnostic Details</summary>
+                                <pre style={{ marginTop: '0.5rem', color: '#F87171', fontSize: '0.75rem', whiteSpace: 'pre-wrap', wordBreak: 'break-all', maxHeight: '150px', overflowY: 'auto' }}>
+                                    {this.state.error?.toString()}
+                                    {this.state.error?.stack && `\n\n${this.state.error.stack}`}
+                                </pre>
+                            </details>
+                        )}
                         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
                             <button
                                 onClick={this.handleReload}

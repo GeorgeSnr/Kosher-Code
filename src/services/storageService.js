@@ -222,13 +222,13 @@ export const addStoredAdmin = (email) => {
 export const checkIsAdmin = (email) => {
     if (!email) return false;
     const normalized = email.toLowerCase().trim();
-    const admins = getStoredAdmins();
+    const admins = getStoredAdmins().map(a => (typeof a === 'string' ? a.toLowerCase().trim() : ''));
     return admins.includes(normalized) || 
            normalized === 'georgewilliamochole@gmail.com' ||
            normalized === 'admin@koshercode.com' ||
-           normalized.includes('admin') ||
-           normalized.includes('director') ||
-           normalized.includes('george');
+           normalized === 'director@koshercode.ug' ||
+           normalized === 'tech@koshercode.com' ||
+           normalized === 'admin@mail.com';
 };
 
 const USERS_KEY = 'kosher_registered_users';
@@ -247,19 +247,27 @@ export const registerUserAccount = (userObj) => {
     const normalized = userObj.email.toLowerCase().trim();
     const existing = getRegisteredUsers();
     const updated = existing.filter(u => u.email.toLowerCase().trim() !== normalized);
-    const isAdmin = checkIsAdmin(normalized) || userObj.role === 'admin';
+    
+    // Explicit role preservation: if explicitly registered as client, preserve 'client'
+    const isExplicitClient = userObj.role === 'client';
+    const isExplicitAdmin = userObj.role === 'admin';
+    const isAdmin = isExplicitAdmin ? true : (isExplicitClient ? false : checkIsAdmin(normalized));
+    
     const newUser = {
         ...userObj,
         email: normalized,
         role: isAdmin ? 'admin' : 'client',
-        createdAt: new Date().toISOString()
+        password: userObj.password || '',
+        createdAt: userObj.createdAt || new Date().toISOString()
     };
     updated.push(newUser);
     try {
         localStorage.setItem(USERS_KEY, JSON.stringify(updated));
     } catch (e) {}
     
-    saveUserToFirestore(newUser).catch(err => console.warn('Firestore user registration sync:', err.message));
+    // Do not sync plain password to Firestore
+    const { password, ...safeUser } = newUser;
+    saveUserToFirestore(safeUser).catch(err => console.warn('Firestore user registration sync:', err.message));
     return newUser;
 };
 
@@ -270,6 +278,24 @@ export const authenticateUserAccount = (email, password) => {
     const existing = getRegisteredUsers();
     const matched = existing.find(u => u.email.toLowerCase().trim() === normalized);
     
+    // If not an admin and not in registered users, authentication cannot succeed locally
+    if (!isAdmin && !matched) {
+        return null;
+    }
+
+    // Verify password for registered user if a password was saved
+    if (matched && matched.password && password && matched.password !== password) {
+        return null;
+    }
+
+    // If matched existed without a saved password, record the password now
+    if (matched && !matched.password && password) {
+        matched.password = password;
+        try {
+            localStorage.setItem(USERS_KEY, JSON.stringify(existing));
+        } catch (e) {}
+    }
+
     const resolvedRole = isAdmin ? 'admin' : (matched?.role || 'client');
     const resolvedName = matched?.name || (normalized === 'georgewilliamochole@gmail.com' 
         ? 'George William Ochole' 

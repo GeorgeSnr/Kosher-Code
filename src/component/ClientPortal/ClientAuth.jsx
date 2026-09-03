@@ -66,11 +66,20 @@ const ClientAuth = ({ defaultPortal }) => {
     const [signUpPassword, setSignUpPassword] = useState('');
 
     const finalizeAuthSession = (userObj) => {
-        const isAdmin = userObj.role === 'admin' || authRole === 'admin' || checkIsAdmin(userObj.email);
+        const isSystemAdmin = checkIsAdmin(userObj.email);
+        const isAdmin = userObj.role === 'admin' || (authRole === 'admin' && isSystemAdmin);
+        
+        // If user targeted Admin Portal but does not have admin privileges, block and notify
+        if (authRole === 'admin' && !isAdmin && !isSystemAdmin) {
+            toast.error('Access restricted: This account does not have Administrator privileges. Please sign in via the Client Portal.');
+            setAuthRole('client');
+            return;
+        }
+
         const resolvedUser = {
             ...userObj,
-            role: isAdmin ? 'admin' : 'client',
-            img: userObj.img || (isAdmin 
+            role: (isAdmin || isSystemAdmin) ? 'admin' : 'client',
+            img: userObj.img || ((isAdmin || isSystemAdmin) 
                 ? 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png' 
                 : userImg)
         };
@@ -78,19 +87,19 @@ const ClientAuth = ({ defaultPortal }) => {
         sessionStorage.setItem('kosher_client_session', JSON.stringify(resolvedUser));
         localStorage.setItem('kosher_current_user', JSON.stringify(resolvedUser));
         dispatch({ type: SET_USER, payload: resolvedUser });
-        dispatch({ type: SET_ADMIN, payload: isAdmin });
+        dispatch({ type: SET_ADMIN, payload: Boolean(isAdmin || isSystemAdmin) });
 
         // Save / update in Firestore
         saveUserToFirestore(resolvedUser).catch(err => console.log('Firestore user profile sync:', err.message));
 
-        if (isAdmin) {
+        if (isAdmin || isSystemAdmin) {
             toast.success('Welcome to the Administrator Command Center!');
             navigate('/admin');
         } else {
             toast.success(`Welcome to Kosher Code, ${resolvedUser.name}!`);
             const targetDest = fromPath && !fromPath.includes('/admin') && fromPath !== '/login' && fromPath !== '/client/login'
                 ? fromPath
-                : '/client/book';
+                : '/client';
             navigate(targetDest);
         }
     };
@@ -112,6 +121,7 @@ const ClientAuth = ({ defaultPortal }) => {
             setSubmitting(false);
 
             if (res.success && res.user) {
+                registerUserAccount({ ...res.user, password: signInPassword });
                 finalizeAuthSession(res.user);
             } else {
                 // Fallback to locally registered / administrator accounts
@@ -119,7 +129,8 @@ const ClientAuth = ({ defaultPortal }) => {
                 if (localUser) {
                     finalizeAuthSession(localUser);
                 } else {
-                    toast.error(res.error || 'Authentication failed. Please verify your credentials.');
+                    const errorMsg = res.error ? `Authentication error: ${res.error}` : 'Invalid email or password. Please verify your credentials or create an account.';
+                    toast.error(errorMsg);
                 }
             }
         } catch (err) {
@@ -129,7 +140,7 @@ const ClientAuth = ({ defaultPortal }) => {
             if (localUser) {
                 finalizeAuthSession(localUser);
             } else {
-                toast.error(err.message || 'Authentication failed. Please check your credentials.');
+                toast.error(err.message || 'Invalid credentials. Please verify your details or create an account.');
             }
         }
     };
@@ -155,14 +166,21 @@ const ClientAuth = ({ defaultPortal }) => {
             setSubmitting(false);
 
             if (res.success && res.user) {
-                registerUserAccount({ ...res.user, institution: signUpOrg });
+                registerUserAccount({ ...res.user, institution: signUpOrg, password: signUpPassword });
                 finalizeAuthSession(res.user);
             } else {
+                if (res.error && res.error.toLowerCase().includes('already in use')) {
+                    toast.error('This email is already registered. Please sign in instead.');
+                    setMode('signin');
+                    setSignInEmail(signUpEmail);
+                    return;
+                }
                 const registeredUser = registerUserAccount({
                     name: signUpName,
                     email: signUpEmail.toLowerCase(),
                     institution: signUpOrg,
                     role: 'client',
+                    password: signUpPassword,
                     isSignedIn: true
                 });
                 finalizeAuthSession(registeredUser);
@@ -175,6 +193,7 @@ const ClientAuth = ({ defaultPortal }) => {
                 email: signUpEmail.toLowerCase(),
                 institution: signUpOrg,
                 role: 'client',
+                password: signUpPassword,
                 isSignedIn: true
             });
             finalizeAuthSession(registeredUser);

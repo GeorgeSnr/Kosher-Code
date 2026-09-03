@@ -331,7 +331,7 @@ const ClientLanding = () => {
 
                                         <h6 className="fw-bold mb-1.5" style={{ color: 'var(--cp-text-main)', fontSize: '0.92rem' }}>{service.name}</h6>
                                         <p className="small mb-3" style={{ color: 'var(--cp-text-muted)', fontSize: '0.78rem', lineHeight: 1.55 }}>
-                                            {service.description.substring(0, 75)}...
+                                            {(service.description || '').substring(0, 75)}...
                                         </p>
                                     </div>
                                     <Link 
