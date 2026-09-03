@@ -259,7 +259,28 @@
 .cs-section-chevron {
     font-size: 0.68rem;
     color: var(--cp-text-light);
-    transition: transform 0.2s ease;
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cs-section-chevron.open {
+    transform: rotate(180deg);
+}
+
+/* Animated Accordion: Smooth Roll-Down & Roll-Back of Menu Selection Items */
+.cs-nav-accordion {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: max-height 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.28s ease,
+                transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cs-nav-accordion.open {
+    max-height: 600px;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Navigation Item List */
@@ -955,6 +976,13 @@ select option {
     }
 
     /* Ensure all nav lists are visible in collapsed mode */
+    .client-sidebar.desktop-collapsed .cs-nav-accordion {
+        max-height: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        overflow: visible !important;
+    }
+
     .client-sidebar.desktop-collapsed .cs-nav-list {
         display: flex !important;
         flex-direction: column !important;

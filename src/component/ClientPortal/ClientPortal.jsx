@@ -130,14 +130,22 @@ const ClientPortal = () => {
     const handleNavClick = (pageTitle) => {
         setTitle(pageTitle);
         setShowUserMenu(false);
+
+        // Automatically roll back expanded sub-accordion selection lists
+        setSolutionsOpen(false);
+        setSupportOpen(false);
+
         if (isMobile || (typeof window !== 'undefined' && window.innerWidth <= 991)) {
-            // Gentle micro-delay gives the user instant visual tap confirmation,
-            // then gently glides the sidebar away so they can continue with their selection
+            // Mobile: gently roll back drawer
             setTimeout(() => {
                 setMobileOpen(false);
             }, 140);
         } else {
-            setMobileOpen(false);
+            // Desktop: roll back to compact icon rail automatically
+            setTimeout(() => {
+                setSidebarOpen(false);
+                localStorage.setItem('kosher_client_sidebar_open', 'false');
+            }, 140);
         }
     };
 
@@ -220,12 +228,12 @@ const ClientPortal = () => {
                     >
                         <span className="cs-section-title">WORKSPACE</span>
                         <FontAwesomeIcon 
-                            icon={workspaceOpen ? faChevronUp : faChevronDown} 
-                            className="cs-section-chevron" 
+                            icon={faChevronDown} 
+                            className={`cs-section-chevron ${workspaceOpen ? 'open' : ''}`} 
                         />
                     </div>
 
-                    {workspaceOpen && (
+                    <div className={`cs-nav-accordion ${workspaceOpen ? 'open' : ''}`}>
                         <ul className="cs-nav-list">
                             <li>
                                 <NavLink 
@@ -268,10 +276,8 @@ const ClientPortal = () => {
                                         <FontAwesomeIcon icon={faFolderOpen} className="cs-icon" />
                                         <span>Active Engagements</span>
                                     </div>
-                                    {bookings.length > 0 ? (
-                                        <span className="cs-badge-pill">{bookings.length}</span>
-                                    ) : (
-                                        <span className="cs-plus-indicator">+</span>
+                                    {bookings.length > 0 && (
+                                        <span className="badge cs-badge-pill">{bookings.length}</span>
                                     )}
                                 </NavLink>
                             </li>
@@ -281,11 +287,11 @@ const ClientPortal = () => {
                                     to="/client/bookings" 
                                     onClick={() => handleNavClick('Invoices & Milestone Billing')}
                                     className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
-                                    title="Invoices & Quotes"
+                                    title="Invoices & Billing"
                                 >
                                     <div className="cs-nav-item-left">
                                         <FontAwesomeIcon icon={faFileInvoiceDollar} className="cs-icon" />
-                                        <span>Invoices & Quotes</span>
+                                        <span>Invoices & Billing</span>
                                     </div>
                                     <span className="cs-plus-indicator">+</span>
                                 </NavLink>
@@ -319,7 +325,7 @@ const ClientPortal = () => {
                                 </NavLink>
                             </li>
                         </ul>
-                    )}
+                    </div>
 
                     {/* SECTION 2: SOLUTIONS SUITE */}
                     <div 
@@ -328,12 +334,12 @@ const ClientPortal = () => {
                     >
                         <span className="cs-section-title">SOLUTIONS SUITE</span>
                         <FontAwesomeIcon 
-                            icon={solutionsOpen ? faChevronUp : faChevronDown} 
-                            className="cs-section-chevron" 
+                            icon={faChevronDown} 
+                            className={`cs-section-chevron ${solutionsOpen ? 'open' : ''}`} 
                         />
                     </div>
 
-                    {solutionsOpen && (
+                    <div className={`cs-nav-accordion ${solutionsOpen ? 'open' : ''}`}>
                         <ul className="cs-nav-list">
                             <li>
                                 <NavLink 
@@ -395,7 +401,7 @@ const ClientPortal = () => {
                                 </NavLink>
                             </li>
                         </ul>
-                    )}
+                    </div>
 
                     {/* SECTION 3: KAMPALA HQ & SLA */}
                     <div 
@@ -404,12 +410,12 @@ const ClientPortal = () => {
                     >
                         <span className="cs-section-title">KAMPALA HQ & SLA</span>
                         <FontAwesomeIcon 
-                            icon={supportOpen ? faChevronUp : faChevronDown} 
-                            className="cs-section-chevron" 
+                            icon={faChevronDown} 
+                            className={`cs-section-chevron ${supportOpen ? 'open' : ''}`} 
                         />
                     </div>
 
-                    {supportOpen && (
+                    <div className={`cs-nav-accordion ${supportOpen ? 'open' : ''}`}>
                         <ul className="cs-nav-list">
                             <li>
                                 <NavLink 
@@ -457,7 +463,7 @@ const ClientPortal = () => {
                                 </a>
                             </li>
                         </ul>
-                    )}
+                    </div>
                 </div>
 
                 {/* 3. Bottom User Profile Card (Matching Reference) */}

@@ -125,14 +125,22 @@ const AdminPortal = () => {
     const handleNavClick = (pageTitle) => {
         setTitle(pageTitle);
         setShowUserMenu(false);
+
+        // Automatically roll back expanded sub-accordion selection lists
+        setCatalogOpen(false);
+        setTelemetryOpen(false);
+
         if (isMobile || (typeof window !== 'undefined' && window.innerWidth <= 991)) {
-            // Gentle micro-delay gives the user instant visual tap confirmation,
-            // then gently glides the sidebar away so they can continue with their selection
+            // Mobile: gently roll back drawer
             setTimeout(() => {
                 setMobileOpen(false);
             }, 140);
         } else {
-            setMobileOpen(false);
+            // Desktop: roll back to compact icon rail automatically
+            setTimeout(() => {
+                setSidebarOpen(false);
+                localStorage.setItem('kosher_admin_sidebar_open', 'false');
+            }, 140);
         }
     };
 
@@ -238,12 +246,12 @@ const AdminPortal = () => {
                     >
                         <span className="cs-section-title">OPERATIONS</span>
                         <FontAwesomeIcon 
-                            icon={opsOpen ? faChevronUp : faChevronDown} 
-                            className="cs-section-chevron" 
+                            icon={faChevronDown} 
+                            className={`cs-section-chevron ${opsOpen ? 'open' : ''}`} 
                         />
                     </div>
 
-                    {opsOpen && (
+                    <div className={`cs-nav-accordion ${opsOpen ? 'open' : ''}`}>
                         <ul className="cs-nav-list">
                             <li>
                                 <NavLink 
@@ -318,7 +326,7 @@ const AdminPortal = () => {
                                 </NavLink>
                             </li>
                         </ul>
-                    )}
+                    </div>
 
                     {/* SECTION 2: SOLUTION CATEGORIES */}
                     <div 
@@ -327,12 +335,12 @@ const AdminPortal = () => {
                     >
                         <span className="cs-section-title">SOLUTIONS CATALOG</span>
                         <FontAwesomeIcon 
-                            icon={catalogOpen ? faChevronUp : faChevronDown} 
-                            className="cs-section-chevron" 
+                            icon={faChevronDown} 
+                            className={`cs-section-chevron ${catalogOpen ? 'open' : ''}`} 
                         />
                     </div>
 
-                    {catalogOpen && (
+                    <div className={`cs-nav-accordion ${catalogOpen ? 'open' : ''}`}>
                         <ul className="cs-nav-list">
                             <li>
                                 <NavLink 
@@ -394,7 +402,7 @@ const AdminPortal = () => {
                                 </NavLink>
                             </li>
                         </ul>
-                    )}
+                    </div>
 
                     {/* SECTION 3: SYSTEM TELEMETRY */}
                     <div 
@@ -403,12 +411,12 @@ const AdminPortal = () => {
                     >
                         <span className="cs-section-title">SYSTEM TELEMETRY</span>
                         <FontAwesomeIcon 
-                            icon={telemetryOpen ? faChevronUp : faChevronDown} 
-                            className="cs-section-chevron" 
+                            icon={faChevronDown} 
+                            className={`cs-section-chevron ${telemetryOpen ? 'open' : ''}`} 
                         />
                     </div>
 
-                    {telemetryOpen && (
+                    <div className={`cs-nav-accordion ${telemetryOpen ? 'open' : ''}`}>
                         <ul className="cs-nav-list">
                             <li>
                                 <NavLink 
@@ -424,7 +432,7 @@ const AdminPortal = () => {
                                 </NavLink>
                             </li>
                         </ul>
-                    )}
+                    </div>
                 </div>
 
                 {/* 3. Bottom User Profile Card */}

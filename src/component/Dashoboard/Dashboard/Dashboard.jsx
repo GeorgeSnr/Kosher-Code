@@ -30,6 +30,10 @@ const Dashboard = () => {
             setTimeout(() => {
                 setSideToggle(false);
             }, 140);
+        } else {
+            setTimeout(() => {
+                setSideToggle(true);
+            }, 140);
         }
     };
 
