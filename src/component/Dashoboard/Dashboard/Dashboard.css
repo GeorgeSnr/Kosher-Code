@@ -79,6 +79,8 @@
     background: var(--cp-bg, #F8F9FD);
     color: var(--cp-text-main, #0F172A);
     box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: -0.01em;
 }
 
 .dashBoardHeader {

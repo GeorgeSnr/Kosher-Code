@@ -3,11 +3,14 @@
    Reference: https://cdn.dribbble.com/userupload/47406563/file/ca9d63a63f4718a0645fc505a6ebffd4.png
    ========================================================= */
 
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
 /* Main Container */
 .admin-dribbble-dashboard {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     color: var(--cp-text-main, #111827);
     padding: 0.25rem 0.25rem 1.5rem 0.25rem;
+    letter-spacing: -0.01em;
 }
 
 /* Base Card Styling (High Border Radius, Soft Elevation) */
