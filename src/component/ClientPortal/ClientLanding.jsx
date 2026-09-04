@@ -17,7 +17,8 @@ import {
     faPiggyBank, 
     faChartLine, 
     faMobileAlt,
-    faEye
+    faEye,
+    faServer
 } from '@fortawesome/free-solid-svg-icons';
 import { useAppContext, SET_SELECTED_SERVICE } from '../../context';
 import { 
@@ -133,16 +134,90 @@ const ClientLanding = () => {
                         </div>
                     </Col>
 
-                    <Col lg={4} className="d-none d-lg-block text-end pe-2">
-                        <div className="p-3.5 bg-white bg-opacity-10 border border-white border-opacity-15 rounded-4 d-inline-block text-start" style={{ width: '240px', backdropFilter: 'blur(8px)' }}>
-                            <div className="d-flex align-items-center justify-content-between mb-2">
-                                <small className="text-white text-opacity-80 fw-semibold" style={{ fontSize: '0.74rem' }}>Deployment Hub</small>
-                                <span className="badge bg-success rounded-pill px-2.5 py-1" style={{ fontSize: '0.68rem', fontWeight: 600 }}>Active</span>
+                    <Col lg={4} className="mt-4 mt-lg-0 text-lg-end">
+                        <div 
+                            className="d-inline-block text-start"
+                            style={{ 
+                                width: '100%',
+                                maxWidth: '300px',
+                                backgroundColor: 'rgba(255, 255, 255, 0.12)',
+                                border: '1px solid rgba(255, 255, 255, 0.22)',
+                                borderRadius: '20px',
+                                padding: '18px 20px',
+                                boxShadow: '0 12px 30px rgba(0, 0, 0, 0.15)',
+                                backdropFilter: 'blur(16px)',
+                                WebkitBackdropFilter: 'blur(16px)'
+                            }}
+                        >
+                            <div className="d-flex align-items-center justify-content-between mb-3">
+                                <div className="d-flex align-items-center gap-2">
+                                    <span 
+                                        style={{ 
+                                            width: '8px', 
+                                            height: '8px', 
+                                            borderRadius: '50%', 
+                                            backgroundColor: '#10B981',
+                                            boxShadow: '0 0 8px #10B981',
+                                            display: 'inline-block'
+                                        }} 
+                                    />
+                                    <span 
+                                        style={{ 
+                                            fontSize: '0.75rem', 
+                                            fontWeight: 700, 
+                                            letterSpacing: '0.06em', 
+                                            textTransform: 'uppercase',
+                                            color: 'rgba(255, 255, 255, 0.95)' 
+                                        }}
+                                    >
+                                        Deployment Hub
+                                    </span>
+                                </div>
+                                <span 
+                                    className="badge rounded-pill"
+                                    style={{ 
+                                        backgroundColor: 'rgba(16, 185, 129, 0.25)', 
+                                        color: '#A7F3D0',
+                                        border: '1px solid rgba(16, 185, 129, 0.4)',
+                                        fontSize: '0.7rem', 
+                                        fontWeight: 700,
+                                        padding: '4px 10px'
+                                    }}
+                                >
+                                    ● 100% Active
+                                </span>
                             </div>
-                            <h6 className="text-white fw-bold mb-1" style={{ fontSize: '0.98rem' }}>Kampala, Uganda</h6>
-                            <p className="text-white text-opacity-70 mb-2.5" style={{ fontSize: '0.75rem' }}>East Africa & Global Delivery</p>
-                            <div className="pt-2 border-top border-white border-opacity-10 small text-white text-opacity-90" style={{ fontSize: '0.76rem' }}>
-                                SLA: <strong>99.9% Uptime Guaranteed</strong>
+
+                            <div className="mb-3">
+                                <h6 className="text-white fw-bold mb-1 d-flex align-items-center gap-2" style={{ fontSize: '1.02rem', letterSpacing: '-0.01em' }}>
+                                    <FontAwesomeIcon icon={faServer} style={{ fontSize: '0.9rem', color: 'rgba(255, 255, 255, 0.85)' }} />
+                                    Kampala, Uganda
+                                </h6>
+                                <p className="mb-0 text-white text-opacity-80" style={{ fontSize: '0.78rem', lineHeight: 1.45 }}>
+                                    East Africa & Global Delivery Network
+                                </p>
+                            </div>
+
+                            <div 
+                                className="pt-2.5 border-top d-flex align-items-center justify-content-between" 
+                                style={{ borderColor: 'rgba(255, 255, 255, 0.16)', fontSize: '0.76rem' }}
+                            >
+                                <span className="text-white text-opacity-90 d-flex align-items-center gap-1.5">
+                                    <FontAwesomeIcon icon={faCheckCircle} style={{ color: '#10B981', fontSize: '0.8rem' }} />
+                                    <span>SLA: <strong>99.9% Uptime</strong></span>
+                                </span>
+                                <span 
+                                    className="badge rounded-pill"
+                                    style={{
+                                        backgroundColor: 'rgba(255, 255, 255, 0.16)',
+                                        color: '#FFFFFF',
+                                        fontSize: '0.68rem',
+                                        padding: '3px 8px',
+                                        fontWeight: 600
+                                    }}
+                                >
+                                    Priority Tier
+                                </span>
                             </div>
                         </div>
                     </Col>

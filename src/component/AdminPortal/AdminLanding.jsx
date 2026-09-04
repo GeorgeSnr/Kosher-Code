@@ -25,7 +25,8 @@ import {
     faPhone,
     faMapMarkerAlt,
     faDollarSign,
-    faCar
+    faCar,
+    faServer
 } from '@fortawesome/free-solid-svg-icons';
 import { 
     faGoogle, 
@@ -232,6 +233,54 @@ const AdminLanding = () => {
 
     return (
         <div className="admin-dribbble-dashboard">
+            {/* Top Operations & Deployment Hub Command Banner */}
+            <div className="ad-hero-banner mb-4">
+                <Row className="align-items-center g-3">
+                    <Col lg={8} md={7}>
+                        <div className="d-inline-flex align-items-center gap-2 px-3 py-1 mb-2.5 rounded-pill ad-hero-badge">
+                            <FontAwesomeIcon icon={faShieldAlt} /> Superadmin Operations • Kampala HQ Desk
+                        </div>
+                        <h3 className="fw-bold mb-1.5 ad-hero-title">Enterprise Systems & Telemetry</h3>
+                        <p className="mb-0 ad-hero-sub">
+                            Monitor live platform infrastructure, core banking switches, and multi-tenant solution deployments across East Africa and global cloud nodes.
+                        </p>
+                    </Col>
+                    <Col lg={4} md={5} className="text-md-end">
+                        <div className="ad-deployment-hub-box">
+                            <div className="d-flex align-items-center justify-content-between mb-2.5">
+                                <div className="d-flex align-items-center gap-2">
+                                    <span className="ad-pulse-dot" />
+                                    <span className="ad-hub-label">Deployment Hub</span>
+                                </div>
+                                <span className="badge rounded-pill ad-hub-status-pill">
+                                    ● 100% Operational
+                                </span>
+                            </div>
+
+                            <div className="mb-2.5">
+                                <h6 className="ad-hub-title mb-1 d-flex align-items-center gap-2">
+                                    <FontAwesomeIcon icon={faServer} style={{ fontSize: '0.9rem', color: 'rgba(255, 255, 255, 0.85)' }} />
+                                    Kampala HQ Switch
+                                </h6>
+                                <p className="mb-0 ad-hub-sub">
+                                    East Africa Core Banking & Cloud Node
+                                </p>
+                            </div>
+
+                            <div className="pt-2 border-top ad-hub-footer d-flex align-items-center justify-content-between">
+                                <span className="ad-hub-sla d-flex align-items-center gap-1.5">
+                                    <FontAwesomeIcon icon={faCheckCircle} className="text-success" style={{ fontSize: '0.8rem' }} />
+                                    <span>SLA: <strong>99.9% Uptime</strong></span>
+                                </span>
+                                <span className="badge rounded-pill ad-hub-pill-tag">
+                                    Production Live
+                                </span>
+                            </div>
+                        </div>
+                    </Col>
+                </Row>
+            </div>
+
             {/* =========================================================
                TOP SECTION: QUICK STATS (Horizontal Layout + Tall Pill Cards)
                ========================================================= */}

@@ -31,6 +31,124 @@
 }
 
 /* =========================================================
+   TOP OPERATIONS & DEPLOYMENT HUB BANNER
+   ========================================================= */
+.ad-hero-banner {
+    background: linear-gradient(135deg, #7054F2 0%, #4E36C2 100%);
+    border-radius: 24px;
+    padding: 22px 28px;
+    color: #FFFFFF;
+    box-shadow: 0 10px 30px rgba(112, 84, 242, 0.22);
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme="dark"] .ad-hero-banner,
+.theme-dark .ad-hero-banner {
+    background: linear-gradient(135deg, #182238 0%, #0F1626 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.ad-hero-badge {
+    background-color: rgba(255, 255, 255, 0.16);
+    color: #FFFFFF;
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.ad-hero-title {
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+}
+
+.ad-hero-sub {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.5;
+    max-width: 650px;
+}
+
+/* Deployment Hub Box (Clean padding, gaps, margins, descent looks) */
+.ad-deployment-hub-box {
+    display: inline-block;
+    text-align: left;
+    width: 100%;
+    max-width: 300px;
+    background-color: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 20px;
+    padding: 18px 20px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+[data-theme="dark"] .ad-deployment-hub-box,
+.theme-dark .ad-deployment-hub-box {
+    background-color: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.14);
+}
+
+.ad-pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #10B981;
+    box-shadow: 0 0 8px #10B981;
+    display: inline-block;
+}
+
+.ad-hub-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.ad-hub-status-pill {
+    background-color: rgba(16, 185, 129, 0.25) !important;
+    color: #A7F3D0 !important;
+    border: 1px solid rgba(16, 185, 129, 0.4) !important;
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+    padding: 4px 10px !important;
+}
+
+.ad-hub-title {
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: -0.01em;
+}
+
+.ad-hub-sub {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.78);
+    line-height: 1.45;
+}
+
+.ad-hub-footer {
+    border-color: rgba(255, 255, 255, 0.16) !important;
+    font-size: 0.76rem;
+}
+
+.ad-hub-sla {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.ad-hub-pill-tag {
+    background-color: rgba(255, 255, 255, 0.16) !important;
+    color: #FFFFFF !important;
+    font-size: 0.68rem !important;
+    padding: 3px 8px !important;
+    font-weight: 600 !important;
+}
+
+/* =========================================================
    TOP SECTION: QUICK STATS (Horizontal Flow + Tall Pill Cards)
    ========================================================= */
 .ad-stats-section {
