@@ -202,7 +202,7 @@ const ManageServices = () => {
 
                     {/* Table */}
                     <div className="table-responsive">
-                        <Table hover className="align-middle mb-0 cp-table">
+                        <Table hover className="align-middle mb-0 cp-table" style={{ minWidth: '650px' }}>
                             <thead>
                                 <tr>
                                     <th className="py-3 px-3" style={{ borderTop: 'none' }}>Solution Name & Scope</th>

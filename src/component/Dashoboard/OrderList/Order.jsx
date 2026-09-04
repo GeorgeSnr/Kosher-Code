@@ -78,26 +78,26 @@ const Order = ({ order, handleAction, handleDelete }) => {
         <>
             <tr>
                 {/* Client Info */}
-                <td className="align-middle">
-                    <div className="d-flex align-items-center gap-2">
+                <td className="align-middle" style={{ minWidth: '180px' }}>
+                    <div className="d-flex align-items-center gap-2.5">
                         <UserAvatar 
                             name={name}
                             size="xs"
                             ring={false}
                         />
-                        <div className="overflow-hidden">
+                        <div className="overflow-hidden" style={{ minWidth: 0 }}>
                             <div 
                                 className="fw-bold text-truncate" 
-                                style={{ color: 'var(--cp-text-main)', cursor: 'pointer', maxWidth: '200px' }}
+                                style={{ color: 'var(--cp-text-main)', cursor: 'pointer', maxWidth: '170px', fontSize: '0.88rem' }}
                                 onClick={() => setShowDetails(true)}
-                                title="Click to view full request details"
+                                title={name}
                             >
                                 {name}
                             </div>
                             {institution && (
-                                <div className="small d-flex align-items-center gap-1 mt-0.5" style={{ color: 'var(--cp-text-muted)' }}>
-                                    <FontAwesomeIcon icon={faBuilding} style={{ color: 'var(--cp-primary)', fontSize: '11px' }} />
-                                    <span className="text-truncate" style={{ maxWidth: '180px' }}>{institution}</span>
+                                <div className="small d-flex align-items-center gap-1 mt-0.5" style={{ color: 'var(--cp-text-muted)', fontSize: '0.76rem' }}>
+                                    <FontAwesomeIcon icon={faBuilding} style={{ color: 'var(--cp-primary)', fontSize: '10px', flexShrink: 0 }} />
+                                    <span className="text-truncate" style={{ maxWidth: '150px' }} title={institution}>{institution}</span>
                                 </div>
                             )}
                         </div>
@@ -105,40 +105,40 @@ const Order = ({ order, handleAction, handleDelete }) => {
                 </td>
 
                 {/* Contact Details */}
-                <td className="align-middle">
-                    <div className="small d-flex align-items-center gap-1.5" style={{ color: 'var(--cp-text-main)' }}>
-                        <FontAwesomeIcon icon={faEnvelope} style={{ color: 'var(--cp-text-muted)', fontSize: '11px' }} />
-                        <a href={`mailto:${email}`} className="text-decoration-none text-truncate" style={{ color: 'inherit', maxWidth: '190px' }}>{email}</a>
+                <td className="align-middle" style={{ minWidth: '180px' }}>
+                    <div className="small d-flex align-items-center gap-1.5 overflow-hidden" style={{ color: 'var(--cp-text-main)' }}>
+                        <FontAwesomeIcon icon={faEnvelope} style={{ color: 'var(--cp-text-muted)', fontSize: '11px', flexShrink: 0 }} />
+                        <a href={`mailto:${email}`} className="text-decoration-none text-truncate" style={{ color: 'inherit', maxWidth: '160px', fontSize: '0.82rem' }} title={email}>{email}</a>
                     </div>
                     {phone && (
-                        <div className="small d-flex align-items-center gap-1.5 mt-0.5" style={{ color: 'var(--cp-text-muted)' }}>
-                            <FontAwesomeIcon icon={faPhone} style={{ color: 'var(--status-done-text)', fontSize: '10px' }} />
-                            <a href={`tel:${phone}`} className="text-decoration-none" style={{ color: 'inherit' }}>{phone}</a>
+                        <div className="small d-flex align-items-center gap-1.5 mt-0.5 overflow-hidden" style={{ color: 'var(--cp-text-muted)' }}>
+                            <FontAwesomeIcon icon={faPhone} style={{ color: 'var(--status-done-text)', fontSize: '10px', flexShrink: 0 }} />
+                            <a href={`tel:${phone}`} className="text-decoration-none text-truncate" style={{ color: 'inherit', maxWidth: '160px', fontSize: '0.78rem' }}>{phone}</a>
                         </div>
                     )}
                 </td>
 
                 {/* Service & Region */}
-                <td className="align-middle">
-                    <div className="fw-semibold text-truncate" style={{ color: 'var(--cp-primary)', maxWidth: '220px' }}>{serviceName}</div>
-                    <div className="small d-flex align-items-center gap-1 mt-0.5" style={{ color: 'var(--cp-text-muted)' }}>
-                        <FontAwesomeIcon icon={faMapMarkerAlt} style={{ fontSize: '11px', color: 'var(--cp-text-muted)' }} />
-                        <span>{region || 'Uganda & Global'}</span>
+                <td className="align-middle" style={{ minWidth: '190px' }}>
+                    <div className="fw-semibold text-truncate" style={{ color: 'var(--cp-primary)', maxWidth: '180px', fontSize: '0.86rem' }} title={serviceName}>{serviceName}</div>
+                    <div className="small d-flex align-items-center gap-1 mt-0.5" style={{ color: 'var(--cp-text-muted)', fontSize: '0.76rem' }}>
+                        <FontAwesomeIcon icon={faMapMarkerAlt} style={{ fontSize: '10px', color: 'var(--cp-text-muted)', flexShrink: 0 }} />
+                        <span className="text-truncate" style={{ maxWidth: '160px' }}>{region || 'Uganda & Global'}</span>
                     </div>
                 </td>
 
                 {/* Budget / Pricing */}
-                <td className="align-middle">
-                    <div className="fw-bold" style={{ color: 'var(--cp-text-main)' }}>{price ? `$${price}` : 'Quotation'}</div>
-                    <div className="small" style={{ fontSize: '11px', color: 'var(--cp-text-muted)' }}>{pricingType || date || 'Direct'}</div>
+                <td className="align-middle" style={{ minWidth: '110px' }}>
+                    <div className="fw-bold" style={{ color: 'var(--cp-text-main)', fontSize: '0.9rem' }}>{price ? `$${price}` : 'Quotation'}</div>
+                    <div className="small text-muted text-truncate" style={{ fontSize: '11px', maxWidth: '100px' }}>{pricingType || date || 'Direct'}</div>
                 </td>
 
                 {/* Status Dropdown */}
-                <td className="align-middle">
+                <td className="align-middle" style={{ minWidth: '130px' }}>
                     <Dropdown id={`dropdown-${_id}`}>
                         <Dropdown.Toggle 
                             size="sm"
-                            className="border shadow-none"
+                            className="border shadow-none text-nowrap"
                             style={{
                                 backgroundColor: currentStyle.bg,
                                 color: currentStyle.text,
@@ -169,8 +169,8 @@ const Order = ({ order, handleAction, handleDelete }) => {
                 </td>
 
                 {/* Actions */}
-                <td className="align-middle text-end">
-                    <div className="d-inline-flex align-items-center gap-2">
+                <td className="align-middle text-end" style={{ minWidth: '90px' }}>
+                    <div className="d-inline-flex align-items-center gap-2 flex-nowrap">
                         <button
                             className="btn btn-sm d-flex align-items-center justify-content-center"
                             style={{ 
@@ -179,7 +179,8 @@ const Order = ({ order, handleAction, handleDelete }) => {
                                 borderRadius: '50%',
                                 backgroundColor: 'var(--cp-card-subtle)',
                                 border: '1px solid var(--cp-border)',
-                                color: 'var(--cp-primary)'
+                                color: 'var(--cp-primary)',
+                                flexShrink: 0
                             }}
                             title="Inspect Request Details"
                             onClick={() => setShowDetails(true)}
@@ -188,7 +189,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                         </button>
                         <button
                             className="btn btn-outline-danger btn-sm d-flex align-items-center justify-content-center"
-                            style={{ width: '32px', height: '32px', borderRadius: '50%' }}
+                            style={{ width: '32px', height: '32px', borderRadius: '50%', flexShrink: 0 }}
                             title="Delete / Archive Request"
                             onClick={() => handleDelete(_id)}
                         >
@@ -206,10 +207,10 @@ const Order = ({ order, handleAction, handleDelete }) => {
                 size="lg"
                 className="order-details-modal"
             >
-                <Modal.Header closeButton style={{ padding: '22px 28px' }}>
-                    <div className="d-flex align-items-center gap-3">
+                <Modal.Header closeButton style={{ padding: '20px 26px', borderBottom: '1px solid var(--cp-border)' }}>
+                    <div className="d-flex align-items-center gap-3 overflow-hidden">
                         <div 
-                            className="d-flex align-items-center justify-content-center"
+                            className="d-flex align-items-center justify-content-center flex-shrink-0"
                             style={{
                                 width: '42px',
                                 height: '42px',
@@ -220,34 +221,36 @@ const Order = ({ order, handleAction, handleDelete }) => {
                         >
                             <FontAwesomeIcon icon={faFileAlt} />
                         </div>
-                        <div>
-                            <Modal.Title className="fs-5 fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>
+                        <div className="overflow-hidden">
+                            <Modal.Title className="fs-5 fw-bold mb-0 text-truncate" style={{ color: 'var(--cp-text-main)' }}>
                                 Inbound Request Details
                             </Modal.Title>
-                            <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.8rem' }}>ID: {_id} &bull; Received on {date || 'Recent'}</small>
+                            <small className="text-truncate d-block" style={{ color: 'var(--cp-text-muted)', fontSize: '0.8rem' }}>
+                                Ref: {_id?.substring(0, 10)} &bull; Received on {date || 'Recent'}
+                            </small>
                         </div>
                     </div>
                 </Modal.Header>
 
                 <Modal.Body className="p-4" style={{ backgroundColor: 'var(--cp-card-bg)', color: 'var(--cp-text-main)' }}>
                     {/* Header Client Snapshot */}
-                    <div className="d-flex flex-wrap align-items-center justify-content-between p-3.5 mb-4 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
-                        <div className="d-flex align-items-center gap-3">
+                    <div className="d-flex flex-wrap align-items-center justify-content-between p-3.5 mb-4 rounded-4 gap-3" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                        <div className="d-flex align-items-center gap-3 overflow-hidden" style={{ minWidth: '220px', flex: '1 1 auto' }}>
                             <UserAvatar 
                                 name={name}
                                 size="md"
                                 ring={true}
                                 ringType="glow"
                             />
-                            <div>
+                            <div className="overflow-hidden">
                                 <span className="small d-block fw-bold text-uppercase" style={{ color: 'var(--cp-text-muted)', fontSize: '0.72rem', letterSpacing: '0.04em' }}>REPRESENTATIVE & INSTITUTION</span>
-                                <h4 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{name}</h4>
-                                <span className="fw-semibold" style={{ color: 'var(--cp-primary)', fontSize: '0.9rem' }}>{institution || 'Independent Enterprise'}</span>
+                                <h4 className="fw-bold mb-0 text-truncate" style={{ color: 'var(--cp-text-main)' }}>{name}</h4>
+                                <span className="fw-semibold text-truncate d-block" style={{ color: 'var(--cp-primary)', fontSize: '0.88rem' }}>{institution || 'Independent Enterprise'}</span>
                             </div>
                         </div>
-                        <div className="mt-2 mt-sm-0">
+                        <div className="flex-shrink-0">
                             <span 
-                                className="badge rounded-pill px-3 py-1.5 fw-semibold d-inline-flex align-items-center gap-1.5"
+                                className="badge rounded-pill px-3.5 py-1.5 fw-semibold d-inline-flex align-items-center gap-1.5"
                                 style={{
                                     backgroundColor: currentStyle.bg,
                                     color: currentStyle.text,
@@ -268,23 +271,24 @@ const Order = ({ order, handleAction, handleDelete }) => {
                                 <h6 className="fw-bold mb-3 small text-uppercase" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
                                     <FontAwesomeIcon icon={faEnvelope} className="me-1.5" style={{ color: 'var(--cp-primary)' }} /> Contact Channels
                                 </h6>
-                                <div className="mb-2.5">
+                                <div className="mb-2.5 overflow-hidden">
                                     <small className="d-block fw-semibold" style={{ color: 'var(--cp-text-muted)', fontSize: '0.75rem' }}>Corporate Email</small>
-                                    <a href={`mailto:${email}`} className="fw-semibold text-decoration-none d-inline-flex align-items-center gap-1" style={{ color: 'var(--cp-primary)' }}>
-                                        {email} <FontAwesomeIcon icon={faExternalLinkAlt} style={{ fontSize: '10px' }} />
+                                    <a href={`mailto:${email}`} className="fw-semibold text-decoration-none d-inline-flex align-items-center gap-1.5 text-truncate" style={{ color: 'var(--cp-primary)', maxWidth: '100%', wordBreak: 'break-all' }}>
+                                        <span className="text-truncate">{email}</span> 
+                                        <FontAwesomeIcon icon={faExternalLinkAlt} style={{ fontSize: '10px', flexShrink: 0 }} />
                                     </a>
                                 </div>
                                 {phone && (
-                                    <div className="mb-2.5">
+                                    <div className="mb-2.5 overflow-hidden">
                                         <small className="d-block fw-semibold" style={{ color: 'var(--cp-text-muted)', fontSize: '0.75rem' }}>Phone / Direct Line</small>
-                                        <a href={`tel:${phone}`} className="fw-semibold text-decoration-none" style={{ color: 'var(--status-done-text)', fontSize: '0.92rem' }}>
+                                        <a href={`tel:${phone}`} className="fw-semibold text-decoration-none text-truncate d-block" style={{ color: 'var(--status-done-text)', fontSize: '0.9rem' }}>
                                             {phone}
                                         </a>
                                     </div>
                                 )}
                                 <div>
                                     <small className="d-block fw-semibold" style={{ color: 'var(--cp-text-muted)', fontSize: '0.75rem' }}>Deployment Location / Region</small>
-                                    <span className="fw-semibold" style={{ color: 'var(--cp-text-main)' }}>{region || 'Uganda (Nationwide & Global)'}</span>
+                                    <span className="fw-semibold text-truncate d-block" style={{ color: 'var(--cp-text-main)' }}>{region || 'Uganda (Nationwide & Global)'}</span>
                                 </div>
                             </div>
                         </Col>
@@ -294,16 +298,16 @@ const Order = ({ order, handleAction, handleDelete }) => {
                                 <h6 className="fw-bold mb-3 small text-uppercase" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
                                     <FontAwesomeIcon icon={faDollarSign} className="me-1.5" style={{ color: 'var(--status-done-text)' }} /> Scope & Commercial Tier
                                 </h6>
-                                <div className="mb-2.5 d-flex align-items-center gap-2">
-                                    {img && <img src={img} alt="" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />}
-                                    <div>
+                                <div className="mb-2.5 d-flex align-items-center gap-2 overflow-hidden">
+                                    {img && <img src={img} alt="" style={{ width: '28px', height: '28px', objectFit: 'contain', flexShrink: 0 }} />}
+                                    <div className="overflow-hidden">
                                         <small className="d-block fw-semibold" style={{ color: 'var(--cp-text-muted)', fontSize: '0.75rem' }}>Target Solution</small>
-                                        <span className="fw-bold" style={{ color: 'var(--cp-text-main)' }}>{serviceName}</span>
+                                        <span className="fw-bold text-truncate d-block" style={{ color: 'var(--cp-text-main)' }}>{serviceName}</span>
                                     </div>
                                 </div>
-                                <div className="mb-2.5">
+                                <div className="mb-2.5 overflow-hidden">
                                     <small className="d-block fw-semibold" style={{ color: 'var(--cp-text-muted)', fontSize: '0.75rem' }}>Pricing Tier / Plan</small>
-                                    <span className="fw-semibold" style={{ color: 'var(--cp-primary)' }}>{pricingType || 'Enterprise Tier'}</span>
+                                    <span className="fw-semibold text-truncate d-block" style={{ color: 'var(--cp-primary)' }}>{pricingType || 'Enterprise Tier'}</span>
                                 </div>
                                 <div>
                                     <small className="d-block fw-semibold" style={{ color: 'var(--cp-text-muted)', fontSize: '0.75rem' }}>Projected Budget / Price</small>
@@ -318,7 +322,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                         <h6 className="fw-bold mb-2 small text-uppercase" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
                             Client Requirements & Scope Description
                         </h6>
-                        <p className="mb-0" style={{ color: 'var(--cp-text-main)', lineHeight: 1.65, fontSize: '0.92rem' }}>
+                        <p className="mb-0" style={{ color: 'var(--cp-text-main)', lineHeight: 1.65, fontSize: '0.9rem', wordBreak: 'break-word', overflowWrap: 'anywhere' }}>
                             {description || 'Full solution deployment requested with custom institutional workflows, security compliance protocols, and technical staff onboarding support.'}
                         </p>
                     </div>
@@ -328,7 +332,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                         <small className="fw-bold text-uppercase d-block mb-2.5" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
                             Update Live Project Status:
                         </small>
-                        <div className="d-flex flex-wrap gap-2.5">
+                        <div className="d-flex flex-wrap gap-2">
                             {['Pending', 'In Review', 'In Progress', 'Done'].map(st => {
                                 const isCurrent = status === st;
                                 return (
@@ -340,7 +344,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                                             backgroundColor: isCurrent ? '#121417' : 'transparent',
                                             borderColor: isCurrent ? '#121417' : 'var(--cp-border)',
                                             color: isCurrent ? '#FFFFFF' : 'var(--cp-text-main)',
-                                            fontSize: '0.8rem'
+                                            fontSize: '0.78rem'
                                         }}
                                         onClick={() => {
                                             handleAction(_id, st);
@@ -354,11 +358,11 @@ const Order = ({ order, handleAction, handleDelete }) => {
                     </div>
                 </Modal.Body>
 
-                <Modal.Footer style={{ padding: '18px 28px' }}>
-                    <div className="d-flex justify-content-between align-items-center w-100 gap-3">
+                <Modal.Footer style={{ padding: '16px 26px', borderTop: '1px solid var(--cp-border)' }}>
+                    <div className="d-flex flex-wrap justify-content-between align-items-center w-100 gap-2">
                         <button 
                             type="button"
-                            className="btn btn-outline-danger btn-sm d-flex align-items-center gap-2 rounded-pill px-3.5 py-2"
+                            className="btn btn-outline-danger btn-sm d-flex align-items-center gap-2 rounded-pill px-3.5 py-1.5"
                             style={{ fontSize: '0.82rem', fontWeight: 600 }}
                             onClick={() => {
                                 setShowDetails(false);
@@ -370,11 +374,11 @@ const Order = ({ order, handleAction, handleDelete }) => {
 
                         <button 
                             type="button"
-                            className="btn btn-secondary btn-sm rounded-pill px-4 py-2"
+                            className="btn btn-secondary btn-sm rounded-pill px-4 py-1.5"
                             style={{ backgroundColor: 'var(--cp-card-hover)', color: 'var(--cp-text-main)', border: '1px solid var(--cp-border)', fontSize: '0.82rem', fontWeight: 600 }}
                             onClick={() => setShowDetails(false)}
                         >
-                            Close Details
+                            Close
                         </button>
                     </div>
                 </Modal.Footer>

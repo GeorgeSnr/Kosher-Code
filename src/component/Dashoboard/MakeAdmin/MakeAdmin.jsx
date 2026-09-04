@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Form, Row, Table, Button, Card } from 'react-bootstrap';
+import { Col, Form, Row, Table, Button, Card, Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import swal from 'sweetalert';
@@ -25,13 +25,20 @@ import {
     faLayerGroup,
     faTags,
     faComments,
-    faShoppingCart
+    faShoppingCart,
+    faEnvelope,
+    faPhone,
+    faMapMarkerAlt,
+    faReply,
+    faEye
 } from '@fortawesome/free-solid-svg-icons';
 
 const MakeAdmin = () => {
     const [admins, setAdmins] = useState(getStoredAdmins());
     const [users, setUsers] = useState([]);
     const [contacts, setContacts] = useState([]);
+    const [selectedInquiry, setSelectedInquiry] = useState(null);
+    const [showInquiryModal, setShowInquiryModal] = useState(false);
     const [dbStats, setDbStats] = useState({ services: 0, pricing: 0, reviews: 0, orders: 0, users: 0, contacts: 0, connected: false });
     const [connCheck, setConnCheck] = useState({ auth: false, firestore: false, projectId: '' });
     const [isSeeding, setIsSeeding] = useState(false);
@@ -253,7 +260,7 @@ const MakeAdmin = () => {
                             </span>
                         </div>
                         <div className="table-responsive">
-                            <Table hover className="align-middle mb-0 cp-table">
+                            <Table hover className="align-middle mb-0 cp-table" style={{ minWidth: '560px' }}>
                                 <thead>
                                     <tr>
                                         <th className="py-3 px-3" style={{ borderTop: 'none' }}>Admin Account</th>
@@ -357,7 +364,7 @@ const MakeAdmin = () => {
                         </div>
                     ) : (
                         <div className="table-responsive">
-                            <Table hover className="align-middle mb-0 cp-table">
+                            <Table hover className="align-middle mb-0 cp-table" style={{ minWidth: '700px' }}>
                                 <thead>
                                     <tr>
                                         <th className="py-3 px-3" style={{ borderTop: 'none' }}>User & Identity</th>
@@ -461,32 +468,55 @@ const MakeAdmin = () => {
                         </div>
                     ) : (
                         <div className="table-responsive">
-                            <Table hover className="align-middle mb-0 cp-table">
+                            <Table hover className="align-middle mb-0 cp-table" style={{ minWidth: '780px' }}>
                                 <thead>
                                     <tr>
-                                        <th className="py-3 px-3" style={{ borderTop: 'none' }}>Client Contact</th>
-                                        <th className="py-3 px-3" style={{ borderTop: 'none' }}>Institution & Region</th>
+                                        <th className="py-3 px-3" style={{ borderTop: 'none', width: '220px' }}>Client Contact</th>
+                                        <th className="py-3 px-3" style={{ borderTop: 'none', width: '180px' }}>Institution & Region</th>
                                         <th className="py-3 px-3" style={{ borderTop: 'none' }}>Subject & Scope</th>
-                                        <th className="py-3 px-3 text-end" style={{ borderTop: 'none' }}>Date</th>
+                                        <th className="py-3 px-3" style={{ borderTop: 'none', width: '110px' }}>Date</th>
+                                        <th className="py-3 px-3 text-end" style={{ borderTop: 'none', width: '90px' }}>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {contacts.map((c, idx) => (
-                                        <tr key={c._id || idx}>
+                                        <tr 
+                                            key={c._id || idx} 
+                                            style={{ cursor: 'pointer' }}
+                                            onClick={() => {
+                                                setSelectedInquiry(c);
+                                                setShowInquiryModal(true);
+                                            }}
+                                            title="Click to view full inquiry details"
+                                        >
                                             <td className="fw-semibold py-3 px-3" style={{ color: 'var(--cp-text-main)' }}>
-                                                <div style={{ fontSize: '0.88rem' }}>{c.name}</div>
-                                                <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.74rem' }}>{c.email}</small>
+                                                <div style={{ fontSize: '0.88rem' }} className="text-truncate">{c.name}</div>
+                                                <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.74rem' }} className="text-truncate d-block">{c.email}</small>
                                             </td>
                                             <td className="py-3 px-3 small">
-                                                <div style={{ color: 'var(--cp-text-main)', fontWeight: 600 }}>{c.institution || 'General'}</div>
-                                                <small style={{ color: 'var(--cp-text-muted)' }}>{c.region}</small>
+                                                <div style={{ color: 'var(--cp-text-main)', fontWeight: 600 }} className="text-truncate">{c.institution || 'General'}</div>
+                                                <small style={{ color: 'var(--cp-text-muted)' }} className="text-truncate d-block">{c.region || 'Uganda & Global'}</small>
                                             </td>
                                             <td className="py-3 px-3 small">
-                                                <div className="fw-semibold" style={{ color: 'var(--cp-text-main)' }}>{c.subject}</div>
-                                                <small style={{ color: 'var(--cp-text-muted)' }}>{c.description?.substring(0, 60)}...</small>
+                                                <div className="fw-semibold text-truncate" style={{ color: 'var(--cp-text-main)', maxWidth: '280px' }}>{c.subject || 'Consultation Request'}</div>
+                                                <small style={{ color: 'var(--cp-text-muted)', maxWidth: '300px' }} className="text-truncate d-block">{c.description || 'No description provided'}</small>
                                             </td>
-                                            <td className="py-3 px-3 text-end small" style={{ color: 'var(--cp-text-muted)' }}>
+                                            <td className="py-3 px-3 small" style={{ color: 'var(--cp-text-muted)' }}>
                                                 {c.date || 'Recent'}
+                                            </td>
+                                            <td className="py-3 px-3 text-end" onClick={(e) => e.stopPropagation()}>
+                                                <Button 
+                                                    size="sm" 
+                                                    variant="outline-secondary"
+                                                    className="rounded-pill px-3 py-1 d-inline-flex align-items-center gap-1.5"
+                                                    style={{ fontSize: '0.78rem', fontWeight: 600, borderColor: 'var(--cp-border)', backgroundColor: 'var(--cp-card-subtle)' }}
+                                                    onClick={() => {
+                                                        setSelectedInquiry(c);
+                                                        setShowInquiryModal(true);
+                                                    }}
+                                                >
+                                                    <FontAwesomeIcon icon={faEye} style={{ color: 'var(--cp-primary)' }} /> View
+                                                </Button>
                                             </td>
                                         </tr>
                                     ))}
@@ -604,7 +634,7 @@ const MakeAdmin = () => {
                     <Row className="g-3 mb-4">
                         <Col xs={6} md={4} lg={2}>
                             <Card 
-                                className="h-100 p-3.5 border-0 text-center" 
+                                className="h-100 p-3 border-0 text-center" 
                                 style={{ 
                                     backgroundColor: 'var(--cp-card-subtle)', 
                                     borderRadius: '20px'
@@ -615,12 +645,12 @@ const MakeAdmin = () => {
                                 </div>
                                 <small className="text-muted fw-bold d-block" style={{ fontSize: '0.72rem', letterSpacing: '0.04em' }}>SERVICES</small>
                                 <h3 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{dbStats.services}</h3>
-                                <small className="text-muted" style={{ fontSize: '0.7rem' }}>collection: services</small>
+                                <small className="text-muted text-truncate d-block" style={{ fontSize: '0.68rem' }}>collection: services</small>
                             </Card>
                         </Col>
                         <Col xs={6} md={4} lg={2}>
                             <Card 
-                                className="h-100 p-3.5 border-0 text-center" 
+                                className="h-100 p-3 border-0 text-center" 
                                 style={{ 
                                     backgroundColor: 'var(--cp-card-subtle)', 
                                     borderRadius: '20px'
@@ -631,12 +661,12 @@ const MakeAdmin = () => {
                                 </div>
                                 <small className="text-muted fw-bold d-block" style={{ fontSize: '0.72rem', letterSpacing: '0.04em' }}>PRICING</small>
                                 <h3 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{dbStats.pricing}</h3>
-                                <small className="text-muted" style={{ fontSize: '0.7rem' }}>collection: pricing</small>
+                                <small className="text-muted text-truncate d-block" style={{ fontSize: '0.68rem' }}>collection: pricing</small>
                             </Card>
                         </Col>
                         <Col xs={6} md={4} lg={2}>
                             <Card 
-                                className="h-100 p-3.5 border-0 text-center" 
+                                className="h-100 p-3 border-0 text-center" 
                                 style={{ 
                                     backgroundColor: 'var(--cp-card-subtle)', 
                                     borderRadius: '20px'
@@ -647,12 +677,12 @@ const MakeAdmin = () => {
                                 </div>
                                 <small className="text-muted fw-bold d-block" style={{ fontSize: '0.72rem', letterSpacing: '0.04em' }}>REVIEWS</small>
                                 <h3 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{dbStats.reviews}</h3>
-                                <small className="text-muted" style={{ fontSize: '0.7rem' }}>collection: reviews</small>
+                                <small className="text-muted text-truncate d-block" style={{ fontSize: '0.68rem' }}>collection: reviews</small>
                             </Card>
                         </Col>
                         <Col xs={6} md={4} lg={2}>
                             <Card 
-                                className="h-100 p-3.5 border-0 text-center" 
+                                className="h-100 p-3 border-0 text-center" 
                                 style={{ 
                                     backgroundColor: 'var(--cp-card-subtle)', 
                                     borderRadius: '20px'
@@ -663,12 +693,12 @@ const MakeAdmin = () => {
                                 </div>
                                 <small className="text-muted fw-bold d-block" style={{ fontSize: '0.72rem', letterSpacing: '0.04em' }}>ORDERS</small>
                                 <h3 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{dbStats.orders}</h3>
-                                <small className="text-muted" style={{ fontSize: '0.7rem' }}>collection: orders</small>
+                                <small className="text-muted text-truncate d-block" style={{ fontSize: '0.68rem' }}>collection: orders</small>
                             </Card>
                         </Col>
                         <Col xs={6} md={4} lg={2}>
                             <Card 
-                                className="h-100 p-3.5 border-0 text-center" 
+                                className="h-100 p-3 border-0 text-center" 
                                 style={{ 
                                     backgroundColor: 'var(--cp-card-subtle)', 
                                     borderRadius: '20px'
@@ -679,12 +709,12 @@ const MakeAdmin = () => {
                                 </div>
                                 <small className="text-muted fw-bold d-block" style={{ fontSize: '0.72rem', letterSpacing: '0.04em' }}>USERS</small>
                                 <h3 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{dbStats.users}</h3>
-                                <small className="text-muted" style={{ fontSize: '0.7rem' }}>collection: users</small>
+                                <small className="text-muted text-truncate d-block" style={{ fontSize: '0.68rem' }}>collection: users</small>
                             </Card>
                         </Col>
                         <Col xs={6} md={4} lg={2}>
                             <Card 
-                                className="h-100 p-3.5 border-0 text-center" 
+                                className="h-100 p-3 border-0 text-center" 
                                 style={{ 
                                     backgroundColor: 'var(--cp-card-subtle)', 
                                     borderRadius: '20px'
@@ -695,7 +725,7 @@ const MakeAdmin = () => {
                                 </div>
                                 <small className="text-muted fw-bold d-block" style={{ fontSize: '0.72rem', letterSpacing: '0.04em' }}>INQUIRIES</small>
                                 <h3 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{dbStats.contacts}</h3>
-                                <small className="text-muted" style={{ fontSize: '0.7rem' }}>collection: contacts</small>
+                                <small className="text-muted text-truncate d-block" style={{ fontSize: '0.68rem' }}>collection: contacts</small>
                             </Card>
                         </Col>
                     </Row>
@@ -748,6 +778,116 @@ const MakeAdmin = () => {
                         </div>
                     </div>
                 </div>
+            )}
+
+            {/* Inquiry Details Modal Dialogue */}
+            {selectedInquiry && (
+                <Modal
+                    show={showInquiryModal}
+                    onHide={() => setShowInquiryModal(false)}
+                    centered
+                    size="lg"
+                    dialogClassName="admin-modal"
+                    contentClassName="ad-card border-0 shadow-lg"
+                    style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                >
+                    <Modal.Header closeButton style={{ borderBottom: '1px solid var(--cp-border)', padding: '20px 26px' }}>
+                        <div className="d-flex align-items-center gap-3 overflow-hidden" style={{ minWidth: 0, flex: '1 1 auto' }}>
+                            <UserAvatar name={selectedInquiry.name} size="md" ring={true} ringType="glow" />
+                            <div className="overflow-hidden" style={{ minWidth: 0, flex: '1 1 auto' }}>
+                                <Modal.Title className="fs-5 fw-bold mb-0 text-truncate" style={{ color: 'var(--cp-text-main)' }}>
+                                    {selectedInquiry.subject || 'Enterprise Consultation Inquiry'}
+                                </Modal.Title>
+                                <small className="text-truncate d-block" style={{ color: 'var(--cp-text-muted)', fontSize: '0.8rem' }}>
+                                    {selectedInquiry.institution || 'Organization / Independent'} &bull; {selectedInquiry.date || 'Recent Submission'}
+                                </small>
+                            </div>
+                        </div>
+                    </Modal.Header>
+
+                    <Modal.Body className="p-4" style={{ color: 'var(--cp-text-main)', maxHeight: '78vh', overflowY: 'auto' }}>
+                        <Row className="g-3 mb-4">
+                            <Col md={6}>
+                                <div className="p-3.5 rounded-4 h-100" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                                    <h6 className="fw-bold mb-2.5 small text-uppercase" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
+                                        <FontAwesomeIcon icon={faEnvelope} className="me-1.5" style={{ color: 'var(--cp-primary)' }} /> Contact Identity
+                                    </h6>
+                                    <div className="mb-2">
+                                        <small className="d-block fw-semibold text-muted" style={{ fontSize: '0.74rem' }}>Client Name</small>
+                                        <span className="fw-semibold text-truncate d-block">{selectedInquiry.name}</span>
+                                    </div>
+                                    <div className="mb-2">
+                                        <small className="d-block fw-semibold text-muted" style={{ fontSize: '0.74rem' }}>Email Address</small>
+                                        <a 
+                                            href={`mailto:${selectedInquiry.email}`} 
+                                            className="fw-semibold text-decoration-none d-block"
+                                            style={{ color: 'var(--cp-primary)', wordBreak: 'break-all', overflowWrap: 'anywhere', fontSize: '0.86rem' }}
+                                        >
+                                            {selectedInquiry.email}
+                                        </a>
+                                    </div>
+                                    {selectedInquiry.phone && (
+                                        <div>
+                                            <small className="d-block fw-semibold text-muted" style={{ fontSize: '0.74rem' }}>Phone</small>
+                                            <span className="fw-semibold text-truncate d-block">{selectedInquiry.phone}</span>
+                                        </div>
+                                    )}
+                                </div>
+                            </Col>
+
+                            <Col md={6}>
+                                <div className="p-3.5 rounded-4 h-100" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                                    <h6 className="fw-bold mb-2.5 small text-uppercase" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
+                                        <FontAwesomeIcon icon={faMapMarkerAlt} className="me-1.5" style={{ color: '#10B981' }} /> Scope & Institution
+                                    </h6>
+                                    <div className="mb-2">
+                                        <small className="d-block fw-semibold text-muted" style={{ fontSize: '0.74rem' }}>Organization / Institution</small>
+                                        <span className="fw-semibold text-truncate d-block">{selectedInquiry.institution || 'Individual Inquiry'}</span>
+                                    </div>
+                                    <div className="mb-2">
+                                        <small className="d-block fw-semibold text-muted" style={{ fontSize: '0.74rem' }}>Target Region</small>
+                                        <span className="fw-semibold text-truncate d-block">{selectedInquiry.region || 'Uganda & Global'}</span>
+                                    </div>
+                                    <div>
+                                        <small className="d-block fw-semibold text-muted" style={{ fontSize: '0.74rem' }}>Inquiry Source</small>
+                                        <span className="badge rounded-pill px-3 py-1 bg-success bg-opacity-10 text-success fw-semibold" style={{ fontSize: '0.76rem' }}>
+                                            Online Contact Portal
+                                        </span>
+                                    </div>
+                                </div>
+                            </Col>
+                        </Row>
+
+                        <div className="p-3.5 rounded-4 mb-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                            <h6 className="fw-bold mb-2 small text-uppercase" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
+                                Inquiry Details & Requirements
+                            </h6>
+                            <p className="mb-0 small" style={{ lineHeight: 1.65, wordBreak: 'break-word', overflowWrap: 'anywhere', whiteSpace: 'pre-line' }}>
+                                {selectedInquiry.description || 'No additional requirements details provided.'}
+                            </p>
+                        </div>
+                    </Modal.Body>
+
+                    <Modal.Footer style={{ borderTop: '1px solid var(--cp-border)', padding: '16px 26px' }}>
+                        <div className="d-flex flex-wrap justify-content-between align-items-center w-100 gap-2">
+                            <a
+                                href={`mailto:${selectedInquiry.email}?subject=Re: ${encodeURIComponent(selectedInquiry.subject || 'Consultation Inquiry - Kosher Code')}`}
+                                className="btn btn-sm btn-dark rounded-pill px-3.5 py-1.5 d-inline-flex align-items-center gap-2 text-decoration-none text-white"
+                                style={{ backgroundColor: '#121417', borderColor: '#121417', fontSize: '0.82rem', fontWeight: 600 }}
+                            >
+                                <FontAwesomeIcon icon={faReply} /> Reply via Email
+                            </a>
+                            <button
+                                type="button"
+                                className="btn btn-sm rounded-pill px-4 py-1.5"
+                                style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', color: 'var(--cp-text-main)', fontSize: '0.82rem', fontWeight: 600 }}
+                                onClick={() => setShowInquiryModal(false)}
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </Modal.Footer>
+                </Modal>
             )}
         </div>
     );

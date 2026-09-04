@@ -70,7 +70,9 @@
     align-items: stretch;
     gap: 14px;
     overflow-x: auto;
-    padding-bottom: 6px;
+    padding-top: 4px;
+    padding-bottom: 16px;
+    margin-bottom: -8px;
     scrollbar-width: thin;
 }
 
@@ -86,7 +88,7 @@
 /* Tall Vertical Pill Stat Card */
 .ad-stat-pill {
     flex: 1 1 115px;
-    min-width: 108px;
+    min-width: 112px;
     max-width: 150px;
     background-color: var(--cp-card-bg, #FFFFFF);
     border-radius: 26px;
@@ -101,6 +103,7 @@
     position: relative;
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     cursor: default;
+    box-sizing: border-box;
 }
 
 .ad-stat-pill:hover {
@@ -267,7 +270,8 @@
 .ad-chart-container {
     position: relative;
     width: 100%;
-    height: 220px;
+    height: 240px;
+    padding-top: 30px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -275,7 +279,7 @@
 
 .ad-chart-gridlines {
     position: absolute;
-    top: 0;
+    top: 30px;
     left: 36px;
     right: 0;
     bottom: 30px;
@@ -293,7 +297,7 @@
 
 .ad-chart-y-axis {
     position: absolute;
-    top: 0;
+    top: 30px;
     left: 0;
     bottom: 30px;
     display: flex;
@@ -310,7 +314,7 @@
 .ad-chart-bars-area {
     position: relative;
     margin-left: 36px;
-    height: 190px;
+    height: 180px;
     display: flex;
     align-items: flex-end;
     justify-content: space-around;
@@ -432,6 +436,9 @@
     display: flex;
     align-items: center;
     gap: 14px;
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
 }
 
 .ad-pending-logo-box {
@@ -457,12 +464,18 @@
     color: var(--cp-text-main, #111827);
     line-height: 1.25;
     margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .ad-pending-time {
     font-size: 0.76rem;
     color: var(--cp-text-light, #94A3B8);
     line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Neutral Soft Gray Status Pill (Matching Dribbble) */
@@ -477,6 +490,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 [data-theme="dark"] .ad-pill-pending,
@@ -496,6 +510,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 [data-theme="dark"] .ad-pill-active,
@@ -515,6 +530,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 [data-theme="dark"] .ad-pill-expired,
@@ -684,6 +700,7 @@
 
 .ad-table {
     width: 100%;
+    min-width: 760px;
     border-collapse: collapse;
     margin-bottom: 0;
 }
@@ -769,6 +786,12 @@
     font-size: 0.88rem;
     color: var(--cp-text-main, #111827);
     cursor: pointer;
+    max-width: 260px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .ad-cell-title:hover {
@@ -782,6 +805,10 @@
     font-weight: 500;
     font-size: 0.86rem;
     color: var(--cp-text-main, #111827);
+    max-width: 220px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .ad-company-icon-circle {

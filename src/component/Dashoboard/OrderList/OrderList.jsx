@@ -120,7 +120,7 @@ const OrderList = () => {
             {/* Quick Metrics Cards (Rounded 24px + Circular Badges) */}
             <Row className="g-3.5 mb-4">
                 <Col xs={6} md={3}>
-                    <div className="p-4 admin-kpi-card h-100">
+                    <div className="p-3 p-sm-4 admin-kpi-card h-100">
                         <div className="admin-kpi-bar" style={{ backgroundColor: '#7355F7' }}></div>
                         <div className="d-flex justify-content-between align-items-start mb-3">
                             <div className="d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)', fontSize: '1.15rem' }}>
@@ -134,7 +134,7 @@ const OrderList = () => {
                 </Col>
 
                 <Col xs={6} md={3}>
-                    <div className="p-4 admin-kpi-card h-100">
+                    <div className="p-3 p-sm-4 admin-kpi-card h-100">
                         <div className="admin-kpi-bar" style={{ backgroundColor: '#F59E0B' }}></div>
                         <div className="d-flex justify-content-between align-items-start mb-3">
                             <div className="d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'var(--status-pending-bg)', color: 'var(--status-pending-text)', fontSize: '1.15rem' }}>
@@ -148,7 +148,7 @@ const OrderList = () => {
                 </Col>
 
                 <Col xs={6} md={3}>
-                    <div className="p-4 admin-kpi-card h-100">
+                    <div className="p-3 p-sm-4 admin-kpi-card h-100">
                         <div className="admin-kpi-bar" style={{ backgroundColor: '#3B82F6' }}></div>
                         <div className="d-flex justify-content-between align-items-start mb-3">
                             <div className="d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'var(--status-progress-bg)', color: 'var(--status-progress-text)', fontSize: '1.15rem' }}>
@@ -162,7 +162,7 @@ const OrderList = () => {
                 </Col>
 
                 <Col xs={6} md={3}>
-                    <div className="p-4 admin-kpi-card h-100">
+                    <div className="p-3 p-sm-4 admin-kpi-card h-100">
                         <div className="admin-kpi-bar" style={{ backgroundColor: '#10B981' }}></div>
                         <div className="d-flex justify-content-between align-items-start mb-3">
                             <div className="d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'var(--status-done-bg)', color: 'var(--status-done-text)', fontSize: '1.15rem' }}>
@@ -233,7 +233,7 @@ const OrderList = () => {
                     </div>
                 ) : (
                     <div className="table-responsive">
-                        <Table hover className="align-middle mb-0 cp-table">
+                        <Table hover className="align-middle mb-0 cp-table" style={{ minWidth: '860px' }}>
                             <thead>
                                 <tr>
                                     <th className="py-3 text-uppercase small fw-bold" style={{ letterSpacing: '0.04em' }}>Client & Organization</th>

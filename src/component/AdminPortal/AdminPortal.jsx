@@ -548,7 +548,7 @@ const AdminPortal = () => {
             <div id="pageContent" className={!sidebarOpen ? 'sidebar-collapsed' : ''}>
                 {/* Clean Top Header */}
                 <div className="dashBoardHeader">
-                    <div className="d-flex align-items-center gap-2.5 gap-sm-3">
+                    <div className="d-flex align-items-center gap-2.5 gap-sm-3 overflow-hidden" style={{ minWidth: 0, flex: '1 1 auto' }}>
                         <div 
                             ref={toggleBtnRef}
                             id="nav-icon"
@@ -572,12 +572,12 @@ const AdminPortal = () => {
                             <span></span>
                             <span></span>
                         </div>
-                        <div>
-                            <h4 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{title}</h4>
+                        <div className="overflow-hidden" style={{ minWidth: 0, flex: '1 1 auto' }}>
+                            <h4 className="fw-bold mb-0 text-truncate" style={{ color: 'var(--cp-text-main)' }}>{title}</h4>
                         </div>
                     </div>
 
-                    <div className="d-flex align-items-center gap-2.5 gap-md-3">
+                    <div className="d-flex align-items-center gap-2 gap-md-3 flex-shrink-0">
                         <button 
                             type="button" 
                             onClick={toggleTheme}

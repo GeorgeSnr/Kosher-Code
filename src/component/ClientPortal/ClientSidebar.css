@@ -519,8 +519,10 @@
 /* Top App Header */
 .dashBoardHeader {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    gap: 12px;
     padding: 14px 24px;
     margin-bottom: 24px;
     background: var(--cp-header-bg);
@@ -613,12 +615,15 @@
 
 .admin-kpi-label {
     color: var(--cp-text-muted) !important;
-    font-size: 0.74rem;
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     display: block;
     margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .admin-filter-pill {
@@ -1223,3 +1228,50 @@ select option {
         width: 270px;
     }
 }
+
+/* =========================================================
+   MODAL & DIALOG POLISH (24px Radius, Soft Shadow, Crisp Typography)
+   ========================================================= */
+.admin-modal .modal-content,
+.order-details-modal .modal-content {
+    border-radius: 24px !important;
+    border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.06)) !important;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.16) !important;
+    background-color: var(--cp-card-bg, #FFFFFF) !important;
+    color: var(--cp-text-main, #111827) !important;
+    overflow: hidden;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+[data-theme="dark"] .admin-modal .modal-content,
+.theme-dark .admin-modal .modal-content,
+[data-theme="dark"] .order-details-modal .modal-content,
+.theme-dark .order-details-modal .modal-content {
+    background-color: #141C2E !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45) !important;
+    color: #F8FAFC !important;
+}
+
+.admin-modal .modal-body,
+.order-details-modal .modal-body {
+    max-height: 78vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+/* SweetAlert Dialog Polish */
+.swal-modal {
+    border-radius: 24px !important;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    padding: 24px 28px !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2) !important;
+}
+
+.swal-button {
+    border-radius: 9999px !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+    padding: 8px 24px !important;
+}
+

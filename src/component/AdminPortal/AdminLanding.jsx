@@ -414,9 +414,9 @@ const AdminLanding = () => {
                                             <div className="ad-pending-logo-box">
                                                 {renderCompanyIcon(item.institution || item.name, item.companyIcon)}
                                             </div>
-                                            <div>
-                                                <div className="ad-pending-name">{item.institution || item.name}</div>
-                                                <div className="ad-pending-time">{item.postedDate || `${item.date} 03:20 GMT`}</div>
+                                            <div className="overflow-hidden" style={{ minWidth: 0, flex: '1 1 auto' }}>
+                                                <div className="ad-pending-name text-truncate">{item.institution || item.name}</div>
+                                                <div className="ad-pending-time text-truncate">{item.postedDate || `${item.date} 03:20 GMT`}</div>
                                             </div>
                                         </div>
                                         <span className="ad-pill-pending">Pending</span>
@@ -639,62 +639,68 @@ const AdminLanding = () => {
                     onHide={() => setShowModal(false)}
                     centered 
                     size="lg"
-                    contentClassName="ad-card border-0"
+                    dialogClassName="admin-modal"
+                    contentClassName="ad-card border-0 shadow-lg"
+                    style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
                 >
                     <Modal.Header closeButton style={{ borderBottom: '1px solid var(--cp-border)', padding: '20px 26px' }}>
-                        <div className="d-flex align-items-center gap-3">
-                            <div className="ad-pending-logo-box" style={{ width: '42px', height: '42px' }}>
+                        <div className="d-flex align-items-center gap-3 overflow-hidden" style={{ minWidth: 0, flex: '1 1 auto' }}>
+                            <div className="ad-pending-logo-box" style={{ width: '42px', height: '42px', flexShrink: 0 }}>
                                 {renderCompanyIcon(selectedOrder.institution || selectedOrder.name, selectedOrder.companyIcon)}
                             </div>
-                            <div>
-                                <Modal.Title className="fs-5 fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>
+                            <div className="overflow-hidden" style={{ minWidth: 0, flex: '1 1 auto' }}>
+                                <Modal.Title className="fs-5 fw-bold mb-0 text-truncate" style={{ color: 'var(--cp-text-main)' }}>
                                     {selectedOrder.title || selectedOrder.serviceName || 'Request Details'}
                                 </Modal.Title>
-                                <small style={{ color: 'var(--cp-text-light)', fontSize: '0.8rem' }}>
+                                <small className="text-truncate d-block" style={{ color: 'var(--cp-text-light)', fontSize: '0.8rem' }}>
                                     {selectedOrder.institution || selectedOrder.name} &bull; {selectedOrder.postedDate || selectedOrder.date}
                                 </small>
                             </div>
                         </div>
                     </Modal.Header>
 
-                    <Modal.Body className="p-4" style={{ color: 'var(--cp-text-main)' }}>
+                    <Modal.Body className="p-4" style={{ color: 'var(--cp-text-main)', maxHeight: '78vh', overflowY: 'auto' }}>
                         <Row className="g-3 mb-4">
                             <Col md={6}>
-                                <div className="p-3.5 rounded-3 h-100" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                                <div className="p-3.5 rounded-4 h-100" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
                                     <h6 className="fw-bold mb-2.5 small text-uppercase" style={{ color: 'var(--cp-text-light)', letterSpacing: '0.04em' }}>
                                         Contact & Organization
                                     </h6>
                                     <div className="mb-2">
                                         <small className="d-block fw-semibold text-muted" style={{ fontSize: '0.74rem' }}>Client Representative</small>
-                                        <span className="fw-semibold">{selectedOrder.name}</span>
+                                        <span className="fw-semibold text-truncate d-block">{selectedOrder.name}</span>
                                     </div>
                                     <div className="mb-2">
                                         <small className="d-block fw-semibold text-muted" style={{ fontSize: '0.74rem' }}>Email Address</small>
-                                        <a href={`mailto:${selectedOrder.email}`} className="fw-semibold text-decoration-none" style={{ color: 'var(--cp-primary)' }}>
+                                        <a 
+                                            href={`mailto:${selectedOrder.email}`} 
+                                            className="fw-semibold text-decoration-none d-block" 
+                                            style={{ color: 'var(--cp-primary)', wordBreak: 'break-all', overflowWrap: 'anywhere', fontSize: '0.86rem' }}
+                                        >
                                             {selectedOrder.email}
                                         </a>
                                     </div>
                                     {selectedOrder.phone && (
                                         <div>
                                             <small className="d-block fw-semibold text-muted" style={{ fontSize: '0.74rem' }}>Phone</small>
-                                            <span className="fw-semibold">{selectedOrder.phone}</span>
+                                            <span className="fw-semibold text-truncate d-block">{selectedOrder.phone}</span>
                                         </div>
                                     )}
                                 </div>
                             </Col>
 
                             <Col md={6}>
-                                <div className="p-3.5 rounded-3 h-100" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                                <div className="p-3.5 rounded-4 h-100" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
                                     <h6 className="fw-bold mb-2.5 small text-uppercase" style={{ color: 'var(--cp-text-light)', letterSpacing: '0.04em' }}>
                                         Scope & Commercials
                                     </h6>
                                     <div className="mb-2">
                                         <small className="d-block fw-semibold text-muted" style={{ fontSize: '0.74rem' }}>Location / Region</small>
-                                        <span className="fw-semibold">{selectedOrder.location || selectedOrder.region || 'Global'}</span>
+                                        <span className="fw-semibold text-truncate d-block">{selectedOrder.location || selectedOrder.region || 'Global'}</span>
                                     </div>
                                     <div className="mb-2">
                                         <small className="d-block fw-semibold text-muted" style={{ fontSize: '0.74rem' }}>Plan / Tier</small>
-                                        <span className="fw-semibold" style={{ color: 'var(--cp-primary)' }}>{selectedOrder.pricingType || 'Enterprise Tier'}</span>
+                                        <span className="fw-semibold text-truncate d-block" style={{ color: 'var(--cp-primary)' }}>{selectedOrder.pricingType || 'Enterprise Tier'}</span>
                                     </div>
                                     <div>
                                         <small className="d-block fw-semibold text-muted" style={{ fontSize: '0.74rem' }}>Project Budget / Price</small>
@@ -704,18 +710,18 @@ const AdminLanding = () => {
                             </Col>
                         </Row>
 
-                        <div className="p-3.5 rounded-3 mb-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                        <div className="p-3.5 rounded-4 mb-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
                             <h6 className="fw-bold mb-2 small text-uppercase" style={{ color: 'var(--cp-text-light)', letterSpacing: '0.04em' }}>
                                 Requirements Description
                             </h6>
-                            <p className="mb-0 small" style={{ lineHeight: 1.6 }}>
+                            <p className="mb-0 small" style={{ lineHeight: 1.6, wordBreak: 'break-word', overflowWrap: 'anywhere', whiteSpace: 'pre-line' }}>
                                 {selectedOrder.description || 'Full solution deployment requested with custom institutional workflows, security compliance protocols, and technical staff onboarding support.'}
                             </p>
                         </div>
 
                         {/* Status Change Strip */}
-                        <div className="p-3 rounded-3" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
-                            <small className="fw-bold text-uppercase d-block mb-2 text-muted" style={{ letterSpacing: '0.04em', fontSize: '0.72rem' }}>
+                        <div className="p-3.5 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                            <small className="fw-bold text-uppercase d-block mb-2.5 text-muted" style={{ letterSpacing: '0.04em', fontSize: '0.72rem' }}>
                                 Quick Status Update:
                             </small>
                             <div className="d-flex flex-wrap gap-2.5">
@@ -726,7 +732,7 @@ const AdminLanding = () => {
                                             key={st}
                                             type="button"
                                             className={isCurrent ? "ad-btn-pill-dark" : "ad-btn-pill-filter"}
-                                            style={{ padding: '5px 16px', fontSize: '0.78rem' }}
+                                            style={{ padding: '6px 18px', fontSize: '0.78rem' }}
                                             onClick={() => handleAction(selectedOrder._id, st)}
                                         >
                                             ● {st}
@@ -738,10 +744,10 @@ const AdminLanding = () => {
                     </Modal.Body>
 
                     <Modal.Footer style={{ borderTop: '1px solid var(--cp-border)', padding: '16px 26px' }}>
-                        <div className="d-flex justify-content-between align-items-center w-100">
+                        <div className="d-flex flex-wrap justify-content-between align-items-center w-100 gap-2">
                             <button
                                 type="button"
-                                className="btn btn-sm btn-outline-danger d-inline-flex align-items-center gap-2 rounded-pill px-3 py-1.5"
+                                className="btn btn-sm btn-outline-danger d-inline-flex align-items-center gap-2 rounded-pill px-3.5 py-1.5"
                                 onClick={() => handleDelete(selectedOrder._id)}
                             >
                                 <FontAwesomeIcon icon={faTrashAlt} /> Archive

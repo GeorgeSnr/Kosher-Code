@@ -1,19 +1,47 @@
+/* Order Action Dropdown (16px Soft-Minimalist) */
 .dropdown-menu {
-    border-radius: 4px !important;
-    border: 1px solid var(--cp-border, #E5E0FA) !important;
+    border-radius: 16px !important;
+    border: 1px solid var(--cp-border, #E2E8F0) !important;
     background-color: var(--cp-card-bg, #FFFFFF) !important;
-    box-shadow: var(--cp-shadow-md, 0 8px 24px rgba(0, 0, 0, 0.08)) !important;
-    padding: 4px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+    padding: 6px !important;
+    z-index: 1050;
 }
 
 .dropdown-item {
-    font-size: 0.85rem !important;
-    padding: 6px 12px !important;
-    border-radius: 3px !important;
+    font-size: 0.82rem !important;
+    padding: 7px 14px !important;
+    border-radius: 10px !important;
+    color: var(--cp-text-main, #0F172A) !important;
+    font-weight: 500 !important;
+    transition: background-color 0.15s ease, color 0.15s ease !important;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+    background-color: var(--cp-card-subtle, #F8FAFC) !important;
     color: var(--cp-text-main, #0F172A) !important;
 }
 
-.dropdown-item:hover {
-    background-color: var(--cp-card-hover, #F4F0FF) !important;
-    color: var(--cp-text-main, #0F172A) !important;
+/* Modal text & container overflow protection */
+.order-details-modal .modal-content {
+    border-radius: 24px !important;
+    border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.05)) !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.16) !important;
+    overflow: hidden;
 }
+
+.order-details-modal .modal-body {
+    max-height: 80vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.order-details-modal .modal-body::-webkit-scrollbar {
+    width: 5px;
+}
+
+.order-details-modal .modal-body::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+}
+
