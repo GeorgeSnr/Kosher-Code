@@ -28,7 +28,10 @@ import {
     faCar,
     faServer,
     faCalendarAlt,
-    faExternalLinkAlt
+    faExternalLinkAlt,
+    faTasks,
+    faBolt,
+    faUserShield
 } from '@fortawesome/free-solid-svg-icons';
 import { 
     faGoogle, 
@@ -52,6 +55,11 @@ import {
     fetchContactInquiries,
     subscribeToContacts
 } from '../../services/storageService';
+import {
+    getStoredTickets,
+    getStoredTeamMembers,
+    getStoredSprints
+} from '../../services/ticketService';
 import ExportDropdown from '../Shared/ExportButton/ExportDropdown';
 import './AdminLanding.css';
 
@@ -63,6 +71,9 @@ const AdminLanding = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [admins] = useState(() => getStoredAdmins());
     const [services] = useState(() => getStoredServices());
+    const [jiraTickets] = useState(() => getStoredTickets());
+    const [teamMembers] = useState(() => getStoredTeamMembers());
+    const [jiraSprints] = useState(() => getStoredSprints());
 
     // Selected order for details modal
     const [selectedOrder, setSelectedOrder] = useState(null);
@@ -622,6 +633,117 @@ const AdminLanding = () => {
                     </div>
                 </Col>
             </Row>
+
+            {/* =========================================================
+               JIRA AGILE ENGINEERING & SPRINT HUB CARD
+               ========================================================= */}
+            {(() => {
+                const activeJiraSprint = jiraSprints.find(s => s.status === 'active') || jiraSprints[0];
+                const sprintTickets = jiraTickets.filter(t => t.sprintId === activeJiraSprint?.id);
+                const sprintDone = sprintTickets.filter(t => t.status === 'Done');
+                const totalPts = sprintTickets.reduce((acc, t) => acc + (t.storyPoints || 0), 0);
+                const donePts = sprintDone.reduce((acc, t) => acc + (t.storyPoints || 0), 0);
+                const sprintPct = totalPts > 0 ? Math.round((donePts / totalPts) * 100) : 0;
+                const openJiraCount = jiraTickets.filter(t => t.status !== 'Done').length;
+                const pendingJiraApprovals = jiraTickets.filter(t => t.approvalWorkflow?.status === 'Pending').length;
+
+                return (
+                    <div 
+                        className="ad-card p-4 mb-4"
+                        style={{
+                            background: 'linear-gradient(135deg, rgba(112, 84, 242, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%)',
+                            border: '1px solid rgba(112, 84, 242, 0.15)'
+                        }}
+                    >
+                        <Row className="align-items-center g-4">
+                            {/* Left Col: Sprint Goal & Velocity */}
+                            <Col lg={7} md={12}>
+                                <div className="d-flex align-items-center gap-2 mb-2">
+                                    <span 
+                                        className="badge rounded-pill px-3 py-1"
+                                        style={{ backgroundColor: 'rgba(112, 84, 242, 0.15)', color: '#7054F2', fontSize: '0.74rem', fontWeight: 700 }}
+                                    >
+                                        <FontAwesomeIcon icon={faBolt} className="me-1" /> Active Sprint Cycle
+                                    </span>
+                                    {pendingJiraApprovals > 0 && (
+                                        <span 
+                                            className="badge rounded-pill px-2.5 py-1 text-white"
+                                            style={{ backgroundColor: '#EF4444', fontSize: '0.72rem' }}
+                                        >
+                                            <FontAwesomeIcon icon={faClock} className="me-1" /> {pendingJiraApprovals} Awaiting Sign-off
+                                        </span>
+                                    )}
+                                </div>
+
+                                <h4 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)', letterSpacing: '-0.01em' }}>
+                                    {activeJiraSprint?.name || 'Sprint 1 - FinTech Switch & SACCO Q3'}
+                                </h4>
+                                <p className="small text-muted mb-3" style={{ maxWidth: '620px' }}>
+                                    {activeJiraSprint?.goal || 'Core Banking switch adapter, MoMo float reconciliation, and EFRIS compliance.'}
+                                </p>
+
+                                {/* Velocity Progress Bar */}
+                                <div className="mb-2">
+                                    <div className="d-flex justify-content-between align-items-center mb-1">
+                                        <span className="small fw-semibold text-muted">Sprint Resolution Velocity</span>
+                                        <span className="small fw-bold text-primary">{donePts} / {totalPts} story pts ({sprintPct}%)</span>
+                                    </div>
+                                    <div className="progress" style={{ height: '8px', borderRadius: '9999px', backgroundColor: 'rgba(0,0,0,0.06)' }}>
+                                        <div 
+                                            className="progress-bar" 
+                                            role="progressbar" 
+                                            style={{ width: `${sprintPct}%`, backgroundColor: '#7054F2', borderRadius: '9999px' }}
+                                            aria-valuenow={sprintPct} 
+                                            aria-valuemin="0" 
+                                            aria-valuemax="100"
+                                        />
+                                    </div>
+                                </div>
+                            </Col>
+
+                            {/* Right Col: Stats & Quick Jump Buttons */}
+                            <Col lg={5} md={12}>
+                                <div className="d-flex flex-wrap gap-2 mb-3">
+                                    <div className="p-2.5 rounded-3 bg-white border flex-grow-1 text-center">
+                                        <div className="fw-bold fs-5 text-primary">{jiraTickets.length}</div>
+                                        <small className="text-muted" style={{ fontSize: '0.72rem' }}>Total Issues</small>
+                                    </div>
+                                    <div className="p-2.5 rounded-3 bg-white border flex-grow-1 text-center">
+                                        <div className="fw-bold fs-5 text-warning">{openJiraCount}</div>
+                                        <small className="text-muted" style={{ fontSize: '0.72rem' }}>In Development</small>
+                                    </div>
+                                    <div className="p-2.5 rounded-3 bg-white border flex-grow-1 text-center">
+                                        <div className="fw-bold fs-5 text-info">{teamMembers.length}</div>
+                                        <small className="text-muted" style={{ fontSize: '0.72rem' }}>Onboarded Team</small>
+                                    </div>
+                                </div>
+
+                                <div className="d-flex gap-2">
+                                    <Link to="/admin/tickets" className="flex-grow-1 text-decoration-none">
+                                        <Button 
+                                            variant="primary" 
+                                            className="w-100 rounded-pill py-2 fw-bold d-inline-flex align-items-center justify-content-center gap-1.5"
+                                            style={{ backgroundColor: '#7054F2', borderColor: '#7054F2', fontSize: '0.82rem' }}
+                                        >
+                                            <FontAwesomeIcon icon={faTasks} /> Launch Kanban Board
+                                        </Button>
+                                    </Link>
+                                    <Link to="/admin/team-roles" className="text-decoration-none">
+                                        <Button 
+                                            variant="outline-secondary" 
+                                            className="rounded-pill py-2 px-3 fw-semibold d-inline-flex align-items-center justify-content-center gap-1.5"
+                                            style={{ fontSize: '0.82rem' }}
+                                            title="Onboard Developers & Configure RBAC"
+                                        >
+                                            <FontAwesomeIcon icon={faUserShield} /> RBAC Studio
+                                        </Button>
+                                    </Link>
+                                </div>
+                            </Col>
+                        </Row>
+                    </div>
+                );
+            })()}
 
             {/* =========================================================
                BOTTOM SECTION: MANAGE JOBS (Full Width Modern Minimal Table)

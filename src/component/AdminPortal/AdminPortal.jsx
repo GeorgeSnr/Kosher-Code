@@ -21,7 +21,9 @@ import {
     faSun,
     faMoon,
     faClock,
-    faCheckCircle
+    faCheckCircle,
+    faTasks,
+    faBolt
 } from '@fortawesome/free-solid-svg-icons';
 import { faBuffer } from '@fortawesome/free-brands-svg-icons';
 import AdminLanding from './AdminLanding';
@@ -30,10 +32,13 @@ import AddService from '../Dashoboard/AddService/AddService';
 import ManageServices from '../Dashoboard/ManageServices/ManageServices';
 import MakeAdmin from '../Dashoboard/MakeAdmin/MakeAdmin';
 import AdminProfile from './AdminProfile';
+import TicketManagement from './Tickets/TicketManagement';
+import TeamRoleManagement from './Tickets/TeamRoleManagement';
 import '../ClientPortal/ClientSidebar.css';
 import '../Dashoboard/Dashboard/Dashboard.css';
 import { SET_USER, SET_ADMIN, useAppContext } from '../../context';
 import { getStoredOrders, getStoredAdmins } from '../../services/storageService';
+import { getStoredTickets, getStoredTeamMembers } from '../../services/ticketService';
 import userImg from '../../Assets/user.svg';
 import UserAvatar from '../Shared/UserAvatar/UserAvatar';
 import toast from 'react-hot-toast';
@@ -144,6 +149,7 @@ const AdminPortal = () => {
 
     // Collapsible Sections
     const [opsOpen, setOpsOpen] = useState(true);
+    const [jiraOpen, setJiraOpen] = useState(true);
     const [catalogOpen, setCatalogOpen] = useState(true);
     const [telemetryOpen, setTelemetryOpen] = useState(false);
 
@@ -154,6 +160,9 @@ const AdminPortal = () => {
 
     const orders = getStoredOrders();
     const admins = getStoredAdmins();
+    const jiraTickets = getStoredTickets();
+    const teamMembers = getStoredTeamMembers();
+    const openJiraCount = jiraTickets.filter(t => t.status !== 'Done').length;
     const displayName = user?.name || 'Super Administrator';
     const displayEmail = user?.email || 'georgewilliamochole@gmail.com';
     const displayImg = user?.img || userImg;
@@ -366,6 +375,54 @@ const AdminPortal = () => {
                                         <FontAwesomeIcon icon={faUserCircle} className="cs-icon" />
                                         <span>Admin Profile</span>
                                     </div>
+                                </NavLink>
+                            </li>
+                        </ul>
+                    </div>
+
+                    {/* SECTION: AGILE & JIRA TICKET MANAGEMENT */}
+                    <div 
+                        className="cs-section-header" 
+                        onClick={() => setJiraOpen(!jiraOpen)}
+                    >
+                        <span className="cs-section-title">AGILE & JIRA HUB</span>
+                        <FontAwesomeIcon 
+                            icon={faChevronDown} 
+                            className={`cs-section-chevron ${jiraOpen ? 'open' : ''}`} 
+                        />
+                    </div>
+
+                    <div className={`cs-nav-accordion ${jiraOpen ? 'open' : ''}`}>
+                        <ul className="cs-nav-list">
+                            <li>
+                                <NavLink 
+                                    to="/admin/tickets" 
+                                    onClick={() => handleNavClick('Jira Ticket Board & Agile Sprints')}
+                                    className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="Jira Tickets & Kanban Board"
+                                >
+                                    <div className="cs-nav-item-left">
+                                        <FontAwesomeIcon icon={faTasks} className="cs-icon" style={{ color: '#7054F2' }} />
+                                        <span>Jira Kanban Board</span>
+                                    </div>
+                                    <span className="cs-badge-pill" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)' }}>
+                                        {openJiraCount}
+                                    </span>
+                                </NavLink>
+                            </li>
+
+                            <li>
+                                <NavLink 
+                                    to="/admin/team-roles" 
+                                    onClick={() => handleNavClick('Team Onboarding & Roles (RBAC)')}
+                                    className={({ isActive }) => `cs-nav-item ${isActive ? 'active' : ''}`}
+                                    title="Team Onboarding & Roles (RBAC)"
+                                >
+                                    <div className="cs-nav-item-left">
+                                        <FontAwesomeIcon icon={faUserShield} className="cs-icon" style={{ color: '#3B82F6' }} />
+                                        <span>Team & RBAC Matrix</span>
+                                    </div>
+                                    <span className="cs-badge-pill">{teamMembers.length}</span>
                                 </NavLink>
                             </li>
                         </ul>
@@ -637,6 +694,8 @@ const AdminPortal = () => {
                     <Route index element={<AdminLanding />} />
                     <Route path="" element={<AdminLanding />} />
                     <Route path="orders" element={<OrderList />} />
+                    <Route path="tickets" element={<TicketManagement />} />
+                    <Route path="team-roles" element={<TeamRoleManagement />} />
                     <Route path="add-service" element={<AddService />} />
                     <Route path="services" element={<ManageServices />} />
                     <Route path="team" element={<MakeAdmin />} />
