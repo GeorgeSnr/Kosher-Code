@@ -17,19 +17,19 @@
     --cp-text-main: #0F172A;
     --cp-text-muted: #475569;
     --cp-text-light: #64748B;
-    --cp-primary: #7355F7;
-    --cp-primary-hover: #5B3CE6;
-    --cp-primary-subtle: #F4F0FF;
-    --cp-primary-text: #5B3CE6;
+    --cp-primary: #0672CB;
+    --cp-primary-hover: #005FB2;
+    --cp-primary-subtle: #EBF4FA;
+    --cp-primary-text: #0672CB;
     --cp-input-bg: #FFFFFF;
     --cp-input-border: #CBD5E1;
     --cp-table-head: #F1F5F9;
     --cp-table-row-hover: #F8FAFC;
     --cp-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-    --cp-shadow-md: 0 4px 14px rgba(115, 85, 247, 0.08);
+    --cp-shadow-md: 0 4px 14px rgba(6, 114, 203, 0.08);
     --cp-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
     --cp-toggle-bg: #E2E8F0;
-    --cp-toggle-active: #7355F7;
+    --cp-toggle-active: #0672CB;
 
     /* Semantic Status Colors (Light Mode - WCAG AA Compliant 4.5:1+) */
     --status-pending-text: #B45309;
@@ -58,10 +58,10 @@
     --cp-text-main: #F8FAFC;
     --cp-text-muted: #94A3B8;
     --cp-text-light: #64748B;
-    --cp-primary: #8B5CF6;
-    --cp-primary-hover: #7C3AED;
-    --cp-primary-subtle: rgba(139, 92, 246, 0.18);
-    --cp-primary-text: #C4B5FD;
+    --cp-primary: #38BDF8;
+    --cp-primary-hover: #0284C7;
+    --cp-primary-subtle: rgba(56, 189, 248, 0.15);
+    --cp-primary-text: #38BDF8;
     --cp-input-bg: #0F172A;
     --cp-input-border: #2A3854;
     --cp-table-head: #1A243B;
@@ -70,7 +70,7 @@
     --cp-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.45);
     --cp-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     --cp-toggle-bg: #1E293B;
-    --cp-toggle-active: #8B5CF6;
+    --cp-toggle-active: #38BDF8;
     color-scheme: dark;
 
     /* Semantic Status Colors (Dark Mode) */
@@ -526,7 +526,7 @@
     padding: 14px 24px;
     margin-bottom: 24px;
     background: var(--cp-header-bg);
-    border-radius: 20px;
+    border-radius: 12px;
     border: 1px solid var(--cp-border-subtle, var(--cp-border));
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.025);
     transition: background-color 0.25s ease, border-color 0.25s ease;
@@ -538,7 +538,7 @@
 .cp-card {
     background-color: var(--cp-card-bg) !important;
     border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.04)) !important;
-    border-radius: 24px !important;
+    border-radius: 12px !important;
     color: var(--cp-text-main) !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.025), 0 1px 3px rgba(0, 0, 0, 0.015) !important;
     transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.2s ease, color 0.25s ease;
@@ -552,7 +552,7 @@
     background-color: var(--cp-card-subtle) !important;
     border: 1px solid var(--cp-border-subtle, var(--cp-border)) !important;
     color: var(--cp-text-main) !important;
-    border-radius: 18px !important;
+    border-radius: 10px !important;
     transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
@@ -560,10 +560,10 @@
    ADMIN PORTAL HERO BANNER & STATS CARDS
    ========================================================= */
 .admin-hero-banner {
-    background: linear-gradient(135deg, #070120 0%, #150B42 50%, #2608AB 100%) !important;
-    border: 1px solid rgba(139, 92, 246, 0.4) !important;
-    border-radius: 24px !important;
-    box-shadow: 0 10px 30px rgba(7, 1, 32, 0.25) !important;
+    background: linear-gradient(135deg, #004B87 0%, #0672CB 60%, #0076CE 100%) !important;
+    border: 1px solid rgba(6, 114, 203, 0.3) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 10px 30px rgba(6, 114, 203, 0.2) !important;
     color: #FFFFFF !important;
     position: relative;
     overflow: hidden;
@@ -574,14 +574,11 @@
 }
 
 .admin-hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
     padding: 6px 14px;
     border-radius: 9999px;
-    background-color: rgba(139, 92, 246, 0.25);
-    color: #DDD6FE !important;
-    border: 1px solid rgba(139, 92, 246, 0.4);
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF !important;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     font-size: 0.78rem;
     font-weight: 600;
     letter-spacing: 0.03em;
@@ -591,7 +588,7 @@
 .admin-kpi-card {
     background-color: var(--cp-card-bg) !important;
     border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.04)) !important;
-    border-radius: 24px !important;
+    border-radius: 12px !important;
     color: var(--cp-text-main) !important;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.025) !important;
     position: relative;
@@ -772,7 +769,7 @@ select option {
 
 /* Clean Dialogue Boxes / Modal Windows */
 .modal-content {
-    border-radius: 24px !important;
+    border-radius: 16px !important;
     border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.05)) !important;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.16) !important;
     background-color: var(--cp-card-bg) !important;
@@ -800,7 +797,7 @@ select option {
 
 /* Clean SweetAlert Confirmation Dialogue Boxes */
 .swal-modal {
-    border-radius: 24px !important;
+    border-radius: 16px !important;
     background-color: var(--cp-card-bg, #FFFFFF) !important;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18) !important;
@@ -836,7 +833,7 @@ select option {
 }
 
 .swal-button {
-    border-radius: 9999px !important;
+    border-radius: 8px !important;
     font-weight: 600 !important;
     font-size: 0.84rem !important;
     padding: 9px 24px !important;
@@ -845,13 +842,13 @@ select option {
 }
 
 .swal-button--confirm {
-    background-color: #121417 !important;
+    background-color: #0672CB !important;
     color: #FFFFFF !important;
 }
 
 [data-theme="dark"] .swal-button--confirm,
 .theme-dark .swal-button--confirm {
-    background-color: var(--cp-primary, #8B5CF6) !important;
+    background-color: #0672CB !important;
     color: #FFFFFF !important;
 }
 
@@ -862,15 +859,15 @@ select option {
 
 /* Modern Dropdown Menu */
 .dropdown-menu {
-    border-radius: 16px !important;
+    border-radius: 10px !important;
     border: 1px solid var(--cp-border, #E2E8F0) !important;
     background-color: var(--cp-card-bg, #FFFFFF) !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
     padding: 6px !important;
 }
 
 .dropdown-item {
-    border-radius: 10px !important;
+    border-radius: 6px !important;
     font-size: 0.84rem !important;
     font-weight: 500 !important;
     padding: 7px 14px !important;
@@ -1293,11 +1290,11 @@ select option {
 }
 
 /* =========================================================
-   MODAL & DIALOG POLISH (24px Radius, Soft Shadow, Crisp Typography)
+   MODAL & DIALOG POLISH (16px Radius, Soft Shadow, Crisp Typography)
    ========================================================= */
 .admin-modal .modal-content,
 .order-details-modal .modal-content {
-    border-radius: 24px !important;
+    border-radius: 16px !important;
     border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.06)) !important;
     box-shadow: 0 24px 64px rgba(0, 0, 0, 0.16) !important;
     background-color: var(--cp-card-bg, #FFFFFF) !important;
@@ -1325,14 +1322,14 @@ select option {
 
 /* SweetAlert Dialog Polish */
 .swal-modal {
-    border-radius: 24px !important;
+    border-radius: 16px !important;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
     padding: 24px 28px !important;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2) !important;
 }
 
 .swal-button {
-    border-radius: 9999px !important;
+    border-radius: 8px !important;
     font-weight: 600 !important;
     font-size: 0.85rem !important;
     padding: 8px 24px !important;

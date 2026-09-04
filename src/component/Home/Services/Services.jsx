@@ -49,29 +49,37 @@ const Services = () => {
                 </p>
             </div>
 
-            <div className="d-flex justify-content-center flex-wrap gap-2 mb-4 px-3">
+            <div className="d-flex justify-content-center flex-wrap gap-2 mb-3 px-3">
                 {categories.map((cat, idx) => {
                     const isActive = activeFilter === cat;
+                    const count = cat === 'All' ? services.length : services.filter(s => s.category === cat).length;
                     return (
                         <button
                             key={idx}
-                            className="btn btn-sm px-3 py-2 m-1"
+                            className="btn btn-sm px-3.5 py-1.5 m-1 rounded-pill"
                             style={{
-                                borderRadius: '4px',
-                                fontWeight: 500,
-                                fontSize: '0.88rem',
-                                transition: 'all 0.25s ease',
-                                backgroundColor: isActive ? 'var(--site-primary, #7355F7)' : 'var(--site-card-bg, #FFFFFF)',
-                                color: isActive ? '#FFFFFF' : 'var(--site-text-main, #070120)',
-                                border: isActive ? '1px solid var(--site-primary, #7355F7)' : '1px solid var(--site-border, #E5E0FA)',
-                                boxShadow: isActive ? '0 4px 12px rgba(115, 85, 247, 0.25)' : 'none'
+                                fontWeight: 600,
+                                fontSize: '0.82rem',
+                                transition: 'all 0.18s ease',
+                                backgroundColor: isActive ? 'var(--site-primary, #0672CB)' : 'var(--site-card-bg, #FFFFFF)',
+                                color: isActive ? '#FFFFFF' : 'var(--site-text-muted, #475569)',
+                                border: isActive ? '1px solid var(--site-primary, #0672CB)' : '1px solid var(--site-border, #CBD5E1)',
+                                boxShadow: isActive ? '0 2px 8px rgba(6, 114, 203, 0.25)' : 'none'
                             }}
                             onClick={() => setActiveFilter(cat)}
                         >
-                            {cat}
+                            {cat} <span style={{ opacity: isActive ? 0.9 : 0.7, fontSize: '0.74rem', marginLeft: '4px' }}>({count})</span>
                         </button>
                     );
                 })}
+            </div>
+
+            {/* Dell-style results metadata bar */}
+            <div className="container text-center mb-4">
+                <small className="text-muted" style={{ fontSize: '0.78rem', letterSpacing: '0.02em' }}>
+                    Showing <strong>{filteredServices.length}</strong> enterprise {filteredServices.length === 1 ? 'capability' : 'capabilities'}
+                    {activeFilter !== 'All' && <span> in <strong>{activeFilter}</strong></span>}
+                </small>
             </div>
 
             {services.length === 0 && <div className="spinner text-center"><Spinner/></div>}

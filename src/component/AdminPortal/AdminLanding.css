@@ -13,11 +13,11 @@
     letter-spacing: -0.01em;
 }
 
-/* Base Card Styling (High Border Radius, Soft Elevation) */
+/* Base Card Styling (Dell Architectural Geometry, Soft Elevation) */
 .ad-card {
     background-color: var(--cp-card-bg, #FFFFFF);
-    border-radius: 24px !important;
-    border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.04)) !important;
+    border-radius: 12px !important;
+    border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.05)) !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.025), 0 1px 3px rgba(0, 0, 0, 0.015) !important;
     transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.2s ease;
     overflow: hidden;
@@ -34,24 +34,24 @@
    TOP OPERATIONS & DEPLOYMENT HUB BANNER
    ========================================================= */
 .ad-hero-banner {
-    background: linear-gradient(135deg, #7054F2 0%, #4E36C2 100%);
-    border-radius: 24px;
+    background: linear-gradient(135deg, #004B87 0%, #0672CB 60%, #0076CE 100%);
+    border-radius: 14px;
     padding: 22px 28px;
     color: #FFFFFF;
-    box-shadow: 0 10px 30px rgba(112, 84, 242, 0.22);
+    box-shadow: 0 10px 30px rgba(6, 114, 203, 0.22);
     position: relative;
     overflow: hidden;
 }
 
 [data-theme="dark"] .ad-hero-banner,
 .theme-dark .ad-hero-banner {
-    background: linear-gradient(135deg, #182238 0%, #0F1626 100%);
+    background: linear-gradient(135deg, #0F172A 0%, #151D2F 60%, #1E293B 100%);
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
 .ad-hero-badge {
-    background-color: rgba(255, 255, 255, 0.16);
+    background-color: rgba(255, 255, 255, 0.18);
     color: #FFFFFF;
     font-size: 0.76rem;
     font-weight: 600;
@@ -79,7 +79,7 @@
     max-width: 300px;
     background-color: rgba(255, 255, 255, 0.12);
     border: 1px solid rgba(255, 255, 255, 0.22);
-    border-radius: 20px;
+    border-radius: 12px;
     padding: 18px 20px;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(16px);
@@ -209,7 +209,7 @@
     min-width: 112px;
     max-width: 150px;
     background-color: var(--cp-card-bg, #FFFFFF);
-    border-radius: 26px;
+    border-radius: 12px;
     padding: 20px 10px 18px 10px;
     display: flex;
     flex-direction: column;
@@ -997,7 +997,7 @@
 }
 
 .ad-modal-content {
-    border-radius: 24px !important;
+    border-radius: 16px !important;
     border: 1px solid var(--cp-border, rgba(0, 0, 0, 0.08)) !important;
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.16) !important;
     background-color: var(--cp-card-bg, #FFFFFF) !important;
@@ -1106,7 +1106,7 @@
 .ad-modal-hero-strip {
     background-color: var(--cp-card-subtle, #F8FAFC);
     border: 1px solid var(--cp-border, #E2E8F0);
-    border-radius: 20px;
+    border-radius: 12px;
     padding: 18px 22px;
     margin-bottom: 22px;
     display: grid;
@@ -1148,7 +1148,7 @@
 .ad-modal-card {
     background-color: var(--cp-card-subtle, #F8FAFC);
     border: 1px solid var(--cp-border, #E2E8F0);
-    border-radius: 20px;
+    border-radius: 12px;
     padding: 20px 22px;
     height: 100%;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -1262,7 +1262,7 @@
 .ad-modal-status-strip {
     background-color: var(--cp-card-subtle, #F8FAFC);
     border: 1px solid var(--cp-border, #E2E8F0);
-    border-radius: 20px;
+    border-radius: 12px;
     padding: 18px 22px;
 }
 

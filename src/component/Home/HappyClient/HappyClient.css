@@ -1,7 +1,13 @@
+/* =========================================================
+   DELL-INSPIRED CLEAN VALUE & METRICS CARDS
+   ========================================================= */
+
 .ourValue {
-    background: var(--site-primary, #7355F7);
-    padding: 4.5rem 0;
-    font-family: 'Poppins', sans-serif;
+    background: var(--site-bg-alt, #F8F9FA);
+    padding: 5rem 0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    border-top: 1px solid var(--site-border, #E2E8F0);
+    border-bottom: 1px solid var(--site-border, #E2E8F0);
     transition: background 0.25s ease;
 }
 
@@ -13,62 +19,67 @@
 
 .ourValueDetails {
     background-color: var(--site-card-bg, #FFFFFF);
-    border-radius: 4px;
-    border: 1px solid var(--site-border, #E5E0FA);
-    box-shadow: var(--site-shadow-sm, 0 4px 20px 0 rgba(0, 0, 0, 0.08));
-    padding: 2rem 1.25rem;
+    border-radius: 12px;
+    border: 1px solid var(--site-border, #E2E8F0);
+    box-shadow: var(--site-card-shadow, 0 1px 3px rgba(0, 0, 0, 0.04));
+    padding: 2rem 1.5rem;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
     height: 100%;
 }
 
 .ourValueDetails:hover {
-    transform: translateY(-5px);
-    border-color: var(--site-primary, #7355F7);
-    box-shadow: var(--site-shadow-md, 0 12px 30px 0 rgba(0, 0, 0, 0.15));
+    transform: translateY(-3px);
+    border-color: var(--site-primary, #0672CB);
+    box-shadow: var(--site-card-hover-shadow, 0 10px 25px -4px rgba(0, 0, 0, 0.08));
 }
 
 .valueIcon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 52px;
-    height: 52px;
-    border-radius: 4px;
-    background-color: var(--site-primary-subtle, #FAF8FF);
-    color: var(--site-primary, #7355F7);
-    border: 1px solid var(--site-border, #E5E0FA);
-    font-size: 1.35rem;
-    margin-bottom: 1.1rem;
-    transition: all 0.25s ease;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: var(--site-primary-subtle, rgba(6, 114, 203, 0.08));
+    color: var(--site-primary, #0672CB);
+    border: 1px solid var(--site-border, #E2E8F0);
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+    transition: all 0.2s ease;
 }
 
 .ourValueDetails:hover .valueIcon {
-    background-color: var(--site-primary, #7355F7);
+    background-color: var(--site-primary, #0672CB);
     color: #FFFFFF;
-    border-color: var(--site-primary, #7355F7);
+    border-color: var(--site-primary, #0672CB);
 }
 
 .ourValueNumber {
-    font-weight: 700;
-    font-size: 2.2rem;
-    color: var(--site-primary, #7355F7);
-    margin-bottom: 0.4rem;
+    font-weight: 800;
+    font-size: 2.25rem;
+    color: var(--site-primary, #0672CB);
+    margin-bottom: 0.35rem;
     line-height: 1.1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+[data-theme="dark"] .ourValueNumber {
+    color: var(--site-primary, #38BDF8);
 }
 
 .ourValueTitle {
-    color: var(--site-text-muted, #555555);
+    color: var(--site-text-muted, #475569);
     margin-bottom: 0;
-    font-weight: 500;
-    font-size: 0.95rem;
-    line-height: 1.4;
+    font-weight: 600;
+    font-size: 0.92rem;
+    line-height: 1.45;
 }
 
 @media (max-width: 768px) {
     .ourValue {
-        padding: 3rem 0;
+        padding: 3.5rem 0;
     }
     .ourValueDetails {
         padding: 1.5rem 1rem;

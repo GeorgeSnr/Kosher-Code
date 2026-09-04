@@ -721,8 +721,8 @@ const TicketManagement = () => {
                         </div>
                         <Button 
                             variant="primary" 
-                            className="rounded-pill px-4 fw-semibold"
-                            style={{ backgroundColor: '#7054F2', borderColor: '#7054F2', fontSize: '0.84rem' }}
+                            className="px-4 fw-semibold"
+                            style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '8px', fontSize: '0.84rem' }}
                             onClick={() => setShowSprintModal(true)}
                         >
                             <FontAwesomeIcon icon={faPlus} className="me-1" /> Create Sprint
@@ -966,14 +966,14 @@ const TicketManagement = () => {
                         </div>
                     </Modal.Body>
                     <Modal.Footer className="border-0 px-4 pb-4 pt-1">
-                        <Button variant="secondary" className="rounded-pill px-4" onClick={() => setShowSprintModal(false)}>
+                        <Button variant="secondary" className="px-4" style={{ borderRadius: '8px' }} onClick={() => setShowSprintModal(false)}>
                             Cancel
                         </Button>
                         <Button 
                             type="submit" 
                             variant="primary" 
-                            className="rounded-pill px-4 fw-bold"
-                            style={{ backgroundColor: '#7054F2', borderColor: '#7054F2' }}
+                            className="px-4 fw-bold"
+                            style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '8px' }}
                         >
                             Create Sprint
                         </Button>

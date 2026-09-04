@@ -10,11 +10,11 @@
 
 /* Header Banner */
 .jira-hero-banner {
-    background: linear-gradient(135deg, #1E1B4B 0%, #312E81 50%, #4338CA 100%);
-    border-radius: 20px;
+    background: linear-gradient(135deg, #004B87 0%, #0672CB 60%, #0076CE 100%);
+    border-radius: 14px;
     padding: 24px 28px;
     color: #FFFFFF;
-    box-shadow: 0 10px 25px -5px rgba(67, 56, 202, 0.3);
+    box-shadow: 0 10px 25px -5px rgba(6, 114, 203, 0.25);
     margin-bottom: 24px;
     position: relative;
     overflow: hidden;
@@ -22,7 +22,7 @@
 
 [data-theme="dark"] .jira-hero-banner,
 .theme-dark .jira-hero-banner {
-    background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 60%, #312E81 100%);
+    background: linear-gradient(135deg, #0F172A 0%, #151D2F 60%, #1E293B 100%);
     border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -61,16 +61,16 @@
 }
 
 .jira-tab-btn.active {
-    background-color: #121417 !important;
+    background-color: #0672CB !important;
     color: #FFFFFF !important;
-    box-shadow: 0 4px 12px rgba(18, 20, 23, 0.2);
+    box-shadow: 0 4px 12px rgba(6, 114, 203, 0.3);
 }
 
 [data-theme="dark"] .jira-tab-btn.active,
 .theme-dark .jira-tab-btn.active {
-    background-color: #7054F2 !important;
+    background-color: #0672CB !important;
     color: #FFFFFF !important;
-    box-shadow: 0 4px 14px rgba(112, 84, 242, 0.35);
+    box-shadow: 0 4px 14px rgba(6, 114, 203, 0.4);
 }
 
 /* Kanban Board Layout */
@@ -92,7 +92,7 @@
     min-width: 250px;
     background-color: var(--cp-card-subtle, #F8FAFC);
     border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.06));
-    border-radius: 16px;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
     max-height: 82vh;
@@ -154,7 +154,7 @@
 /* Kanban Ticket Card */
 .jira-card {
     background-color: var(--cp-card-bg, #FFFFFF);
-    border-radius: 12px;
+    border-radius: 10px;
     border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.07));
     padding: 14px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
@@ -167,7 +167,7 @@
 .jira-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.07);
-    border-color: var(--cp-primary, #7054F2);
+    border-color: #0672CB;
 }
 
 [data-theme="dark"] .jira-card,
@@ -179,7 +179,7 @@
 
 [data-theme="dark"] .jira-card:hover,
 .theme-dark .jira-card:hover {
-    border-color: #7054F2;
+    border-color: #38BDF8;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
 }
 
@@ -189,8 +189,8 @@
     left: 0;
     bottom: 0;
     width: 4px;
-    border-top-left-radius: 12px;
-    border-bottom-left-radius: 12px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 .jira-card-header {
@@ -203,10 +203,15 @@
 .jira-card-key {
     font-size: 0.76rem;
     font-weight: 700;
-    color: var(--cp-primary, #7054F2);
+    color: #0672CB;
     display: inline-flex;
     align-items: center;
     gap: 5px;
+}
+
+[data-theme="dark"] .jira-card-key,
+.theme-dark .jira-card-key {
+    color: #38BDF8;
 }
 
 .jira-card-title {
@@ -231,8 +236,8 @@
 .jira-tag-pill {
     font-size: 0.7rem;
     font-weight: 600;
-    padding: 2px 7px;
-    border-radius: 4px;
+    padding: 2px 8px;
+    border-radius: 9999px;
     background-color: var(--cp-card-subtle, #F1F5F9);
     color: var(--cp-text-muted, #64748B);
     border: 1px solid var(--cp-border, #E2E8F0);
@@ -359,7 +364,7 @@
 .jira-modal-content {
     background-color: var(--cp-card-bg, #FFFFFF);
     color: var(--cp-text-main, #0F172A);
-    border-radius: 20px;
+    border-radius: 16px;
     border: 1px solid var(--cp-border, #E2E8F0);
     overflow: hidden;
 }
@@ -408,7 +413,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px 14px;
-    border-radius: 10px;
+    border-radius: 8px;
     background-color: var(--cp-card-subtle, #F8FAFC);
     border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.05));
     transition: background-color 0.15s ease;
@@ -429,7 +434,7 @@
 /* Activity & Comments */
 .comment-bubble {
     background-color: var(--cp-card-subtle, #F8FAFC);
-    border-radius: 12px;
+    border-radius: 10px;
     padding: 12px 16px;
     border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.05));
     margin-bottom: 12px;
@@ -459,9 +464,9 @@
 
 .filter-pill:hover,
 .filter-pill.active {
-    border-color: var(--cp-primary, #7054F2);
-    color: var(--cp-primary, #7054F2);
-    background-color: var(--cp-primary-subtle, rgba(112, 84, 242, 0.08));
+    border-color: #0672CB;
+    color: #0672CB;
+    background-color: rgba(6, 114, 203, 0.08);
 }
 
 /* WhatsApp Communication Pill */
@@ -510,8 +515,8 @@
 [data-theme="dark"] .jira-modal-content .form-select:focus,
 .theme-dark .jira-modal-content .form-control:focus,
 .theme-dark .jira-modal-content .form-select:focus {
-    border-color: #7054F2 !important;
-    box-shadow: 0 0 0 3px rgba(112, 84, 242, 0.25) !important;
+    border-color: #0672CB !important;
+    box-shadow: 0 0 0 3px rgba(6, 114, 203, 0.25) !important;
 }
 
 /* Dark mode Table Hover and Header Styling */

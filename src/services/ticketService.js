@@ -31,7 +31,7 @@ export const DEFAULT_ROLES = [
         name: 'Super Administrator',
         description: 'Complete platform governance, security control, role customization, and executive overrides.',
         department: 'Executive Leadership',
-        badgeColor: '#7054F2',
+        badgeColor: '#0672CB',
         isSystem: true,
         permissions: [
             'create_tickets',
@@ -631,7 +631,7 @@ export const saveStoredRole = (roleData) => {
     const roles = getStoredRoles();
     const newRole = {
         id: 'role-' + Date.now(),
-        badgeColor: roleData.badgeColor || '#7054F2',
+        badgeColor: roleData.badgeColor || '#0672CB',
         isSystem: false,
         permissions: roleData.permissions || ['create_tickets', 'edit_tickets', 'transition_status'],
         ...roleData

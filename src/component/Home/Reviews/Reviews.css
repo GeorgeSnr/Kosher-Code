@@ -1,23 +1,28 @@
 #testimonial {
     padding: 7rem 0 6rem;
-    background: var(--site-bg-alt, #F8F5FF);
+    background: var(--site-bg-alt, #F8F9FA);
+    font-family: 'Plus Jakarta Sans', sans-serif;
     transition: background 0.25s ease;
 }
+
 .review {
-    box-shadow: var(--site-shadow-sm, 0 8px 24px rgba(0, 0, 0, 0.06));
-    padding: 1.75rem 1.5rem;
+    box-shadow: var(--site-card-shadow, 0 1px 3px rgba(0, 0, 0, 0.04));
+    padding: 2rem 1.75rem;
     border: 1px solid var(--site-border, #E2E8F0);
-    border-radius: 8px;
+    border-radius: 12px;
     margin: 5rem 0 1rem 0;
     text-align: center;
-    background: var(--site-card-bg, #fff);
+    background: var(--site-card-bg, #FFFFFF);
     max-width: 550px;
     transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 .review:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 28px rgba(115, 85, 247, 0.12);
+    box-shadow: var(--site-card-hover-shadow, 0 10px 25px -4px rgba(0, 0, 0, 0.08));
+    border-color: var(--site-primary, #0672CB);
 }
+
 .review-avatar-wrap {
     margin-top: -4.5rem;
     margin-bottom: 0.75rem;
@@ -25,31 +30,44 @@
     justify-content: center;
     align-items: center;
 }
+
 .review-avatar {
-    box-shadow: 0 6px 20px rgba(115, 85, 247, 0.28) !important;
+    box-shadow: 0 4px 14px rgba(6, 114, 203, 0.25) !important;
 }
+
 .review > .testimonialName {
-    font-weight: 600;
-    font-size: 22px;
-    font-family: 'Poppins', sans-serif;
-    color: var(--site-text-main, #000);
-    line-height: 26px;
-    margin: 0.8rem 0 0.4rem 0;
+    font-weight: 700;
+    font-size: 1.15rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--site-text-main, #0F172A);
+    line-height: 1.3;
+    margin: 0.8rem 0 0.25rem 0;
+    letter-spacing: -0.015em;
 }
+
 .review > .testimonialAddress {
-    font-size: 15px;
-    color: var(--site-primary, #7053F1);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--site-primary, #0672CB);
 }
+
+[data-theme="dark"] .review > .testimonialAddress {
+    color: var(--site-primary, #38BDF8);
+}
+
 .review > p {
-    color: var(--site-text-muted, #777);
+    color: var(--site-text-muted, #475569);
     margin-top: 0.8rem;
-    font-size: 1rem;
+    font-size: 0.92rem;
     font-weight: 400;
-    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
+
 .rate {
-    color: #FFBE5B;
+    color: #F59E0B;
 }
+
 :root {
-    --swiper-theme-color: #7355F7 !important;
+    --swiper-theme-color: #0672CB !important;
 }

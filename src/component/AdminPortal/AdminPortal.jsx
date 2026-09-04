@@ -402,7 +402,7 @@ const AdminPortal = () => {
                                     title="Jira Tickets & Kanban Board"
                                 >
                                     <div className="cs-nav-item-left">
-                                        <FontAwesomeIcon icon={faTasks} className="cs-icon" style={{ color: '#7054F2' }} />
+                                        <FontAwesomeIcon icon={faTasks} className="cs-icon" style={{ color: 'var(--cp-primary, #0672CB)' }} />
                                         <span>Jira Kanban Board</span>
                                     </div>
                                     <span className="cs-badge-pill" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)' }}>

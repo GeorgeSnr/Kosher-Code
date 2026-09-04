@@ -651,8 +651,8 @@ const AdminLanding = () => {
                     <div 
                         className="ad-card p-4 mb-4"
                         style={{
-                            background: 'linear-gradient(135deg, rgba(112, 84, 242, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%)',
-                            border: '1px solid rgba(112, 84, 242, 0.15)'
+                            background: 'linear-gradient(135deg, rgba(6, 114, 203, 0.04) 0%, rgba(2, 132, 199, 0.04) 100%)',
+                            border: '1px solid rgba(6, 114, 203, 0.18)'
                         }}
                     >
                         <Row className="align-items-center g-4">
@@ -661,7 +661,7 @@ const AdminLanding = () => {
                                 <div className="d-flex align-items-center gap-2 mb-2">
                                     <span 
                                         className="badge rounded-pill px-3 py-1"
-                                        style={{ backgroundColor: 'rgba(112, 84, 242, 0.15)', color: '#7054F2', fontSize: '0.74rem', fontWeight: 700 }}
+                                        style={{ backgroundColor: 'rgba(6, 114, 203, 0.12)', color: '#0672CB', fontSize: '0.74rem', fontWeight: 700 }}
                                     >
                                         <FontAwesomeIcon icon={faBolt} className="me-1" /> Active Sprint Cycle
                                     </span>
@@ -692,7 +692,7 @@ const AdminLanding = () => {
                                         <div 
                                             className="progress-bar" 
                                             role="progressbar" 
-                                            style={{ width: `${sprintPct}%`, backgroundColor: '#7054F2', borderRadius: '9999px' }}
+                                            style={{ width: `${sprintPct}%`, backgroundColor: '#0672CB', borderRadius: '9999px' }}
                                             aria-valuenow={sprintPct} 
                                             aria-valuemin="0" 
                                             aria-valuemax="100"
@@ -722,8 +722,8 @@ const AdminLanding = () => {
                                     <Link to="/admin/tickets" className="flex-grow-1 text-decoration-none">
                                         <Button 
                                             variant="primary" 
-                                            className="w-100 rounded-pill py-2 fw-bold d-inline-flex align-items-center justify-content-center gap-1.5"
-                                            style={{ backgroundColor: '#7054F2', borderColor: '#7054F2', fontSize: '0.82rem' }}
+                                            className="w-100 py-2 fw-bold d-inline-flex align-items-center justify-content-center gap-1.5"
+                                            style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '8px', fontSize: '0.82rem' }}
                                         >
                                             <FontAwesomeIcon icon={faTasks} /> Launch Kanban Board
                                         </Button>
@@ -731,8 +731,8 @@ const AdminLanding = () => {
                                     <Link to="/admin/team-roles" className="text-decoration-none">
                                         <Button 
                                             variant="outline-secondary" 
-                                            className="rounded-pill py-2 px-3 fw-semibold d-inline-flex align-items-center justify-content-center gap-1.5"
-                                            style={{ fontSize: '0.82rem' }}
+                                            className="py-2 px-3 fw-semibold d-inline-flex align-items-center justify-content-center gap-1.5"
+                                            style={{ fontSize: '0.82rem', borderRadius: '8px' }}
                                             title="Onboard Developers & Configure RBAC"
                                         >
                                             <FontAwesomeIcon icon={faUserShield} /> RBAC Studio

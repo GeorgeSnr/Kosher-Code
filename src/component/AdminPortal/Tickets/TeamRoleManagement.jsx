@@ -83,7 +83,7 @@ const TeamRoleManagement = () => {
     const [newRoleName, setNewRoleName] = useState('');
     const [newRoleDesc, setNewRoleDesc] = useState('');
     const [newRoleDept, setNewRoleDept] = useState('Engineering');
-    const [newRoleColor, setNewRoleColor] = useState('#7054F2');
+    const [newRoleColor, setNewRoleColor] = useState('#0672CB');
     const [newRolePerms, setNewRolePerms] = useState(['create_tickets', 'edit_tickets', 'transition_status']);
 
     const reloadData = () => {
@@ -422,8 +422,8 @@ const TeamRoleManagement = () => {
 
                             <Button 
                                 variant="primary" 
-                                className="rounded-pill px-4 py-2 fw-semibold d-inline-flex align-items-center gap-2"
-                                style={{ backgroundColor: '#7054F2', borderColor: '#7054F2', fontSize: '0.84rem' }}
+                                className="px-4 py-2 fw-semibold d-inline-flex align-items-center gap-2"
+                                style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '8px', fontSize: '0.84rem' }}
                                 onClick={() => openOnboardModal()}
                             >
                                 <FontAwesomeIcon icon={faUserPlus} /> Onboard Member
@@ -477,10 +477,10 @@ const TeamRoleManagement = () => {
                                                 <span 
                                                     className="badge rounded-pill px-3 py-1 fw-semibold"
                                                     style={{ 
-                                                        backgroundColor: `${matchedRole?.badgeColor || '#7054F2'}18`, 
-                                                        color: matchedRole?.badgeColor || '#7054F2',
+                                                        backgroundColor: `${matchedRole?.badgeColor || '#0672CB'}18`, 
+                                                        color: matchedRole?.badgeColor || '#0672CB',
                                                         fontSize: '0.76rem',
-                                                        border: `1px solid ${matchedRole?.badgeColor || '#7054F2'}30`
+                                                        border: `1px solid ${matchedRole?.badgeColor || '#0672CB'}30`
                                                     }}
                                                 >
                                                     {matchedRole?.name || member.roleTitle}
@@ -617,8 +617,8 @@ const TeamRoleManagement = () => {
 
                             <Button 
                                 variant="primary" 
-                                className="rounded-pill px-3.5 py-1.5 fw-semibold d-inline-flex align-items-center gap-1.5"
-                                style={{ backgroundColor: '#7054F2', borderColor: '#7054F2', fontSize: '0.82rem' }}
+                                className="px-3.5 py-1.5 fw-semibold d-inline-flex align-items-center gap-1.5"
+                                style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '8px', fontSize: '0.82rem' }}
                                 onClick={() => setShowRoleModal(true)}
                             >
                                 <FontAwesomeIcon icon={faUserShield} /> + Create Custom Role
@@ -651,7 +651,7 @@ const TeamRoleManagement = () => {
                                             <div className="d-flex align-items-center gap-2">
                                                 <div 
                                                     className="rounded-circle"
-                                                    style={{ width: '10px', height: '10px', backgroundColor: role.badgeColor || '#7054F2', flexShrink: 0 }}
+                                                    style={{ width: '10px', height: '10px', backgroundColor: role.badgeColor || '#0672CB', flexShrink: 0 }}
                                                 />
                                                 <div>
                                                     <div className="fw-bold" style={{ color: 'var(--cp-text-main)', fontSize: '0.88rem' }}>
@@ -998,14 +998,14 @@ const TeamRoleManagement = () => {
                     </Modal.Body>
 
                     <Modal.Footer className="border-0 px-4 pb-4 pt-1">
-                        <Button variant="secondary" className="rounded-pill px-4" onClick={() => setShowOnboardModal(false)}>
+                        <Button variant="secondary" className="px-4" style={{ borderRadius: '8px' }} onClick={() => setShowOnboardModal(false)}>
                             Cancel
                         </Button>
                         <Button 
                             type="submit" 
                             variant="primary" 
-                            className="rounded-pill px-4 fw-bold"
-                            style={{ backgroundColor: '#7054F2', borderColor: '#7054F2' }}
+                            className="px-4 fw-bold"
+                            style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '8px' }}
                         >
                             {editingMember ? 'Save Changes' : 'Complete Onboarding'}
                         </Button>
@@ -1120,14 +1120,14 @@ const TeamRoleManagement = () => {
                     </Modal.Body>
 
                     <Modal.Footer className="border-0 px-4 pb-4 pt-1">
-                        <Button variant="secondary" className="rounded-pill px-4" onClick={() => setShowRoleModal(false)}>
+                        <Button variant="secondary" className="px-4" style={{ borderRadius: '8px' }} onClick={() => setShowRoleModal(false)}>
                             Cancel
                         </Button>
                         <Button 
                             type="submit" 
                             variant="primary" 
-                            className="rounded-pill px-4 fw-bold"
-                            style={{ backgroundColor: '#7054F2', borderColor: '#7054F2' }}
+                            className="px-4 fw-bold"
+                            style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '8px' }}
                         >
                             Create Role
                         </Button>
@@ -1301,8 +1301,8 @@ const TeamRoleManagement = () => {
                 <Modal.Footer className="border-0 px-4 pb-4 pt-1">
                     <Button 
                         variant="primary" 
-                        className="rounded-pill px-4 fw-semibold w-100"
-                        style={{ backgroundColor: '#7054F2', borderColor: '#7054F2' }}
+                        className="px-4 fw-semibold w-100"
+                        style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '8px' }}
                         onClick={() => setShowInviteModal(false)}
                     >
                         Done

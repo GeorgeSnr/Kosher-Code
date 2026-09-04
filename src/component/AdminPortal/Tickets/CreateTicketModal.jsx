@@ -106,7 +106,7 @@ const CreateTicketModal = ({
                     <div className="d-flex align-items-center gap-2">
                         <div 
                             className="p-2 rounded-3 text-white d-flex align-items-center justify-content-center"
-                            style={{ backgroundColor: '#7054F2', width: '38px', height: '38px' }}
+                            style={{ backgroundColor: '#0672CB', width: '38px', height: '38px', borderRadius: '8px' }}
                         >
                             <FontAwesomeIcon icon={faPlus} />
                         </div>
@@ -336,7 +336,8 @@ const CreateTicketModal = ({
                 <Modal.Footer className="border-0 px-4 pb-4 pt-1 d-flex justify-content-end gap-2">
                     <Button 
                         variant="secondary" 
-                        className="rounded-pill px-4 fw-semibold"
+                        className="px-4 fw-semibold"
+                        style={{ borderRadius: '8px' }}
                         onClick={onHide}
                     >
                         Cancel
@@ -344,8 +345,8 @@ const CreateTicketModal = ({
                     <Button 
                         type="submit" 
                         variant="primary" 
-                        className="rounded-pill px-4 fw-semibold d-inline-flex align-items-center gap-2"
-                        style={{ backgroundColor: '#7054F2', borderColor: '#7054F2' }}
+                        className="px-4 fw-semibold d-inline-flex align-items-center gap-2"
+                        style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '8px' }}
                     >
                         <FontAwesomeIcon icon={faPlus} /> Create Issue
                     </Button>

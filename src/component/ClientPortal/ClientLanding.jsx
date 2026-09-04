@@ -88,20 +88,20 @@ const ClientLanding = () => {
 
     return (
         <div className="p-0">
-            {/* 1. Executive Welcome Hero Banner (24px Curvature & Pill Actions) */}
+            {/* 1. Executive Welcome Hero Banner (Dell Clean Architecture) */}
             <div 
                 className="p-4 p-md-5 mb-4 text-white position-relative overflow-hidden"
                 style={{
-                    background: 'linear-gradient(135deg, #7355F7 0%, #4B24F5 55%, #2608AB 100%)',
-                    borderRadius: '24px',
-                    boxShadow: '0 10px 30px rgba(115, 85, 247, 0.22)'
+                    background: 'linear-gradient(135deg, #004B87 0%, #0672CB 60%, #0076CE 100%)',
+                    borderRadius: '14px',
+                    boxShadow: '0 10px 30px rgba(6, 114, 203, 0.22)'
                 }}
             >
                 <Row className="align-items-center g-4">
                     <Col lg={8}>
                         <div 
                             className="d-inline-flex align-items-center gap-2 px-3.5 py-1.5 mb-3 rounded-pill" 
-                            style={{ backgroundColor: 'rgba(255, 255, 255, 0.16)', fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.02em' }}
+                            style={{ backgroundColor: 'rgba(255, 255, 255, 0.18)', fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.02em' }}
                         >
                             <FontAwesomeIcon icon={faShieldAlt} /> Enterprise Client Hub • Kampala HQ
                         </div>
@@ -112,12 +112,13 @@ const ClientLanding = () => {
                         <div className="d-flex flex-wrap gap-3 mt-2">
                             <Link to="/client/book">
                                 <Button 
-                                    className="px-4 py-2.5 fw-semibold text-white d-inline-flex align-items-center gap-2 rounded-pill"
+                                    className="px-4 py-2.5 fw-semibold text-white d-inline-flex align-items-center gap-2"
                                     style={{
-                                        backgroundColor: '#121417',
-                                        borderColor: '#121417',
+                                        backgroundColor: '#0F172A',
+                                        borderColor: '#0F172A',
+                                        borderRadius: '8px',
                                         fontSize: '0.88rem',
-                                        boxShadow: '0 4px 14px rgba(0, 0, 0, 0.3)'
+                                        boxShadow: '0 4px 14px rgba(0, 0, 0, 0.2)'
                                     }}
                                 >
                                     <FontAwesomeIcon icon={faPlus} /> Book New Solution
@@ -126,8 +127,8 @@ const ClientLanding = () => {
                             <Link to="/client/bookings">
                                 <Button 
                                     variant="outline-light" 
-                                    className="px-4 py-2.5 fw-semibold d-inline-flex align-items-center gap-2 rounded-pill"
-                                    style={{ fontSize: '0.88rem' }}
+                                    className="px-4 py-2.5 fw-semibold d-inline-flex align-items-center gap-2"
+                                    style={{ fontSize: '0.88rem', borderRadius: '8px' }}
                                 >
                                     <FontAwesomeIcon icon={faFolderOpen} /> View Engagements ({bookings.length})
                                 </Button>
@@ -143,7 +144,7 @@ const ClientLanding = () => {
                                 maxWidth: '300px',
                                 backgroundColor: 'rgba(255, 255, 255, 0.12)',
                                 border: '1px solid rgba(255, 255, 255, 0.22)',
-                                borderRadius: '20px',
+                                borderRadius: '12px',
                                 padding: '18px 20px',
                                 boxShadow: '0 12px 30px rgba(0, 0, 0, 0.15)',
                                 backdropFilter: 'blur(16px)',

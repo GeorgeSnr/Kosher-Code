@@ -1,9 +1,13 @@
+/* =========================================================
+   DELL-INSPIRED CLEAN MODULAR SERVICE / PRODUCT CARDS
+   ========================================================= */
+
 .services {
     padding: 6rem 0;
     width: 100%;
-    background-color: var(--site-bg-alt, #FAF8FF);
-    font-family: 'Poppins', sans-serif;
-    color: var(--site-text-main, #070120);
+    background-color: var(--site-bg-alt, #F8F9FA);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--site-text-main, #0F172A);
     transition: background-color 0.25s ease, color 0.25s ease;
 }
 
@@ -14,27 +18,31 @@
 
 .service-card {
     background: var(--site-card-bg, #FFFFFF);
-    border: 1px solid var(--site-border, #E5E0FA);
-    border-radius: 4px;
+    border: 1px solid var(--site-border, #E2E8F0);
+    border-radius: 12px;
     padding: 1.75rem;
     position: relative;
-    box-shadow: var(--site-shadow-sm, 0 4px 18px 0 rgba(115, 85, 247, 0.05));
-    transition: all 0.3s ease;
+    box-shadow: var(--site-card-shadow, 0 1px 3px rgba(0, 0, 0, 0.04));
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
     width: 100%;
 }
 
 .service-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--site-primary, #7355F7);
-    box-shadow: var(--site-shadow-md, 0 12px 28px 0 rgba(115, 85, 247, 0.15));
+    transform: translateY(-3px);
+    border-color: var(--site-primary, #0672CB);
+    box-shadow: var(--site-card-hover-shadow, 0 10px 25px -4px rgba(0, 0, 0, 0.08));
 }
 
 .service-icon-box {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 4px;
-    transition: transform 0.3s ease;
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    background-color: var(--site-primary-subtle, rgba(6, 114, 203, 0.08));
+    color: var(--site-primary, #0672CB);
+    transition: transform 0.25s ease;
 }
 
 .service-card:hover .service-icon-box {
@@ -43,56 +51,67 @@
 
 .service-category-badge {
     display: inline-block;
-    padding: 0.25rem 0.65rem;
-    border-radius: 4px;
+    padding: 0.3rem 0.75rem;
+    border-radius: 9999px;
     font-size: 0.72rem;
-    font-weight: 600;
-    background-color: var(--site-primary-subtle, #F4F0FF);
-    color: var(--site-primary, #7355F7);
-    border: 1px solid var(--site-border, #E5E0FA);
-    letter-spacing: 0.03em;
+    font-weight: 700;
+    background-color: var(--site-primary-subtle, rgba(6, 114, 203, 0.08));
+    color: var(--site-primary, #0672CB);
+    border: 1px solid var(--site-border, #E2E8F0);
+    letter-spacing: 0.04em;
     text-transform: uppercase;
+}
+
+[data-theme="dark"] .service-category-badge {
+    background-color: rgba(56, 189, 248, 0.15);
+    color: #7DD3FC;
+    border-color: rgba(56, 189, 248, 0.3);
 }
 
 .service-region-badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    font-size: 0.78rem;
-    font-weight: 500;
-    color: var(--site-text-muted, #666666);
-    background-color: var(--site-card-subtle, #FAF8FF);
-    border: 1px solid var(--site-border, #E5E0FA);
-    padding: 0.25rem 0.6rem;
-    border-radius: 4px;
+    gap: 0.45rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--site-text-muted, #475569);
+    background-color: var(--site-card-subtle, #F8FAFC);
+    border: 1px solid var(--site-border, #E2E8F0);
+    padding: 0.25rem 0.7rem;
+    border-radius: 9999px;
 }
 
 .region-dot {
     width: 6px;
     height: 6px;
-    border-radius: 2px;
-    background-color: var(--site-primary, #7355F7);
+    border-radius: 50%;
+    background-color: #10B981;
     display: inline-block;
 }
 
 .serviceName {
     font-weight: 700;
     font-size: 1.18rem;
-    color: var(--site-text-main, #070120);
+    color: var(--site-text-main, #0F172A);
     line-height: 1.4;
     margin-bottom: 0.65rem;
+    letter-spacing: -0.015em;
     transition: color 0.2s ease;
 }
 
 .service-card:hover .serviceName {
-    color: var(--site-primary, #7355F7);
+    color: var(--site-primary, #0672CB);
+}
+
+[data-theme="dark"] .service-card:hover .serviceName {
+    color: var(--site-primary, #38BDF8);
 }
 
 .serviceDes {
-    color: var(--site-text-muted, #666666);
+    color: var(--site-text-muted, #475569);
     font-weight: 400;
-    line-height: 1.65;
-    font-size: 0.925rem;
+    line-height: 1.6;
+    font-size: 0.88rem;
     margin-bottom: 0.75rem;
 }
 
@@ -101,35 +120,39 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--site-text-light, #888888);
+    color: var(--site-text-light, #64748B);
     display: block;
     line-height: 1;
     margin-bottom: 3px;
 }
 
 .servicePrice {
-    color: var(--site-primary, #7355F7);
+    color: var(--site-primary, #0672CB);
     font-size: 1.45rem;
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1;
 }
 
+[data-theme="dark"] .servicePrice {
+    color: var(--site-primary, #38BDF8);
+}
+
 .service-footer {
-    border-color: var(--site-border, #E5E0FA) !important;
+    border-color: var(--site-border, #E2E8F0) !important;
 }
 
 .bookingBtn {
-    border-radius: 4px;
-    font-weight: 500;
-    font-size: 0.88rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.84rem;
     outline: none;
     color: #FFFFFF;
     border: none;
     padding: 0.6rem 1.25rem;
-    background: var(--site-primary, #7355F7);
-    box-shadow: 0 4px 12px rgba(115, 85, 247, 0.25);
-    transition: all 0.25s ease;
+    background: var(--site-primary, #0672CB);
+    box-shadow: 0 2px 6px rgba(6, 114, 203, 0.2);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
@@ -141,8 +164,8 @@
 }
 
 .bookingBtn:hover {
-    background: var(--site-primary-hover, #4B24F5);
-    box-shadow: 0 6px 16px rgba(75, 36, 245, 0.35);
+    background: var(--site-primary-hover, #005FB2);
+    box-shadow: 0 4px 12px rgba(6, 114, 203, 0.3);
 }
 
 .bookingBtn:hover span {

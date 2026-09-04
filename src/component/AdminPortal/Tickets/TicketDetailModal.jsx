@@ -406,7 +406,7 @@ const TicketDetailModal = ({
                                                         </span>
                                                         <span 
                                                             className="badge rounded-pill px-2 py-0.5" 
-                                                            style={{ backgroundColor: 'var(--cp-primary-subtle, rgba(112,84,242,0.1))', color: 'var(--cp-primary, #7054F2)', fontSize: '0.68rem' }}
+                                                            style={{ backgroundColor: 'var(--cp-primary-subtle, rgba(6,114,203,0.1))', color: 'var(--cp-primary, #0672CB)', fontSize: '0.68rem' }}
                                                         >
                                                             {cm.authorRole || 'Member'}
                                                         </span>
@@ -740,7 +740,8 @@ const TicketDetailModal = ({
                                     <Form.Control
                                         type="text"
                                         size="sm"
-                                        className="cp-input rounded-pill"
+                                        className="cp-input"
+                                        style={{ borderRadius: '8px' }}
                                         placeholder="Add tag and hit Enter..."
                                         value={newTag}
                                         onChange={(e) => setNewTag(e.target.value)}
@@ -752,7 +753,8 @@ const TicketDetailModal = ({
                             <Button
                                 variant="outline-danger"
                                 size="sm"
-                                className="w-100 rounded-pill fw-semibold d-inline-flex align-items-center justify-content-center gap-2"
+                                className="w-100 fw-semibold d-inline-flex align-items-center justify-content-center gap-2"
+                                style={{ borderRadius: '8px' }}
                                 onClick={handleDelete}
                             >
                                 <FontAwesomeIcon icon={faTrashAlt} /> Archive / Delete Ticket
@@ -765,7 +767,8 @@ const TicketDetailModal = ({
             <Modal.Footer className="border-0 px-4 pb-4 pt-0">
                 <Button 
                     variant="secondary" 
-                    className="rounded-pill px-4 fw-semibold"
+                    className="px-4 fw-semibold"
+                    style={{ borderRadius: '8px' }}
                     onClick={onHide}
                 >
                     Close
