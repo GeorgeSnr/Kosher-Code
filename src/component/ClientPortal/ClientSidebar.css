@@ -700,7 +700,7 @@
 }
 
 /* Clean Forms & Inputs (Soft Minimal Style) */
-.cp-input, .form-control, .form-select, .input-group-text {
+.cp-input, .form-control, .input-group-text {
     background-color: var(--cp-input-bg) !important;
     border: 1px solid var(--cp-input-border) !important;
     color: var(--cp-text-main) !important;
@@ -710,7 +710,42 @@
     transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.25s ease;
 }
 
-.cp-input:focus, .form-control:focus, .form-select:focus {
+/* Dedicated Form Select & Dropdown Boxes (Arrow Clearance & Zero Overlap) */
+.form-select, select.cp-input, select.form-control, select {
+    background-color: var(--cp-input-bg) !important;
+    border: 1px solid var(--cp-input-border) !important;
+    color: var(--cp-text-main) !important;
+    border-radius: 14px !important;
+    padding: 10px 44px 10px 16px !important;
+    font-size: 0.88rem !important;
+    line-height: 1.5 !important;
+    min-height: 44px !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23475569' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 14px center !important;
+    background-size: 16px 12px !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    cursor: pointer !important;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.25s ease;
+}
+
+[data-theme="dark"] .form-select,
+[data-theme="dark"] select.cp-input,
+[data-theme="dark"] select.form-control,
+[data-theme="dark"] select,
+.theme-dark .form-select,
+.theme-dark select.cp-input,
+.theme-dark select.form-control,
+.theme-dark select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2394A3B8' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+}
+
+.cp-input:focus, .form-control:focus, .form-select:focus, select:focus {
     border-color: var(--cp-primary) !important;
     box-shadow: 0 0 0 3px var(--cp-primary-subtle) !important;
     background-color: var(--cp-input-bg) !important;
@@ -724,8 +759,15 @@
 }
 
 select option {
-    background-color: var(--cp-sidebar-bg) !important;
-    color: var(--cp-text-main) !important;
+    background-color: var(--cp-card-bg, #FFFFFF) !important;
+    color: var(--cp-text-main, #0F172A) !important;
+    padding: 8px 12px !important;
+}
+
+[data-theme="dark"] select option,
+.theme-dark select option {
+    background-color: #141C2E !important;
+    color: #F8FAFC !important;
 }
 
 /* Clean Dialogue Boxes / Modal Windows */
@@ -839,6 +881,27 @@ select option {
 .dropdown-item:hover, .dropdown-item:focus {
     background-color: var(--cp-card-subtle, #F8FAFC) !important;
     color: var(--cp-text-main) !important;
+}
+
+/* Dropdown Toggle Spacing & Caret Alignment */
+.dropdown-toggle {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.dropdown-toggle::after {
+    margin-left: 8px !important;
+    vertical-align: 0.15em !important;
+    border-top: 0.35em solid currentColor !important;
+    border-right: 0.3em solid transparent !important;
+    border-bottom: 0 !important;
+    border-left: 0.3em solid transparent !important;
+    transition: transform 0.2s ease;
+}
+
+.dropdown-toggle.show::after {
+    transform: rotate(180deg);
 }
 
 /* =========================================================

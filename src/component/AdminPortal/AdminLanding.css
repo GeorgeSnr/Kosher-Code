@@ -565,6 +565,10 @@
     color: #FFFFFF;
 }
 
+.ad-btn-dots::after {
+    display: none !important;
+}
+
 /* =========================================================
    BOTTOM SECTION: MANAGE INBOUND REQUESTS (Table Card)
    ========================================================= */
@@ -654,6 +658,10 @@
     background-color: #141C2E;
     border-color: rgba(255, 255, 255, 0.1);
     color: #F8FAFC;
+}
+
+.ad-btn-pill-filter::after {
+    display: none !important;
 }
 
 /* Dark Solid Pill Button (Matching "Export" button in Dribbble) */

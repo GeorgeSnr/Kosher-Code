@@ -159,7 +159,7 @@ const Book = () => {
                         <Form onSubmit={handleSubmit}>
                             <Row className="g-3">
                                 {/* Selected Solution */}
-                                <Col md={7} xs={12}>
+                                <Col md={6} xs={12}>
                                     <Form.Label className="fw-semibold small" style={{ color: 'var(--cp-text-main)' }}>Target Solution *</Form.Label>
                                     <select 
                                         className="form-select cp-input" 
@@ -175,7 +175,7 @@ const Book = () => {
                                 </Col>
 
                                 {/* Pricing / Budget Model */}
-                                <Col md={5} xs={12}>
+                                <Col md={6} xs={12}>
                                     <Form.Label className="fw-semibold small" style={{ color: 'var(--cp-text-main)' }}>Pricing Model *</Form.Label>
                                     <select 
                                         name="pricingType"

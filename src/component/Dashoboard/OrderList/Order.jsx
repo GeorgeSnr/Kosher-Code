@@ -138,7 +138,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                     <Dropdown id={`dropdown-${_id}`}>
                         <Dropdown.Toggle 
                             size="sm"
-                            className="border shadow-none text-nowrap"
+                            className="border shadow-none text-nowrap d-inline-flex align-items-center justify-content-between"
                             style={{
                                 backgroundColor: currentStyle.bg,
                                 color: currentStyle.text,
@@ -146,10 +146,11 @@ const Order = ({ order, handleAction, handleDelete }) => {
                                 borderRadius: '9999px',
                                 fontWeight: 600,
                                 fontSize: '0.78rem',
-                                padding: '5px 14px'
+                                padding: '5px 12px 5px 14px',
+                                gap: '8px'
                             }}
                         >
-                            ● {status}
+                            <span>● {status}</span>
                         </Dropdown.Toggle>
                         <Dropdown.Menu style={{ borderRadius: '16px', backgroundColor: 'var(--cp-card-bg)', border: '1px solid var(--cp-border)', boxShadow: '0 10px 30px rgba(0,0,0,0.1)', padding: '6px' }}>
                             <Dropdown.Item onClick={() => handleAction(_id, "Pending")} style={{ borderRadius: '10px', fontSize: '0.82rem', padding: '6px 14px' }}>

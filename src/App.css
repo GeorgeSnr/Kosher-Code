@@ -92,6 +92,35 @@ textarea,
 }
 
 /* =========================================================
+   GLOBAL FORM SELECT & DROPDOWN ARROW CLEARANCE
+   ========================================================= */
+.form-select, select {
+    padding-right: 2.75rem !important;
+    background-repeat: no-repeat !important;
+    background-position: right 14px center !important;
+    background-size: 16px 12px !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    cursor: pointer;
+}
+
+[data-theme="dark"] .form-select,
+[data-theme="dark"] select,
+.theme-dark .form-select,
+.theme-dark select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2394A3B8' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+}
+
+.dropdown-toggle::after {
+    margin-left: 8px !important;
+    vertical-align: 0.15em !important;
+}
+
+/* =========================================================
    PUBLIC WEBSITE SECTION DARK MODE OVERRIDES
    ========================================================= */
 

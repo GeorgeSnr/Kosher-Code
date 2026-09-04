@@ -29,24 +29,64 @@
     padding: 1rem;
 }
 .contactForm input,
-.contactForm textarea,
-.contactForm select {
+.contactForm textarea {
     width: 100%;
     margin: 0.5rem 0;
-    padding: 0.8rem 0.8rem;
-    border-radius: 4px;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
     border: 1px solid var(--site-border, #ced4da);
     background-color: var(--site-card-bg, #FFFFFF);
     color: var(--site-text-main, #000);
     transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
+.contactForm select,
+.contactForm .form-select {
+    width: 100%;
+    margin: 0.5rem 0;
+    padding: 0.8rem 2.75rem 0.8rem 1rem !important;
+    border-radius: 12px;
+    border: 1px solid var(--site-border, #ced4da);
+    background-color: var(--site-card-bg, #FFFFFF) !important;
+    color: var(--site-text-main, #000) !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23475569' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 14px center !important;
+    background-size: 16px 12px !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    cursor: pointer !important;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.contactForm select option {
+    background-color: #FFFFFF;
+    color: #070120;
+    padding: 8px 12px;
+}
+
 [data-theme="dark"] .contactForm input,
-[data-theme="dark"] .contactForm textarea,
-[data-theme="dark"] .contactForm select {
+[data-theme="dark"] .contactForm textarea {
     background-color: #0F172A !important;
     border-color: #2A3854 !important;
     color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .contactForm select,
+[data-theme="dark"] .contactForm .form-select {
+    background-color: #0F172A !important;
+    border-color: #2A3854 !important;
+    color: #F8FAFC !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2394A3B8' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+}
+
+[data-theme="dark"] .contactForm select option {
+    background-color: #0F172A;
+    color: #F8FAFC;
 }
 
 [data-theme="dark"] .contactForm input::placeholder,
