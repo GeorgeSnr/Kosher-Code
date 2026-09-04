@@ -8,7 +8,8 @@ import {
     faCheckSquare, 
     faBolt, 
     faExchangeAlt,
-    faShieldAlt
+    faShieldAlt,
+    faPaperPlane
 } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
 
@@ -202,6 +203,10 @@ const CreateTicketModal = ({
                                     </option>
                                 ))}
                             </Form.Select>
+                            <small className="text-muted d-block mt-1" style={{ fontSize: '0.72rem' }}>
+                                <FontAwesomeIcon icon={faPaperPlane} className="text-primary me-1" />
+                                Assignee will receive an automated email notice upon creation
+                            </small>
                         </Col>
 
                         <Col md={6}>

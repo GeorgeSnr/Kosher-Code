@@ -20,10 +20,13 @@ import {
     faCalendarAlt,
     faUserCheck,
     faShieldAlt,
-    faEdit
+    faEdit,
+    faCopy
 } from '@fortawesome/free-solid-svg-icons';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import toast from 'react-hot-toast';
 import swal from 'sweetalert';
+import { sendTicketAssignmentNotification } from '../../../services/jiraNotificationService';
 
 const typeIcons = {
     'Story': { icon: faBookmark, color: '#10B981' },
@@ -88,6 +91,22 @@ const TicketDetailModal = ({
             setApprovalNotes('');
         }
     }, [ticket]);
+
+    const handleSendAssignmentEmail = () => {
+        const assignedMember = teamMembers.find(m => m.id === (assigneeId || ticket.assigneeId));
+        if (!assignedMember || !assignedMember.email) {
+            toast.error('Assignee has no email address configured');
+            return;
+        }
+
+        const sprint = sprints.find(s => s.id === (sprintId || ticket.sprintId));
+        const notifPromise = sendTicketAssignmentNotification(ticket, assignedMember, currentUser, sprint?.name);
+        toast.promise(notifPromise, {
+            loading: `Dispatching ticket assignment email to ${assignedMember.email}...`,
+            success: `Assignment email delivered to ${assignedMember.email}!`,
+            error: 'Failed to send assignment notification'
+        });
+    };
 
     const handleSaveField = (field, value) => {
         onUpdateTicket(ticket.id, { [field]: value });
@@ -473,7 +492,7 @@ const TicketDetailModal = ({
                                 {ticket.approvalWorkflow?.required && (
                                     <>
                                         <div className="small text-muted mb-2" style={{ fontSize: '0.78rem' }}>
-                                            Required Approver: <strong className="text-dark">{ticket.approvalWorkflow.approverRoleName || 'Project Manager / Architect'}</strong>
+                                            Required Approver: <strong style={{ color: 'var(--cp-text-main)' }}>{ticket.approvalWorkflow.approverRoleName || 'Project Manager / Architect'}</strong>
                                         </div>
 
                                         {ticket.approvalWorkflow.status === 'Approved' && (
@@ -529,6 +548,68 @@ const TicketDetailModal = ({
                                         </option>
                                     ))}
                                 </Form.Select>
+
+                                {/* Assignee Notification Dispatch Card */}
+                                {currentAssignee && (
+                                    <div className="p-3 mt-2 rounded-3" style={{ backgroundColor: 'var(--cp-card-bg, #FFFFFF)', border: '1px solid var(--cp-border, #E2E8F0)' }}>
+                                        <div className="d-flex align-items-center gap-2.5 mb-2">
+                                            <img 
+                                                src={currentAssignee.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80'} 
+                                                alt={currentAssignee.name}
+                                                className="jira-avatar-sm"
+                                            />
+                                            <div className="flex-grow-1 min-w-0">
+                                                <div className="fw-bold small text-truncate" style={{ color: 'var(--cp-text-main)', fontSize: '0.82rem' }}>
+                                                    {currentAssignee.name}
+                                                </div>
+                                                <small className="text-muted d-block text-truncate" style={{ fontSize: '0.72rem' }}>
+                                                    {currentAssignee.email}
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        {/* Action Buttons for Assignment Dispatch */}
+                                        <div className="d-flex flex-column gap-1.5 mt-2">
+                                            <Button
+                                                size="sm"
+                                                variant="outline-primary"
+                                                className="rounded-pill w-100 py-1 fw-semibold d-inline-flex align-items-center justify-content-center gap-1.5"
+                                                style={{ fontSize: '0.75rem' }}
+                                                onClick={handleSendAssignmentEmail}
+                                                title={`Send assignment notification email to ${currentAssignee.email}`}
+                                            >
+                                                <FontAwesomeIcon icon={faPaperPlane} /> Send Assignment Email
+                                            </Button>
+
+                                            {currentAssignee.phone ? (
+                                                <a
+                                                    href={`https://wa.me/${currentAssignee.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`*KOSHER CODE JIRA - TICKET ASSIGNMENT*\nHello ${currentAssignee.name},\nTicket: ${ticket.key} - ${ticket.title}\nPriority: ${ticket.priority}\nSprint: ${sprints.find(s => s.id === ticket.sprintId)?.name || 'Active'}\nPortal: ${window.location.origin}/admin/tickets`)}`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="jira-whatsapp-btn w-100 justify-content-center py-1 text-center"
+                                                    style={{ fontSize: '0.75rem' }}
+                                                    title="Notify on WhatsApp"
+                                                >
+                                                    <FontAwesomeIcon icon={faWhatsapp} /> Notify on WhatsApp
+                                                </a>
+                                            ) : (
+                                                <Button
+                                                    size="sm"
+                                                    variant="outline-secondary"
+                                                    className="rounded-pill w-100 py-1 fw-semibold d-inline-flex align-items-center justify-content-center gap-1.5"
+                                                    style={{ fontSize: '0.74rem' }}
+                                                    onClick={() => {
+                                                        const text = `*Kosher Code Jira Ticket Assignment*\nAssignee: ${currentAssignee.name}\nTicket: ${ticket.key} - ${ticket.title}\nPriority: ${ticket.priority}\nStatus: ${ticket.status}\nLink: ${window.location.origin}/admin/tickets`;
+                                                        navigator.clipboard.writeText(text);
+                                                        toast.success('Assignment brief copied to clipboard!');
+                                                    }}
+                                                >
+                                                    <FontAwesomeIcon icon={faCopy} /> Copy Ticket Summary
+                                                </Button>
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
 
                             {/* Reporter */}

@@ -51,6 +51,7 @@ import {
     subscribeToTeamMembers
 } from '../../../services/ticketService';
 import { useAppContext } from '../../../context';
+import { sendTicketAssignmentNotification } from '../../../services/jiraNotificationService';
 
 const KANBAN_COLUMNS = [
     { id: 'Backlog', label: 'Backlog', color: '#64748B' },
@@ -116,13 +117,42 @@ const TicketManagement = () => {
         const created = createTicket(ticketData, user);
         setTickets(getStoredTickets());
         setSelectedTicket(created);
+
+        // Automated notification dispatch to assignee
+        if (created?.assigneeId) {
+            const assignee = teamMembers.find(m => m.id === created.assigneeId);
+            if (assignee && assignee.email) {
+                const sprint = sprints.find(s => s.id === created.sprintId);
+                const notifPromise = sendTicketAssignmentNotification(created, assignee, user, sprint?.name);
+                toast.promise(notifPromise, {
+                    loading: `Dispatching assignment notice to ${assignee.name}...`,
+                    success: `Assignment email sent to ${assignee.name}!`,
+                    error: 'Assignment notification logged'
+                });
+            }
+        }
     };
 
     const handleUpdateTicket = (ticketId, updates) => {
+        const prevTicket = tickets.find(t => t.id === ticketId);
         const updatedList = updateTicket(ticketId, updates, user);
         setTickets(updatedList);
         const refreshed = updatedList.find(t => t.id === ticketId);
         if (refreshed) setSelectedTicket(refreshed);
+
+        // Dispatch notice if assignee was newly set or changed
+        if (updates.assigneeId && updates.assigneeId !== prevTicket?.assigneeId) {
+            const assignee = teamMembers.find(m => m.id === updates.assigneeId);
+            if (assignee && assignee.email) {
+                const sprint = sprints.find(s => s.id === (refreshed?.sprintId || prevTicket?.sprintId));
+                const notifPromise = sendTicketAssignmentNotification(refreshed || prevTicket, assignee, user, sprint?.name);
+                toast.promise(notifPromise, {
+                    loading: `Dispatching reassignment notice to ${assignee.name}...`,
+                    success: `Assignment email sent to ${assignee.name}!`,
+                    error: 'Assignment notification logged'
+                });
+            }
+        }
     };
 
     const handleDeleteTicket = (ticketId) => {
@@ -629,7 +659,14 @@ const TicketManagement = () => {
                                                 </span>
                                             </td>
                                             <td className="py-3 px-3">
-                                                <span className="badge rounded-pill bg-light text-dark border px-2.5 py-1 small">
+                                                <span 
+                                                    className="badge rounded-pill px-2.5 py-1 small"
+                                                    style={{ 
+                                                        backgroundColor: 'var(--cp-card-subtle, #F1F5F9)', 
+                                                        color: 'var(--cp-text-main, #0F172A)', 
+                                                        border: '1px solid var(--cp-border, #E2E8F0)' 
+                                                    }}
+                                                >
                                                     {ticket.status}
                                                 </span>
                                             </td>
@@ -757,16 +794,29 @@ const TicketManagement = () => {
                                         return (
                                             <div 
                                                 key={t.id} 
-                                                className="d-flex align-items-center justify-content-between p-2.5 rounded-3 bg-white border"
-                                                style={{ cursor: 'pointer' }}
+                                                className="d-flex align-items-center justify-content-between p-2.5 rounded-3 border"
+                                                style={{ 
+                                                    cursor: 'pointer',
+                                                    backgroundColor: 'var(--cp-card-bg, #FFFFFF)',
+                                                    borderColor: 'var(--cp-border, #E2E8F0)'
+                                                }}
                                                 onClick={() => handleOpenTicket(t)}
                                             >
                                                 <div className="d-flex align-items-center gap-2">
                                                     <span className="fw-bold text-primary small">{t.key}</span>
-                                                    <span className="small fw-semibold">{t.title}</span>
+                                                    <span className="small fw-semibold" style={{ color: 'var(--cp-text-main)' }}>{t.title}</span>
                                                 </div>
                                                 <div className="d-flex align-items-center gap-3">
-                                                    <span className="badge rounded-pill bg-light text-dark border small">{t.status}</span>
+                                                    <span 
+                                                        className="badge rounded-pill small"
+                                                        style={{ 
+                                                            backgroundColor: 'var(--cp-card-subtle, #F1F5F9)', 
+                                                            color: 'var(--cp-text-main, #0F172A)', 
+                                                            border: '1px solid var(--cp-border, #E2E8F0)' 
+                                                        }}
+                                                    >
+                                                        {t.status}
+                                                    </span>
                                                     {assignee && <img src={assignee.avatar} alt={assignee.name} className="jira-avatar-sm" />}
                                                     <span className="small fw-bold">{t.storyPoints} pts</span>
                                                 </div>

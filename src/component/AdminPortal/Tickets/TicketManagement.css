@@ -463,3 +463,72 @@
     color: var(--cp-primary, #7054F2);
     background-color: var(--cp-primary-subtle, rgba(112, 84, 242, 0.08));
 }
+
+/* WhatsApp Communication Pill */
+.jira-whatsapp-btn {
+    background-color: #25D366;
+    color: #FFFFFF !important;
+    font-size: 0.74rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 9999px;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
+.jira-whatsapp-btn:hover {
+    background-color: #1EBE5D;
+    color: #FFFFFF !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
+}
+
+/* Invert Bootstrap close button in Dark Mode */
+[data-theme="dark"] .jira-modal-content .btn-close,
+.theme-dark .jira-modal-content .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* Dark Mode Form Controls and Selects */
+[data-theme="dark"] .jira-modal-content .form-control,
+[data-theme="dark"] .jira-modal-content .form-select,
+[data-theme="dark"] .cp-input,
+.theme-dark .jira-modal-content .form-control,
+.theme-dark .jira-modal-content .form-select,
+.theme-dark .cp-input {
+    background-color: #0F172A !important;
+    color: #F8FAFC !important;
+    border-color: #2A3854 !important;
+}
+
+[data-theme="dark"] .jira-modal-content .form-control:focus,
+[data-theme="dark"] .jira-modal-content .form-select:focus,
+.theme-dark .jira-modal-content .form-control:focus,
+.theme-dark .jira-modal-content .form-select:focus {
+    border-color: #7054F2 !important;
+    box-shadow: 0 0 0 3px rgba(112, 84, 242, 0.25) !important;
+}
+
+/* Dark mode Table Hover and Header Styling */
+[data-theme="dark"] .cp-table thead th,
+.theme-dark .cp-table thead th {
+    background-color: #1A243B;
+    color: #94A3B8;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .cp-table tbody tr:hover,
+.theme-dark .cp-table tbody tr:hover {
+    background-color: #1E2B45;
+}
+
+[data-theme="dark"] .jira-ticket-box-white,
+.theme-dark .jira-ticket-box-white {
+    background-color: #1A243B !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
