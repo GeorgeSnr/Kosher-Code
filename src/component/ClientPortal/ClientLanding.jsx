@@ -495,21 +495,23 @@ const ClientLanding = () => {
                                 </div>
                                 <div className="d-flex justify-content-between align-items-center small" style={{ fontSize: '0.8rem' }}>
                                     <span style={{ color: 'var(--cp-text-muted)' }}>Emergency Hotline</span>
-                                    <strong style={{ color: 'var(--cp-text-main)' }}>+256 700 000 000</strong>
+                                    <a href="tel:+256703275790" className="text-decoration-none fw-bold" style={{ color: 'var(--cp-text-main)' }}>
+                                        +256 703 275 790
+                                    </a>
                                 </div>
                             </div>
                         </div>
 
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3 pt-3 border-top" style={{ borderColor: 'var(--cp-border)' }}>
                             <a 
-                                href="mailto:support@koshercode.com" 
+                                href="mailto:koshercode01@gmail.com" 
                                 className="btn rounded-pill fw-semibold text-white d-inline-flex align-items-center gap-2 px-4 py-2"
                                 style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', fontSize: '0.82rem' }}
                             >
                                 Email Lead Architect <FontAwesomeIcon icon={faArrowRight} style={{ fontSize: '0.7rem' }} />
                             </a>
                             <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.78rem' }}>
-                                support@koshercode.com
+                                koshercode01@gmail.com
                             </small>
                         </div>
                     </div>

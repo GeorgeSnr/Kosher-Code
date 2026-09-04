@@ -45,12 +45,19 @@ import {
     getStoredAdmins,
     getStoredServices,
     subscribeToOrders,
-    fetchOrdersAsync 
+    fetchOrdersAsync,
+    getRegisteredUsers,
+    fetchFirestoreUsers,
+    subscribeToUsers,
+    fetchContactInquiries,
+    subscribeToContacts
 } from '../../services/storageService';
 import './AdminLanding.css';
 
 const AdminLanding = () => {
     const [orders, setOrders] = useState(() => getStoredOrders());
+    const [users, setUsers] = useState(() => getRegisteredUsers());
+    const [contacts, setContacts] = useState([]);
     const [filterStatus, setFilterStatus] = useState('All');
     const [searchQuery, setSearchQuery] = useState('');
     const [admins] = useState(() => getStoredAdmins());
@@ -63,33 +70,118 @@ const AdminLanding = () => {
     // Selected table rows (checkboxes)
     const [selectedRowIds, setSelectedRowIds] = useState(new Set());
 
-    // Interactive chart state (default to August, index 7 matching 6.4K in Dribbble)
-    const [activeMonthIdx, setActiveMonthIdx] = useState(7);
+    // Formatting helper for live numeric figures
+    const formatStatNumber = (num) => {
+        if (!num && num !== 0) return '0';
+        if (num >= 1000000) return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        if (num >= 1000) return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        return String(num);
+    };
 
-    // Monthly Bar Chart Data (Jan - Dec)
-    const monthlyStats = [
-        { month: 'Jan', postedHeight: 52, appsHeight: 38, tooltip: '4.0K' },
-        { month: 'Feb', postedHeight: 96, appsHeight: 64, tooltip: '7.2K' },
-        { month: 'Mar', postedHeight: 68, appsHeight: 46, tooltip: '5.1K' },
-        { month: 'Apr', postedHeight: 78, appsHeight: 58, tooltip: '5.8K' },
-        { month: 'May', postedHeight: 72, appsHeight: 52, tooltip: '5.4K' },
-        { month: 'Jun', postedHeight: 104, appsHeight: 68, tooltip: '7.8K' },
-        { month: 'Jul', postedHeight: 62, appsHeight: 44, tooltip: '4.6K' },
-        { month: 'Aug', postedHeight: 88, appsHeight: 60, tooltip: '6.4K' }, // Peak featured in Dribbble
-        { month: 'Sep', postedHeight: 56, appsHeight: 38, tooltip: '4.2K' },
-        { month: 'Oct', postedHeight: 94, appsHeight: 66, tooltip: '7.0K' },
-        { month: 'Nov', postedHeight: 60, appsHeight: 78, tooltip: '5.8K' },
-        { month: 'Dec', postedHeight: 82, appsHeight: 56, tooltip: '6.2K' }
-    ];
+    // Helper to extract month index from various order and contact date structures
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const extractMonthIndex = (item) => {
+        if (!item) return -1;
+        if (item.createdAt) {
+            if (typeof item.createdAt.toDate === 'function') {
+                return item.createdAt.toDate().getMonth();
+            }
+            const d = new Date(item.createdAt);
+            if (!isNaN(d.getTime())) return d.getMonth();
+        }
+        if (item.date) {
+            const d = new Date(item.date);
+            if (!isNaN(d.getTime())) return d.getMonth();
+            const lower = String(item.date).toLowerCase();
+            for (let i = 0; i < monthNames.length; i++) {
+                if (lower.includes(monthNames[i].toLowerCase())) return i;
+            }
+        }
+        if (item.postedDate) {
+            const lower = String(item.postedDate).toLowerCase();
+            for (let i = 0; i < monthNames.length; i++) {
+                if (lower.includes(monthNames[i].toLowerCase())) return i;
+            }
+        }
+        return -1;
+    };
+
+    // Compute dynamic monthly stats from live orders & inbound contacts
+    const monthlyStats = React.useMemo(() => {
+        const rawCounts = monthNames.map((month, idx) => {
+            const monthOrders = orders.filter(o => extractMonthIndex(o) === idx);
+            const monthContacts = contacts.filter(c => extractMonthIndex(c) === idx);
+            const appsCount = monthOrders.length + monthContacts.length;
+            const postedCount = monthOrders.filter(o => o.status === 'Active' || o.status === 'In Progress' || o.status === 'Done').length;
+            return { month, appsCount, postedCount };
+        });
+
+        const maxActivity = Math.max(4, ...rawCounts.map(r => Math.max(r.appsCount, r.postedCount)));
+        const MAX_HEIGHT_PX = 104;
+
+        return rawCounts.map(r => {
+            const postedHeight = r.postedCount > 0 
+                ? Math.max(10, Math.round((r.postedCount / maxActivity) * MAX_HEIGHT_PX)) 
+                : 4;
+            const appsHeight = r.appsCount > 0 
+                ? Math.max(10, Math.round((r.appsCount / maxActivity) * MAX_HEIGHT_PX)) 
+                : 4;
+            const tooltip = r.appsCount > 0 || r.postedCount > 0 
+                ? `${r.appsCount} Apps (${r.postedCount} Active)` 
+                : '0 Activity';
+
+            return {
+                month: r.month,
+                postedHeight,
+                appsHeight,
+                postedCount: r.postedCount,
+                appsCount: r.appsCount,
+                tooltip
+            };
+        });
+    }, [orders, contacts]);
+
+    // Peak activity or current month index for chart highlight
+    const peakMonthIdx = React.useMemo(() => {
+        let peakIdx = new Date().getMonth();
+        let maxVal = -1;
+        monthlyStats.forEach((m, idx) => {
+            const total = m.appsCount + m.postedCount;
+            if (total > maxVal) {
+                maxVal = total;
+                peakIdx = idx;
+            }
+        });
+        return peakIdx;
+    }, [monthlyStats]);
+
+    const [activeMonthIdx, setActiveMonthIdx] = useState(peakMonthIdx);
 
     useEffect(() => {
-        // Initial async fetch
+        setActiveMonthIdx(peakMonthIdx);
+    }, [peakMonthIdx]);
+
+    // Dynamic Y-Axis scale based on actual maximum activity
+    const yAxisLabels = React.useMemo(() => {
+        const maxVal = Math.max(4, ...monthlyStats.map(m => Math.max(m.appsCount, m.postedCount)));
+        const roundedMax = Math.ceil(maxVal / 4) * 4;
+        return [
+            formatStatNumber(roundedMax),
+            formatStatNumber(Math.round(roundedMax * 0.75)),
+            formatStatNumber(Math.round(roundedMax * 0.5)),
+            formatStatNumber(Math.round(roundedMax * 0.25)),
+            '0'
+        ];
+    }, [monthlyStats]);
+
+    useEffect(() => {
+        // Initial async fetch for orders
         fetchOrdersAsync().then(cloudList => {
             if (cloudList && cloudList.length > 0) setOrders(cloudList);
         });
 
-        // Real-time Firestore subscription
-        const unsubscribe = subscribeToOrders(
+        // Real-time Firestore orders subscription
+        const unsubOrders = subscribeToOrders(
             (cloudOrders) => {
                 if (cloudOrders && cloudOrders.length > 0) {
                     setOrders(cloudOrders);
@@ -100,8 +192,55 @@ const AdminLanding = () => {
             }
         );
 
+        // Initial fetch for registered users
+        fetchFirestoreUsers().then(cloudUsers => {
+            if (cloudUsers && cloudUsers.length > 0) {
+                setUsers(prev => {
+                    const localUsers = getRegisteredUsers();
+                    const map = new Map();
+                    localUsers.forEach(u => map.set(u.email?.toLowerCase(), u));
+                    cloudUsers.forEach(u => map.set(u.email?.toLowerCase() || u.id?.toLowerCase(), u));
+                    return Array.from(map.values());
+                });
+            }
+        });
+
+        // Real-time Firestore users subscription
+        const unsubUsers = subscribeToUsers(
+            (cloudUsers) => {
+                if (cloudUsers && cloudUsers.length > 0) {
+                    setUsers(prev => {
+                        const localUsers = getRegisteredUsers();
+                        const map = new Map();
+                        localUsers.forEach(u => map.set(u.email?.toLowerCase(), u));
+                        cloudUsers.forEach(u => map.set(u.email?.toLowerCase() || u.id?.toLowerCase(), u));
+                        return Array.from(map.values());
+                    });
+                }
+            },
+            (err) => {
+                console.log('Live admin landing users subscription:', err.message);
+            }
+        );
+
+        // Inbound contact inquiries
+        fetchContactInquiries().then(inquiries => {
+            if (inquiries && inquiries.length > 0) setContacts(inquiries);
+        });
+
+        const unsubContacts = subscribeToContacts(
+            (inquiries) => {
+                if (inquiries) setContacts(inquiries);
+            },
+            (err) => {
+                console.log('Live admin landing contacts subscription:', err.message);
+            }
+        );
+
         return () => {
-            if (typeof unsubscribe === 'function') unsubscribe();
+            if (typeof unsubOrders === 'function') unsubOrders();
+            if (typeof unsubUsers === 'function') unsubUsers();
+            if (typeof unsubContacts === 'function') unsubContacts();
         };
     }, []);
 
@@ -230,8 +369,24 @@ const AdminLanding = () => {
         .filter(o => o.status === 'Pending' || o.status === 'In Review')
         .slice(0, 3);
 
-    // Dynamic stats
-    const pendingCount = orders.filter(o => o.status === 'Pending').length;
+    // Dynamic counts from live database & storage
+    const allUserEmails = new Set([
+        ...users.map(u => u.email?.toLowerCase()).filter(Boolean),
+        ...admins.map(a => a.toLowerCase()).filter(Boolean),
+        ...orders.map(o => o.email?.toLowerCase()).filter(Boolean)
+    ]);
+    const totalUsersCount = Math.max(allUserEmails.size, users.length, admins.length);
+
+    const allCompanies = new Set([
+        ...orders.map(o => o.institution || o.company),
+        ...users.map(u => u.institution || u.company)
+    ].filter(Boolean).map(c => c.trim()));
+    const totalCompaniesCount = allCompanies.size > 0 ? allCompanies.size : 1;
+
+    const activeJobsCount = orders.filter(o => o.status === 'Active' || o.status === 'In Progress').length;
+    const totalApplicationsCount = orders.length + (contacts?.length || 0);
+    const pendingJobsCount = orders.filter(o => o.status === 'Pending' || o.status === 'In Review').length;
+    const closedJobsCount = orders.filter(o => o.status === 'Done' || o.status === 'Completed' || o.status === 'Expired').length;
 
     return (
         <div className="admin-dribbble-dashboard">
@@ -290,7 +445,7 @@ const AdminLanding = () => {
                 {/* Left Heading Box */}
                 <div className="ad-stats-intro">
                     <h3 className="ad-stats-intro-title">Quick Stats</h3>
-                    <p className="ad-stats-intro-sub">Your statistics for 1 week period.</p>
+                    <p className="ad-stats-intro-sub">Live platform telemetry & client volume.</p>
                 </div>
 
                 {/* Right 6 Tall Pill Cards */}
@@ -300,7 +455,7 @@ const AdminLanding = () => {
                         <div className="ad-stat-icon-circle">
                             <FontAwesomeIcon icon={faUsers} />
                         </div>
-                        <div className="ad-stat-value">500K</div>
+                        <div className="ad-stat-value">{formatStatNumber(totalUsersCount)}</div>
                         <p className="ad-stat-title">Total Users</p>
                     </div>
 
@@ -309,7 +464,7 @@ const AdminLanding = () => {
                         <div className="ad-stat-icon-circle">
                             <FontAwesomeIcon icon={faBuilding} />
                         </div>
-                        <div className="ad-stat-value">1.2K</div>
+                        <div className="ad-stat-value">{formatStatNumber(totalCompaniesCount)}</div>
                         <p className="ad-stat-title">Total Companies</p>
                     </div>
 
@@ -318,9 +473,9 @@ const AdminLanding = () => {
                         <div className="ad-stat-icon-circle">
                             <FontAwesomeIcon icon={faBriefcase} />
                         </div>
-                        <div className="ad-stat-value">3.5K</div>
-                        <p className="ad-stat-title">Active Jobs Posted</p>
-                        <div className="ad-stat-arrow-indicator" title="Active Focus">
+                        <div className="ad-stat-value">{formatStatNumber(activeJobsCount)}</div>
+                        <p className="ad-stat-title">Active Deployments</p>
+                        <div className="ad-stat-arrow-indicator" title="Active Deployments">
                             <FontAwesomeIcon icon={faArrowUp} style={{ transform: 'rotate(45deg)' }} />
                         </div>
                     </div>
@@ -330,8 +485,8 @@ const AdminLanding = () => {
                         <div className="ad-stat-icon-circle">
                             <FontAwesomeIcon icon={faFileAlt} />
                         </div>
-                        <div className="ad-stat-value">28K</div>
-                        <p className="ad-stat-title">Total Applications</p>
+                        <div className="ad-stat-value">{formatStatNumber(totalApplicationsCount)}</div>
+                        <p className="ad-stat-title">Total Inquiries</p>
                     </div>
 
                     {/* 5. Pending Jobs */}
@@ -339,17 +494,17 @@ const AdminLanding = () => {
                         <div className="ad-stat-icon-circle">
                             <FontAwesomeIcon icon={faExclamationTriangle} />
                         </div>
-                        <div className="ad-stat-value">{pendingCount > 0 ? pendingCount * 10 : 80}</div>
-                        <p className="ad-stat-title">Pending Jobs</p>
+                        <div className="ad-stat-value">{formatStatNumber(pendingJobsCount)}</div>
+                        <p className="ad-stat-title">Pending Approvals</p>
                     </div>
 
-                    {/* 6. Reported Jobs */}
+                    {/* 6. Completed / Archived */}
                     <div className="ad-stat-pill">
                         <div className="ad-stat-icon-circle">
-                            <FontAwesomeIcon icon={faClock} />
+                            <FontAwesomeIcon icon={faCheckCircle} />
                         </div>
-                        <div className="ad-stat-value">20</div>
-                        <p className="ad-stat-title">Reported Jobs</p>
+                        <div className="ad-stat-value">{formatStatNumber(closedJobsCount)}</div>
+                        <p className="ad-stat-title">Completed Jobs</p>
                     </div>
                 </div>
             </div>
@@ -362,10 +517,13 @@ const AdminLanding = () => {
                 <Col lg={7} md={12}>
                     <div className="ad-card p-4 h-100">
                         <div className="ad-card-header">
-                            <h4 className="ad-card-heading">Statistics</h4>
+                            <div>
+                                <h4 className="ad-card-heading mb-0">Inbound & Deployment Volume</h4>
+                                <small className="text-muted" style={{ fontSize: '0.74rem' }}>Live monthly distribution from platform database</small>
+                            </div>
                             <div className="ad-chart-legend">
                                 <span className="ad-legend-item">
-                                    <span className="ad-legend-dot dark"></span> Jobs Posted
+                                    <span className="ad-legend-dot dark"></span> Active Jobs
                                 </span>
                                 <span className="ad-legend-item">
                                     <span className="ad-legend-dot light"></span> Applications
@@ -384,13 +542,11 @@ const AdminLanding = () => {
                                 <div className="ad-chart-gridline"></div>
                             </div>
 
-                            {/* Y-Axis Labels */}
+                            {/* Dynamic Y-Axis Labels */}
                             <div className="ad-chart-y-axis">
-                                <span>8K</span>
-                                <span>6K</span>
-                                <span>4K</span>
-                                <span>2K</span>
-                                <span>0</span>
+                                {yAxisLabels.map((lbl, i) => (
+                                    <span key={i}>{lbl}</span>
+                                ))}
                             </div>
 
                             {/* Bars Area */}
@@ -407,7 +563,7 @@ const AdminLanding = () => {
                                             {/* Peak Floating Tooltip */}
                                             {isHighlighted && (
                                                 <div className="ad-chart-active-tooltip">
-                                                    {item.tooltip}
+                                                    {item.appsCount > 0 || item.postedCount > 0 ? `${item.appsCount} Apps` : '0 Apps'}
                                                     <div className="ad-chart-active-dot"></div>
                                                 </div>
                                             )}
@@ -467,7 +623,7 @@ const AdminLanding = () => {
                                             </div>
                                             <div className="overflow-hidden" style={{ minWidth: 0, flex: '1 1 auto' }}>
                                                 <div className="ad-pending-name text-truncate">{item.institution || item.name}</div>
-                                                <div className="ad-pending-time text-truncate">{item.postedDate || `${item.date} 03:20 GMT`}</div>
+                                                <div className="ad-pending-time text-truncate">{item.postedDate || item.date || 'Pending Review'}</div>
                                             </div>
                                         </div>
                                         <span className="ad-pill-pending">Pending</span>
@@ -597,7 +753,7 @@ const AdminLanding = () => {
                                                     onClick={() => openOrderDetails(order)}
                                                     title="Click to inspect request"
                                                 >
-                                                    {order.title || order.serviceName || 'Product Designer'}
+                                                    {order.serviceName || order.title || 'Enterprise Solution'}
                                                 </span>
                                             </td>
 
@@ -614,7 +770,7 @@ const AdminLanding = () => {
                                             {/* Location */}
                                             <td>
                                                 <span className="ad-cell-location">
-                                                    {order.location || order.region || 'San Francisco'}
+                                                    {order.region || order.location || 'Kampala HQ / East Africa'}
                                                 </span>
                                             </td>
 
@@ -626,7 +782,7 @@ const AdminLanding = () => {
                                             {/* Posted Date */}
                                             <td>
                                                 <span className="ad-cell-date">
-                                                    {order.postedDate || `${order.date || 'Jun 10'} 03:20 GMT`}
+                                                    {order.postedDate || order.date || 'Recent'}
                                                 </span>
                                             </td>
 
@@ -701,7 +857,7 @@ const AdminLanding = () => {
                             </div>
                             <div className="overflow-hidden" style={{ minWidth: 0, flex: '1 1 auto' }}>
                                 <Modal.Title className="ad-modal-title text-truncate">
-                                    {selectedOrder.title || selectedOrder.serviceName || 'Request Details'}
+                                    {selectedOrder.serviceName || selectedOrder.title || 'Enterprise Solution'}
                                 </Modal.Title>
                                 <div className="ad-modal-meta">
                                     <span className="fw-semibold text-truncate" style={{ maxWidth: '180px' }}>
@@ -711,11 +867,11 @@ const AdminLanding = () => {
                                     <span>&bull;</span>
                                     <span>
                                         <FontAwesomeIcon icon={faCalendarAlt} className="me-1 text-muted" style={{ fontSize: '0.75rem' }} />
-                                        {selectedOrder.postedDate || `${selectedOrder.date || 'Recent'} 03:20 GMT`}
+                                        {selectedOrder.postedDate || selectedOrder.date || 'Recent'}
                                     </span>
                                     <span>&bull;</span>
                                     <span className="ad-modal-ref-tag">
-                                        REF-{selectedOrder._id ? selectedOrder._id.substring(0, 8).toUpperCase() : 'JOB-2026'}
+                                        REF-{selectedOrder._id ? selectedOrder._id.substring(0, 8).toUpperCase() : 'ENG-2026'}
                                     </span>
                                 </div>
                             </div>
@@ -731,19 +887,19 @@ const AdminLanding = () => {
                             <div className="ad-modal-hero-item">
                                 <span className="ad-modal-hero-label">Representative</span>
                                 <span className="ad-modal-hero-val" title={selectedOrder.name}>
-                                    {selectedOrder.name || 'Enterprise Lead'}
+                                    {selectedOrder.name || 'Enterprise Stakeholder'}
                                 </span>
                             </div>
                             <div className="ad-modal-hero-item">
                                 <span className="ad-modal-hero-label">Deployment Node</span>
-                                <span className="ad-modal-hero-val" title={selectedOrder.location || selectedOrder.region || 'Kampala HQ'}>
-                                    {selectedOrder.location || selectedOrder.region || 'Kampala Hub'}
+                                <span className="ad-modal-hero-val" title={selectedOrder.region || selectedOrder.location || 'Kampala HQ'}>
+                                    {selectedOrder.region || selectedOrder.location || 'Kampala HQ'}
                                 </span>
                             </div>
                             <div className="ad-modal-hero-item">
                                 <span className="ad-modal-hero-label">Valuation</span>
                                 <span className="ad-modal-hero-val text-success">
-                                    ${selectedOrder.price || '4,500'} <small className="text-muted fw-normal" style={{ fontSize: '0.75rem' }}>USD</small>
+                                    {selectedOrder.price ? `$${selectedOrder.price} ` : 'Custom Scope '}<small className="text-muted fw-normal" style={{ fontSize: '0.75rem' }}>USD</small>
                                 </span>
                             </div>
                             <div className="ad-modal-hero-item">
