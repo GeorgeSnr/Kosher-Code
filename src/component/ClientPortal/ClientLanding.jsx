@@ -18,7 +18,7 @@ import {
     faChartLine, 
     faMobileAlt,
     faEye,
-    faServer
+    faBuilding
 } from '@fortawesome/free-solid-svg-icons';
 import { useAppContext, SET_SELECTED_SERVICE } from '../../context';
 import { 
@@ -171,7 +171,7 @@ const ClientLanding = () => {
                                             color: 'rgba(255, 255, 255, 0.95)' 
                                         }}
                                     >
-                                        Deployment Hub
+                                        Client Advisory Desk
                                     </span>
                                 </div>
                                 <span 
@@ -185,17 +185,19 @@ const ClientLanding = () => {
                                         padding: '4px 10px'
                                     }}
                                 >
-                                    ● 100% Active
+                                    ● Active Desk
                                 </span>
                             </div>
 
                             <div className="mb-3">
                                 <h6 className="text-white fw-bold mb-1 d-flex align-items-center gap-2" style={{ fontSize: '1.02rem', letterSpacing: '-0.01em' }}>
-                                    <FontAwesomeIcon icon={faServer} style={{ fontSize: '0.9rem', color: 'rgba(255, 255, 255, 0.85)' }} />
-                                    Kampala, Uganda
+                                    <FontAwesomeIcon icon={faBuilding} style={{ fontSize: '0.9rem', color: 'rgba(255, 255, 255, 0.9)' }} />
+                                    {user?.institution || user?.company || (user?.name ? `${user.name}'s Account` : 'Enterprise Partner')}
                                 </h6>
                                 <p className="mb-0 text-white text-opacity-80" style={{ fontSize: '0.78rem', lineHeight: 1.45 }}>
-                                    East Africa & Global Delivery Network
+                                    {bookings.length > 0 
+                                        ? `${bookings.length} Solution Engagement${bookings.length > 1 ? 's' : ''} Managed` 
+                                        : 'Dedicated Kosher Code Solutions Team'}
                                 </p>
                             </div>
 
@@ -203,10 +205,14 @@ const ClientLanding = () => {
                                 className="pt-2.5 border-top d-flex align-items-center justify-content-between" 
                                 style={{ borderColor: 'rgba(255, 255, 255, 0.16)', fontSize: '0.76rem' }}
                             >
-                                <span className="text-white text-opacity-90 d-flex align-items-center gap-1.5">
-                                    <FontAwesomeIcon icon={faCheckCircle} style={{ color: '#10B981', fontSize: '0.8rem' }} />
-                                    <span>SLA: <strong>99.9% Uptime</strong></span>
-                                </span>
+                                <a 
+                                    href="tel:+256703275790" 
+                                    className="text-white text-opacity-90 d-flex align-items-center gap-1.5 text-decoration-none"
+                                    title="Call Kosher Code Advisory Desk"
+                                >
+                                    <FontAwesomeIcon icon={faHeadset} style={{ color: '#A7F3D0', fontSize: '0.85rem' }} />
+                                    <span>Desk: <strong>+256 703 275 790</strong></span>
+                                </a>
                                 <span 
                                     className="badge rounded-pill"
                                     style={{
@@ -217,7 +223,7 @@ const ClientLanding = () => {
                                         fontWeight: 600
                                     }}
                                 >
-                                    Priority Tier
+                                    Priority SLA
                                 </span>
                             </div>
                         </div>
