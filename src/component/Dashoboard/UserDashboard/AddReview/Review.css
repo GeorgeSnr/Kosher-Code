@@ -1,18 +1,20 @@
 .userReviewBox {
-    background: #f1ecff;
-    padding: 2.5rem 5rem;
-    border-radius: 4px;
+    background: var(--cp-card-subtle, #f1ecff);
+    padding: 2.5rem;
+    border-radius: 24px;
     text-align: center;
-    min-height: 100vh;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 .userReviewBox button {
     margin: 0 0.5rem;
 }
 .reviewForm {
-    background: white;
-    box-shadow: 0 2px 5px 1px rgb(64 60 67 / 4%);
-    padding: 2rem;
-    border-radius: 4px;
+    background: var(--cp-card-bg, white);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.025);
+    border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.04));
+    padding: 2.5rem;
+    border-radius: 24px;
     width: 100%;
-    margin: 2.5rem 0;
+    margin: 2rem 0;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }

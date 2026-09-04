@@ -47,9 +47,9 @@ const ReviewForm = ({ setIsUpdated, existingReview, onCancel }) => {
     };
 
     return (
-        <div className="cp-card p-4 mx-auto" style={{ maxWidth: '680px' }}>
+        <div className="cp-card p-4 p-md-5 mx-auto" style={{ maxWidth: '680px' }}>
             <div className="d-flex align-items-center justify-content-between mb-2">
-                <h5 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)', fontSize: '1.1rem' }}>
+                <h5 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)', fontSize: '1.15rem' }}>
                     {existingReview ? 'Edit Your Testimonial' : 'Share Project Testimonial'}
                 </h5>
                 {onCancel && (
@@ -58,15 +58,15 @@ const ReviewForm = ({ setIsUpdated, existingReview, onCancel }) => {
                     </Button>
                 )}
             </div>
-            <p className="small mb-3" style={{ color: 'var(--cp-text-muted)', fontSize: '0.82rem' }}>
+            <p className="small mb-3.5" style={{ color: 'var(--cp-text-muted)', fontSize: '0.84rem' }}>
                 Your feedback directly impacts our engineering roadmaps and highlights successful enterprise deployments.
             </p>
 
             {/* Interactive Star Rating Selector */}
-            <div className="p-2.5 rounded mb-3 d-flex align-items-center justify-content-between" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+            <div className="p-3 rounded-4 mb-3.5 d-flex align-items-center justify-content-between" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
                 <div>
-                    <span className="fw-semibold small d-block" style={{ color: 'var(--cp-text-main)', fontSize: '0.82rem' }}>Overall Satisfaction Rating</span>
-                    <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.74rem' }}>Click to rate your experience</small>
+                    <span className="fw-semibold small d-block" style={{ color: 'var(--cp-text-main)', fontSize: '0.84rem' }}>Overall Satisfaction Rating</span>
+                    <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.76rem' }}>Click to rate your experience</small>
                 </div>
                 <div className="d-flex align-items-center gap-1">
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -82,13 +82,13 @@ const ReviewForm = ({ setIsUpdated, existingReview, onCancel }) => {
                             <FontAwesomeIcon
                                 icon={faStar}
                                 style={{
-                                    fontSize: '1.25rem',
+                                    fontSize: '1.3rem',
                                     color: (hoverRating || rating) >= star ? '#F59E0B' : 'var(--cp-border)'
                                 }}
                             />
                         </button>
                     ))}
-                    <span className="ms-2 fw-bold small" style={{ color: '#F59E0B' }}>{rating}.0</span>
+                    <span className="ms-2 fw-bold small" style={{ color: '#F59E0B', fontSize: '0.88rem' }}>{rating}.0</span>
                 </div>
             </div>
 
@@ -99,7 +99,6 @@ const ReviewForm = ({ setIsUpdated, existingReview, onCancel }) => {
                         <Form.Control
                             type="text"
                             className="cp-input"
-                            style={{ padding: '0.65rem' }}
                             {...register("name", { required: true })}
                             placeholder="e.g. David Mukasa (Chief Technology Officer)" 
                         />
@@ -110,7 +109,6 @@ const ReviewForm = ({ setIsUpdated, existingReview, onCancel }) => {
                         <Form.Control
                             type="text"
                             className="cp-input"
-                            style={{ padding: '0.65rem' }}
                             {...register("address", { required: true })}
                             placeholder="e.g. Victoria SACCO Union, Kampala" 
                         />
@@ -121,7 +119,6 @@ const ReviewForm = ({ setIsUpdated, existingReview, onCancel }) => {
                         <Form.Control
                             type="text"
                             className="cp-input"
-                            style={{ padding: '0.65rem' }}
                             {...register("service", { required: true })}
                             placeholder="e.g. Core Banking API & SACCO Cloud ERP Deployment" 
                         />
@@ -133,21 +130,20 @@ const ReviewForm = ({ setIsUpdated, existingReview, onCancel }) => {
                             as="textarea"
                             rows={3}
                             className="cp-input"
-                            style={{ padding: '0.65rem' }}
                             {...register("description", { required: true })}
                             placeholder="Describe the business outcomes, turnaround speed, system stability, and engineering collaboration with Kosher Code..." 
                         />
                     </Form.Group>
                 </Row>
 
-                <div className="d-flex align-items-center justify-content-between mt-4 pt-2 border-top" style={{ borderColor: 'var(--cp-border)' }}>
-                    <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.75rem' }}>
+                <div className="d-flex flex-wrap align-items-center justify-content-between mt-4 pt-3 border-top gap-3" style={{ borderColor: 'var(--cp-border)' }}>
+                    <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.76rem' }}>
                         🔒 Reviews are verified by Kosher Code administration.
                     </small>
                     <Button 
                         type="submit" 
-                        className="fw-semibold px-4 py-2 text-white d-inline-flex align-items-center gap-2"
-                        style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', borderRadius: '4px', fontSize: '0.85rem' }}
+                        className="fw-semibold px-4 py-2.5 text-white d-inline-flex align-items-center gap-2 rounded-pill"
+                        style={{ backgroundColor: '#121417', borderColor: '#121417', fontSize: '0.88rem', boxShadow: '0 4px 14px rgba(0, 0, 0, 0.25)' }}
                     >
                         <FontAwesomeIcon icon={faPaperPlane} /> {existingReview ? 'Update Testimonial' : 'Publish Testimonial'}
                     </Button>

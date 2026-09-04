@@ -41,7 +41,7 @@ const ClientProfile = () => {
         <div className="p-1 p-sm-2">
             <Row className="justify-content-center">
                 <Col md={8} lg={6}>
-                    <div className="cp-card p-4">
+                    <div className="cp-card p-4 p-md-5">
                         {/* Profile Header */}
                         <div className="text-center mb-4">
                             <div className="d-flex justify-content-center mb-3">
@@ -55,29 +55,29 @@ const ClientProfile = () => {
                                     ringType="glow"
                                 />
                             </div>
-                            <div className="mt-2.5 mb-1">
+                            <div className="mt-2.5 mb-2">
                                 <span 
-                                    className="badge px-3 py-1 fw-semibold"
+                                    className="badge rounded-pill px-3.5 py-1.5 fw-semibold"
                                     style={{
                                         backgroundColor: 'var(--cp-primary-subtle)',
                                         color: 'var(--cp-primary-text)',
                                         border: '1px solid var(--cp-border)',
-                                        fontSize: '0.78rem'
+                                        fontSize: '0.8rem'
                                     }}
                                 >
                                     <FontAwesomeIcon icon={faUserTie} className="me-1.5" />
                                     Verified Enterprise Partner
                                 </span>
                             </div>
-                            <h4 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{displayName}</h4>
+                            <h4 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)' }}>{displayName}</h4>
                             <p className="small mb-0 d-flex align-items-center justify-content-center gap-1.5" style={{ color: 'var(--cp-text-muted)' }}>
                                 <FontAwesomeIcon icon={faEnvelope} /> {displayEmail}
                             </p>
                         </div>
 
                         {/* Account & Telemetry Details */}
-                        <div className="p-3.5 mb-4 rounded" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
-                            <h6 className="fw-bold mb-3 small text-uppercase" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>Account Telemetry & SLA Status</h6>
+                        <div className="p-4 mb-4 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                            <span className="admin-kpi-label mb-3">ACCOUNT TELEMETRY & SLA STATUS</span>
                             
                             <div className="d-flex justify-content-between align-items-center mb-2.5 pb-2 border-bottom" style={{ borderColor: 'var(--cp-border)' }}>
                                 <span className="small fw-semibold" style={{ color: 'var(--cp-text-muted)' }}>Workspace Mode</span>
@@ -103,26 +103,31 @@ const ClientProfile = () => {
                         </div>
 
                         {/* Security Session Details */}
-                        <div className="p-3 mb-4 rounded d-flex align-items-center gap-2.5" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
-                            <FontAwesomeIcon icon={faLock} style={{ color: 'var(--cp-primary)' }} />
+                        <div className="p-3.5 mb-4 rounded-4 d-flex align-items-center gap-3" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                            <div 
+                                className="d-flex align-items-center justify-content-center flex-shrink-0"
+                                style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)' }}
+                            >
+                                <FontAwesomeIcon icon={faLock} />
+                            </div>
                             <div>
                                 <strong className="d-block small" style={{ color: 'var(--cp-text-main)' }}>Session Protected</strong>
-                                <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.75rem' }}>Auto-terminates upon tab closure for maximum security.</small>
+                                <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.76rem' }}>Auto-terminates upon tab closure for maximum security.</small>
                             </div>
                         </div>
 
                         {/* Action Buttons */}
-                        <div className="d-grid gap-3">
-                            <Link to="/client/book" className="btn py-2.5 text-white fw-semibold" style={{ backgroundColor: 'var(--cp-primary)', borderRadius: '4px' }}>
+                        <div className="d-grid gap-2.5">
+                            <Link to="/client/book" className="btn rounded-pill py-2.5 text-white fw-semibold" style={{ backgroundColor: '#121417', borderColor: '#121417', fontSize: '0.88rem', boxShadow: '0 4px 14px rgba(0, 0, 0, 0.25)' }}>
                                 <FontAwesomeIcon icon={faShoppingCart} className="me-2" /> Book New Solution
                             </Link>
-                            <Link to="/client/bookings" className="btn btn-outline-secondary py-2.5 fw-semibold" style={{ borderRadius: '4px', borderColor: 'var(--cp-border)', color: 'var(--cp-text-main)' }}>
+                            <Link to="/client/bookings" className="btn btn-outline-secondary rounded-pill py-2.5 fw-semibold" style={{ borderColor: 'var(--cp-border)', color: 'var(--cp-text-main)', fontSize: '0.88rem' }}>
                                 <FontAwesomeIcon icon={faCalendarCheck} className="me-2" /> View My Engagements ({bookings.length})
                             </Link>
                             <button 
                                 onClick={signOut} 
-                                className="btn btn-outline-danger py-2.5 fw-semibold" 
-                                style={{ borderRadius: '4px' }}
+                                className="btn btn-outline-danger rounded-pill py-2.5 fw-semibold" 
+                                style={{ fontSize: '0.88rem' }}
                             >
                                 <FontAwesomeIcon icon={faSignOutAlt} className="me-2" /> Exit Session & Log Out
                             </button>

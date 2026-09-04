@@ -579,7 +579,7 @@ const ClientPortal = () => {
             <div id="pageContent" className={!sidebarOpen ? 'sidebar-collapsed' : ''}>
                 {/* Clean Responsive Top Header */}
                 <div className="dashBoardHeader">
-                    <div className="d-flex align-items-center gap-2.5 gap-sm-3">
+                    <div className="d-flex align-items-center gap-2.5 gap-sm-3 overflow-hidden" style={{ minWidth: 0, flex: '1 1 auto' }}>
                         <div 
                             ref={toggleBtnRef}
                             id="nav-icon"
@@ -603,23 +603,23 @@ const ClientPortal = () => {
                             <span></span>
                             <span></span>
                         </div>
-                        <div>
-                            <h4 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{title}</h4>
+                        <div className="overflow-hidden" style={{ minWidth: 0, flex: '1 1 auto' }}>
+                            <h4 className="fw-bold mb-0 text-truncate" style={{ color: 'var(--cp-text-main)' }}>{title}</h4>
                         </div>
                     </div>
 
-                    <div className="d-flex align-items-center gap-2.5 gap-sm-3.5 gap-md-4">
+                    <div className="d-flex align-items-center gap-2 gap-sm-2.5 gap-md-3 flex-shrink-0">
                         <button 
-                            type="button"
+                            type="button" 
                             onClick={toggleTheme}
-                            className="btn btn-sm d-flex align-items-center gap-2 py-1.5 px-3"
+                            className="btn d-flex align-items-center gap-2 rounded-pill"
                             style={{ 
                                 backgroundColor: 'var(--cp-card-subtle)', 
                                 border: '1px solid var(--cp-border)',
                                 color: 'var(--cp-text-main)',
-                                borderRadius: '4px',
                                 fontSize: '0.82rem',
-                                fontWeight: 500
+                                fontWeight: 500,
+                                padding: '7px 16px'
                             }}
                             title={`Switch to ${theme === 'light' ? 'Dark' : 'Light'} Mode`}
                         >
@@ -627,18 +627,36 @@ const ClientPortal = () => {
                             <span className="d-none d-md-inline">{theme === 'dark' ? 'Light' : 'Dark'}</span>
                         </button>
 
-                        <div className="d-none d-md-flex align-items-center gap-2 px-3 py-1.5 rounded" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', fontSize: '0.78rem' }}>
+                        <div 
+                            className="d-none d-md-flex align-items-center gap-2 rounded-pill" 
+                            style={{ 
+                                backgroundColor: 'var(--cp-card-subtle)', 
+                                border: '1px solid var(--cp-border)', 
+                                fontSize: '0.8rem',
+                                padding: '7px 16px'
+                            }}
+                        >
                             <FontAwesomeIcon icon={faClock} style={{ color: 'var(--cp-primary)' }} />
-                            <span className="fw-semibold" style={{ color: 'var(--cp-text-muted)' }}>Kampala HQ: {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                            <span className="fw-semibold" style={{ color: 'var(--cp-text-muted)' }}>Kampala HQ Desk</span>
                         </div>
-                        <span className="badge px-3 py-1.5 d-none d-sm-inline-flex align-items-center gap-1.5" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', border: '1px solid var(--cp-border-highlight)', fontSize: '0.78rem' }}>
-                            <FontAwesomeIcon icon={faCheckCircle} /> Secured Session
+                        <span 
+                            className="badge rounded-pill d-none d-sm-inline-flex align-items-center gap-1.5" 
+                            style={{ 
+                                backgroundColor: 'var(--cp-primary-subtle)', 
+                                color: 'var(--cp-primary-text)', 
+                                border: '1px solid var(--cp-border-highlight)', 
+                                fontSize: '0.8rem',
+                                padding: '7px 16px',
+                                fontWeight: 600
+                            }}
+                        >
+                            <FontAwesomeIcon icon={faCheckCircle} /> Secured Client Session
                         </span>
                         <button 
                             type="button" 
                             onClick={handleSignOut}
-                            className="btn btn-sm btn-outline-danger d-inline-flex align-items-center gap-2 py-1.5 px-3"
-                            style={{ borderRadius: '4px', fontSize: '0.8rem', fontWeight: 600 }}
+                            className="btn btn-sm btn-outline-danger rounded-pill d-inline-flex align-items-center gap-2 px-3.5 py-1.5"
+                            style={{ fontSize: '0.82rem', fontWeight: 600 }}
                         >
                             <FontAwesomeIcon icon={faSignOutAlt} /> <span className="d-none d-sm-inline">Exit</span>
                         </button>

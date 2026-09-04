@@ -142,12 +142,12 @@ const Book = () => {
     return (
         <div className="p-1 p-sm-2">
             {/* Header */}
-            <div className="d-flex flex-wrap align-items-center justify-content-between pb-3 mb-4 border-bottom" style={{ borderColor: 'var(--cp-border)' }}>
+            <div className="d-flex flex-wrap align-items-center justify-content-between pb-3 mb-4 border-bottom gap-2" style={{ borderColor: 'var(--cp-border)' }}>
                 <div>
                     <h4 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)' }}>Configure & Book Enterprise Solution</h4>
                     <p className="mb-0 small" style={{ color: 'var(--cp-text-muted)' }}>Tailor architecture parameters, user volume, and engagement models with Kampala HQ engineers.</p>
                 </div>
-                <span className="badge px-3 py-2 mt-2 mt-sm-0 d-inline-flex align-items-center gap-1.5" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', border: '1px solid var(--cp-border)', fontSize: '0.8rem' }}>
+                <span className="badge rounded-pill px-3.5 py-2 mt-2 mt-sm-0 d-inline-flex align-items-center gap-1.5" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', border: '1px solid var(--cp-border)', fontSize: '0.8rem', fontWeight: 600 }}>
                     <FontAwesomeIcon icon={faShieldAlt} /> 24/7 SLA Protected
                 </span>
             </div>
@@ -155,7 +155,7 @@ const Book = () => {
             <Row className="g-4">
                 {/* Form Inputs (Left Column) */}
                 <Col lg={8}>
-                    <div className="cp-card p-4">
+                    <div className="cp-card p-4 p-md-5">
                         <Form onSubmit={handleSubmit}>
                             <Row className="g-3">
                                 {/* Selected Solution */}
@@ -163,7 +163,6 @@ const Book = () => {
                                     <Form.Label className="fw-semibold small" style={{ color: 'var(--cp-text-main)' }}>Target Solution *</Form.Label>
                                     <select 
                                         className="form-select cp-input" 
-                                        style={{ padding: '0.7rem' }}
                                         value={currentService.name} 
                                         onChange={handleServiceChange}
                                     >
@@ -181,7 +180,6 @@ const Book = () => {
                                     <select 
                                         name="pricingType"
                                         className="form-select cp-input" 
-                                        style={{ padding: '0.7rem' }}
                                         value={formData.pricingType}
                                         onChange={handleInputChange}
                                     >
@@ -198,7 +196,6 @@ const Book = () => {
                                     <select 
                                         name="institution"
                                         className="form-select cp-input" 
-                                        style={{ padding: '0.7rem' }}
                                         value={formData.institution}
                                         onChange={handleInputChange}
                                         required
@@ -218,7 +215,6 @@ const Book = () => {
                                     <select 
                                         name="region"
                                         className="form-select cp-input" 
-                                        style={{ padding: '0.7rem' }}
                                         value={formData.region}
                                         onChange={handleInputChange}
                                         required
@@ -238,7 +234,6 @@ const Book = () => {
                                         name="name"
                                         required
                                         className="cp-input"
-                                        style={{ padding: '0.7rem' }}
                                         value={formData.name}
                                         onChange={handleInputChange}
                                         placeholder="e.g. David Mukasa"
@@ -253,7 +248,6 @@ const Book = () => {
                                         name="email"
                                         required
                                         className="cp-input"
-                                        style={{ padding: '0.7rem' }}
                                         value={formData.email}
                                         onChange={handleInputChange}
                                         placeholder="mukasa@organization.com"
@@ -267,7 +261,6 @@ const Book = () => {
                                         type="text"
                                         name="phone"
                                         className="cp-input"
-                                        style={{ padding: '0.7rem' }}
                                         value={formData.phone}
                                         onChange={handleInputChange}
                                         placeholder="+256 700 000 000"
@@ -282,7 +275,6 @@ const Book = () => {
                                         rows={3}
                                         name="description"
                                         className="cp-input"
-                                        style={{ padding: '0.7rem' }}
                                         value={formData.description}
                                         onChange={handleInputChange}
                                         placeholder="Specific integrations required (MTN MoMo, Airtel Money, URA EFRIS, CBS Core Banking, SWIFT, AWS/Azure cloud)..."
@@ -298,12 +290,12 @@ const Book = () => {
 
                                 <button
                                     type="submit"
-                                    className="btn py-2.5 px-4 d-inline-flex align-items-center gap-2 text-white fw-semibold"
+                                    className="btn rounded-pill py-2.5 px-5 d-inline-flex align-items-center gap-2 text-white fw-semibold"
                                     style={{
-                                        backgroundColor: 'var(--cp-primary)',
-                                        borderRadius: '4px',
+                                        backgroundColor: '#121417',
+                                        borderColor: '#121417',
                                         fontSize: '0.9rem',
-                                        boxShadow: '0 4px 14px rgba(115, 85, 247, 0.3)'
+                                        boxShadow: '0 4px 14px rgba(0, 0, 0, 0.25)'
                                     }}
                                 >
                                     <FontAwesomeIcon icon={faPaperPlane} /> Submit Solution Request
@@ -316,21 +308,22 @@ const Book = () => {
                 {/* Live Quotation Summary Card (Right Column) */}
                 <Col lg={4}>
                     <div className="cp-card p-4 sticky-top" style={{ top: '80px' }}>
-                        <div className="d-flex align-items-center gap-3.5 mb-3.5 pb-3.5 border-bottom" style={{ borderColor: 'var(--cp-border)' }}>
+                        <div className="d-flex align-items-center gap-3 mb-3.5 pb-3.5 border-bottom" style={{ borderColor: 'var(--cp-border)' }}>
                             <div 
-                                className="d-flex align-items-center justify-content-center flex-shrink-0 rounded"
+                                className="d-flex align-items-center justify-content-center flex-shrink-0"
                                 style={{ 
-                                    width: '44px', 
-                                    height: '44px', 
+                                    width: '46px', 
+                                    height: '46px', 
+                                    borderRadius: '50%', 
                                     backgroundColor: 'var(--cp-primary-subtle)',
                                     color: 'var(--cp-primary)',
                                     border: '1px solid var(--cp-border)'
                                 }}
                             >
-                                <FontAwesomeIcon icon={getServiceIcon(currentService.category)} style={{ fontSize: '1.25rem' }} />
+                                <FontAwesomeIcon icon={getServiceIcon(currentService.category)} style={{ fontSize: '1.2rem' }} />
                             </div>
                             <div className="overflow-hidden">
-                                <span className="badge mb-1" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', fontSize: '0.68rem' }}>
+                                <span className="badge rounded-pill px-2.5 py-1 mb-1" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', fontSize: '0.7rem', fontWeight: 600 }}>
                                     {currentService.category || 'Enterprise Solution'}
                                 </span>
                                 <h6 className="fw-bold mb-0 text-truncate" style={{ color: 'var(--cp-text-main)', fontSize: '1.02rem' }}>{currentService.name}</h6>
@@ -338,37 +331,37 @@ const Book = () => {
                         </div>
 
                         <div className="mb-3">
-                            <small className="fw-semibold d-block mb-1 text-uppercase" style={{ fontSize: '0.7rem', color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>ENGAGEMENT PARAMETERS</small>
-                            <div className="d-flex justify-content-between align-items-center py-1.5 border-bottom small" style={{ borderColor: 'var(--cp-border)' }}>
+                            <span className="admin-kpi-label mb-2">ENGAGEMENT PARAMETERS</span>
+                            <div className="d-flex justify-content-between align-items-center py-2 border-bottom small" style={{ borderColor: 'var(--cp-border)' }}>
                                 <span style={{ color: 'var(--cp-text-muted)' }}>Pricing Model</span>
                                 <span className="fw-semibold" style={{ color: 'var(--cp-text-main)' }}>{formData.pricingType.split('(')[0]}</span>
                             </div>
-                            <div className="d-flex justify-content-between align-items-center py-1.5 border-bottom small" style={{ borderColor: 'var(--cp-border)' }}>
+                            <div className="d-flex justify-content-between align-items-center py-2 border-bottom small" style={{ borderColor: 'var(--cp-border)' }}>
                                 <span style={{ color: 'var(--cp-text-muted)' }}>Sector</span>
                                 <span className="fw-semibold" style={{ color: 'var(--cp-text-main)' }}>{formData.institution}</span>
                             </div>
-                            <div className="d-flex justify-content-between align-items-center py-1.5 border-bottom small" style={{ borderColor: 'var(--cp-border)' }}>
+                            <div className="d-flex justify-content-between align-items-center py-2 border-bottom small" style={{ borderColor: 'var(--cp-border)' }}>
                                 <span style={{ color: 'var(--cp-text-muted)' }}>Region</span>
                                 <span className="fw-semibold" style={{ color: 'var(--cp-text-main)' }}>{formData.region}</span>
                             </div>
-                            <div className="d-flex justify-content-between align-items-center py-1.5 border-bottom small" style={{ borderColor: 'var(--cp-border)' }}>
+                            <div className="d-flex justify-content-between align-items-center py-2 border-bottom small" style={{ borderColor: 'var(--cp-border)' }}>
                                 <span style={{ color: 'var(--cp-text-muted)' }}>Turnaround SLA</span>
-                                <span className="fw-bold text-success">24h Feasibility Review</span>
+                                <span className="badge bg-success bg-opacity-10 text-success rounded-pill px-2.5 py-1" style={{ fontSize: '0.74rem', fontWeight: 600 }}>24h Feasibility Review</span>
                             </div>
                         </div>
 
-                        <div className="p-3 rounded mb-3" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
-                            <div className="d-flex align-items-center gap-2 mb-1">
+                        <div className="p-3.5 rounded-4 mb-3" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                            <div className="d-flex align-items-center gap-2 mb-1.5">
                                 <FontAwesomeIcon icon={faShieldAlt} style={{ color: 'var(--cp-primary)' }} />
                                 <strong className="small" style={{ color: 'var(--cp-text-main)' }}>Kampala HQ Engineering SLA</strong>
                             </div>
-                            <p className="small mb-0" style={{ color: 'var(--cp-text-muted)', fontSize: '0.75rem', lineHeight: 1.5 }}>
+                            <p className="small mb-0" style={{ color: 'var(--cp-text-muted)', fontSize: '0.76rem', lineHeight: 1.55 }}>
                                 Dedicated Lead Architect assignment, ISO/FinTech standard security audits, and continuous DevOps pipeline.
                             </p>
                         </div>
 
                         <div className="text-center">
-                            <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.75rem' }}>
+                            <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.76rem' }}>
                                 Questions? Email <a href="mailto:support@koshercode.com" style={{ color: 'var(--cp-primary)' }}>support@koshercode.com</a>
                             </small>
                         </div>

@@ -80,30 +80,30 @@ const Review = () => {
     return (
         <div className="p-1 p-sm-2">
             {/* Header */}
-            <div className="d-flex flex-wrap align-items-center justify-content-between pb-3 mb-4 border-bottom" style={{ borderColor: 'var(--cp-border)' }}>
+            <div className="d-flex flex-wrap align-items-center justify-content-between pb-3 mb-4 border-bottom gap-2" style={{ borderColor: 'var(--cp-border)' }}>
                 <div>
                     <h4 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)' }}>Client Testimonials & Executive Feedback</h4>
                     <p className="mb-0 small" style={{ color: 'var(--cp-text-muted)' }}>Share your engineering milestone review to be featured on Kosher Code platforms.</p>
                 </div>
-                <span className="badge px-3 py-2 mt-2 mt-sm-0 d-inline-flex align-items-center gap-1.5" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', border: '1px solid var(--cp-border)', fontSize: '0.8rem' }}>
+                <span className="badge rounded-pill px-3.5 py-2 mt-2 mt-sm-0 d-inline-flex align-items-center gap-1.5" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', border: '1px solid var(--cp-border)', fontSize: '0.8rem', fontWeight: 600 }}>
                     <FontAwesomeIcon icon={faCheckCircle} /> Verified Partner Feedback
                 </span>
             </div>
 
             {/* Active Review View or Form */}
             {review?.description && !isEditing ? (
-                <div className="cp-card p-4 mx-auto mb-5" style={{ maxWidth: '680px' }}>
-                    <div className="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom" style={{ borderColor: 'var(--cp-border)' }}>
-                        <span className="badge" style={{ backgroundColor: 'rgba(16, 185, 129, 0.12)', color: '#10B981', fontSize: '0.78rem' }}>
+                <div className="cp-card p-4 p-md-5 mx-auto mb-5" style={{ maxWidth: '680px' }}>
+                    <div className="d-flex align-items-center justify-content-between mb-3 pb-2.5 border-bottom" style={{ borderColor: 'var(--cp-border)' }}>
+                        <span className="badge rounded-pill px-3 py-1.5" style={{ backgroundColor: 'rgba(16, 185, 129, 0.12)', color: '#10B981', fontSize: '0.78rem', fontWeight: 600 }}>
                             <FontAwesomeIcon icon={faCheckCircle} className="me-1" /> Published Testimonial
                         </span>
-                        <div className="d-flex align-items-center gap-2.5 gap-sm-3">
+                        <div className="d-flex align-items-center gap-2">
                             <Button 
                                 variant="outline-primary" 
                                 size="sm"
                                 onClick={() => setIsEditing(true)}
-                                className="d-flex align-items-center gap-1.5 px-3 py-1.5"
-                                style={{ borderRadius: '4px', fontSize: '0.8rem' }}
+                                className="rounded-pill d-flex align-items-center gap-1.5 px-3.5 py-1.5 fw-semibold"
+                                style={{ fontSize: '0.8rem' }}
                             >
                                 <FontAwesomeIcon icon={faEdit} /> Edit Review
                             </Button>
@@ -111,16 +111,16 @@ const Review = () => {
                                 variant="outline-danger" 
                                 size="sm"
                                 onClick={handleDelete}
-                                className="d-flex align-items-center gap-1.5 px-3 py-1.5"
-                                style={{ borderRadius: '4px', fontSize: '0.8rem' }}
+                                className="rounded-pill d-flex align-items-center gap-1.5 px-3.5 py-1.5 fw-semibold"
+                                style={{ fontSize: '0.8rem' }}
                             >
                                 <FontAwesomeIcon icon={faTrashAlt} /> Remove
                             </Button>
                         </div>
                     </div>
 
-                    <div className="text-center mb-3">
-                        <div className="text-warning mb-2">
+                    <div className="text-center mb-4">
+                        <div className="text-warning mb-2.5">
                             {[...Array(review.rating || 5)].map((_, i) => (
                                 <FontAwesomeIcon key={i} icon={faStar} className="mx-0.5" />
                             ))}
@@ -144,7 +144,7 @@ const Review = () => {
                         </div>
                     </div>
 
-                    <div className="p-3.5 rounded mb-3 position-relative" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                    <div className="p-4 rounded-4 mb-3.5 position-relative" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
                         <FontAwesomeIcon icon={faQuoteLeft} style={{ color: 'var(--cp-primary)', opacity: 0.35, fontSize: '1.6rem' }} className="mb-2" />
                         <p className="fst-italic small mb-0" style={{ color: 'var(--cp-text-main)', lineHeight: 1.65, fontSize: '0.92rem' }}>
                             "{review.description}"
@@ -169,28 +169,28 @@ const Review = () => {
             <div className="mt-4 pt-2">
                 <div className="d-flex align-items-center justify-content-between mb-3">
                     <div>
-                        <h5 className="fw-bold mb-0.5" style={{ color: 'var(--cp-text-main)', fontSize: '1.05rem' }}>Featured Enterprise Testimonials</h5>
-                        <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.78rem' }}>Recent verified client testimonials across Africa and global hubs.</small>
+                        <h5 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)', fontSize: '1.12rem' }}>Featured Enterprise Testimonials</h5>
+                        <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.8rem' }}>Recent verified client testimonials across Africa and global hubs.</small>
                     </div>
                 </div>
 
                 <Row className="g-3">
                     {sampleTestimonials.map((t, idx) => (
                         <Col md={4} key={idx}>
-                            <div className="p-3.5 cp-card h-100 d-flex flex-column justify-content-between">
+                            <div className="p-4 cp-card h-100 d-flex flex-column justify-content-between">
                                 <div>
-                                    <div className="d-flex justify-content-between align-items-center mb-2">
+                                    <div className="d-flex justify-content-between align-items-center mb-2.5">
                                         <div className="text-warning small">
                                             {[...Array(t.rating)].map((_, rIdx) => (
                                                 <FontAwesomeIcon key={rIdx} icon={faStar} className="me-0.5" style={{ fontSize: '0.75rem' }} />
                                             ))}
                                         </div>
-                                        <span className="badge" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', fontSize: '0.65rem' }}>
+                                        <span className="badge rounded-pill px-2.5 py-1" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', fontSize: '0.68rem', fontWeight: 600 }}>
                                             Verified SLA
                                         </span>
                                     </div>
 
-                                    <p className="small mb-3 fst-italic" style={{ color: 'var(--cp-text-main)', lineHeight: 1.55, fontSize: '0.8rem' }}>
+                                    <p className="small mb-3 fst-italic" style={{ color: 'var(--cp-text-main)', lineHeight: 1.55, fontSize: '0.82rem' }}>
                                         "{t.description}"
                                     </p>
                                 </div>

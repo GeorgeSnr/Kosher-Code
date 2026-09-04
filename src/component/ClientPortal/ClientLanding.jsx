@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Button, Table } from 'react-bootstrap';
+import { Row, Col, Button, Table, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
@@ -16,7 +16,8 @@ import {
     faUniversity, 
     faPiggyBank, 
     faChartLine, 
-    faMobileAlt
+    faMobileAlt,
+    faEye
 } from '@fortawesome/free-solid-svg-icons';
 import { useAppContext, SET_SELECTED_SERVICE } from '../../context';
 import { 
@@ -32,6 +33,8 @@ const ClientLanding = () => {
     const { state: { user }, dispatch } = useAppContext();
     const [bookings, setBookings] = useState(() => getUserOrders(user?.email));
     const [services, setServices] = useState(() => getStoredServices());
+    const [selectedEngagement, setSelectedEngagement] = useState(null);
+    const [showDetailsModal, setShowDetailsModal] = useState(false);
 
     useEffect(() => {
         if (!user?.email) {
@@ -83,34 +86,36 @@ const ClientLanding = () => {
 
     return (
         <div className="p-0">
-            {/* 1. Executive Welcome Hero Banner */}
+            {/* 1. Executive Welcome Hero Banner (24px Curvature & Pill Actions) */}
             <div 
-                className="p-4 p-md-4 mb-4 text-white position-relative overflow-hidden"
+                className="p-4 p-md-5 mb-4 text-white position-relative overflow-hidden"
                 style={{
                     background: 'linear-gradient(135deg, #7355F7 0%, #4B24F5 55%, #2608AB 100%)',
-                    borderRadius: '6px',
-                    boxShadow: '0 8px 24px rgba(115, 85, 247, 0.18)'
+                    borderRadius: '24px',
+                    boxShadow: '0 10px 30px rgba(115, 85, 247, 0.22)'
                 }}
             >
-                <Row className="align-items-center g-3">
+                <Row className="align-items-center g-4">
                     <Col lg={8}>
-                        <div className="d-inline-flex align-items-center gap-2 px-3 py-1 mb-2.5 rounded" style={{ backgroundColor: 'rgba(255, 255, 255, 0.16)', fontSize: '0.75rem', fontWeight: 600 }}>
+                        <div 
+                            className="d-inline-flex align-items-center gap-2 px-3.5 py-1.5 mb-3 rounded-pill" 
+                            style={{ backgroundColor: 'rgba(255, 255, 255, 0.16)', fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.02em' }}
+                        >
                             <FontAwesomeIcon icon={faShieldAlt} /> Enterprise Client Hub • Kampala HQ
                         </div>
-                        <h2 className="fw-bold mb-2" style={{ fontSize: '1.65rem', letterSpacing: '-0.02em' }}>Welcome back, {displayName}</h2>
-                        <p className="mb-3.5 text-white text-opacity-85 small" style={{ maxWidth: '580px', lineHeight: 1.6, fontSize: '0.88rem' }}>
+                        <h2 className="fw-bold mb-2.5" style={{ fontSize: '1.85rem', letterSpacing: '-0.025em' }}>Welcome back, {displayName}</h2>
+                        <p className="mb-4 text-white text-opacity-85 small" style={{ maxWidth: '620px', lineHeight: 1.65, fontSize: '0.9rem' }}>
                             Supervise your active digital systems, core banking modules, and SACCO ERP requests. Our software engineering teams in Kampala, Uganda are actively maintaining your infrastructure under 24/7 SLA.
                         </p>
-                        <div className="d-flex flex-wrap gap-3 gap-sm-3.5 mt-2">
+                        <div className="d-flex flex-wrap gap-3 mt-2">
                             <Link to="/client/book">
                                 <Button 
-                                    className="px-4 py-2.5 fw-semibold text-white d-inline-flex align-items-center gap-2"
+                                    className="px-4 py-2.5 fw-semibold text-white d-inline-flex align-items-center gap-2 rounded-pill"
                                     style={{
-                                        backgroundColor: '#070120',
-                                        borderColor: '#070120',
-                                        borderRadius: '4px',
+                                        backgroundColor: '#121417',
+                                        borderColor: '#121417',
                                         fontSize: '0.88rem',
-                                        boxShadow: '0 4px 12px rgba(7, 1, 32, 0.25)'
+                                        boxShadow: '0 4px 14px rgba(0, 0, 0, 0.3)'
                                     }}
                                 >
                                     <FontAwesomeIcon icon={faPlus} /> Book New Solution
@@ -119,8 +124,8 @@ const ClientLanding = () => {
                             <Link to="/client/bookings">
                                 <Button 
                                     variant="outline-light" 
-                                    className="px-4 py-2.5 fw-semibold d-inline-flex align-items-center gap-2"
-                                    style={{ borderRadius: '4px', fontSize: '0.88rem' }}
+                                    className="px-4 py-2.5 fw-semibold d-inline-flex align-items-center gap-2 rounded-pill"
+                                    style={{ fontSize: '0.88rem' }}
                                 >
                                     <FontAwesomeIcon icon={faFolderOpen} /> View Engagements ({bookings.length})
                                 </Button>
@@ -129,14 +134,14 @@ const ClientLanding = () => {
                     </Col>
 
                     <Col lg={4} className="d-none d-lg-block text-end pe-2">
-                        <div className="p-3 bg-white bg-opacity-10 border border-white border-opacity-15 rounded d-inline-block text-start" style={{ width: '230px' }}>
-                            <div className="d-flex align-items-center justify-content-between mb-1.5">
-                                <small className="text-white text-opacity-80 fw-semibold" style={{ fontSize: '0.72rem' }}>Deployment Hub</small>
-                                <span className="badge bg-success" style={{ fontSize: '0.62rem', padding: '2px 6px' }}>Active</span>
+                        <div className="p-3.5 bg-white bg-opacity-10 border border-white border-opacity-15 rounded-4 d-inline-block text-start" style={{ width: '240px', backdropFilter: 'blur(8px)' }}>
+                            <div className="d-flex align-items-center justify-content-between mb-2">
+                                <small className="text-white text-opacity-80 fw-semibold" style={{ fontSize: '0.74rem' }}>Deployment Hub</small>
+                                <span className="badge bg-success rounded-pill px-2.5 py-1" style={{ fontSize: '0.68rem', fontWeight: 600 }}>Active</span>
                             </div>
-                            <h6 className="text-white fw-bold mb-0.5" style={{ fontSize: '0.92rem' }}>Kampala, Uganda</h6>
-                            <p className="text-white text-opacity-70 mb-2" style={{ fontSize: '0.73rem' }}>East Africa & Global Delivery</p>
-                            <div className="pt-1.5 border-top border-white border-opacity-10 small text-white text-opacity-90" style={{ fontSize: '0.74rem' }}>
+                            <h6 className="text-white fw-bold mb-1" style={{ fontSize: '0.98rem' }}>Kampala, Uganda</h6>
+                            <p className="text-white text-opacity-70 mb-2.5" style={{ fontSize: '0.75rem' }}>East Africa & Global Delivery</p>
+                            <div className="pt-2 border-top border-white border-opacity-10 small text-white text-opacity-90" style={{ fontSize: '0.76rem' }}>
                                 SLA: <strong>99.9% Uptime Guaranteed</strong>
                             </div>
                         </div>
@@ -144,73 +149,92 @@ const ClientLanding = () => {
                 </Row>
             </div>
 
-            {/* 2. Crisp KPI Metric Summary Cards with generous icon-to-heading margins */}
+            {/* 2. Dribbble Soft-Minimal KPI Metric Summary Cards */}
             <Row className="g-3 mb-4">
                 <Col xs={6} md={3}>
-                    <div className="p-3.5 cp-card h-100">
+                    <div className="p-4 cp-card h-100 d-flex flex-column justify-content-between">
                         <div className="d-flex justify-content-between align-items-center mb-3">
-                            <small className="fw-bold text-uppercase" style={{ fontSize: '0.68rem', color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>TOTAL ENGAGEMENTS</small>
-                            <div className="p-2 rounded d-flex align-items-center justify-content-center" style={{ width: '34px', height: '34px', backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)' }}>
-                                <FontAwesomeIcon icon={faFolderOpen} style={{ fontSize: '0.9rem' }} />
+                            <span className="admin-kpi-label mb-0">TOTAL ENGAGEMENTS</span>
+                            <div 
+                                className="d-flex align-items-center justify-content-center flex-shrink-0" 
+                                style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)' }}
+                            >
+                                <FontAwesomeIcon icon={faFolderOpen} style={{ fontSize: '0.95rem' }} />
                             </div>
                         </div>
-                        <h3 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)', fontSize: '1.65rem' }}>{bookings.length}</h3>
-                        <small style={{ fontSize: '0.72rem', color: 'var(--cp-text-muted)' }}>Registered solution requests</small>
+                        <div>
+                            <h3 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)', fontSize: '1.75rem', fontWeight: 800 }}>{bookings.length}</h3>
+                            <small style={{ fontSize: '0.75rem', color: 'var(--cp-text-muted)' }}>Registered solution requests</small>
+                        </div>
                     </div>
                 </Col>
 
                 <Col xs={6} md={3}>
-                    <div className="p-3.5 cp-card h-100" style={{ borderLeft: '3px solid #F59E0B' }}>
+                    <div className="p-4 cp-card h-100 d-flex flex-column justify-content-between">
                         <div className="d-flex justify-content-between align-items-center mb-3">
-                            <small className="fw-bold text-uppercase" style={{ fontSize: '0.68rem', color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>PENDING PROPOSALS</small>
-                            <div className="p-2 rounded d-flex align-items-center justify-content-center bg-warning bg-opacity-10 text-warning" style={{ width: '34px', height: '34px' }}>
-                                <FontAwesomeIcon icon={faClock} style={{ fontSize: '0.9rem' }} />
+                            <span className="admin-kpi-label mb-0">PENDING PROPOSALS</span>
+                            <div 
+                                className="d-flex align-items-center justify-content-center flex-shrink-0" 
+                                style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'rgba(245, 158, 11, 0.14)', color: '#F59E0B' }}
+                            >
+                                <FontAwesomeIcon icon={faClock} style={{ fontSize: '0.95rem' }} />
                             </div>
                         </div>
-                        <h3 className="fw-bold mb-1 text-warning" style={{ fontSize: '1.65rem' }}>{pendingCount}</h3>
-                        <small style={{ fontSize: '0.72rem', color: 'var(--cp-text-muted)' }}>Awaiting feasibility review</small>
+                        <div>
+                            <h3 className="fw-bold mb-1 text-warning" style={{ fontSize: '1.75rem', fontWeight: 800 }}>{pendingCount}</h3>
+                            <small style={{ fontSize: '0.75rem', color: 'var(--cp-text-muted)' }}>Awaiting feasibility review</small>
+                        </div>
                     </div>
                 </Col>
 
                 <Col xs={6} md={3}>
-                    <div className="p-3.5 cp-card h-100" style={{ borderLeft: '3px solid #3B82F6' }}>
+                    <div className="p-4 cp-card h-100 d-flex flex-column justify-content-between">
                         <div className="d-flex justify-content-between align-items-center mb-3">
-                            <small className="fw-bold text-uppercase" style={{ fontSize: '0.68rem', color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>IN ENGINEERING</small>
-                            <div className="p-2 rounded d-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary" style={{ width: '34px', height: '34px' }}>
-                                <FontAwesomeIcon icon={faSpinner} style={{ fontSize: '0.9rem' }} />
+                            <span className="admin-kpi-label mb-0">IN ENGINEERING</span>
+                            <div 
+                                className="d-flex align-items-center justify-content-center flex-shrink-0" 
+                                style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'rgba(59, 130, 246, 0.14)', color: '#3B82F6' }}
+                            >
+                                <FontAwesomeIcon icon={faSpinner} style={{ fontSize: '0.95rem' }} />
                             </div>
                         </div>
-                        <h3 className="fw-bold mb-1 text-primary" style={{ fontSize: '1.65rem' }}>{progressCount + reviewCount}</h3>
-                        <small style={{ fontSize: '0.72rem', color: 'var(--cp-text-muted)' }}>Active sprint development</small>
+                        <div>
+                            <h3 className="fw-bold mb-1 text-primary" style={{ fontSize: '1.75rem', fontWeight: 800 }}>{progressCount + reviewCount}</h3>
+                            <small style={{ fontSize: '0.75rem', color: 'var(--cp-text-muted)' }}>Active sprint development</small>
+                        </div>
                     </div>
                 </Col>
 
                 <Col xs={6} md={3}>
-                    <div className="p-3.5 cp-card h-100" style={{ borderLeft: '3px solid #10B981' }}>
+                    <div className="p-4 cp-card h-100 d-flex flex-column justify-content-between">
                         <div className="d-flex justify-content-between align-items-center mb-3">
-                            <small className="fw-bold text-uppercase" style={{ fontSize: '0.68rem', color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>DEPLOYED & LIVE</small>
-                            <div className="p-2 rounded d-flex align-items-center justify-content-center bg-success bg-opacity-10 text-success" style={{ width: '34px', height: '34px' }}>
-                                <FontAwesomeIcon icon={faCheckCircle} style={{ fontSize: '0.9rem' }} />
+                            <span className="admin-kpi-label mb-0">DEPLOYED & LIVE</span>
+                            <div 
+                                className="d-flex align-items-center justify-content-center flex-shrink-0" 
+                                style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'rgba(16, 185, 129, 0.14)', color: '#10B981' }}
+                            >
+                                <FontAwesomeIcon icon={faCheckCircle} style={{ fontSize: '0.95rem' }} />
                             </div>
                         </div>
-                        <h3 className="fw-bold mb-1 text-success" style={{ fontSize: '1.65rem' }}>{doneCount}</h3>
-                        <small style={{ fontSize: '0.72rem', color: 'var(--cp-text-muted)' }}>Live in production</small>
+                        <div>
+                            <h3 className="fw-bold mb-1 text-success" style={{ fontSize: '1.75rem', fontWeight: 800 }}>{doneCount}</h3>
+                            <small style={{ fontSize: '0.75rem', color: 'var(--cp-text-muted)' }}>Live in production</small>
+                        </div>
                     </div>
                 </Col>
             </Row>
 
-            {/* 3. Live Project Engagements Table with Generous Icon Margins */}
-            <div className="cp-card p-4 mb-4">
-                <div className="d-flex flex-wrap justify-content-between align-items-center mb-3 pb-2.5 border-bottom" style={{ borderColor: 'var(--cp-border)' }}>
+            {/* 3. Live Project Engagements Table with Generous Padding & Inspection Modal */}
+            <div className="cp-card p-4 p-md-5 mb-4">
+                <div className="d-flex flex-wrap justify-content-between align-items-center mb-3 pb-3 border-bottom" style={{ borderColor: 'var(--cp-border)' }}>
                     <div>
-                        <h5 className="fw-bold mb-0.5" style={{ color: 'var(--cp-text-main)', fontSize: '1.05rem' }}>Live Project Engagements</h5>
-                        <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.78rem' }}>Real-time implementation milestones from the Kosher Code engineering team.</small>
+                        <h5 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)', fontSize: '1.12rem' }}>Live Project Engagements</h5>
+                        <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.8rem' }}>Real-time implementation milestones from the Kosher Code engineering team.</small>
                     </div>
                     <Link to="/client/book">
                         <Button 
-                            size="sm"
-                            className="d-flex align-items-center gap-2 fw-semibold text-white mt-2 mt-sm-0"
-                            style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', borderRadius: '4px', fontSize: '0.8rem', padding: '6px 14px' }}
+                            className="rounded-pill d-flex align-items-center gap-2 fw-semibold text-white px-3.5 py-2 mt-2 mt-sm-0"
+                            style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', fontSize: '0.82rem' }}
                         >
                             <FontAwesomeIcon icon={faPlus} /> Request Solution
                         </Button>
@@ -218,19 +242,19 @@ const ClientLanding = () => {
                 </div>
 
                 {bookings.length === 0 ? (
-                    <div className="text-center py-4 rounded" style={{ backgroundColor: 'var(--cp-card-subtle)' }}>
-                        <FontAwesomeIcon icon={faFileContract} style={{ fontSize: '2.4rem', color: 'var(--cp-text-light)' }} className="mb-2" />
-                        <h6 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)', fontSize: '0.92rem' }}>No Active Project Requests</h6>
-                        <p className="small mb-3" style={{ color: 'var(--cp-text-muted)', fontSize: '0.78rem' }}>You haven't submitted a solution booking request yet.</p>
+                    <div className="text-center py-5 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)' }}>
+                        <FontAwesomeIcon icon={faFileContract} style={{ fontSize: '2.5rem', color: 'var(--cp-text-light)' }} className="mb-2" />
+                        <h6 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)', fontSize: '0.95rem' }}>No Active Project Requests</h6>
+                        <p className="small mb-3" style={{ color: 'var(--cp-text-muted)', fontSize: '0.8rem' }}>You haven't submitted a solution booking request yet.</p>
                         <Link to="/client/book">
-                            <Button size="sm" style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', borderRadius: '4px', fontSize: '0.8rem', padding: '6px 14px' }}>
+                            <Button className="rounded-pill px-4 py-2" style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', fontSize: '0.82rem' }}>
                                 Book Your First Solution
                             </Button>
                         </Link>
                     </div>
                 ) : (
                     <div className="table-responsive">
-                        <Table hover className="align-middle mb-0 cp-table">
+                        <Table hover className="align-middle mb-0 cp-table" style={{ minWidth: '760px' }}>
                             <thead>
                                 <tr>
                                     <th className="py-2.5 small fw-semibold" style={{ fontSize: '0.74rem' }}>SOLUTION / PROJECT</th>
@@ -238,6 +262,7 @@ const ClientLanding = () => {
                                     <th className="py-2.5 small fw-semibold" style={{ fontSize: '0.74rem' }}>TIMELINE</th>
                                     <th className="py-2.5 small fw-semibold" style={{ fontSize: '0.74rem' }}>PRICING MODEL</th>
                                     <th className="py-2.5 small fw-semibold text-center" style={{ fontSize: '0.74rem' }}>STATUS</th>
+                                    <th className="py-2.5 small fw-semibold text-end" style={{ fontSize: '0.74rem' }}>ACTION</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -251,38 +276,48 @@ const ClientLanding = () => {
                                                     <div 
                                                         className="d-flex align-items-center justify-content-center flex-shrink-0"
                                                         style={{ 
-                                                            width: '36px', 
-                                                            height: '36px', 
-                                                            borderRadius: '4px', 
+                                                            width: '40px', 
+                                                            height: '40px', 
+                                                            borderRadius: '50%', 
                                                             backgroundColor: 'var(--cp-primary-subtle)',
                                                             color: 'var(--cp-primary)',
                                                             border: '1px solid var(--cp-border)'
                                                         }}
                                                     >
-                                                        <FontAwesomeIcon icon={getSolutionIcon(b.serviceName || b.institution)} style={{ fontSize: '0.9rem' }} />
+                                                        <FontAwesomeIcon icon={getSolutionIcon(b.serviceName || b.institution)} style={{ fontSize: '0.92rem' }} />
                                                     </div>
                                                     <div>
-                                                        <div className="fw-bold mb-0.5" style={{ color: 'var(--cp-text-main)', fontSize: '0.88rem' }}>{b.serviceName}</div>
-                                                        <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.73rem' }}>{b.date || 'Active Request'}</small>
+                                                        <div className="fw-bold mb-0.5" style={{ color: 'var(--cp-text-main)', fontSize: '0.9rem' }}>{b.serviceName}</div>
+                                                        <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.74rem' }}>{b.date || 'Active Request'}</small>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td className="small" style={{ color: 'var(--cp-text-muted)', fontSize: '0.78rem' }}>{b.institution || 'Enterprise'}</td>
-                                            <td className="small" style={{ color: 'var(--cp-text-muted)', fontSize: '0.78rem' }}>{b.timeline || '1-3 months'}</td>
-                                            <td className="small fw-semibold" style={{ color: 'var(--cp-text-main)', fontSize: '0.78rem' }}>{b.pricingType?.split('(')[0] || `$${b.price || 48}`}</td>
+                                            <td className="small" style={{ color: 'var(--cp-text-muted)', fontSize: '0.8rem' }}>{b.institution || 'Enterprise'}</td>
+                                            <td className="small" style={{ color: 'var(--cp-text-muted)', fontSize: '0.8rem' }}>{b.timeline || '1-3 months'}</td>
+                                            <td className="small fw-semibold" style={{ color: 'var(--cp-text-main)', fontSize: '0.8rem' }}>{b.pricingType?.split('(')[0] || `$${b.price || 48}`}</td>
                                             <td className="text-center">
                                                 <span 
-                                                    className="px-2.5 py-1 fw-semibold small d-inline-flex align-items-center gap-1"
+                                                    className="px-3 py-1 fw-semibold small d-inline-flex align-items-center gap-1 rounded-pill"
                                                     style={{
-                                                        borderRadius: '3px',
                                                         backgroundColor: statusBg,
                                                         color: statusColor,
                                                         border: `1px solid ${statusColor}33`,
-                                                        fontSize: '0.74rem'
+                                                        fontSize: '0.76rem'
                                                     }}
                                                 >
                                                     ● {b.status || 'Pending'}
                                                 </span>
+                                            </td>
+                                            <td className="text-end">
+                                                <Button 
+                                                    variant="outline-primary"
+                                                    size="sm"
+                                                    onClick={() => { setSelectedEngagement(b); setShowDetailsModal(true); }}
+                                                    className="rounded-pill px-3 py-1 d-inline-flex align-items-center gap-1.5"
+                                                    style={{ fontSize: '0.78rem', fontWeight: 600 }}
+                                                >
+                                                    <FontAwesomeIcon icon={faEye} /> Inspect
+                                                </Button>
                                             </td>
                                         </tr>
                                     );
@@ -293,12 +328,12 @@ const ClientLanding = () => {
                 )}
             </div>
 
-            {/* 4. Quick Solution Launchpad Cards with Generous Icon-to-Heading Margins */}
-            <div className="cp-card p-4 mb-4">
+            {/* 4. Quick Solution Launchpad Cards (20px Curvature, Pill CTAs) */}
+            <div className="cp-card p-4 p-md-5 mb-4">
                 <div className="d-flex justify-content-between align-items-center mb-3">
                     <div>
-                        <h5 className="fw-bold mb-0.5" style={{ color: 'var(--cp-text-main)', fontSize: '1.05rem' }}>Solutions Suite Catalog</h5>
-                        <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.78rem' }}>Instant shortcuts to configure specialized architecture from Kampala HQ.</small>
+                        <h5 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)', fontSize: '1.12rem' }}>Solutions Suite Catalog</h5>
+                        <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.8rem' }}>Instant shortcuts to configure specialized architecture from Kampala HQ.</small>
                     </div>
                 </div>
 
@@ -308,20 +343,20 @@ const ClientLanding = () => {
                         return (
                             <Col md={6} lg={3} key={sIdx}>
                                 <div 
-                                    className="p-3.5 cp-card-subtle h-100 d-flex flex-column justify-content-between"
+                                    className="p-3.5 cp-card-subtle h-100 d-flex flex-column justify-content-between rounded-4"
                                     style={{
                                         transition: 'all 0.2s ease',
-                                        borderRadius: '6px'
+                                        border: '1px solid var(--cp-border)'
                                     }}
                                 >
                                     <div>
-                                        {/* Icon and Category Badge Row with Increased Bottom Margin */}
                                         <div className="d-flex align-items-center justify-content-between mb-3">
                                             <div 
-                                                className="d-flex align-items-center justify-content-center rounded"
+                                                className="d-flex align-items-center justify-content-center flex-shrink-0"
                                                 style={{ 
-                                                    width: '36px', 
-                                                    height: '36px', 
+                                                    width: '42px', 
+                                                    height: '42px', 
+                                                    borderRadius: '50%',
                                                     backgroundColor: 'var(--cp-primary-subtle)',
                                                     color: 'var(--cp-primary)',
                                                     border: '1px solid var(--cp-border)'
@@ -329,23 +364,23 @@ const ClientLanding = () => {
                                             >
                                                 <FontAwesomeIcon icon={icon} style={{ fontSize: '0.95rem' }} />
                                             </div>
-                                            <span className="badge px-2 py-1" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', fontSize: '0.68rem' }}>
+                                            <span className="badge rounded-pill px-2.5 py-1" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', fontSize: '0.7rem', fontWeight: 600 }}>
                                                 {service.category || 'Enterprise'}
                                             </span>
                                         </div>
 
-                                        <h6 className="fw-bold mb-1.5" style={{ color: 'var(--cp-text-main)', fontSize: '0.92rem' }}>{service.name}</h6>
-                                        <p className="small mb-3" style={{ color: 'var(--cp-text-muted)', fontSize: '0.78rem', lineHeight: 1.55 }}>
+                                        <h6 className="fw-bold mb-1.5" style={{ color: 'var(--cp-text-main)', fontSize: '0.95rem' }}>{service.name}</h6>
+                                        <p className="small mb-3" style={{ color: 'var(--cp-text-muted)', fontSize: '0.8rem', lineHeight: 1.55 }}>
                                             {(service.description || '').substring(0, 75)}...
                                         </p>
                                     </div>
                                     <Link 
                                         to="/client/book" 
                                         onClick={() => handleSelectService(service)}
-                                        className="btn btn-sm w-100 fw-semibold text-white d-flex align-items-center justify-content-center gap-1.5"
-                                        style={{ backgroundColor: 'var(--cp-primary)', borderRadius: '4px', fontSize: '0.8rem', padding: '7px 12px' }}
+                                        className="btn rounded-pill w-100 fw-semibold text-white d-flex align-items-center justify-content-center gap-1.5 py-2"
+                                        style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', fontSize: '0.82rem' }}
                                     >
-                                        Configure Solution <FontAwesomeIcon icon={faArrowRight} style={{ fontSize: '0.7rem' }} />
+                                        Configure Solution <FontAwesomeIcon icon={faArrowRight} style={{ fontSize: '0.72rem' }} />
                                     </Link>
                                 </div>
                             </Col>
@@ -354,36 +389,36 @@ const ClientLanding = () => {
                 </Row>
             </div>
 
-            {/* 5. Support & Feedback Channels with Increased Gap Between Icon & Subheading */}
+            {/* 5. Support & Feedback Channels (24px Curvature & Circular Badges) */}
             <Row className="g-3">
                 <Col md={6}>
-                    <div className="p-4 cp-card h-100 d-flex flex-column justify-content-between">
+                    <div className="p-4 p-md-5 cp-card h-100 d-flex flex-column justify-content-between">
                         <div>
                             <div className="d-flex align-items-center justify-content-between mb-3.5 pb-2.5 border-bottom" style={{ borderColor: 'var(--cp-border)' }}>
-                                <div className="d-flex align-items-center gap-3.5">
-                                    <div className="p-2.5 rounded d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: '42px', height: '42px', backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)' }}>
+                                <div className="d-flex align-items-center gap-3">
+                                    <div className="d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: '44px', height: '44px', borderRadius: '50%', backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)' }}>
                                         <FontAwesomeIcon icon={faHeadset} style={{ fontSize: '1.1rem' }} />
                                     </div>
                                     <div>
-                                        <h6 className="fw-bold mb-0.5" style={{ color: 'var(--cp-text-main)', fontSize: '1rem' }}>Direct Engineering Support</h6>
-                                        <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.76rem' }}>Kampala Technology Hub • Enterprise Desk</small>
+                                        <h6 className="fw-bold mb-0.5" style={{ color: 'var(--cp-text-main)', fontSize: '1.02rem' }}>Direct Engineering Support</h6>
+                                        <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.78rem' }}>Kampala Technology Hub • Enterprise Desk</small>
                                     </div>
                                 </div>
-                                <span className="badge bg-success bg-opacity-10 text-success" style={{ fontSize: '0.68rem', padding: '4px 8px' }}>
+                                <span className="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-1.5" style={{ fontSize: '0.72rem', fontWeight: 600 }}>
                                     ● 24/7 SLA Active
                                 </span>
                             </div>
 
-                            <div className="p-3 rounded mb-3.5" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
-                                <div className="d-flex justify-content-between align-items-center mb-2 pb-1.5 border-bottom border-light small" style={{ fontSize: '0.78rem' }}>
+                            <div className="p-3.5 rounded-4 mb-3.5" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                                <div className="d-flex justify-content-between align-items-center mb-2 pb-1.5 border-bottom border-light small" style={{ fontSize: '0.8rem' }}>
                                     <span style={{ color: 'var(--cp-text-muted)' }}>Assigned Lead</span>
                                     <strong style={{ color: 'var(--cp-text-main)' }}>Senior Solutions Architect</strong>
                                 </div>
-                                <div className="d-flex justify-content-between align-items-center mb-2 pb-1.5 border-bottom border-light small" style={{ fontSize: '0.78rem' }}>
+                                <div className="d-flex justify-content-between align-items-center mb-2 pb-1.5 border-bottom border-light small" style={{ fontSize: '0.8rem' }}>
                                     <span style={{ color: 'var(--cp-text-muted)' }}>Priority 1 SLA</span>
                                     <strong className="text-success">&lt; 15 min Turnaround</strong>
                                 </div>
-                                <div className="d-flex justify-content-between align-items-center small" style={{ fontSize: '0.78rem' }}>
+                                <div className="d-flex justify-content-between align-items-center small" style={{ fontSize: '0.8rem' }}>
                                     <span style={{ color: 'var(--cp-text-muted)' }}>Emergency Hotline</span>
                                     <strong style={{ color: 'var(--cp-text-main)' }}>+256 700 000 000</strong>
                                 </div>
@@ -393,12 +428,12 @@ const ClientLanding = () => {
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3 pt-3 border-top" style={{ borderColor: 'var(--cp-border)' }}>
                             <a 
                                 href="mailto:support@koshercode.com" 
-                                className="btn btn-sm fw-semibold text-white d-inline-flex align-items-center gap-2"
-                                style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', borderRadius: '4px', fontSize: '0.82rem', padding: '8px 16px' }}
+                                className="btn rounded-pill fw-semibold text-white d-inline-flex align-items-center gap-2 px-4 py-2"
+                                style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', fontSize: '0.82rem' }}
                             >
                                 Email Lead Architect <FontAwesomeIcon icon={faArrowRight} style={{ fontSize: '0.7rem' }} />
                             </a>
-                            <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.76rem' }}>
+                            <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.78rem' }}>
                                 support@koshercode.com
                             </small>
                         </div>
@@ -406,32 +441,32 @@ const ClientLanding = () => {
                 </Col>
 
                 <Col md={6}>
-                    <div className="p-4 cp-card h-100 d-flex flex-column justify-content-between">
+                    <div className="p-4 p-md-5 cp-card h-100 d-flex flex-column justify-content-between">
                         <div>
                             <div className="d-flex align-items-center justify-content-between mb-3.5 pb-2.5 border-bottom" style={{ borderColor: 'var(--cp-border)' }}>
-                                <div className="d-flex align-items-center gap-3.5">
-                                    <div className="p-2.5 rounded d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: '42px', height: '42px', backgroundColor: 'rgba(16, 185, 129, 0.12)', color: '#10B981' }}>
+                                <div className="d-flex align-items-center gap-3">
+                                    <div className="d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: '44px', height: '44px', borderRadius: '50%', backgroundColor: 'rgba(16, 185, 129, 0.12)', color: '#10B981' }}>
                                         <FontAwesomeIcon icon={faComments} style={{ fontSize: '1.1rem' }} />
                                     </div>
                                     <div>
-                                        <h6 className="fw-bold mb-0.5" style={{ color: 'var(--cp-text-main)', fontSize: '1rem' }}>Client Reviews & Testimonials</h6>
-                                        <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.76rem' }}>Verified Enterprise Feedback & Ratings</small>
+                                        <h6 className="fw-bold mb-0.5" style={{ color: 'var(--cp-text-main)', fontSize: '1.02rem' }}>Client Reviews & Testimonials</h6>
+                                        <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.78rem' }}>Verified Enterprise Feedback & Ratings</small>
                                     </div>
                                 </div>
-                                <span className="badge" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', fontSize: '0.68rem', padding: '4px 8px' }}>
+                                <span className="badge rounded-pill px-3 py-1.5" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', fontSize: '0.72rem', fontWeight: 600 }}>
                                     ★★★★★ 5.0 Rating
                                 </span>
                             </div>
 
-                            <p className="small mb-3.5" style={{ color: 'var(--cp-text-muted)', lineHeight: 1.6, fontSize: '0.84rem' }}>
+                            <p className="small mb-3.5" style={{ color: 'var(--cp-text-muted)', lineHeight: 1.6, fontSize: '0.86rem' }}>
                                 Have you recently completed a banking integration, SACCO ERP rollout, or bespoke software milestone with Kosher Code? Share your review to be featured across our platform.
                             </p>
 
                             <div className="d-flex flex-wrap gap-2 mb-3.5">
-                                <span className="badge" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', color: 'var(--cp-text-main)', fontSize: '0.74rem', padding: '5px 10px' }}>
+                                <span className="badge rounded-pill" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', color: 'var(--cp-text-main)', fontSize: '0.76rem', padding: '6px 14px' }}>
                                     ✓ Verified Client Feedback
                                 </span>
-                                <span className="badge" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', color: 'var(--cp-text-main)', fontSize: '0.74rem', padding: '5px 10px' }}>
+                                <span className="badge rounded-pill" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', color: 'var(--cp-text-main)', fontSize: '0.76rem', padding: '6px 14px' }}>
                                     ✓ Direct Roadmap Influence
                                 </span>
                             </div>
@@ -440,18 +475,133 @@ const ClientLanding = () => {
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3 pt-3 border-top" style={{ borderColor: 'var(--cp-border)' }}>
                             <Link 
                                 to="/client/review" 
-                                className="btn btn-sm btn-outline-success fw-semibold d-inline-flex align-items-center gap-2" 
-                                style={{ borderRadius: '4px', fontSize: '0.82rem', padding: '8px 16px' }}
+                                className="btn btn-outline-success rounded-pill fw-semibold d-inline-flex align-items-center gap-2 px-4 py-2" 
+                                style={{ fontSize: '0.82rem' }}
                             >
                                 Submit Milestone Review <FontAwesomeIcon icon={faArrowRight} style={{ fontSize: '0.7rem' }} />
                             </Link>
-                            <Link to="/client/review" className="text-decoration-none small fw-semibold" style={{ color: 'var(--cp-primary)', fontSize: '0.78rem' }}>
+                            <Link to="/client/review" className="text-decoration-none small fw-semibold" style={{ color: 'var(--cp-primary)', fontSize: '0.8rem' }}>
                                 View Testimonials &rarr;
                             </Link>
                         </div>
                     </div>
                 </Col>
             </Row>
+
+            {/* 6. Engagement Details Inspection Modal */}
+            <Modal 
+                show={showDetailsModal} 
+                onHide={() => setShowDetailsModal(false)} 
+                centered 
+                size="lg"
+                className="client-modal"
+            >
+                <Modal.Header closeButton style={{ borderBottom: '1px solid var(--cp-border)' }}>
+                    <div className="d-flex align-items-center gap-3">
+                        <div 
+                            className="d-flex align-items-center justify-content-center flex-shrink-0"
+                            style={{ 
+                                width: '42px', 
+                                height: '42px', 
+                                borderRadius: '50%', 
+                                backgroundColor: 'var(--cp-primary-subtle)',
+                                color: 'var(--cp-primary)'
+                            }}
+                        >
+                            <FontAwesomeIcon icon={getSolutionIcon(selectedEngagement?.serviceName || selectedEngagement?.institution)} />
+                        </div>
+                        <div>
+                            <Modal.Title className="fw-bold fs-5 mb-0" style={{ color: 'var(--cp-text-main)' }}>
+                                {selectedEngagement?.serviceName || 'Engagement Details'}
+                            </Modal.Title>
+                            <small style={{ color: 'var(--cp-text-muted)' }}>ID: {selectedEngagement?._id || 'N/A'}</small>
+                        </div>
+                    </div>
+                </Modal.Header>
+                <Modal.Body>
+                    {selectedEngagement && (
+                        <div>
+                            <Row className="g-3 mb-4">
+                                <Col sm={6}>
+                                    <div className="p-3 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                                        <small className="admin-kpi-label">Current Status</small>
+                                        <span 
+                                            className="px-3 py-1 fw-bold rounded-pill d-inline-flex align-items-center gap-1.5"
+                                            style={{
+                                                backgroundColor: selectedEngagement.status === 'Done' ? 'rgba(16, 185, 129, 0.12)' : selectedEngagement.status === 'In Progress' ? 'rgba(59, 130, 246, 0.12)' : selectedEngagement.status === 'In Review' ? 'rgba(139, 92, 246, 0.12)' : 'rgba(245, 158, 11, 0.12)',
+                                                color: selectedEngagement.status === 'Done' ? '#10B981' : selectedEngagement.status === 'In Progress' ? '#3B82F6' : selectedEngagement.status === 'In Review' ? '#8B5CF6' : '#F59E0B',
+                                                border: `1px solid ${selectedEngagement.status === 'Done' ? '#10B98133' : selectedEngagement.status === 'In Progress' ? '#3B82F633' : selectedEngagement.status === 'In Review' ? '#8B5CF633' : '#F59E0B33'}`,
+                                                fontSize: '0.8rem'
+                                            }}
+                                        >
+                                            ● {selectedEngagement.status || 'Pending'}
+                                        </span>
+                                    </div>
+                                </Col>
+                                <Col sm={6}>
+                                    <div className="p-3 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                                        <small className="admin-kpi-label">Pricing Model</small>
+                                        <div className="fw-bold" style={{ color: 'var(--cp-text-main)', fontSize: '0.95rem' }}>
+                                            {selectedEngagement.pricingType || `$${selectedEngagement.price || 48}`}
+                                        </div>
+                                    </div>
+                                </Col>
+                                <Col sm={6}>
+                                    <div className="p-3 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                                        <small className="admin-kpi-label">Institution / Sector</small>
+                                        <div className="fw-semibold" style={{ color: 'var(--cp-text-main)', fontSize: '0.9rem' }}>
+                                            {selectedEngagement.institution || 'Commercial Banking & FinTech'}
+                                        </div>
+                                    </div>
+                                </Col>
+                                <Col sm={6}>
+                                    <div className="p-3 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                                        <small className="admin-kpi-label">Delivery Timeline</small>
+                                        <div className="fw-semibold" style={{ color: 'var(--cp-text-main)', fontSize: '0.9rem' }}>
+                                            {selectedEngagement.timeline || 'Immediate (1-3 months)'}
+                                        </div>
+                                    </div>
+                                </Col>
+                            </Row>
+
+                            <div className="p-3.5 rounded-4 mb-3" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                                <small className="admin-kpi-label mb-2">Scope & Project Specifications</small>
+                                <p className="mb-0" style={{ color: 'var(--cp-text-main)', fontSize: '0.88rem', lineHeight: 1.6, wordBreak: 'break-word' }}>
+                                    {selectedEngagement.description || 'Enterprise software architecture configured for your operational scale.'}
+                                </p>
+                            </div>
+
+                            <div className="p-3 rounded-4" style={{ backgroundColor: 'var(--cp-primary-subtle)', border: '1px solid var(--cp-border)' }}>
+                                <div className="d-flex align-items-center gap-2 mb-1">
+                                    <FontAwesomeIcon icon={faShieldAlt} style={{ color: 'var(--cp-primary)' }} />
+                                    <strong className="small" style={{ color: 'var(--cp-primary-text)' }}>Kampala HQ Engineering SLA Active</strong>
+                                </div>
+                                <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.78rem' }}>
+                                    Supervised under 24/7 SLA. Priority response time and continuous deployment pipelines enabled.
+                                </small>
+                            </div>
+                        </div>
+                    )}
+                </Modal.Body>
+                <Modal.Footer style={{ borderTop: '1px solid var(--cp-border)' }}>
+                    <Button 
+                        variant="secondary" 
+                        onClick={() => setShowDetailsModal(false)}
+                        className="rounded-pill px-4 py-2"
+                        style={{ fontSize: '0.85rem' }}
+                    >
+                        Close
+                    </Button>
+                    <Link to="/client/bookings" onClick={() => setShowDetailsModal(false)}>
+                        <Button 
+                            className="rounded-pill px-4 py-2 text-white"
+                            style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', fontSize: '0.85rem' }}
+                        >
+                            Manage All Engagements
+                        </Button>
+                    </Link>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 };
