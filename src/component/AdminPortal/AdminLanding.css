@@ -1,0 +1,834 @@
+/* =========================================================
+   ADMIN LANDING / MAIN DASHBOARD (Dribbble Soft Minimal Style)
+   Reference: https://cdn.dribbble.com/userupload/47406563/file/ca9d63a63f4718a0645fc505a6ebffd4.png
+   ========================================================= */
+
+/* Main Container */
+.admin-dribbble-dashboard {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--cp-text-main, #111827);
+    padding: 0.25rem 0.25rem 1.5rem 0.25rem;
+}
+
+/* Base Card Styling (High Border Radius, Soft Elevation) */
+.ad-card {
+    background-color: var(--cp-card-bg, #FFFFFF);
+    border-radius: 24px !important;
+    border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.04)) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.025), 0 1px 3px rgba(0, 0, 0, 0.015) !important;
+    transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+}
+
+[data-theme="dark"] .ad-card,
+.theme-dark .ad-card {
+    background-color: #141C2E !important;
+    border: 1px solid rgba(255, 255, 255, 0.07) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* =========================================================
+   TOP SECTION: QUICK STATS (Horizontal Flow + Tall Pill Cards)
+   ========================================================= */
+.ad-stats-section {
+    display: flex;
+    align-items: stretch;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.ad-stats-intro {
+    flex: 0 0 170px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 8px;
+}
+
+.ad-stats-intro-title {
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--cp-text-main, #111827);
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.ad-stats-intro-sub {
+    font-size: 0.82rem;
+    color: var(--cp-text-light, #718096);
+    line-height: 1.45;
+    margin: 0;
+}
+
+.ad-stats-grid {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: stretch;
+    gap: 14px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scrollbar-width: thin;
+}
+
+.ad-stats-grid::-webkit-scrollbar {
+    height: 4px;
+}
+
+.ad-stats-grid::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+}
+
+/* Tall Vertical Pill Stat Card */
+.ad-stat-pill {
+    flex: 1 1 115px;
+    min-width: 108px;
+    max-width: 150px;
+    background-color: var(--cp-card-bg, #FFFFFF);
+    border-radius: 26px;
+    padding: 20px 10px 18px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.04));
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.025);
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    cursor: default;
+}
+
+.ad-stat-pill:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    border-color: var(--cp-border-highlight, #CBD5E1);
+}
+
+[data-theme="dark"] .ad-stat-pill,
+.theme-dark .ad-stat-pill {
+    background-color: #141C2E;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Icon Container Circle */
+.ad-stat-icon-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--cp-card-subtle, #F1F4F6);
+    color: var(--cp-text-main, #334155);
+    font-size: 1rem;
+    margin-bottom: 14px;
+    transition: transform 0.2s ease;
+}
+
+.ad-stat-pill:hover .ad-stat-icon-circle {
+    transform: scale(1.05);
+}
+
+[data-theme="dark"] .ad-stat-icon-circle,
+.theme-dark .ad-stat-icon-circle {
+    background-color: #1E293B;
+    color: #CBD5E1;
+}
+
+/* Active Highlighted Stat Card (Like the 3.5K Active Jobs card in Dribbble) */
+.ad-stat-pill.is-active {
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.07);
+}
+
+.ad-stat-pill.is-active .ad-stat-icon-circle {
+    background-color: #121417;
+    color: #FFFFFF;
+}
+
+[data-theme="dark"] .ad-stat-pill.is-active .ad-stat-icon-circle,
+.theme-dark .ad-stat-pill.is-active .ad-stat-icon-circle {
+    background-color: var(--cp-primary, #8B5CF6);
+    color: #FFFFFF;
+}
+
+/* Active bottom indicator with diagonal arrow */
+.ad-stat-arrow-indicator {
+    position: absolute;
+    bottom: -9px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: #121417;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    border: 2px solid var(--cp-card-bg, #FFFFFF);
+}
+
+[data-theme="dark"] .ad-stat-arrow-indicator,
+.theme-dark .ad-stat-arrow-indicator {
+    background-color: var(--cp-primary, #8B5CF6);
+    border-color: #141C2E;
+}
+
+/* Stat Number & Label Text Sizes */
+.ad-stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--cp-text-main, #111827);
+    line-height: 1.15;
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+}
+
+.ad-stat-title {
+    font-size: 0.74rem;
+    font-weight: 500;
+    color: var(--cp-text-light, #718096);
+    line-height: 1.25;
+    margin: 0;
+    max-width: 90px;
+}
+
+/* =========================================================
+   MIDDLE SECTION: STATISTICS CHART & PENDING APPROVALS
+   ========================================================= */
+.ad-middle-row {
+    margin-bottom: 24px;
+}
+
+/* Card Headers */
+.ad-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.ad-card-heading {
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: var(--cp-text-main, #111827);
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+/* Chart Legend */
+.ad-chart-legend {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--cp-text-light, #718096);
+}
+
+.ad-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ad-legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.ad-legend-dot.dark {
+    background-color: #121417;
+}
+
+[data-theme="dark"] .ad-legend-dot.dark,
+.theme-dark .ad-legend-dot.dark {
+    background-color: var(--cp-primary, #A78BFA);
+}
+
+.ad-legend-dot.light {
+    background-color: #CBD5E1;
+}
+
+[data-theme="dark"] .ad-legend-dot.light,
+.theme-dark .ad-legend-dot.light {
+    background-color: #334155;
+}
+
+/* Minimalist Bar Chart Container */
+.ad-chart-container {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.ad-chart-gridlines {
+    position: absolute;
+    top: 0;
+    left: 36px;
+    right: 0;
+    bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+.ad-chart-gridline {
+    width: 100%;
+    border-bottom: 1px dashed var(--cp-border-subtle, #E2E8F0);
+    opacity: 0.8;
+}
+
+.ad-chart-y-axis {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--cp-text-light, #94A3B8);
+    width: 30px;
+    text-align: right;
+    padding-right: 4px;
+}
+
+.ad-chart-bars-area {
+    position: relative;
+    margin-left: 36px;
+    height: 190px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    padding-bottom: 4px;
+}
+
+.ad-chart-month-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.ad-chart-pair {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 155px;
+}
+
+.ad-chart-bar {
+    width: 7px;
+    border-radius: 3px 3px 0 0;
+    transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+}
+
+.ad-chart-bar.primary {
+    background-color: #121417;
+}
+
+[data-theme="dark"] .ad-chart-bar.primary,
+.theme-dark .ad-chart-bar.primary {
+    background-color: var(--cp-primary, #A78BFA);
+}
+
+.ad-chart-bar.secondary {
+    background-color: #CBD5E1;
+}
+
+[data-theme="dark"] .ad-chart-bar.secondary,
+.theme-dark .ad-chart-bar.secondary {
+    background-color: #334155;
+}
+
+.ad-chart-month-col:hover .ad-chart-bar {
+    opacity: 0.8;
+}
+
+.ad-chart-month-label {
+    font-size: 0.74rem;
+    font-weight: 500;
+    color: var(--cp-text-light, #94A3B8);
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Peak Active Floating Tooltip (Matching 6.4K in Dribbble) */
+.ad-chart-active-tooltip {
+    position: absolute;
+    top: -36px;
+    background-color: #121417;
+    color: #FFFFFF;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+[data-theme="dark"] .ad-chart-active-tooltip,
+.theme-dark .ad-chart-active-tooltip {
+    background-color: #FFFFFF;
+    color: #111827;
+}
+
+.ad-chart-active-dot {
+    position: absolute;
+    top: -8px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #121417;
+}
+
+[data-theme="dark"] .ad-chart-active-dot,
+.theme-dark .ad-chart-active-dot {
+    background-color: #FFFFFF;
+}
+
+/* Pending Approvals Card */
+.ad-pending-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.ad-pending-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--cp-border-subtle, #F1F4F6);
+    transition: background-color 0.15s ease;
+}
+
+.ad-pending-item:last-child {
+    border-bottom: none;
+    padding-bottom: 4px;
+}
+
+.ad-pending-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.ad-pending-logo-box {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--cp-card-subtle, #F1F4F6);
+    font-size: 1.05rem;
+    flex-shrink: 0;
+}
+
+[data-theme="dark"] .ad-pending-logo-box,
+.theme-dark .ad-pending-logo-box {
+    background-color: #1E293B;
+}
+
+.ad-pending-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--cp-text-main, #111827);
+    line-height: 1.25;
+    margin-bottom: 2px;
+}
+
+.ad-pending-time {
+    font-size: 0.76rem;
+    color: var(--cp-text-light, #94A3B8);
+    line-height: 1.2;
+}
+
+/* Neutral Soft Gray Status Pill (Matching Dribbble) */
+.ad-pill-pending {
+    background-color: #ECEFF2 !important;
+    color: #64748B !important;
+    font-size: 0.76rem !important;
+    font-weight: 600 !important;
+    padding: 5px 16px !important;
+    border-radius: 9999px !important;
+    border: none !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+[data-theme="dark"] .ad-pill-pending,
+.theme-dark .ad-pill-pending {
+    background-color: #1E293B !important;
+    color: #94A3B8 !important;
+}
+
+.ad-pill-active {
+    background-color: #E8F5E9 !important;
+    color: #2E7D32 !important;
+    font-size: 0.76rem !important;
+    font-weight: 600 !important;
+    padding: 5px 16px !important;
+    border-radius: 9999px !important;
+    border: none !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+[data-theme="dark"] .ad-pill-active,
+.theme-dark .ad-pill-active {
+    background-color: rgba(16, 185, 129, 0.18) !important;
+    color: #34D399 !important;
+}
+
+.ad-pill-expired {
+    background-color: #F1F5F9 !important;
+    color: #475569 !important;
+    font-size: 0.76rem !important;
+    font-weight: 600 !important;
+    padding: 5px 16px !important;
+    border-radius: 9999px !important;
+    border: none !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+[data-theme="dark"] .ad-pill-expired,
+.theme-dark .ad-pill-expired {
+    background-color: #1E293B !important;
+    color: #64748B !important;
+}
+
+/* Minimal 3-dot Button */
+.ad-btn-dots {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: var(--cp-text-light, #94A3B8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.ad-btn-dots:hover {
+    background-color: var(--cp-card-subtle, #F1F4F6);
+    color: var(--cp-text-main, #111827);
+}
+
+[data-theme="dark"] .ad-btn-dots:hover,
+.theme-dark .ad-btn-dots:hover {
+    background-color: #1E293B;
+    color: #FFFFFF;
+}
+
+/* =========================================================
+   BOTTOM SECTION: MANAGE INBOUND REQUESTS (Table Card)
+   ========================================================= */
+.ad-manage-card {
+    padding: 26px 28px;
+}
+
+.ad-manage-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.ad-manage-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--cp-text-main, #111827);
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+/* Action Controls Row (Neat Spacing, Pill Rounded) */
+.ad-manage-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.ad-search-pill-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.ad-search-icon {
+    position: absolute;
+    left: 14px;
+    color: var(--cp-text-light, #94A3B8);
+    font-size: 0.8rem;
+    pointer-events: none;
+}
+
+.ad-search-input {
+    border-radius: 9999px !important;
+    border: 1px solid var(--cp-border, #E2E8F0) !important;
+    background-color: var(--cp-input-bg, #FFFFFF) !important;
+    color: var(--cp-text-main, #111827) !important;
+    padding: 7px 16px 7px 36px !important;
+    font-size: 0.82rem !important;
+    outline: none !important;
+    width: 190px;
+    transition: all 0.2s ease;
+}
+
+.ad-search-input:focus {
+    width: 230px;
+    border-color: var(--cp-primary, #7355F7) !important;
+    box-shadow: 0 0 0 3px var(--cp-primary-subtle, rgba(115, 85, 247, 0.12)) !important;
+}
+
+/* Status Filter Pill Button */
+.ad-btn-pill-filter {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--cp-card-bg, #FFFFFF);
+    color: var(--cp-text-main, #111827);
+    border: 1px solid var(--cp-border, #E2E8F0);
+    border-radius: 9999px;
+    padding: 7px 18px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.ad-btn-pill-filter:hover {
+    background-color: var(--cp-card-subtle, #F8FAFC);
+    border-color: var(--cp-border-highlight, #CBD5E1);
+}
+
+[data-theme="dark"] .ad-btn-pill-filter,
+.theme-dark .ad-btn-pill-filter {
+    background-color: #141C2E;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #F8FAFC;
+}
+
+/* Dark Solid Pill Button (Matching "Export" button in Dribbble) */
+.ad-btn-pill-dark {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #121417;
+    color: #FFFFFF !important;
+    border: none;
+    border-radius: 9999px;
+    padding: 7px 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    box-shadow: 0 2px 8px rgba(18, 20, 23, 0.15);
+}
+
+.ad-btn-pill-dark:hover {
+    background-color: #272B30;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(18, 20, 23, 0.25);
+    color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .ad-btn-pill-dark,
+.theme-dark .ad-btn-pill-dark {
+    background-color: #FFFFFF;
+    color: #111827 !important;
+}
+
+[data-theme="dark"] .ad-btn-pill-dark:hover,
+.theme-dark .ad-btn-pill-dark:hover {
+    background-color: #F1F5F9;
+    color: #111827 !important;
+}
+
+/* Minimal Modern Table */
+.ad-table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.ad-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0;
+}
+
+.ad-table thead th {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--cp-text-light, #8E99A8);
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--cp-border-subtle, #F1F4F6);
+    white-space: nowrap;
+    text-align: left;
+    letter-spacing: 0;
+}
+
+.ad-table tbody td {
+    padding: 15px 16px;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--cp-border-subtle, #F3F5F7);
+    color: var(--cp-text-main, #111827);
+    font-size: 0.88rem;
+    transition: background-color 0.15s ease;
+}
+
+.ad-table tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+.ad-table tbody tr:hover {
+    background-color: var(--cp-card-subtle, #F8FAFC);
+}
+
+[data-theme="dark"] .ad-table tbody tr:hover,
+.theme-dark .ad-table tbody tr:hover {
+    background-color: #1A243B;
+}
+
+/* Table Checkbox */
+.ad-checkbox {
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    border: 1.5px solid var(--cp-border-highlight, #CBD5E1);
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+    vertical-align: middle;
+    margin: 0;
+    position: relative;
+}
+
+.ad-checkbox:checked {
+    background-color: #121417;
+    border-color: #121417;
+}
+
+[data-theme="dark"] .ad-checkbox:checked,
+.theme-dark .ad-checkbox:checked {
+    background-color: var(--cp-primary, #8B5CF6);
+    border-color: var(--cp-primary, #8B5CF6);
+}
+
+.ad-checkbox:checked::after {
+    content: '';
+    display: block;
+    width: 5px;
+    height: 9px;
+    border: solid #FFFFFF;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    margin-bottom: 2px;
+}
+
+/* Table Cell Details */
+.ad-cell-title {
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--cp-text-main, #111827);
+    cursor: pointer;
+}
+
+.ad-cell-title:hover {
+    color: var(--cp-primary, #7355F7);
+}
+
+.ad-cell-company {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: 500;
+    font-size: 0.86rem;
+    color: var(--cp-text-main, #111827);
+}
+
+.ad-company-icon-circle {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--cp-card-subtle, #F1F4F6);
+    font-size: 0.82rem;
+    flex-shrink: 0;
+}
+
+[data-theme="dark"] .ad-company-icon-circle,
+.theme-dark .ad-company-icon-circle {
+    background-color: #1E293B;
+}
+
+.ad-cell-location {
+    font-size: 0.84rem;
+    color: var(--cp-text-light, #64748B);
+    white-space: nowrap;
+}
+
+.ad-cell-date {
+    font-size: 0.8rem;
+    color: var(--cp-text-light, #64748B);
+    white-space: nowrap;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 991px) {
+    .ad-stats-section {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .ad-stats-intro {
+        flex: 0 0 auto;
+        padding-right: 0;
+    }
+
+    .ad-manage-card {
+        padding: 18px 16px;
+    }
+
+    .ad-manage-actions {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+}

@@ -577,18 +577,18 @@ const AdminPortal = () => {
                         </div>
                     </div>
 
-                    <div className="d-flex align-items-center gap-2.5 gap-sm-3.5 gap-md-4">
+                    <div className="d-flex align-items-center gap-2.5 gap-md-3">
                         <button 
-                            type="button"
+                            type="button" 
                             onClick={toggleTheme}
-                            className="btn btn-sm d-flex align-items-center gap-2 py-1.5 px-3"
+                            className="btn d-flex align-items-center gap-2 rounded-pill"
                             style={{ 
                                 backgroundColor: 'var(--cp-card-subtle)', 
                                 border: '1px solid var(--cp-border)',
                                 color: 'var(--cp-text-main)',
-                                borderRadius: '4px',
                                 fontSize: '0.82rem',
-                                fontWeight: 500
+                                fontWeight: 500,
+                                padding: '7px 16px'
                             }}
                             title={`Switch to ${theme === 'light' ? 'Dark' : 'Light'} Mode`}
                         >
@@ -596,18 +596,36 @@ const AdminPortal = () => {
                             <span className="d-none d-md-inline">{theme === 'dark' ? 'Light' : 'Dark'}</span>
                         </button>
 
-                        <div className="d-none d-md-flex align-items-center gap-2 px-3 py-1.5 rounded" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', fontSize: '0.78rem' }}>
+                        <div 
+                            className="d-none d-md-flex align-items-center gap-2 rounded-pill" 
+                            style={{ 
+                                backgroundColor: 'var(--cp-card-subtle)', 
+                                border: '1px solid var(--cp-border)', 
+                                fontSize: '0.8rem',
+                                padding: '7px 16px'
+                            }}
+                        >
                             <FontAwesomeIcon icon={faClock} style={{ color: 'var(--cp-primary)' }} />
                             <span className="fw-semibold" style={{ color: 'var(--cp-text-muted)' }}>Kampala Admin Desk</span>
                         </div>
-                        <span className="badge px-3 py-1.5 d-none d-sm-inline-flex align-items-center gap-1.5" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', border: '1px solid var(--cp-border-highlight)', fontSize: '0.78rem' }}>
+                        <span 
+                            className="badge rounded-pill d-none d-sm-inline-flex align-items-center gap-1.5" 
+                            style={{ 
+                                backgroundColor: 'var(--cp-primary-subtle)', 
+                                color: 'var(--cp-primary-text)', 
+                                border: '1px solid var(--cp-border-highlight)', 
+                                fontSize: '0.8rem',
+                                padding: '7px 16px',
+                                fontWeight: 600
+                            }}
+                        >
                             <FontAwesomeIcon icon={faCheckCircle} /> Superadmin Access
                         </span>
                         <button 
                             type="button" 
                             onClick={handleSignOut}
-                            className="btn btn-sm btn-outline-danger d-inline-flex align-items-center gap-2 py-1.5 px-3"
-                            style={{ borderRadius: '4px', fontSize: '0.8rem', fontWeight: 600 }}
+                            className="btn btn-outline-danger d-inline-flex align-items-center gap-2 rounded-pill"
+                            style={{ fontSize: '0.82rem', fontWeight: 600, padding: '7px 18px' }}
                         >
                             <FontAwesomeIcon icon={faSignOutAlt} /> <span className="d-none d-sm-inline">Exit</span>
                         </button>

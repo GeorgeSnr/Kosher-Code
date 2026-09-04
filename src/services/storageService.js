@@ -90,13 +90,162 @@ const defaultReviews = [
 // 1. ORDERS / BOOKINGS STORAGE & FIRESTORE SYNC
 // ----------------------------------------------------
 
+// Initial fallback orders matching enterprise solutions & Dribbble inspiration
+export const defaultOrders = [
+    {
+        _id: 'ord-101',
+        name: 'Alex Morgan',
+        title: 'Product Designer',
+        serviceName: 'Core Banking UI/UX & Design System',
+        institution: 'Google',
+        companyIcon: 'google',
+        location: 'San Francisco',
+        region: 'San Francisco, CA',
+        status: 'Pending',
+        postedDate: 'Jun 10 03:20 GMT',
+        date: '2026-06-10',
+        price: '4,500',
+        pricingType: 'Design Systems',
+        email: 'alex.morgan@google.com',
+        phone: '+1 (415) 890-2134',
+        description: 'Comprehensive design system and responsive banking workflow components for microfinance apps.'
+    },
+    {
+        _id: 'ord-102',
+        name: 'Jordan Hayes',
+        title: 'Digital Marketer',
+        serviceName: 'MSME Growth Engine & SEO Cloud',
+        institution: 'Amazon',
+        companyIcon: 'amazon',
+        location: 'California',
+        region: 'California, USA',
+        status: 'Active',
+        postedDate: 'Jun 08 04:30 GMT',
+        date: '2026-06-08',
+        price: '3,200',
+        pricingType: 'Cloud Tier',
+        email: 'jordan.h@amazon.com',
+        phone: '+1 (206) 555-0199',
+        description: 'Multi-store analytics pipeline and regional marketing automation integration.'
+    },
+    {
+        _id: 'ord-103',
+        name: 'David Chen',
+        title: 'Python Developer',
+        serviceName: 'Cross-Border Gateway & Core Switch',
+        institution: 'Paypal',
+        companyIcon: 'paypal',
+        location: 'Los Angeles',
+        region: 'Los Angeles, CA',
+        status: 'Expired',
+        postedDate: 'Feb 02 05:40 GMT',
+        date: '2026-02-02',
+        price: '6,800',
+        pricingType: 'FinTech Switch',
+        email: 'd.chen@paypal.com',
+        phone: '+1 (310) 555-0142',
+        description: 'High-throughput payment gateway integration with real-time settlement rails.'
+    },
+    {
+        _id: 'ord-104',
+        name: 'Elena Rostova',
+        title: 'Lead Architect',
+        serviceName: 'Enterprise Cloud Infrastructure',
+        institution: 'Apple',
+        companyIcon: 'apple',
+        location: 'Cupertino',
+        region: 'Cupertino, CA',
+        status: 'Pending',
+        postedDate: 'Jun 10 03:20 GMT',
+        date: '2026-06-10',
+        price: '8,200',
+        pricingType: 'Cloud Architecture',
+        email: 'elena.r@apple.com',
+        phone: '+1 (408) 996-1010',
+        description: 'Scalable multi-tenant cloud deployment with automated failover and low-latency API proxying.'
+    },
+    {
+        _id: 'ord-105',
+        name: 'Marcus Vance',
+        title: 'UX Systems Engineer',
+        serviceName: 'Web, Mobile & Cloud Solutions',
+        institution: 'Figma',
+        companyIcon: 'figma',
+        location: 'San Francisco',
+        region: 'San Francisco, CA',
+        status: 'Pending',
+        postedDate: 'Jun 12 04:30 GMT',
+        date: '2026-06-12',
+        price: '5,100',
+        pricingType: 'Design Systems',
+        email: 'marcus.vance@figma.com',
+        phone: '+1 (415) 321-7890',
+        description: 'Integration of automated tokens and Figma component libraries into core enterprise portals.'
+    },
+    {
+        _id: 'ord-106',
+        name: 'Stefan Meyer',
+        title: 'Fleet Systems Lead',
+        serviceName: 'Logistics & MSME ERP Suite',
+        institution: 'BMW',
+        companyIcon: 'bmw',
+        location: 'Munich',
+        region: 'Munich & Regional Hubs',
+        status: 'Pending',
+        postedDate: 'Jun 14 05:40 GMT',
+        date: '2026-06-14',
+        price: '7,400',
+        pricingType: 'Enterprise ERP',
+        email: 'stefan.meyer@bmw.de',
+        phone: '+49 89 3820',
+        description: 'Warehouse tracking integration and cross-border shipment synchronization.'
+    },
+    {
+        _id: 'ord-107',
+        name: 'David Mukasa',
+        title: 'SACCO Operations Director',
+        serviceName: 'SACCO & Microfinance Management ERP',
+        institution: 'Kampala Metropolitan SACCO',
+        companyIcon: 'bank',
+        location: 'Kampala',
+        region: 'Uganda & Regional',
+        status: 'In Progress',
+        postedDate: 'Aug 25 09:15 GMT',
+        date: '2026-08-25',
+        price: '899',
+        pricingType: 'Standard Subscription',
+        email: 'mukasa@kampalasacco.ug',
+        phone: '+256 701 234 567',
+        description: 'Need full automated loan management with MTN MoMo disbursement and UMRA compliance.'
+    },
+    {
+        _id: 'ord-108',
+        name: 'Sarah Akello',
+        title: 'Head of Digital Banking',
+        serviceName: 'Banking & Financial Sector Solutions',
+        institution: 'Equatorial FinTech Ltd',
+        companyIcon: 'fintech',
+        location: 'Nairobi',
+        region: 'Pan-African Operations',
+        status: 'In Review',
+        postedDate: 'Aug 26 11:45 GMT',
+        date: '2026-08-26',
+        price: '1,499',
+        pricingType: 'Enterprise Tier',
+        email: 'sarah.akello@equatorialpay.com',
+        phone: '+256 772 890 123',
+        description: 'Agency banking terminal integration with core banking switch and automated reconciliation.'
+    }
+];
+
 export const getStoredOrders = () => {
     try {
         const stored = localStorage.getItem(ORDERS_KEY);
-        if (!stored) return [];
-        return JSON.parse(stored);
+        if (!stored) return defaultOrders;
+        const parsed = JSON.parse(stored);
+        return parsed && parsed.length > 0 ? parsed : defaultOrders;
     } catch (e) {
-        return [];
+        return defaultOrders;
     }
 };
 
