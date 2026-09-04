@@ -171,21 +171,22 @@ const MakeAdmin = () => {
                         className="p-4 p-md-5 mb-4"
                         style={{
                             backgroundColor: 'var(--cp-card-bg, #FFFFFF)',
-                            borderRadius: '24px',
+                            borderRadius: '0',
                             border: '1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.06))',
                             boxShadow: '0 4px 20px -2px rgba(15, 23, 42, 0.04)'
                         }}
                     >
                         <div className="d-flex align-items-center gap-2 mb-1.5">
                             <span 
-                                className="badge rounded-pill px-3 py-1"
+                                className="badge px-3 py-1"
                                 style={{ 
                                     backgroundColor: 'var(--cp-primary-subtle)', 
                                     color: 'var(--cp-primary-text)',
                                     fontSize: '0.74rem',
                                     fontWeight: 700,
                                     letterSpacing: '0.04em',
-                                    textTransform: 'uppercase'
+                                    textTransform: 'uppercase',
+                                    borderRadius: '0'
                                 }}
                             >
                                 Privilege Escalation
@@ -208,7 +209,7 @@ const MakeAdmin = () => {
                                         <Form.Control
                                             type="email"
                                             className="cp-input"
-                                            style={{ borderRadius: '14px', padding: '12px 18px', fontSize: '0.88rem' }}
+                                            style={{ borderRadius: '0', padding: '12px 18px', fontSize: '0.88rem' }}
                                             {...register("email", { required: true })}
                                             placeholder="e.g. director@koshercode.ug"
                                         />
@@ -218,13 +219,14 @@ const MakeAdmin = () => {
                                 <Col md={4}>
                                     <button 
                                         type="submit" 
-                                        className="btn w-100 text-white rounded-pill d-inline-flex align-items-center justify-content-center gap-2" 
+                                        className="btn w-100 text-white d-inline-flex align-items-center justify-content-center gap-2" 
                                         style={{ 
                                             backgroundColor: '#121417', 
                                             fontWeight: 600, 
                                             padding: '12px 18px', 
                                             border: 'none',
-                                            fontSize: '0.88rem'
+                                            fontSize: '0.88rem',
+                                            borderRadius: '0'
                                         }}
                                     >
                                         <FontAwesomeIcon icon={faUserShield} /> Grant Admin Privileges
@@ -238,7 +240,7 @@ const MakeAdmin = () => {
                         className="p-4 p-md-5"
                         style={{
                             backgroundColor: 'var(--cp-card-bg, #FFFFFF)',
-                            borderRadius: '24px',
+                            borderRadius: '0',
                             border: '1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.06))',
                             boxShadow: '0 4px 20px -2px rgba(15, 23, 42, 0.04)'
                         }}
@@ -248,10 +250,11 @@ const MakeAdmin = () => {
                                 Active Superadministrators ({admins.length})
                             </h5>
                             <span 
-                                className="badge rounded-pill px-3 py-1"
+                                className="badge px-3 py-1"
                                 style={{
                                     backgroundColor: 'var(--cp-card-subtle)',
                                     color: 'var(--cp-text-muted)',
+                                    borderRadius: '0',
                                     fontSize: '0.75rem',
                                     fontWeight: 600
                                 }}
@@ -284,10 +287,11 @@ const MakeAdmin = () => {
                                             </td>
                                             <td className="py-3 px-3">
                                                 <span 
-                                                    className="badge rounded-pill px-3 py-1.5"
+                                                    className="badge px-3 py-1.5"
                                                     style={{
                                                         backgroundColor: 'var(--cp-primary-subtle)',
                                                         color: 'var(--cp-primary-text)',
+                                                        borderRadius: '0',
                                                         fontSize: '0.76rem',
                                                         fontWeight: 600
                                                     }}
@@ -297,8 +301,8 @@ const MakeAdmin = () => {
                                             </td>
                                             <td className="py-3 px-3 text-end">
                                                 <span 
-                                                    className="badge rounded-pill px-3 py-1.5 badge-status-done"
-                                                    style={{ fontSize: '0.76rem', fontWeight: 600 }}
+                                                    className="badge px-3 py-1.5 badge-status-done"
+                                                    style={{ fontSize: '0.76rem', fontWeight: 600, borderRadius: '0' }}
                                                 >
                                                     ● Active
                                                 </span>
@@ -318,7 +322,7 @@ const MakeAdmin = () => {
                     className="p-4 p-md-5"
                     style={{
                         backgroundColor: 'var(--cp-card-bg, #FFFFFF)',
-                        borderRadius: '24px',
+                        borderRadius: '0',
                         border: '1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.06))',
                         boxShadow: '0 4px 20px -2px rgba(15, 23, 42, 0.04)'
                     }}
@@ -327,14 +331,15 @@ const MakeAdmin = () => {
                         <div>
                             <div className="d-flex align-items-center gap-2 mb-1.5">
                                 <span 
-                                    className="badge rounded-pill px-3 py-1"
+                                    className="badge px-3 py-1"
                                     style={{ 
                                         backgroundColor: 'var(--cp-primary-subtle)', 
                                         color: 'var(--cp-primary-text)',
                                         fontSize: '0.74rem',
                                         fontWeight: 700,
                                         letterSpacing: '0.04em',
-                                        textTransform: 'uppercase'
+                                        textTransform: 'uppercase',
+                                        borderRadius: '0'
                                     }}
                                 >
                                     Directory
@@ -348,9 +353,9 @@ const MakeAdmin = () => {
                             </p>
                         </div>
                         <Button 
-                            className="btn-sm rounded-pill px-3.5 py-1.5 d-inline-flex align-items-center gap-1.5"
+                            className="btn-sm px-3.5 py-1.5 d-inline-flex align-items-center gap-1.5"
                             variant="outline-secondary" 
-                            style={{ fontSize: '0.82rem', fontWeight: 600, borderColor: 'var(--cp-border)' }}
+                            style={{ fontSize: '0.82rem', fontWeight: 600, borderColor: 'var(--cp-border)', borderRadius: '0' }}
                             onClick={loadData}
                         >
                             <FontAwesomeIcon icon={faSyncAlt} /> Refresh List
@@ -388,8 +393,8 @@ const MakeAdmin = () => {
                                             <td className="py-3 px-3 small" style={{ color: 'var(--cp-text-muted)' }}>{u.institution || '—'}</td>
                                             <td className="py-3 px-3">
                                                 <span 
-                                                    className={`badge rounded-pill px-3 py-1.5 ${u.role === 'admin' ? 'badge-status-review' : 'badge-status-progress'}`}
-                                                    style={{ fontSize: '0.76rem', fontWeight: 600 }}
+                                                    className={`badge px-3 py-1.5 ${u.role === 'admin' ? 'badge-status-review' : 'badge-status-progress'}`}
+                                                    style={{ fontSize: '0.76rem', fontWeight: 600, borderRadius: '0' }}
                                                 >
                                                     {u.role || 'client'}
                                                 </span>
@@ -399,8 +404,8 @@ const MakeAdmin = () => {
                                                     <Button 
                                                         size="sm" 
                                                         variant="outline-primary"
-                                                        className="rounded-pill px-3 py-1"
-                                                        style={{ fontSize: '0.78rem', fontWeight: 600 }}
+                                                        className="px-3 py-1"
+                                                        style={{ fontSize: '0.78rem', fontWeight: 600, borderRadius: '0' }}
                                                         onClick={() => handlePromoteUser(u.email)}
                                                     >
                                                         Promote to Admin
@@ -422,7 +427,7 @@ const MakeAdmin = () => {
                     className="p-4 p-md-5"
                     style={{
                         backgroundColor: 'var(--cp-card-bg, #FFFFFF)',
-                        borderRadius: '24px',
+                        borderRadius: '0',
                         border: '1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.06))',
                         boxShadow: '0 4px 20px -2px rgba(15, 23, 42, 0.04)'
                     }}
@@ -431,14 +436,15 @@ const MakeAdmin = () => {
                         <div>
                             <div className="d-flex align-items-center gap-2 mb-1.5">
                                 <span 
-                                    className="badge rounded-pill px-3 py-1"
+                                    className="badge px-3 py-1"
                                     style={{ 
                                         backgroundColor: 'rgba(236, 72, 153, 0.12)', 
                                         color: '#EC4899',
                                         fontSize: '0.74rem',
                                         fontWeight: 700,
                                         letterSpacing: '0.04em',
-                                        textTransform: 'uppercase'
+                                        textTransform: 'uppercase',
+                                        borderRadius: '0'
                                     }}
                                 >
                                     Inbound Pipeline
@@ -452,9 +458,9 @@ const MakeAdmin = () => {
                             </p>
                         </div>
                         <Button 
-                            className="btn-sm rounded-pill px-3.5 py-1.5 d-inline-flex align-items-center gap-1.5"
+                            className="btn-sm px-3.5 py-1.5 d-inline-flex align-items-center gap-1.5"
                             variant="outline-secondary" 
-                            style={{ fontSize: '0.82rem', fontWeight: 600, borderColor: 'var(--cp-border)' }}
+                            style={{ fontSize: '0.82rem', fontWeight: 600, borderColor: 'var(--cp-border)', borderRadius: '0' }}
                             onClick={loadData}
                         >
                             <FontAwesomeIcon icon={faSyncAlt} /> Refresh Inquiries
@@ -508,8 +514,8 @@ const MakeAdmin = () => {
                                                 <Button 
                                                     size="sm" 
                                                     variant="outline-secondary"
-                                                    className="rounded-pill px-3 py-1 d-inline-flex align-items-center gap-1.5"
-                                                    style={{ fontSize: '0.78rem', fontWeight: 600, borderColor: 'var(--cp-border)', backgroundColor: 'var(--cp-card-subtle)' }}
+                                                    className="px-3 py-1 d-inline-flex align-items-center gap-1.5"
+                                                    style={{ fontSize: '0.78rem', fontWeight: 600, borderColor: 'var(--cp-border)', backgroundColor: 'var(--cp-card-subtle)', borderRadius: '0' }}
                                                     onClick={() => {
                                                         setSelectedInquiry(c);
                                                         setShowInquiryModal(true);
@@ -533,7 +539,7 @@ const MakeAdmin = () => {
                     className="p-4 p-md-5"
                     style={{
                         backgroundColor: 'var(--cp-card-bg, #FFFFFF)',
-                        borderRadius: '24px',
+                        borderRadius: '0',
                         border: '1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.06))',
                         boxShadow: '0 4px 20px -2px rgba(15, 23, 42, 0.04)'
                     }}
@@ -542,14 +548,15 @@ const MakeAdmin = () => {
                         <div>
                             <div className="d-flex align-items-center gap-2 mb-1.5">
                                 <span 
-                                    className="badge rounded-pill px-3 py-1"
+                                    className="badge px-3 py-1"
                                     style={{ 
                                         backgroundColor: 'rgba(16, 185, 129, 0.12)', 
                                         color: '#10B981',
                                         fontSize: '0.74rem',
                                         fontWeight: 700,
                                         letterSpacing: '0.04em',
-                                        textTransform: 'uppercase'
+                                        textTransform: 'uppercase',
+                                        borderRadius: '0'
                                     }}
                                 >
                                     Cloud Architecture
@@ -567,15 +574,15 @@ const MakeAdmin = () => {
                                 size="sm" 
                                 variant="outline-secondary"
                                 onClick={loadData}
-                                className="rounded-pill px-3.5 py-2 d-flex align-items-center gap-2 border-0"
-                                style={{ backgroundColor: 'var(--cp-card-subtle)', color: 'var(--cp-text-main)', fontWeight: 600, fontSize: '0.82rem' }}
+                                className="px-3.5 py-2 d-flex align-items-center gap-2 border-0"
+                                style={{ backgroundColor: 'var(--cp-card-subtle)', color: 'var(--cp-text-main)', fontWeight: 600, fontSize: '0.82rem', borderRadius: '0' }}
                             >
                                 <FontAwesomeIcon icon={faSyncAlt} /> Refresh Status
                             </Button>
                             <Button 
                                 size="sm" 
-                                className="rounded-pill px-4 py-2 text-white d-flex align-items-center gap-2 border-0"
-                                style={{ backgroundColor: '#121417', fontWeight: 600, fontSize: '0.82rem' }}
+                                className="px-4 py-2 text-white d-flex align-items-center gap-2 border-0"
+                                style={{ backgroundColor: '#121417', fontWeight: 600, fontSize: '0.82rem', borderRadius: '0' }}
                                 disabled={isSeeding}
                                 onClick={() => handleSeedDatabase(false)}
                             >
@@ -590,7 +597,7 @@ const MakeAdmin = () => {
                         style={{ 
                             backgroundColor: 'var(--cp-card-subtle)', 
                             border: '1px solid var(--cp-border)',
-                            borderRadius: '20px'
+                            borderRadius: '0'
                         }}
                     >
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
@@ -617,10 +624,10 @@ const MakeAdmin = () => {
                                 </div>
                             </div>
                             <div className="d-flex gap-2">
-                                <span className="badge rounded-pill px-3 py-2 bg-success bg-opacity-10 text-success d-flex align-items-center gap-1.5 fw-semibold" style={{ fontSize: '0.78rem' }}>
+                                <span className="badge px-3 py-2 bg-success bg-opacity-10 text-success d-flex align-items-center gap-1.5 fw-semibold" style={{ fontSize: '0.78rem', borderRadius: '0' }}>
                                     <FontAwesomeIcon icon={faCheckCircle} /> Auth Ready
                                 </span>
-                                <span className="badge rounded-pill px-3 py-2 bg-success bg-opacity-10 text-success d-flex align-items-center gap-1.5 fw-semibold" style={{ fontSize: '0.78rem' }}>
+                                <span className="badge px-3 py-2 bg-success bg-opacity-10 text-success d-flex align-items-center gap-1.5 fw-semibold" style={{ fontSize: '0.78rem', borderRadius: '0' }}>
                                     <FontAwesomeIcon icon={faCheckCircle} /> Firestore Connected
                                 </span>
                             </div>
@@ -637,7 +644,7 @@ const MakeAdmin = () => {
                                 className="h-100 p-3 border-0 text-center" 
                                 style={{ 
                                     backgroundColor: 'var(--cp-card-subtle)', 
-                                    borderRadius: '20px'
+                                    borderRadius: '0'
                                 }}
                             >
                                 <div className="d-inline-flex align-items-center justify-content-center mb-2 mx-auto rounded-circle" style={{ width: '40px', height: '40px', backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)' }}>
@@ -653,7 +660,7 @@ const MakeAdmin = () => {
                                 className="h-100 p-3 border-0 text-center" 
                                 style={{ 
                                     backgroundColor: 'var(--cp-card-subtle)', 
-                                    borderRadius: '20px'
+                                    borderRadius: '0'
                                 }}
                             >
                                 <div className="d-inline-flex align-items-center justify-content-center mb-2 mx-auto rounded-circle" style={{ width: '40px', height: '40px', backgroundColor: 'rgba(59, 130, 246, 0.12)', color: '#3B82F6' }}>
@@ -669,7 +676,7 @@ const MakeAdmin = () => {
                                 className="h-100 p-3 border-0 text-center" 
                                 style={{ 
                                     backgroundColor: 'var(--cp-card-subtle)', 
-                                    borderRadius: '20px'
+                                    borderRadius: '0'
                                 }}
                             >
                                 <div className="d-inline-flex align-items-center justify-content-center mb-2 mx-auto rounded-circle" style={{ width: '40px', height: '40px', backgroundColor: 'rgba(16, 185, 129, 0.12)', color: '#10B981' }}>
@@ -685,7 +692,7 @@ const MakeAdmin = () => {
                                 className="h-100 p-3 border-0 text-center" 
                                 style={{ 
                                     backgroundColor: 'var(--cp-card-subtle)', 
-                                    borderRadius: '20px'
+                                    borderRadius: '0'
                                 }}
                             >
                                 <div className="d-inline-flex align-items-center justify-content-center mb-2 mx-auto rounded-circle" style={{ width: '40px', height: '40px', backgroundColor: 'rgba(245, 158, 11, 0.12)', color: '#F59E0B' }}>
@@ -701,7 +708,7 @@ const MakeAdmin = () => {
                                 className="h-100 p-3 border-0 text-center" 
                                 style={{ 
                                     backgroundColor: 'var(--cp-card-subtle)', 
-                                    borderRadius: '20px'
+                                    borderRadius: '0'
                                 }}
                             >
                                 <div className="d-inline-flex align-items-center justify-content-center mb-2 mx-auto rounded-circle" style={{ width: '40px', height: '40px', backgroundColor: 'rgba(139, 92, 246, 0.12)', color: '#8B5CF6' }}>
@@ -717,7 +724,7 @@ const MakeAdmin = () => {
                                 className="h-100 p-3 border-0 text-center" 
                                 style={{ 
                                     backgroundColor: 'var(--cp-card-subtle)', 
-                                    borderRadius: '20px'
+                                    borderRadius: '0'
                                 }}
                             >
                                 <div className="d-inline-flex align-items-center justify-content-center mb-2 mx-auto rounded-circle" style={{ width: '40px', height: '40px', backgroundColor: 'rgba(236, 72, 153, 0.12)', color: '#EC4899' }}>
@@ -736,7 +743,7 @@ const MakeAdmin = () => {
                         style={{ 
                             backgroundColor: 'var(--cp-card-subtle)', 
                             border: '1px solid var(--cp-border)',
-                            borderRadius: '20px'
+                            borderRadius: '0'
                         }}
                     >
                         <h6 className="fw-bold mb-2" style={{ color: 'var(--cp-text-main)' }}>
@@ -750,8 +757,8 @@ const MakeAdmin = () => {
                                 size="sm" 
                                 disabled={isSeeding}
                                 onClick={() => handleSeedDatabase(false)}
-                                className="rounded-pill px-4 py-2 text-white border-0 fw-semibold"
-                                style={{ backgroundColor: '#121417', fontSize: '0.84rem' }}
+                                className="px-4 py-2 text-white border-0 fw-semibold"
+                                style={{ backgroundColor: '#121417', fontSize: '0.84rem', borderRadius: '0' }}
                             >
                                 Populate Missing Firestore Documents
                             </Button>
@@ -759,8 +766,8 @@ const MakeAdmin = () => {
                                 variant="outline-warning" 
                                 size="sm" 
                                 disabled={isSeeding}
-                                className="rounded-pill px-4 py-2 fw-semibold"
-                                style={{ fontSize: '0.84rem' }}
+                                className="px-4 py-2 fw-semibold"
+                                style={{ fontSize: '0.84rem', borderRadius: '0' }}
                                 onClick={() => {
                                     swal({
                                         title: "Overwrite / Re-seed Database?",
@@ -791,7 +798,7 @@ const MakeAdmin = () => {
                     contentClassName="ad-card border-0 shadow-lg"
                     style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
                 >
-                    <Modal.Header closeButton style={{ borderBottom: '1px solid var(--cp-border)', padding: '20px 26px' }}>
+                    <Modal.Header closeButton style={{ borderBottom: '1px solid var(--cp-border)', padding: '20px 26px', borderRadius: '0' }}>
                         <div className="d-flex align-items-center gap-3 overflow-hidden" style={{ minWidth: 0, flex: '1 1 auto' }}>
                             <UserAvatar name={selectedInquiry.name} size="md" ring={true} ringType="glow" />
                             <div className="overflow-hidden" style={{ minWidth: 0, flex: '1 1 auto' }}>
@@ -808,7 +815,7 @@ const MakeAdmin = () => {
                     <Modal.Body className="p-4" style={{ color: 'var(--cp-text-main)', maxHeight: '78vh', overflowY: 'auto' }}>
                         <Row className="g-3 mb-4">
                             <Col md={6}>
-                                <div className="p-3.5 rounded-4 h-100" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                                <div className="p-3.5 h-100" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0' }}>
                                     <h6 className="fw-bold mb-2.5 small text-uppercase" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
                                         <FontAwesomeIcon icon={faEnvelope} className="me-1.5" style={{ color: 'var(--cp-primary)' }} /> Contact Identity
                                     </h6>
@@ -836,7 +843,7 @@ const MakeAdmin = () => {
                             </Col>
 
                             <Col md={6}>
-                                <div className="p-3.5 rounded-4 h-100" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                                <div className="p-3.5 h-100" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0' }}>
                                     <h6 className="fw-bold mb-2.5 small text-uppercase" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
                                         <FontAwesomeIcon icon={faMapMarkerAlt} className="me-1.5" style={{ color: '#10B981' }} /> Scope & Institution
                                     </h6>
@@ -850,7 +857,7 @@ const MakeAdmin = () => {
                                     </div>
                                     <div>
                                         <small className="d-block fw-semibold text-muted" style={{ fontSize: '0.74rem' }}>Inquiry Source</small>
-                                        <span className="badge rounded-pill px-3 py-1 bg-success bg-opacity-10 text-success fw-semibold" style={{ fontSize: '0.76rem' }}>
+                                        <span className="badge px-3 py-1 bg-success bg-opacity-10 text-success fw-semibold" style={{ fontSize: '0.76rem', borderRadius: '0' }}>
                                             Online Contact Portal
                                         </span>
                                     </div>
@@ -858,7 +865,7 @@ const MakeAdmin = () => {
                             </Col>
                         </Row>
 
-                        <div className="p-3.5 rounded-4 mb-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                        <div className="p-3.5 mb-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0' }}>
                             <h6 className="fw-bold mb-2 small text-uppercase" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
                                 Inquiry Details & Requirements
                             </h6>
@@ -868,19 +875,19 @@ const MakeAdmin = () => {
                         </div>
                     </Modal.Body>
 
-                    <Modal.Footer style={{ borderTop: '1px solid var(--cp-border)', padding: '16px 26px' }}>
+                    <Modal.Footer style={{ borderTop: '1px solid var(--cp-border)', padding: '16px 26px', borderRadius: '0' }}>
                         <div className="d-flex flex-wrap justify-content-between align-items-center w-100 gap-2">
                             <a
                                 href={`mailto:${selectedInquiry.email}?subject=Re: ${encodeURIComponent(selectedInquiry.subject || 'Consultation Inquiry - Kosher Code')}`}
-                                className="btn btn-sm btn-dark rounded-pill px-3.5 py-1.5 d-inline-flex align-items-center gap-2 text-decoration-none text-white"
-                                style={{ backgroundColor: '#121417', borderColor: '#121417', fontSize: '0.82rem', fontWeight: 600 }}
+                                className="btn btn-sm btn-dark px-3.5 py-1.5 d-inline-flex align-items-center gap-2 text-decoration-none text-white"
+                                style={{ backgroundColor: '#121417', borderColor: '#121417', fontSize: '0.82rem', fontWeight: 600, borderRadius: '0' }}
                             >
                                 <FontAwesomeIcon icon={faReply} /> Reply via Email
                             </a>
                             <button
                                 type="button"
-                                className="btn btn-sm rounded-pill px-4 py-1.5"
-                                style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', color: 'var(--cp-text-main)', fontSize: '0.82rem', fontWeight: 600 }}
+                                className="btn btn-sm px-4 py-1.5"
+                                style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', color: 'var(--cp-text-main)', fontSize: '0.82rem', fontWeight: 600, borderRadius: '0' }}
                                 onClick={() => setShowInquiryModal(false)}
                             >
                                 Close

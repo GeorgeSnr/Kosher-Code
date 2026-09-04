@@ -196,7 +196,7 @@ const Book = () => {
                     <h4 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)' }}>Configure & Book Enterprise Solution</h4>
                     <p className="mb-0 small" style={{ color: 'var(--cp-text-muted)' }}>Tailor architecture parameters, user volume, and engagement models with Kampala HQ engineers.</p>
                 </div>
-                <span className="badge rounded-pill px-3.5 py-2 mt-2 mt-sm-0 d-inline-flex align-items-center gap-1.5" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', border: '1px solid var(--cp-border)', fontSize: '0.8rem', fontWeight: 600 }}>
+                <span className="badge px-3.5 py-2 mt-2 mt-sm-0 d-inline-flex align-items-center gap-1.5" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', border: '1px solid var(--cp-border)', borderRadius: '0', fontSize: '0.8rem', fontWeight: 600 }}>
                     <FontAwesomeIcon icon={faShieldAlt} /> 24/7 SLA Protected
                 </span>
             </div>
@@ -339,10 +339,11 @@ const Book = () => {
 
                                 <button
                                     type="submit"
-                                    className="btn rounded-pill py-2.5 px-5 d-inline-flex align-items-center gap-2 text-white fw-semibold"
+                                    className="btn py-2.5 px-5 d-inline-flex align-items-center gap-2 text-white fw-semibold"
                                     style={{
                                         backgroundColor: '#121417',
                                         borderColor: '#121417',
+                                        borderRadius: '0',
                                         fontSize: '0.9rem',
                                         boxShadow: '0 4px 14px rgba(0, 0, 0, 0.25)'
                                     }}
@@ -367,10 +368,11 @@ const Book = () => {
                                     </div>
                                     <div className="overflow-hidden">
                                         <span 
-                                            className="badge rounded-pill px-2.5 py-1 mb-1 d-inline-block"
+                                            className="badge px-2.5 py-1 mb-1 d-inline-block"
                                             style={{ 
                                                 backgroundColor: 'var(--cp-primary-subtle)', 
                                                 color: 'var(--cp-primary-text)', 
+                                                borderRadius: '0',
                                                 fontSize: '0.7rem', 
                                                 fontWeight: 600 
                                             }}
@@ -406,13 +408,13 @@ const Book = () => {
                                 </div>
                                 <div className="book-param-row">
                                     <span className="book-param-label">Turnaround SLA</span>
-                                    <span className="badge bg-success bg-opacity-10 text-success rounded-pill px-2.5 py-1" style={{ fontSize: '0.74rem', fontWeight: 600 }}>
+                                    <span className="badge bg-success bg-opacity-10 text-success px-2.5 py-1" style={{ fontSize: '0.74rem', fontWeight: 600, borderRadius: '0' }}>
                                         24h Engineering Review
                                     </span>
                                 </div>
                             </div>
 
-                            <div className="p-3 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                            <div className="p-3" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0' }}>
                                 <div className="d-flex align-items-center gap-2 mb-1">
                                     <FontAwesomeIcon icon={faShieldAlt} style={{ color: 'var(--cp-primary)' }} />
                                     <strong className="small" style={{ color: 'var(--cp-text-main)' }}>Kampala HQ Engineering SLA</strong>
@@ -435,10 +437,11 @@ const Book = () => {
                                     </small>
                                 </div>
                                 <span 
-                                    className="badge rounded-pill px-2.5 py-1 fw-semibold"
+                                    className="badge px-2.5 py-1 fw-semibold"
                                     style={{
                                         backgroundColor: 'var(--cp-primary-subtle)',
                                         color: 'var(--cp-primary-text)',
+                                        borderRadius: '0',
                                         fontSize: '0.74rem',
                                         border: '1px solid var(--cp-border)'
                                     }}
@@ -490,10 +493,11 @@ const Book = () => {
                                 </div>
                             ) : (
                                 <div 
-                                    className="text-center p-3.5 rounded-4"
+                                    className="text-center p-3.5"
                                     style={{
                                         backgroundColor: 'var(--cp-card-subtle)',
-                                        border: '1.5px dashed var(--cp-border)'
+                                        border: '1.5px dashed var(--cp-border)',
+                                        borderRadius: '0'
                                     }}
                                 >
                                     <FontAwesomeIcon icon={faFileContract} style={{ fontSize: '1.8rem', color: 'var(--cp-text-light)' }} className="mb-2 mt-1" />

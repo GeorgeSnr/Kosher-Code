@@ -1,6 +1,6 @@
-/* Order Action Dropdown (16px Soft-Minimalist) */
+/* Order Action Dropdown (Square Minimalist) */
 .dropdown-menu {
-    border-radius: 16px !important;
+    border-radius: 0 !important;
     border: 1px solid var(--cp-border, #E2E8F0) !important;
     background-color: var(--cp-card-bg, #FFFFFF) !important;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
@@ -11,7 +11,7 @@
 .dropdown-item {
     font-size: 0.82rem !important;
     padding: 7px 14px !important;
-    border-radius: 10px !important;
+    border-radius: 0 !important;
     color: var(--cp-text-main, #0F172A) !important;
     font-weight: 500 !important;
     transition: background-color 0.15s ease, color 0.15s ease !important;
@@ -41,7 +41,7 @@
 
 /* Modal text & container overflow protection */
 .order-details-modal .modal-content {
-    border-radius: 24px !important;
+    border-radius: 0 !important;
     border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.05)) !important;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.16) !important;
     overflow: hidden;
@@ -59,6 +59,6 @@
 
 .order-details-modal .modal-body::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.15);
-    border-radius: 4px;
+    border-radius: 0;
 }
 

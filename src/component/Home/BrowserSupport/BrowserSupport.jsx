@@ -113,7 +113,7 @@ const BrowserSupport = () => {
                                 data-aos-duration={600}
                                 sx={{
                                     p: { xs: 3, md: 3.5 },
-                                    borderRadius: '6px',
+                                    borderRadius: '0',
                                     bgcolor: 'var(--site-card-bg, #FFFFFF)',
                                     border: '1px solid var(--site-border, #E5E0FA)',
                                     boxShadow: 'var(--site-shadow-sm, 0 2px 8px rgba(0, 0, 0, 0.04))',
@@ -141,7 +141,7 @@ const BrowserSupport = () => {
                                     sx={{ 
                                         width: 64,
                                         height: 64,
-                                        borderRadius: '8px', 
+                                        borderRadius: '0', 
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',

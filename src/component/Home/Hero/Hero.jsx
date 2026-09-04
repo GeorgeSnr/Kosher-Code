@@ -32,7 +32,7 @@ const Hero = () => {
                             sx={{
                                 bgcolor: 'var(--site-primary-subtle, #F4F0FF)',
                                 border: '1px solid var(--site-border, #E5E0FA)',
-                                borderRadius: '4px',
+                                borderRadius: '0',
                                 color: 'var(--site-primary, #7355F7)',
                                 fontSize: '0.8rem',
                                 fontWeight: 600,
@@ -45,7 +45,7 @@ const Hero = () => {
                                 sx={{
                                     width: 8,
                                     height: 8,
-                                    borderRadius: '2px',
+                                    borderRadius: '0',
                                     bgcolor: 'var(--site-primary, #7355F7)',
                                     display: 'inline-block'
                                 }}
@@ -122,7 +122,7 @@ const Hero = () => {
                                 variant="contained"
                                 size="large"
                                 sx={{
-                                    borderRadius: '4px',
+                                    borderRadius: '0',
                                     textTransform: 'none',
                                     fontWeight: 600,
                                     fontSize: '0.95rem',
@@ -142,7 +142,7 @@ const Hero = () => {
                                 variant="outlined"
                                 size="large"
                                 sx={{
-                                    borderRadius: '4px',
+                                    borderRadius: '0',
                                     textTransform: 'none',
                                     fontWeight: 600,
                                     fontSize: '0.95rem',
@@ -219,7 +219,7 @@ const Hero = () => {
                                 width: '100%',
                                 maxWidth: '580px',
                                 height: 'auto',
-                                borderRadius: '4px',
+                                borderRadius: '0',
                                 border: '1px solid var(--site-border, #E5E0FA)',
                                 boxShadow: 'var(--site-shadow-md, 0 15px 35px rgba(115, 85, 247, 0.12))'
                             }}

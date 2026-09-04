@@ -19,7 +19,7 @@
 .service-card {
     background: var(--site-card-bg, #FFFFFF);
     border: 1px solid var(--site-border, #E2E8F0);
-    border-radius: 12px;
+    border-radius: 0;
     padding: 1.75rem;
     position: relative;
     box-shadow: var(--site-card-shadow, 0 1px 3px rgba(0, 0, 0, 0.04));
@@ -39,7 +39,7 @@
     justify-content: center;
     width: 46px;
     height: 46px;
-    border-radius: 10px;
+    border-radius: 0;
     background-color: var(--site-primary-subtle, rgba(6, 114, 203, 0.08));
     color: var(--site-primary, #0672CB);
     transition: transform 0.25s ease;
@@ -52,7 +52,7 @@
 .service-category-badge {
     display: inline-block;
     padding: 0.3rem 0.75rem;
-    border-radius: 9999px;
+    border-radius: 0;
     font-size: 0.72rem;
     font-weight: 700;
     background-color: var(--site-primary-subtle, rgba(6, 114, 203, 0.08));
@@ -78,7 +78,7 @@
     background-color: var(--site-card-subtle, #F8FAFC);
     border: 1px solid var(--site-border, #E2E8F0);
     padding: 0.25rem 0.7rem;
-    border-radius: 9999px;
+    border-radius: 0;
 }
 
 .region-dot {
@@ -143,7 +143,7 @@
 }
 
 .bookingBtn {
-    border-radius: 8px;
+    border-radius: 0;
     font-weight: 600;
     font-size: 0.84rem;
     outline: none;

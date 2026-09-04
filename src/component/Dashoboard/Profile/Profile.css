@@ -3,7 +3,7 @@
     background: #fff;
     text-align: center;
     margin: 2.5rem auto;
-    border-radius: 4px;
+    border-radius: 0;
     max-width: 500px;
 }
 
@@ -43,7 +43,7 @@
     background: #7355F7;
     padding: 12px 30px;
     display: inline-block;
-    border-radius: 4px;
+    border-radius: 0;
     font-size: 14px;
     font-weight: 600;
     line-height: 1.2;

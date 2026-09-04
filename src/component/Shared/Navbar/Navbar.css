@@ -42,7 +42,7 @@
     width: 0px;
     background: transparent;
     transition: width .25s ease, background-color .25s ease;
-    border-radius: 2px;
+    border-radius: 0;
 }
 
 .mainNav .nav-link:hover:after {
@@ -75,7 +75,7 @@
     color: var(--site-text-main, #0F172A);
     width: 38px;
     height: 38px;
-    border-radius: 8px;
+    border-radius: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -94,7 +94,7 @@
 .loginBtn {
     outline: none;
     border: none;
-    border-radius: 8px;
+    border-radius: 0;
     font-weight: 600;
     font-size: 0.88rem;
     color: #FFFFFF;
@@ -140,7 +140,7 @@
         background-color: var(--site-card-subtle, #F8FAFC) !important;
         border: 1px solid var(--site-border, #CBD5E1) !important;
         padding: 0.45rem 0.65rem !important;
-        border-radius: 8px !important;
+        border-radius: 0 !important;
         outline: none !important;
         box-shadow: none !important;
     }
@@ -179,7 +179,7 @@
     .mainNav .nav-link {
         padding: 9px 16px !important;
         margin: 2px 0 !important;
-        border-radius: 8px;
+        border-radius: 0;
         transition: transform 0.1s ease, background-color 0.15s ease !important;
     }
 

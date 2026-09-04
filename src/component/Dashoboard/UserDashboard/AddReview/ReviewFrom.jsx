@@ -63,7 +63,7 @@ const ReviewForm = ({ setIsUpdated, existingReview, onCancel }) => {
             </p>
 
             {/* Interactive Star Rating Selector */}
-            <div className="p-3 rounded-4 mb-3.5 d-flex align-items-center justify-content-between" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+            <div className="p-3 mb-3.5 d-flex align-items-center justify-content-between" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0' }}>
                 <div>
                     <span className="fw-semibold small d-block" style={{ color: 'var(--cp-text-main)', fontSize: '0.84rem' }}>Overall Satisfaction Rating</span>
                     <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.76rem' }}>Click to rate your experience</small>
@@ -142,8 +142,8 @@ const ReviewForm = ({ setIsUpdated, existingReview, onCancel }) => {
                     </small>
                     <Button 
                         type="submit" 
-                        className="fw-semibold px-4 py-2.5 text-white d-inline-flex align-items-center gap-2 rounded-pill"
-                        style={{ backgroundColor: '#121417', borderColor: '#121417', fontSize: '0.88rem', boxShadow: '0 4px 14px rgba(0, 0, 0, 0.25)' }}
+                        className="fw-semibold px-4 py-2.5 text-white d-inline-flex align-items-center gap-2"
+                        style={{ backgroundColor: '#121417', borderColor: '#121417', fontSize: '0.88rem', boxShadow: '0 4px 14px rgba(0, 0, 0, 0.25)', borderRadius: '0' }}
                     >
                         <FontAwesomeIcon icon={faPaperPlane} /> {existingReview ? 'Update Testimonial' : 'Publish Testimonial'}
                     </Button>

@@ -85,7 +85,7 @@ const Review = () => {
                     <h4 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)' }}>Client Testimonials & Executive Feedback</h4>
                     <p className="mb-0 small" style={{ color: 'var(--cp-text-muted)' }}>Share your engineering milestone review to be featured on Kosher Code platforms.</p>
                 </div>
-                <span className="badge rounded-pill px-3.5 py-2 mt-2 mt-sm-0 d-inline-flex align-items-center gap-1.5" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', border: '1px solid var(--cp-border)', fontSize: '0.8rem', fontWeight: 600 }}>
+                <span className="badge px-3.5 py-2 mt-2 mt-sm-0 d-inline-flex align-items-center gap-1.5" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', border: '1px solid var(--cp-border)', borderRadius: '0', fontSize: '0.8rem', fontWeight: 600 }}>
                     <FontAwesomeIcon icon={faCheckCircle} /> Verified Partner Feedback
                 </span>
             </div>
@@ -94,7 +94,7 @@ const Review = () => {
             {review?.description && !isEditing ? (
                 <div className="cp-card p-4 p-md-5 mx-auto mb-5" style={{ maxWidth: '680px' }}>
                     <div className="d-flex align-items-center justify-content-between mb-3 pb-2.5 border-bottom" style={{ borderColor: 'var(--cp-border)' }}>
-                        <span className="badge rounded-pill px-3 py-1.5" style={{ backgroundColor: 'rgba(16, 185, 129, 0.12)', color: '#10B981', fontSize: '0.78rem', fontWeight: 600 }}>
+                        <span className="badge px-3 py-1.5" style={{ backgroundColor: 'rgba(16, 185, 129, 0.12)', color: '#10B981', borderRadius: '0', fontSize: '0.78rem', fontWeight: 600 }}>
                             <FontAwesomeIcon icon={faCheckCircle} className="me-1" /> Published Testimonial
                         </span>
                         <div className="d-flex align-items-center gap-2">
@@ -102,8 +102,8 @@ const Review = () => {
                                 variant="outline-primary" 
                                 size="sm"
                                 onClick={() => setIsEditing(true)}
-                                className="rounded-pill d-flex align-items-center gap-1.5 px-3.5 py-1.5 fw-semibold"
-                                style={{ fontSize: '0.8rem' }}
+                                className="d-flex align-items-center gap-1.5 px-3.5 py-1.5 fw-semibold"
+                                style={{ fontSize: '0.8rem', borderRadius: '0' }}
                             >
                                 <FontAwesomeIcon icon={faEdit} /> Edit Review
                             </Button>
@@ -111,8 +111,8 @@ const Review = () => {
                                 variant="outline-danger" 
                                 size="sm"
                                 onClick={handleDelete}
-                                className="rounded-pill d-flex align-items-center gap-1.5 px-3.5 py-1.5 fw-semibold"
-                                style={{ fontSize: '0.8rem' }}
+                                className="d-flex align-items-center gap-1.5 px-3.5 py-1.5 fw-semibold"
+                                style={{ fontSize: '0.8rem', borderRadius: '0' }}
                             >
                                 <FontAwesomeIcon icon={faTrashAlt} /> Remove
                             </Button>
@@ -144,7 +144,7 @@ const Review = () => {
                         </div>
                     </div>
 
-                    <div className="p-4 rounded-4 mb-3.5 position-relative" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                    <div className="p-4 mb-3.5 position-relative" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0' }}>
                         <FontAwesomeIcon icon={faQuoteLeft} style={{ color: 'var(--cp-primary)', opacity: 0.35, fontSize: '1.6rem' }} className="mb-2" />
                         <p className="fst-italic small mb-0" style={{ color: 'var(--cp-text-main)', lineHeight: 1.65, fontSize: '0.92rem' }}>
                             "{review.description}"
@@ -185,7 +185,7 @@ const Review = () => {
                                                 <FontAwesomeIcon key={rIdx} icon={faStar} className="me-0.5" style={{ fontSize: '0.75rem' }} />
                                             ))}
                                         </div>
-                                        <span className="badge rounded-pill px-2.5 py-1" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', fontSize: '0.68rem', fontWeight: 600 }}>
+                                        <span className="badge px-2.5 py-1" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', borderRadius: '0', fontSize: '0.68rem', fontWeight: 600 }}>
                                             Verified SLA
                                         </span>
                                     </div>

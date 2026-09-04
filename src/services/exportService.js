@@ -327,7 +327,7 @@ export const exportToPdf = (data = [], options = {}) => {
             width: 40px;
             height: 40px;
             background: #7355F7;
-            border-radius: 10px;
+            border-radius: 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -361,7 +361,7 @@ export const exportToPdf = (data = [], options = {}) => {
             flex: 1;
             background: #F8FAFC;
             border: 1px solid #E2E8F0;
-            border-radius: 8px;
+            border-radius: 0;
             padding: 10px 14px;
         }
         .kpi-label {
@@ -393,8 +393,8 @@ export const exportToPdf = (data = [], options = {}) => {
             text-align: left;
             border: none;
         }
-        th:first-child { border-top-left-radius: 6px; }
-        th:last-child { border-top-right-radius: 6px; }
+        th:first-child { border-top-left-radius: 0; }
+        th:last-child { border-top-right-radius: 0; }
         td {
             padding: 8px 10px;
             border-bottom: 1px solid #E2E8F0;
@@ -410,7 +410,7 @@ export const exportToPdf = (data = [], options = {}) => {
         .badge {
             display: inline-block;
             padding: 3px 8px;
-            border-radius: 999px;
+            border-radius: 0;
             font-size: 9.5px;
             font-weight: 700;
         }

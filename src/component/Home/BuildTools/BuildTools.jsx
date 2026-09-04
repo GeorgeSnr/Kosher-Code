@@ -47,7 +47,7 @@ const BuildTools = () => {
                     language={'javascript'}
                     style={vs2015}
                     padding={`${theme.spacing(2.5)} !important`}
-                    borderRadius="4px"
+                    borderRadius="0"
                     margin={`${theme.spacing(0)} !important`}
                     bgcolor={'#070120 !important'}
                     border={'1px solid #2608AB'}

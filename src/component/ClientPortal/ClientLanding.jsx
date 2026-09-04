@@ -93,15 +93,15 @@ const ClientLanding = () => {
                 className="p-4 p-md-5 mb-4 text-white position-relative overflow-hidden"
                 style={{
                     background: 'linear-gradient(135deg, #004B87 0%, #0672CB 60%, #0076CE 100%)',
-                    borderRadius: '14px',
+                    borderRadius: '0',
                     boxShadow: '0 10px 30px rgba(6, 114, 203, 0.22)'
                 }}
             >
                 <Row className="align-items-center g-4">
                     <Col lg={8}>
                         <div 
-                            className="d-inline-flex align-items-center gap-2 px-3.5 py-1.5 mb-3 rounded-pill" 
-                            style={{ backgroundColor: 'rgba(255, 255, 255, 0.18)', fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.02em' }}
+                            className="d-inline-flex align-items-center gap-2 px-3.5 py-1.5 mb-3" 
+                            style={{ backgroundColor: 'rgba(255, 255, 255, 0.18)', fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.02em', borderRadius: '0' }}
                         >
                             <FontAwesomeIcon icon={faShieldAlt} /> Enterprise Client Hub • Kampala HQ
                         </div>
@@ -116,7 +116,7 @@ const ClientLanding = () => {
                                     style={{
                                         backgroundColor: '#0F172A',
                                         borderColor: '#0F172A',
-                                        borderRadius: '8px',
+                                        borderRadius: '0',
                                         fontSize: '0.88rem',
                                         boxShadow: '0 4px 14px rgba(0, 0, 0, 0.2)'
                                     }}
@@ -128,7 +128,7 @@ const ClientLanding = () => {
                                 <Button 
                                     variant="outline-light" 
                                     className="px-4 py-2.5 fw-semibold d-inline-flex align-items-center gap-2"
-                                    style={{ fontSize: '0.88rem', borderRadius: '8px' }}
+                                    style={{ fontSize: '0.88rem', borderRadius: '0' }}
                                 >
                                     <FontAwesomeIcon icon={faFolderOpen} /> View Engagements ({bookings.length})
                                 </Button>
@@ -144,7 +144,7 @@ const ClientLanding = () => {
                                 maxWidth: '300px',
                                 backgroundColor: 'rgba(255, 255, 255, 0.12)',
                                 border: '1px solid rgba(255, 255, 255, 0.22)',
-                                borderRadius: '12px',
+                                borderRadius: '0',
                                 padding: '18px 20px',
                                 boxShadow: '0 12px 30px rgba(0, 0, 0, 0.15)',
                                 backdropFilter: 'blur(16px)',
@@ -176,11 +176,12 @@ const ClientLanding = () => {
                                     </span>
                                 </div>
                                 <span 
-                                    className="badge rounded-pill"
+                                    className="badge"
                                     style={{ 
                                         backgroundColor: 'rgba(16, 185, 129, 0.25)', 
                                         color: '#A7F3D0',
                                         border: '1px solid rgba(16, 185, 129, 0.4)',
+                                        borderRadius: '0',
                                         fontSize: '0.7rem', 
                                         fontWeight: 700,
                                         padding: '4px 10px'
@@ -215,10 +216,11 @@ const ClientLanding = () => {
                                     <span>Desk: <strong>+256 703 275 790</strong></span>
                                 </a>
                                 <span 
-                                    className="badge rounded-pill"
+                                    className="badge"
                                     style={{
                                         backgroundColor: 'rgba(255, 255, 255, 0.16)',
                                         color: '#FFFFFF',
+                                        borderRadius: '0',
                                         fontSize: '0.68rem',
                                         padding: '3px 8px',
                                         fontWeight: 600
@@ -232,7 +234,7 @@ const ClientLanding = () => {
                 </Row>
             </div>
 
-            {/* 2. Dribbble Soft-Minimal KPI Metric Summary Cards */}
+            {/* 2. Key Metrics Snapshot (Sharp Dell Architectural Layout) */}
             <Row className="g-3 mb-4">
                 <Col xs={6} md={3}>
                     <div className="p-4 cp-card h-100 d-flex flex-column justify-content-between">
@@ -240,7 +242,7 @@ const ClientLanding = () => {
                             <span className="admin-kpi-label mb-0">TOTAL ENGAGEMENTS</span>
                             <div 
                                 className="d-flex align-items-center justify-content-center flex-shrink-0" 
-                                style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)' }}
+                                style={{ width: '42px', height: '42px', borderRadius: '0', backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)' }}
                             >
                                 <FontAwesomeIcon icon={faFolderOpen} style={{ fontSize: '0.95rem' }} />
                             </div>
@@ -258,7 +260,7 @@ const ClientLanding = () => {
                             <span className="admin-kpi-label mb-0">PENDING PROPOSALS</span>
                             <div 
                                 className="d-flex align-items-center justify-content-center flex-shrink-0" 
-                                style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'rgba(245, 158, 11, 0.14)', color: '#F59E0B' }}
+                                style={{ width: '42px', height: '42px', borderRadius: '0', backgroundColor: 'rgba(245, 158, 11, 0.14)', color: '#F59E0B' }}
                             >
                                 <FontAwesomeIcon icon={faClock} style={{ fontSize: '0.95rem' }} />
                             </div>
@@ -276,7 +278,7 @@ const ClientLanding = () => {
                             <span className="admin-kpi-label mb-0">IN ENGINEERING</span>
                             <div 
                                 className="d-flex align-items-center justify-content-center flex-shrink-0" 
-                                style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'rgba(59, 130, 246, 0.14)', color: '#3B82F6' }}
+                                style={{ width: '42px', height: '42px', borderRadius: '0', backgroundColor: 'rgba(59, 130, 246, 0.14)', color: '#3B82F6' }}
                             >
                                 <FontAwesomeIcon icon={faSpinner} style={{ fontSize: '0.95rem' }} />
                             </div>
@@ -294,7 +296,7 @@ const ClientLanding = () => {
                             <span className="admin-kpi-label mb-0">DEPLOYED & LIVE</span>
                             <div 
                                 className="d-flex align-items-center justify-content-center flex-shrink-0" 
-                                style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'rgba(16, 185, 129, 0.14)', color: '#10B981' }}
+                                style={{ width: '42px', height: '42px', borderRadius: '0', backgroundColor: 'rgba(16, 185, 129, 0.14)', color: '#10B981' }}
                             >
                                 <FontAwesomeIcon icon={faCheckCircle} style={{ fontSize: '0.95rem' }} />
                             </div>
@@ -328,8 +330,8 @@ const ClientLanding = () => {
                         )}
                         <Link to="/client/book">
                             <Button 
-                                className="rounded-pill d-flex align-items-center gap-2 fw-semibold text-white px-3.5 py-2"
-                                style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', fontSize: '0.82rem' }}
+                                className="d-flex align-items-center gap-2 fw-semibold text-white px-3.5 py-2"
+                                style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', borderRadius: '0', fontSize: '0.82rem' }}
                             >
                                 <FontAwesomeIcon icon={faPlus} /> Request Solution
                             </Button>
@@ -338,12 +340,12 @@ const ClientLanding = () => {
                 </div>
 
                 {bookings.length === 0 ? (
-                    <div className="text-center py-5 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)' }}>
+                    <div className="text-center py-5" style={{ backgroundColor: 'var(--cp-card-subtle)', borderRadius: '0' }}>
                         <FontAwesomeIcon icon={faFileContract} style={{ fontSize: '2.5rem', color: 'var(--cp-text-light)' }} className="mb-2" />
                         <h6 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)', fontSize: '0.95rem' }}>No Active Project Requests</h6>
                         <p className="small mb-3" style={{ color: 'var(--cp-text-muted)', fontSize: '0.8rem' }}>You haven't submitted a solution booking request yet.</p>
                         <Link to="/client/book">
-                            <Button className="rounded-pill px-4 py-2" style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', fontSize: '0.82rem' }}>
+                            <Button className="px-4 py-2" style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', borderRadius: '0', fontSize: '0.82rem' }}>
                                 Book Your First Solution
                             </Button>
                         </Link>
@@ -374,7 +376,7 @@ const ClientLanding = () => {
                                                         style={{ 
                                                             width: '40px', 
                                                             height: '40px', 
-                                                            borderRadius: '50%', 
+                                                            borderRadius: '0', 
                                                             backgroundColor: 'var(--cp-primary-subtle)',
                                                             color: 'var(--cp-primary)',
                                                             border: '1px solid var(--cp-border)'
@@ -393,11 +395,12 @@ const ClientLanding = () => {
                                             <td className="small fw-semibold" style={{ color: 'var(--cp-text-main)', fontSize: '0.8rem' }}>{b.pricingType?.split('(')[0] || `$${b.price || 48}`}</td>
                                             <td className="text-center">
                                                 <span 
-                                                    className="px-3 py-1 fw-semibold small d-inline-flex align-items-center gap-1 rounded-pill"
+                                                    className="px-3 py-1 fw-semibold small d-inline-flex align-items-center gap-1"
                                                     style={{
                                                         backgroundColor: statusBg,
                                                         color: statusColor,
                                                         border: `1px solid ${statusColor}33`,
+                                                        borderRadius: '0',
                                                         fontSize: '0.76rem'
                                                     }}
                                                 >
@@ -409,8 +412,8 @@ const ClientLanding = () => {
                                                     variant="outline-primary"
                                                     size="sm"
                                                     onClick={() => { setSelectedEngagement(b); setShowDetailsModal(true); }}
-                                                    className="rounded-pill px-3 py-1 d-inline-flex align-items-center gap-1.5"
-                                                    style={{ fontSize: '0.78rem', fontWeight: 600 }}
+                                                    className="px-3 py-1 d-inline-flex align-items-center gap-1.5"
+                                                    style={{ fontSize: '0.78rem', fontWeight: 600, borderRadius: '0' }}
                                                 >
                                                     <FontAwesomeIcon icon={faEye} /> Inspect
                                                 </Button>
@@ -424,7 +427,7 @@ const ClientLanding = () => {
                 )}
             </div>
 
-            {/* 4. Quick Solution Launchpad Cards (20px Curvature, Pill CTAs) */}
+            {/* 4. Quick Solution Launchpad Cards (Sharp Dell Architectural Layout) */}
             <div className="cp-card p-4 p-md-5 mb-4">
                 <div className="d-flex justify-content-between align-items-center mb-3">
                     <div>
@@ -439,10 +442,11 @@ const ClientLanding = () => {
                         return (
                             <Col md={6} lg={3} key={sIdx}>
                                 <div 
-                                    className="p-3.5 cp-card-subtle h-100 d-flex flex-column justify-content-between rounded-4"
+                                    className="p-3.5 cp-card-subtle h-100 d-flex flex-column justify-content-between"
                                     style={{
                                         transition: 'all 0.2s ease',
-                                        border: '1px solid var(--cp-border)'
+                                        border: '1px solid var(--cp-border)',
+                                        borderRadius: '0'
                                     }}
                                 >
                                     <div>
@@ -452,7 +456,7 @@ const ClientLanding = () => {
                                                 style={{ 
                                                     width: '42px', 
                                                     height: '42px', 
-                                                    borderRadius: '50%',
+                                                    borderRadius: '0',
                                                     backgroundColor: 'var(--cp-primary-subtle)',
                                                     color: 'var(--cp-primary)',
                                                     border: '1px solid var(--cp-border)'
@@ -460,7 +464,7 @@ const ClientLanding = () => {
                                             >
                                                 <FontAwesomeIcon icon={icon} style={{ fontSize: '0.95rem' }} />
                                             </div>
-                                            <span className="badge rounded-pill px-2.5 py-1" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', fontSize: '0.7rem', fontWeight: 600 }}>
+                                            <span className="badge px-2.5 py-1" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', borderRadius: '0', fontSize: '0.7rem', fontWeight: 600 }}>
                                                 {service.category || 'Enterprise'}
                                             </span>
                                         </div>
@@ -473,8 +477,8 @@ const ClientLanding = () => {
                                     <Link 
                                         to="/client/book" 
                                         onClick={() => handleSelectService(service)}
-                                        className="btn rounded-pill w-100 fw-semibold text-white d-flex align-items-center justify-content-center gap-1.5 py-2"
-                                        style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', fontSize: '0.82rem' }}
+                                        className="btn w-100 fw-semibold text-white d-flex align-items-center justify-content-center gap-1.5 py-2"
+                                        style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', borderRadius: '0', fontSize: '0.82rem' }}
                                     >
                                         Configure Solution <FontAwesomeIcon icon={faArrowRight} style={{ fontSize: '0.72rem' }} />
                                     </Link>
@@ -485,14 +489,14 @@ const ClientLanding = () => {
                 </Row>
             </div>
 
-            {/* 5. Support & Feedback Channels (24px Curvature & Circular Badges) */}
+            {/* 5. Support & Feedback Channels (Sharp Dell Architectural Layout) */}
             <Row className="g-3">
                 <Col md={6}>
                     <div className="p-4 p-md-5 cp-card h-100 d-flex flex-column justify-content-between">
                         <div>
                             <div className="d-flex align-items-center justify-content-between mb-3.5 pb-2.5 border-bottom" style={{ borderColor: 'var(--cp-border)' }}>
                                 <div className="d-flex align-items-center gap-3">
-                                    <div className="d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: '44px', height: '44px', borderRadius: '50%', backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)' }}>
+                                    <div className="d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: '44px', height: '44px', borderRadius: '0', backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)' }}>
                                         <FontAwesomeIcon icon={faHeadset} style={{ fontSize: '1.1rem' }} />
                                     </div>
                                     <div>
@@ -500,12 +504,12 @@ const ClientLanding = () => {
                                         <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.78rem' }}>Kampala Technology Hub • Enterprise Desk</small>
                                     </div>
                                 </div>
-                                <span className="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-1.5" style={{ fontSize: '0.72rem', fontWeight: 600 }}>
+                                <span className="badge bg-success bg-opacity-10 text-success px-3 py-1.5" style={{ fontSize: '0.72rem', fontWeight: 600, borderRadius: '0' }}>
                                     ● 24/7 SLA Active
                                 </span>
                             </div>
 
-                            <div className="p-3.5 rounded-4 mb-3.5" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                            <div className="p-3.5 mb-3.5" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0' }}>
                                 <div className="d-flex justify-content-between align-items-center mb-2 pb-1.5 border-bottom border-light small" style={{ fontSize: '0.8rem' }}>
                                     <span style={{ color: 'var(--cp-text-muted)' }}>Assigned Lead</span>
                                     <strong style={{ color: 'var(--cp-text-main)' }}>Senior Solutions Architect</strong>
@@ -526,8 +530,8 @@ const ClientLanding = () => {
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3 pt-3 border-top" style={{ borderColor: 'var(--cp-border)' }}>
                             <a 
                                 href="mailto:koshercode01@gmail.com" 
-                                className="btn rounded-pill fw-semibold text-white d-inline-flex align-items-center gap-2 px-4 py-2"
-                                style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', fontSize: '0.82rem' }}
+                                className="btn fw-semibold text-white d-inline-flex align-items-center gap-2 px-4 py-2"
+                                style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', borderRadius: '0', fontSize: '0.82rem' }}
                             >
                                 Email Lead Architect <FontAwesomeIcon icon={faArrowRight} style={{ fontSize: '0.7rem' }} />
                             </a>
@@ -543,7 +547,7 @@ const ClientLanding = () => {
                         <div>
                             <div className="d-flex align-items-center justify-content-between mb-3.5 pb-2.5 border-bottom" style={{ borderColor: 'var(--cp-border)' }}>
                                 <div className="d-flex align-items-center gap-3">
-                                    <div className="d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: '44px', height: '44px', borderRadius: '50%', backgroundColor: 'rgba(16, 185, 129, 0.12)', color: '#10B981' }}>
+                                    <div className="d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: '44px', height: '44px', borderRadius: '0', backgroundColor: 'rgba(16, 185, 129, 0.12)', color: '#10B981' }}>
                                         <FontAwesomeIcon icon={faComments} style={{ fontSize: '1.1rem' }} />
                                     </div>
                                     <div>
@@ -551,7 +555,7 @@ const ClientLanding = () => {
                                         <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.78rem' }}>Verified Enterprise Feedback & Ratings</small>
                                     </div>
                                 </div>
-                                <span className="badge rounded-pill px-3 py-1.5" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', fontSize: '0.72rem', fontWeight: 600 }}>
+                                <span className="badge px-3 py-1.5" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', borderRadius: '0', fontSize: '0.72rem', fontWeight: 600 }}>
                                     ★★★★★ 5.0 Rating
                                 </span>
                             </div>
@@ -561,10 +565,10 @@ const ClientLanding = () => {
                             </p>
 
                             <div className="d-flex flex-wrap gap-2 mb-3.5">
-                                <span className="badge rounded-pill" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', color: 'var(--cp-text-main)', fontSize: '0.76rem', padding: '6px 14px' }}>
+                                <span className="badge" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0', color: 'var(--cp-text-main)', fontSize: '0.76rem', padding: '6px 14px' }}>
                                     ✓ Verified Client Feedback
                                 </span>
-                                <span className="badge rounded-pill" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', color: 'var(--cp-text-main)', fontSize: '0.76rem', padding: '6px 14px' }}>
+                                <span className="badge" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0', color: 'var(--cp-text-main)', fontSize: '0.76rem', padding: '6px 14px' }}>
                                     ✓ Direct Roadmap Influence
                                 </span>
                             </div>
@@ -573,8 +577,8 @@ const ClientLanding = () => {
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3 pt-3 border-top" style={{ borderColor: 'var(--cp-border)' }}>
                             <Link 
                                 to="/client/review" 
-                                className="btn btn-outline-success rounded-pill fw-semibold d-inline-flex align-items-center gap-2 px-4 py-2" 
-                                style={{ fontSize: '0.82rem' }}
+                                className="btn btn-outline-success fw-semibold d-inline-flex align-items-center gap-2 px-4 py-2" 
+                                style={{ fontSize: '0.82rem', borderRadius: '0' }}
                             >
                                 Submit Milestone Review <FontAwesomeIcon icon={faArrowRight} style={{ fontSize: '0.7rem' }} />
                             </Link>
@@ -601,7 +605,7 @@ const ClientLanding = () => {
                             style={{ 
                                 width: '42px', 
                                 height: '42px', 
-                                borderRadius: '50%', 
+                                borderRadius: '0', 
                                 backgroundColor: 'var(--cp-primary-subtle)',
                                 color: 'var(--cp-primary)'
                             }}
@@ -621,14 +625,15 @@ const ClientLanding = () => {
                         <div>
                             <Row className="g-3 mb-4">
                                 <Col sm={6}>
-                                    <div className="p-3 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                                    <div className="p-3" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0' }}>
                                         <small className="admin-kpi-label">Current Status</small>
                                         <span 
-                                            className="px-3 py-1 fw-bold rounded-pill d-inline-flex align-items-center gap-1.5"
+                                            className="px-3 py-1 fw-bold d-inline-flex align-items-center gap-1.5"
                                             style={{
                                                 backgroundColor: selectedEngagement.status === 'Done' ? 'rgba(16, 185, 129, 0.12)' : selectedEngagement.status === 'In Progress' ? 'rgba(59, 130, 246, 0.12)' : selectedEngagement.status === 'In Review' ? 'rgba(139, 92, 246, 0.12)' : 'rgba(245, 158, 11, 0.12)',
                                                 color: selectedEngagement.status === 'Done' ? '#10B981' : selectedEngagement.status === 'In Progress' ? '#3B82F6' : selectedEngagement.status === 'In Review' ? '#8B5CF6' : '#F59E0B',
                                                 border: `1px solid ${selectedEngagement.status === 'Done' ? '#10B98133' : selectedEngagement.status === 'In Progress' ? '#3B82F633' : selectedEngagement.status === 'In Review' ? '#8B5CF633' : '#F59E0B33'}`,
+                                                borderRadius: '0',
                                                 fontSize: '0.8rem'
                                             }}
                                         >
@@ -637,7 +642,7 @@ const ClientLanding = () => {
                                     </div>
                                 </Col>
                                 <Col sm={6}>
-                                    <div className="p-3 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                                    <div className="p-3" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0' }}>
                                         <small className="admin-kpi-label">Pricing Model</small>
                                         <div className="fw-bold" style={{ color: 'var(--cp-text-main)', fontSize: '0.95rem' }}>
                                             {selectedEngagement.pricingType || `$${selectedEngagement.price || 48}`}
@@ -645,7 +650,7 @@ const ClientLanding = () => {
                                     </div>
                                 </Col>
                                 <Col sm={6}>
-                                    <div className="p-3 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                                    <div className="p-3" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0' }}>
                                         <small className="admin-kpi-label">Institution / Sector</small>
                                         <div className="fw-semibold" style={{ color: 'var(--cp-text-main)', fontSize: '0.9rem' }}>
                                             {selectedEngagement.institution || 'Commercial Banking & FinTech'}
@@ -653,7 +658,7 @@ const ClientLanding = () => {
                                     </div>
                                 </Col>
                                 <Col sm={6}>
-                                    <div className="p-3 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                                    <div className="p-3" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0' }}>
                                         <small className="admin-kpi-label">Delivery Timeline</small>
                                         <div className="fw-semibold" style={{ color: 'var(--cp-text-main)', fontSize: '0.9rem' }}>
                                             {selectedEngagement.timeline || 'Immediate (1-3 months)'}
@@ -662,14 +667,14 @@ const ClientLanding = () => {
                                 </Col>
                             </Row>
 
-                            <div className="p-3.5 rounded-4 mb-3" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                            <div className="p-3.5 mb-3" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0' }}>
                                 <small className="admin-kpi-label mb-2">Scope & Project Specifications</small>
                                 <p className="mb-0" style={{ color: 'var(--cp-text-main)', fontSize: '0.88rem', lineHeight: 1.6, wordBreak: 'break-word' }}>
                                     {selectedEngagement.description || 'Enterprise software architecture configured for your operational scale.'}
                                 </p>
                             </div>
 
-                            <div className="p-3 rounded-4" style={{ backgroundColor: 'var(--cp-primary-subtle)', border: '1px solid var(--cp-border)' }}>
+                            <div className="p-3" style={{ backgroundColor: 'var(--cp-primary-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0' }}>
                                 <div className="d-flex align-items-center gap-2 mb-1">
                                     <FontAwesomeIcon icon={faShieldAlt} style={{ color: 'var(--cp-primary)' }} />
                                     <strong className="small" style={{ color: 'var(--cp-primary-text)' }}>Kampala HQ Engineering SLA Active</strong>
@@ -685,15 +690,15 @@ const ClientLanding = () => {
                     <Button 
                         variant="secondary" 
                         onClick={() => setShowDetailsModal(false)}
-                        className="rounded-pill px-4 py-2"
-                        style={{ fontSize: '0.85rem' }}
+                        className="px-4 py-2"
+                        style={{ fontSize: '0.85rem', borderRadius: '0' }}
                     >
                         Close
                     </Button>
                     <Link to="/client/bookings" onClick={() => setShowDetailsModal(false)}>
                         <Button 
-                            className="rounded-pill px-4 py-2 text-white"
-                            style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', fontSize: '0.85rem' }}
+                            className="px-4 py-2 text-white"
+                            style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', borderRadius: '0', fontSize: '0.85rem' }}
                         >
                             Manage All Engagements
                         </Button>

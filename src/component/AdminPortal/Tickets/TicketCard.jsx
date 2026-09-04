@@ -87,19 +87,20 @@ const TicketCard = ({
                             style={{ fontSize: '0.74rem' }}
                         >
                             <span 
-                                className="badge rounded-pill"
+                                className="badge"
                                 style={{ 
                                     backgroundColor: 'var(--cp-card-subtle, #F1F5F9)', 
                                     color: 'var(--cp-text-muted, #64748B)',
                                     fontWeight: 600,
-                                    fontSize: '0.7rem'
+                                    fontSize: '0.7rem',
+                                    borderRadius: '0'
                                 }}
                             >
                                 Move ▾
                             </span>
                         </Dropdown.Toggle>
 
-                        <Dropdown.Menu align="end" className="shadow-sm border-0" style={{ fontSize: '0.8rem', borderRadius: '10px' }}>
+                        <Dropdown.Menu align="end" className="shadow-sm border-0" style={{ fontSize: '0.8rem', borderRadius: '0' }}>
                             <Dropdown.Header style={{ fontSize: '0.72rem', textTransform: 'uppercase' }}>
                                 Move Status To:
                             </Dropdown.Header>
@@ -158,12 +159,13 @@ const TicketCard = ({
                     {ticket.approvalWorkflow.status === 'Pending' && onQuickApprove && (
                         <button
                             type="button"
-                            className="btn btn-xs rounded-pill py-0.5 px-2.5 fw-bold"
+                            className="btn btn-xs py-0.5 px-2.5 fw-bold"
                             style={{ 
                                 fontSize: '0.68rem', 
                                 backgroundColor: '#10B981', 
                                 color: '#FFFFFF',
-                                border: 'none'
+                                border: 'none',
+                                borderRadius: '0'
                             }}
                             onClick={(e) => {
                                 e.stopPropagation();

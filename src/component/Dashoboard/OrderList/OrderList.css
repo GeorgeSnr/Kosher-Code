@@ -2,7 +2,7 @@
     background: var(--cp-card-bg, #FFFFFF);
     border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.04));
     padding: 26px 28px;
-    border-radius: 24px;
+    border-radius: 0;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.025);
     color: var(--cp-text-main, #0F172A);
 }

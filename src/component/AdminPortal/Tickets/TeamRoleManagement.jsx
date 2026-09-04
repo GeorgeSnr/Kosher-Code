@@ -342,8 +342,8 @@ const TeamRoleManagement = () => {
                     <div className="d-flex align-items-center gap-2">
                         <Button 
                             variant="light" 
-                            className="rounded-pill px-4 py-2 fw-bold d-inline-flex align-items-center gap-2"
-                            style={{ fontSize: '0.86rem' }}
+                            className="px-4 py-2 fw-bold d-inline-flex align-items-center gap-2"
+                            style={{ fontSize: '0.86rem', borderRadius: '0' }}
                             onClick={() => openOnboardModal()}
                         >
                             <FontAwesomeIcon icon={faUserPlus} className="text-primary" /> Onboard Member
@@ -399,7 +399,7 @@ const TeamRoleManagement = () => {
                                 <Form.Control
                                     type="text"
                                     className="cp-input"
-                                    style={{ paddingLeft: '40px', borderRadius: '9999px', fontSize: '0.86rem' }}
+                                    style={{ paddingLeft: '40px', borderRadius: '0', fontSize: '0.86rem' }}
                                     placeholder="Search by name, email, or department..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
@@ -411,8 +411,8 @@ const TeamRoleManagement = () => {
                             <Form.Select
                                 value={filterRole}
                                 onChange={(e) => setFilterRole(e.target.value)}
-                                className="cp-input rounded-pill"
-                                style={{ fontSize: '0.84rem', minWidth: '180px' }}
+                                className="cp-input"
+                                style={{ fontSize: '0.84rem', minWidth: '180px', borderRadius: '0' }}
                             >
                                 <option value="All">All Roles ({roles.length})</option>
                                 {roles.map(r => (
@@ -423,7 +423,7 @@ const TeamRoleManagement = () => {
                             <Button 
                                 variant="primary" 
                                 className="px-4 py-2 fw-semibold d-inline-flex align-items-center gap-2"
-                                style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '8px', fontSize: '0.84rem' }}
+                                style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '0', fontSize: '0.84rem' }}
                                 onClick={() => openOnboardModal()}
                             >
                                 <FontAwesomeIcon icon={faUserPlus} /> Onboard Member
@@ -475,12 +475,13 @@ const TeamRoleManagement = () => {
                                             {/* Role & Title */}
                                             <td className="py-3 px-3">
                                                 <span 
-                                                    className="badge rounded-pill px-3 py-1 fw-semibold"
+                                                    className="badge px-3 py-1 fw-semibold"
                                                     style={{ 
                                                         backgroundColor: `${matchedRole?.badgeColor || '#0672CB'}18`, 
                                                         color: matchedRole?.badgeColor || '#0672CB',
                                                         fontSize: '0.76rem',
-                                                        border: `1px solid ${matchedRole?.badgeColor || '#0672CB'}30`
+                                                        border: `1px solid ${matchedRole?.badgeColor || '#0672CB'}30`,
+                                                        borderRadius: '0'
                                                     }}
                                                 >
                                                     {matchedRole?.name || member.roleTitle}
@@ -499,12 +500,13 @@ const TeamRoleManagement = () => {
                                             <td className="py-3 px-3">
                                                 <div className="d-flex align-items-center gap-2">
                                                     <span 
-                                                        className="badge rounded-pill"
+                                                        className="badge"
                                                         style={{ 
                                                             backgroundColor: openCount > 0 ? 'rgba(59, 130, 246, 0.12)' : 'rgba(16, 185, 129, 0.12)',
                                                             color: openCount > 0 ? '#3B82F6' : '#10B981',
                                                             fontSize: '0.75rem',
-                                                            fontWeight: 700
+                                                            fontWeight: 700,
+                                                            borderRadius: '0'
                                                         }}
                                                     >
                                                         {openCount} Active
@@ -518,8 +520,8 @@ const TeamRoleManagement = () => {
                                             {/* Status */}
                                             <td className="py-3 px-3">
                                                 <span 
-                                                    className={`badge rounded-pill px-2.5 py-1 ${member.status === 'Active' ? 'bg-success text-white' : 'bg-secondary text-white'}`}
-                                                    style={{ fontSize: '0.72rem', cursor: 'pointer' }}
+                                                    className={`badge px-2.5 py-1 ${member.status === 'Active' ? 'bg-success text-white' : 'bg-secondary text-white'}`}
+                                                    style={{ fontSize: '0.72rem', cursor: 'pointer', borderRadius: '0' }}
                                                     onClick={() => handleToggleMemberStatus(member)}
                                                     title="Click to toggle Active / Inactive"
                                                 >
@@ -533,8 +535,8 @@ const TeamRoleManagement = () => {
                                                     <Button
                                                         size="sm"
                                                         variant="outline-primary"
-                                                        className="rounded-pill px-2.5 py-1 d-inline-flex align-items-center gap-1"
-                                                        style={{ fontSize: '0.74rem', fontWeight: 600 }}
+                                                        className="px-2.5 py-1 d-inline-flex align-items-center gap-1"
+                                                        style={{ fontSize: '0.74rem', fontWeight: 600, borderRadius: '0' }}
                                                         onClick={() => handleResendInvite(member)}
                                                         title={`Resend invitation email to ${member.email}`}
                                                     >
@@ -561,8 +563,8 @@ const TeamRoleManagement = () => {
                                                     <Button
                                                         size="sm"
                                                         variant="outline-secondary"
-                                                        className="rounded-circle p-1"
-                                                        style={{ width: '32px', height: '32px' }}
+                                                        className="p-1"
+                                                        style={{ width: '32px', height: '32px', borderRadius: '0' }}
                                                         onClick={() => openOnboardModal(member)}
                                                         title="Edit Member Details"
                                                     >
@@ -572,8 +574,8 @@ const TeamRoleManagement = () => {
                                                     <Button
                                                         size="sm"
                                                         variant="outline-danger"
-                                                        className="rounded-circle p-1"
-                                                        style={{ width: '32px', height: '32px' }}
+                                                        className="p-1"
+                                                        style={{ width: '32px', height: '32px', borderRadius: '0' }}
                                                         onClick={() => handleDeleteMember(member)}
                                                         title="Remove Member"
                                                     >
@@ -608,8 +610,8 @@ const TeamRoleManagement = () => {
                         <div className="d-flex align-items-center gap-2">
                             <Button 
                                 variant="outline-secondary" 
-                                className="rounded-pill px-3 py-1.5 fw-semibold d-inline-flex align-items-center gap-1.5"
-                                style={{ fontSize: '0.82rem' }}
+                                className="px-3 py-1.5 fw-semibold d-inline-flex align-items-center gap-1.5"
+                                style={{ fontSize: '0.82rem', borderRadius: '0' }}
                                 onClick={handleResetRoles}
                             >
                                 <FontAwesomeIcon icon={faUndo} /> Reset Defaults
@@ -618,7 +620,7 @@ const TeamRoleManagement = () => {
                             <Button 
                                 variant="primary" 
                                 className="px-3.5 py-1.5 fw-semibold d-inline-flex align-items-center gap-1.5"
-                                style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '8px', fontSize: '0.82rem' }}
+                                style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '0', fontSize: '0.82rem' }}
                                 onClick={() => setShowRoleModal(true)}
                             >
                                 <FontAwesomeIcon icon={faUserShield} /> + Create Custom Role
@@ -726,7 +728,7 @@ const TeamRoleManagement = () => {
                     <Row className="g-4">
                         {/* Gating Policies */}
                         <Col lg={6}>
-                            <Card className="p-4 border-0 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle, #F8FAFC)' }}>
+                            <Card className="p-4 border-0" style={{ backgroundColor: 'var(--cp-card-subtle, #F8FAFC)', borderRadius: '0' }}>
                                 <h6 className="fw-bold mb-3" style={{ color: 'var(--cp-text-main)' }}>
                                     Automatic Approval Requirements
                                 </h6>
@@ -807,7 +809,7 @@ const TeamRoleManagement = () => {
 
                         {/* Authorized Approvers */}
                         <Col lg={6}>
-                            <Card className="p-4 border-0 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle, #F8FAFC)' }}>
+                            <Card className="p-4 border-0" style={{ backgroundColor: 'var(--cp-card-subtle, #F8FAFC)', borderRadius: '0' }}>
                                 <h6 className="fw-bold mb-3" style={{ color: 'var(--cp-text-main)' }}>
                                     Authorized Approver Roles
                                 </h6>
@@ -947,7 +949,7 @@ const TeamRoleManagement = () => {
                         </div>
 
                         {!editingMember && (
-                            <div className="p-3 mb-2 rounded-3" style={{ backgroundColor: 'var(--cp-card-subtle, #F8FAFC)', border: '1px solid var(--cp-border-subtle, rgba(0,0,0,0.06))' }}>
+                            <div className="p-3 mb-2" style={{ backgroundColor: 'var(--cp-card-subtle, #F8FAFC)', border: '1px solid var(--cp-border-subtle, rgba(0,0,0,0.06))', borderRadius: '0' }}>
                                 <div className="d-flex align-items-center justify-content-between mb-2">
                                     <div>
                                         <span className="fw-bold small d-block" style={{ color: 'var(--cp-text-main)' }}>
@@ -984,8 +986,8 @@ const TeamRoleManagement = () => {
                                                 type="button"
                                                 size="sm"
                                                 variant="outline-secondary"
-                                                className="rounded-pill w-100 py-1 fw-semibold"
-                                                style={{ fontSize: '0.74rem' }}
+                                                className="w-100 py-1 fw-semibold"
+                                                style={{ fontSize: '0.74rem', borderRadius: '0' }}
                                                 onClick={() => setTempPassword(`Kosher@${Math.floor(1000 + Math.random() * 9000)}`)}
                                             >
                                                 Regenerate
@@ -998,14 +1000,14 @@ const TeamRoleManagement = () => {
                     </Modal.Body>
 
                     <Modal.Footer className="border-0 px-4 pb-4 pt-1">
-                        <Button variant="secondary" className="px-4" style={{ borderRadius: '8px' }} onClick={() => setShowOnboardModal(false)}>
+                        <Button variant="secondary" className="px-4" style={{ borderRadius: '0' }} onClick={() => setShowOnboardModal(false)}>
                             Cancel
                         </Button>
                         <Button 
                             type="submit" 
                             variant="primary" 
                             className="px-4 fw-bold"
-                            style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '8px' }}
+                            style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '0' }}
                         >
                             {editingMember ? 'Save Changes' : 'Complete Onboarding'}
                         </Button>
@@ -1081,7 +1083,7 @@ const TeamRoleManagement = () => {
                                         type="color"
                                         value={newRoleColor}
                                         onChange={(e) => setNewRoleColor(e.target.value)}
-                                        style={{ width: '48px', height: '38px', padding: '2px', borderRadius: '8px' }}
+                                        style={{ width: '48px', height: '38px', padding: '2px', borderRadius: '0' }}
                                     />
                                     <span className="small text-muted">{newRoleColor}</span>
                                 </div>
@@ -1092,7 +1094,7 @@ const TeamRoleManagement = () => {
                             <Form.Label className="small fw-bold text-muted text-uppercase mb-2">
                                 Initial Permissions
                             </Form.Label>
-                            <div className="p-3 rounded-3" style={{ backgroundColor: 'var(--cp-card-subtle, #F8FAFC)', maxHeight: '180px', overflowY: 'auto' }}>
+                            <div className="p-3" style={{ backgroundColor: 'var(--cp-card-subtle, #F8FAFC)', maxHeight: '180px', overflowY: 'auto', borderRadius: '0' }}>
                                 {DEFAULT_PERMISSIONS.map(perm => {
                                     const checked = newRolePerms.includes(perm.id);
                                     return (
@@ -1120,14 +1122,14 @@ const TeamRoleManagement = () => {
                     </Modal.Body>
 
                     <Modal.Footer className="border-0 px-4 pb-4 pt-1">
-                        <Button variant="secondary" className="px-4" style={{ borderRadius: '8px' }} onClick={() => setShowRoleModal(false)}>
+                        <Button variant="secondary" className="px-4" style={{ borderRadius: '0' }} onClick={() => setShowRoleModal(false)}>
                             Cancel
                         </Button>
                         <Button 
                             type="submit" 
                             variant="primary" 
                             className="px-4 fw-bold"
-                            style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '8px' }}
+                            style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '0' }}
                         >
                             Create Role
                         </Button>
@@ -1165,7 +1167,7 @@ const TeamRoleManagement = () => {
 
                 <Modal.Body className="px-4 py-3">
                     {inviteResultData?.member && (
-                        <div className="mb-3 p-3 rounded-3" style={{ backgroundColor: 'var(--cp-card-subtle, #F8FAFC)', border: '1px solid var(--cp-border-subtle, rgba(0,0,0,0.06))' }}>
+                        <div className="mb-3 p-3" style={{ backgroundColor: 'var(--cp-card-subtle, #F8FAFC)', border: '1px solid var(--cp-border-subtle, rgba(0,0,0,0.06))', borderRadius: '0' }}>
                             <div className="d-flex align-items-center gap-3">
                                 <img 
                                     src={inviteResultData.member.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80'} 
@@ -1185,7 +1187,7 @@ const TeamRoleManagement = () => {
                     )}
 
                     {/* Email Status Alert */}
-                    <div className="d-flex align-items-center gap-2 p-2.5 mb-3 rounded-3" style={{ backgroundColor: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.25)', color: '#10B981' }}>
+                    <div className="d-flex align-items-center gap-2 p-2.5 mb-3" style={{ backgroundColor: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.25)', color: '#10B981', borderRadius: '0' }}>
                         <FontAwesomeIcon icon={faPaperPlane} className="flex-shrink-0" />
                         <span className="small fw-semibold" style={{ fontSize: '0.8rem' }}>
                             Official invitation email dispatched to <strong>{inviteResultData?.member?.email}</strong>
@@ -1248,7 +1250,7 @@ const TeamRoleManagement = () => {
 
                     {/* WhatsApp Fast Dispatch */}
                     {inviteResultData?.whatsappUrl ? (
-                        <div className="p-3 rounded-3" style={{ backgroundColor: 'rgba(37, 211, 102, 0.08)', border: '1px solid rgba(37, 211, 102, 0.25)' }}>
+                        <div className="p-3" style={{ backgroundColor: 'rgba(37, 211, 102, 0.08)', border: '1px solid rgba(37, 211, 102, 0.25)', borderRadius: '0' }}>
                             <div className="d-flex align-items-center justify-content-between">
                                 <div>
                                     <span className="fw-bold small d-block" style={{ color: '#128C7E' }}>
@@ -1262,15 +1264,15 @@ const TeamRoleManagement = () => {
                                     href={inviteResultData.whatsappUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="btn btn-sm btn-success rounded-pill px-3 fw-bold d-inline-flex align-items-center gap-1.5"
-                                    style={{ backgroundColor: '#25D366', borderColor: '#25D366', fontSize: '0.8rem' }}
+                                    className="btn btn-sm btn-success px-3 fw-bold d-inline-flex align-items-center gap-1.5"
+                                    style={{ backgroundColor: '#25D366', borderColor: '#25D366', fontSize: '0.8rem', borderRadius: '0' }}
                                 >
                                     <FontAwesomeIcon icon={faWhatsapp} /> Send WhatsApp
                                 </a>
                             </div>
                         </div>
                     ) : (
-                        <div className="p-3 rounded-3" style={{ backgroundColor: 'var(--cp-card-subtle, #F8FAFC)', border: '1px solid var(--cp-border-subtle, rgba(0,0,0,0.06))' }}>
+                        <div className="p-3" style={{ backgroundColor: 'var(--cp-card-subtle, #F8FAFC)', border: '1px solid var(--cp-border-subtle, rgba(0,0,0,0.06))', borderRadius: '0' }}>
                             <div className="d-flex align-items-center justify-content-between">
                                 <div>
                                     <span className="fw-bold small d-block" style={{ color: 'var(--cp-text-main)' }}>
@@ -1283,8 +1285,8 @@ const TeamRoleManagement = () => {
                                 <Button
                                     size="sm"
                                     variant="outline-secondary"
-                                    className="rounded-pill px-3 fw-semibold"
-                                    style={{ fontSize: '0.78rem' }}
+                                    className="px-3 fw-semibold"
+                                    style={{ fontSize: '0.78rem', borderRadius: '0' }}
                                     onClick={() => {
                                         const text = inviteResultData?.whatsappText || `Welcome to Kosher Code!\nPortal: ${window.location.origin}/admin/login\nPassword: ${inviteResultData?.tempPassword}`;
                                         navigator.clipboard.writeText(text);
@@ -1302,7 +1304,7 @@ const TeamRoleManagement = () => {
                     <Button 
                         variant="primary" 
                         className="px-4 fw-semibold w-100"
-                        style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '8px' }}
+                        style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '0' }}
                         onClick={() => setShowInviteModal(false)}
                     >
                         Done

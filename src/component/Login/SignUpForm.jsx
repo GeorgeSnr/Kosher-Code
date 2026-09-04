@@ -72,7 +72,7 @@ const SignUpForm = ({ handleResponse }) => {
                 className="iBtn d-flex align-items-center justify-content-center gap-2 text-white mt-3" 
                 style={{ 
                     backgroundColor: '#7355F7', 
-                    borderRadius: '4px', 
+                    borderRadius: '0', 
                     height: '46px',
                     fontWeight: 600,
                     fontSize: '0.95rem',

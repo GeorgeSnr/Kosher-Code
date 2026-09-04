@@ -88,7 +88,7 @@ const ManageServices = () => {
                     className="p-4 p-md-5"
                     style={{
                         backgroundColor: 'var(--cp-card-bg, #FFFFFF)',
-                        borderRadius: '24px',
+                        borderRadius: '0',
                         border: '1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.06))',
                         boxShadow: '0 4px 20px -2px rgba(15, 23, 42, 0.04)',
                         fontFamily: "'Plus Jakarta Sans', sans-serif"
@@ -99,25 +99,27 @@ const ManageServices = () => {
                         <div>
                             <div className="d-flex align-items-center gap-2 mb-1.5">
                                 <span 
-                                    className="badge rounded-pill px-3 py-1"
+                                    className="badge px-3 py-1"
                                     style={{ 
                                         backgroundColor: 'var(--cp-primary-subtle)', 
                                         color: 'var(--cp-primary-text)',
                                         fontSize: '0.74rem',
                                         fontWeight: 700,
                                         letterSpacing: '0.04em',
-                                        textTransform: 'uppercase'
+                                        textTransform: 'uppercase',
+                                        borderRadius: '0'
                                     }}
                                 >
                                     Catalog Manager
                                 </span>
                                 <span 
-                                    className="badge rounded-pill px-2.5 py-1"
+                                    className="badge px-2.5 py-1"
                                     style={{
                                         backgroundColor: 'var(--cp-card-subtle)',
                                         color: 'var(--cp-text-muted)',
                                         fontSize: '0.74rem',
-                                        fontWeight: 600
+                                        fontWeight: 600,
+                                        borderRadius: '0'
                                     }}
                                 >
                                     {services.length} Solutions Active
@@ -133,11 +135,12 @@ const ManageServices = () => {
 
                         <Link to="/admin/add-service" className="text-decoration-none">
                             <Button 
-                                className="rounded-pill px-4 py-2 text-white d-inline-flex align-items-center gap-2 border-0"
+                                className="px-4 py-2 text-white d-inline-flex align-items-center gap-2 border-0"
                                 style={{ 
                                     backgroundColor: '#121417', 
                                     fontWeight: 600, 
-                                    fontSize: '0.86rem' 
+                                    fontSize: '0.86rem',
+                                    borderRadius: '0'
                                 }}
                             >
                                 <FontAwesomeIcon icon={faPlus} /> Add New Solution
@@ -151,12 +154,13 @@ const ManageServices = () => {
                             <button
                                 type="button"
                                 onClick={() => setSelectedCategory('all')}
-                                className="btn btn-sm rounded-pill px-3 py-1.5 border-0"
+                                className="btn btn-sm px-3 py-1.5 border-0"
                                 style={{
                                     backgroundColor: selectedCategory === 'all' ? 'var(--cp-primary)' : 'var(--cp-card-subtle)',
                                     color: selectedCategory === 'all' ? '#FFFFFF' : 'var(--cp-text-muted)',
                                     fontWeight: selectedCategory === 'all' ? 700 : 500,
-                                    fontSize: '0.82rem'
+                                    fontSize: '0.82rem',
+                                    borderRadius: '0'
                                 }}
                             >
                                 All Solutions ({services.length})
@@ -166,12 +170,13 @@ const ManageServices = () => {
                                     key={cat}
                                     type="button"
                                     onClick={() => setSelectedCategory(cat)}
-                                    className="btn btn-sm rounded-pill px-3 py-1.5 border-0"
+                                    className="btn btn-sm px-3 py-1.5 border-0"
                                     style={{
                                         backgroundColor: selectedCategory === cat ? 'var(--cp-primary)' : 'var(--cp-card-subtle)',
                                         color: selectedCategory === cat ? '#FFFFFF' : 'var(--cp-text-muted)',
                                         fontWeight: selectedCategory === cat ? 700 : 500,
-                                        fontSize: '0.82rem'
+                                        fontSize: '0.82rem',
+                                        borderRadius: '0'
                                     }}
                                 >
                                     {cat}
@@ -187,11 +192,12 @@ const ManageServices = () => {
                             />
                             <input 
                                 type="text"
-                                className="form-control rounded-pill ps-5 pe-3 py-2 border-0"
+                                className="form-control ps-5 pe-3 py-2 border-0"
                                 style={{ 
                                     backgroundColor: 'var(--cp-card-subtle)', 
                                     fontSize: '0.84rem',
-                                    color: 'var(--cp-text-main)'
+                                    color: 'var(--cp-text-main)',
+                                    borderRadius: '0'
                                 }}
                                 placeholder="Search solutions..."
                                 value={searchTerm}
@@ -235,13 +241,14 @@ const ManageServices = () => {
                                                 </td>
                                                 <td className="py-3 px-3">
                                                     <span 
-                                                        className="badge rounded-pill px-3 py-1.5"
+                                                        className="badge px-3 py-1.5"
                                                         style={{
                                                             backgroundColor: 'var(--cp-card-subtle)',
                                                             color: 'var(--cp-text-main)',
                                                             fontSize: '0.76rem',
                                                             fontWeight: 600,
-                                                            border: '1px solid var(--cp-border)'
+                                                            border: '1px solid var(--cp-border)',
+                                                            borderRadius: '0'
                                                         }}
                                                     >
                                                         {category || 'Enterprise'}
@@ -254,11 +261,12 @@ const ManageServices = () => {
                                                     <div className="d-inline-flex align-items-center gap-2">
                                                         <button 
                                                             type="button"
-                                                            className="btn btn-sm btn-outline-secondary rounded-pill px-3 py-1.5 d-inline-flex align-items-center gap-1.5"
+                                                            className="btn btn-sm btn-outline-secondary px-3 py-1.5 d-inline-flex align-items-center gap-1.5"
                                                             style={{ 
                                                                 fontSize: '0.8rem', 
                                                                 fontWeight: 600,
-                                                                borderColor: 'var(--cp-border)'
+                                                                borderColor: 'var(--cp-border)',
+                                                                borderRadius: '0'
                                                             }}
                                                             onClick={() => setEdit(serviceId)}
                                                         >
@@ -266,8 +274,8 @@ const ManageServices = () => {
                                                         </button>
                                                         <button 
                                                             type="button"
-                                                            className="btn btn-sm btn-outline-danger rounded-pill px-3 py-1.5 d-inline-flex align-items-center gap-1.5"
-                                                            style={{ fontSize: '0.8rem', fontWeight: 600 }}
+                                                            className="btn btn-sm btn-outline-danger px-3 py-1.5 d-inline-flex align-items-center gap-1.5"
+                                                            style={{ fontSize: '0.8rem', fontWeight: 600, borderRadius: '0' }}
                                                             onClick={() => handleDelete(serviceId, name)}
                                                         >
                                                             <FontAwesomeIcon icon={faTrashAlt} /> Delete

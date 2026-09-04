@@ -114,8 +114,8 @@ const BookList = () => {
                     )}
                     <Link to="/client/book">
                         <Button 
-                            className="rounded-pill d-flex align-items-center gap-2 fw-semibold px-4 py-2.5 text-white"
-                            style={{ backgroundColor: '#121417', borderColor: '#121417', fontSize: '0.86rem', boxShadow: '0 4px 14px rgba(0, 0, 0, 0.25)' }}
+                            className="d-flex align-items-center gap-2 fw-semibold px-4 py-2.5 text-white"
+                            style={{ backgroundColor: '#121417', borderColor: '#121417', borderRadius: '0', fontSize: '0.86rem', boxShadow: '0 4px 14px rgba(0, 0, 0, 0.25)' }}
                         >
                             <FontAwesomeIcon icon={faPlus} /> Book Another Solution
                         </Button>
@@ -124,12 +124,12 @@ const BookList = () => {
             </div>
 
             {bookings.length === 0 ? (
-                <div className="text-center py-5 cp-card p-5">
+                <div className="text-center py-5 cp-card p-5" style={{ borderRadius: '0' }}>
                     <FontAwesomeIcon icon={faFileContract} style={{ fontSize: '3rem', color: 'var(--cp-text-light)' }} className="mb-3" />
                     <h5 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)' }}>No Active Engagements Found</h5>
                     <p className="small mb-3" style={{ color: 'var(--cp-text-muted)' }}>You haven't submitted any solution booking requests yet.</p>
                     <Link to="/client/book">
-                        <Button className="rounded-pill px-4 py-2 text-white" style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', fontSize: '0.85rem' }}>
+                        <Button className="px-4 py-2 text-white" style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', borderRadius: '0', fontSize: '0.85rem' }}>
                             Explore & Book Solutions
                         </Button>
                     </Link>
@@ -141,15 +141,16 @@ const BookList = () => {
                         const icon = getServiceIcon(booking.serviceName, booking.institution);
                         return (
                             <Col md={6} lg={4} key={booking._id}>
-                                <div className="cp-card d-flex flex-column h-100 p-4">
+                                <div className="cp-card d-flex flex-column h-100 p-4" style={{ borderRadius: '0' }}>
                                     <div className="d-flex justify-content-between align-items-center mb-3">
                                         <span 
-                                            className="px-3 py-1 fw-bold rounded-pill"
+                                            className="px-3 py-1 fw-bold"
                                             style={{
                                                 fontSize: '0.78rem',
                                                 backgroundColor: statusStyle.bg,
                                                 color: statusStyle.text,
-                                                border: `1px solid ${statusStyle.border}`
+                                                border: `1px solid ${statusStyle.border}`,
+                                                borderRadius: '0'
                                             }}
                                         >
                                             ● {booking.status}
@@ -165,7 +166,7 @@ const BookList = () => {
                                             style={{ 
                                                 width: '44px', 
                                                 height: '44px', 
-                                                borderRadius: '50%', 
+                                                borderRadius: '0', 
                                                 backgroundColor: 'var(--cp-primary-subtle)',
                                                 color: 'var(--cp-primary)',
                                                 border: '1px solid var(--cp-border)'
@@ -183,7 +184,7 @@ const BookList = () => {
                                         </div>
                                     </div>
 
-                                    <div className="p-3 rounded-4 mb-3 small" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                                    <div className="p-3 mb-3 small" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0' }}>
                                         {booking.institution && (
                                             <div className="d-flex align-items-center gap-2 mb-1.5">
                                                 <FontAwesomeIcon icon={faBuilding} style={{ color: 'var(--cp-primary)', fontSize: '0.85rem' }} />
@@ -211,16 +212,16 @@ const BookList = () => {
                                             <button 
                                                 type="button" 
                                                 onClick={() => { setSelectedBooking(booking); setShowModal(true); }}
-                                                className="btn btn-sm btn-outline-primary rounded-pill py-1.5 px-3 d-flex align-items-center gap-1.5 fw-semibold"
-                                                style={{ fontSize: '0.78rem' }}
+                                                className="btn btn-sm btn-outline-primary py-1.5 px-3 d-flex align-items-center gap-1.5 fw-semibold"
+                                                style={{ fontSize: '0.78rem', borderRadius: '0' }}
                                             >
                                                 <FontAwesomeIcon icon={faEye} /> Inspect
                                             </button>
                                             <button 
                                                 type="button" 
                                                 onClick={() => handleDelete(booking._id, booking.status)}
-                                                className="btn btn-sm btn-outline-danger rounded-pill py-1.5 px-3 d-flex align-items-center gap-1.5 fw-semibold"
-                                                style={{ fontSize: '0.78rem' }}
+                                                className="btn btn-sm btn-outline-danger py-1.5 px-3 d-flex align-items-center gap-1.5 fw-semibold"
+                                                style={{ fontSize: '0.78rem', borderRadius: '0' }}
                                             >
                                                 <FontAwesomeIcon icon={faTrashAlt} /> {booking.status === 'Done' ? 'Remove' : 'Cancel'}
                                             </button>
@@ -248,7 +249,7 @@ const BookList = () => {
                             style={{ 
                                 width: '42px', 
                                 height: '42px', 
-                                borderRadius: '50%', 
+                                borderRadius: '0', 
                                 backgroundColor: 'var(--cp-primary-subtle)',
                                 color: 'var(--cp-primary)'
                             }}
@@ -268,14 +269,15 @@ const BookList = () => {
                         <div>
                             <Row className="g-3 mb-4">
                                 <Col sm={6}>
-                                    <div className="p-3 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                                    <div className="p-3" style={{ borderRadius: '0', backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
                                         <small className="admin-kpi-label">Current Status</small>
                                         <span 
-                                            className="px-3 py-1 fw-bold rounded-pill d-inline-flex align-items-center gap-1.5"
+                                            className="px-3 py-1 fw-bold d-inline-flex align-items-center gap-1.5"
                                             style={{
                                                 backgroundColor: selectedBooking.status === 'Done' ? 'rgba(16, 185, 129, 0.12)' : selectedBooking.status === 'In Progress' ? 'rgba(59, 130, 246, 0.12)' : selectedBooking.status === 'In Review' ? 'rgba(139, 92, 246, 0.12)' : 'rgba(245, 158, 11, 0.12)',
                                                 color: selectedBooking.status === 'Done' ? '#10B981' : selectedBooking.status === 'In Progress' ? '#3B82F6' : selectedBooking.status === 'In Review' ? '#8B5CF6' : '#F59E0B',
                                                 border: `1px solid ${selectedBooking.status === 'Done' ? '#10B98133' : selectedBooking.status === 'In Progress' ? '#3B82F633' : selectedBooking.status === 'In Review' ? '#8B5CF633' : '#F59E0B33'}`,
+                                                borderRadius: '0',
                                                 fontSize: '0.8rem'
                                             }}
                                         >
@@ -284,7 +286,7 @@ const BookList = () => {
                                     </div>
                                 </Col>
                                 <Col sm={6}>
-                                    <div className="p-3 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                                    <div className="p-3" style={{ borderRadius: '0', backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
                                         <small className="admin-kpi-label">Pricing Model</small>
                                         <div className="fw-bold" style={{ color: 'var(--cp-text-main)', fontSize: '0.95rem' }}>
                                             {selectedBooking.pricingType || `$${selectedBooking.price || 48}`}
@@ -292,7 +294,7 @@ const BookList = () => {
                                     </div>
                                 </Col>
                                 <Col sm={6}>
-                                    <div className="p-3 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                                    <div className="p-3" style={{ borderRadius: '0', backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
                                         <small className="admin-kpi-label">Institution / Sector</small>
                                         <div className="fw-semibold" style={{ color: 'var(--cp-text-main)', fontSize: '0.9rem' }}>
                                             {selectedBooking.institution || 'Commercial Banking & FinTech'}
@@ -300,7 +302,7 @@ const BookList = () => {
                                     </div>
                                 </Col>
                                 <Col sm={6}>
-                                    <div className="p-3 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                                    <div className="p-3" style={{ borderRadius: '0', backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
                                         <small className="admin-kpi-label">Delivery Timeline</small>
                                         <div className="fw-semibold" style={{ color: 'var(--cp-text-main)', fontSize: '0.9rem' }}>
                                             {selectedBooking.timeline || 'Immediate (1-3 months)'}
@@ -309,14 +311,14 @@ const BookList = () => {
                                 </Col>
                             </Row>
 
-                            <div className="p-3.5 rounded-4 mb-3" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                            <div className="p-3.5 mb-3" style={{ borderRadius: '0', backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
                                 <small className="admin-kpi-label mb-2">Scope & Project Specifications</small>
                                 <p className="mb-0" style={{ color: 'var(--cp-text-main)', fontSize: '0.88rem', lineHeight: 1.6, wordBreak: 'break-word' }}>
                                     {selectedBooking.description || 'Enterprise software architecture configured for your operational scale.'}
                                 </p>
                             </div>
 
-                            <div className="p-3 rounded-4" style={{ backgroundColor: 'var(--cp-primary-subtle)', border: '1px solid var(--cp-border)' }}>
+                            <div className="p-3" style={{ borderRadius: '0', backgroundColor: 'var(--cp-primary-subtle)', border: '1px solid var(--cp-border)' }}>
                                 <div className="d-flex align-items-center gap-2 mb-1">
                                     <FontAwesomeIcon icon={faShieldAlt} style={{ color: 'var(--cp-primary)' }} />
                                     <strong className="small" style={{ color: 'var(--cp-primary-text)' }}>Kampala HQ Engineering SLA Active</strong>
@@ -332,8 +334,8 @@ const BookList = () => {
                     <Button 
                         variant="secondary" 
                         onClick={() => setShowModal(false)}
-                        className="rounded-pill px-4 py-2"
-                        style={{ fontSize: '0.85rem' }}
+                        className="px-4 py-2"
+                        style={{ fontSize: '0.85rem', borderRadius: '0' }}
                     >
                         Close
                     </Button>

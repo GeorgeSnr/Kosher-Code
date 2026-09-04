@@ -43,7 +43,7 @@ class ErrorBoundary extends React.Component {
                         width: '100%',
                         backgroundColor: '#111827',
                         border: '1px solid #232F46',
-                        borderRadius: '8px',
+                        borderRadius: '0',
                         padding: '2.5rem',
                         textAlign: 'center',
                         boxShadow: '0 20px 40px rgba(0,0,0,0.5)'
@@ -51,7 +51,7 @@ class ErrorBoundary extends React.Component {
                         <div style={{
                             width: '56px',
                             height: '56px',
-                            borderRadius: '50%',
+                            borderRadius: '0',
                             backgroundColor: 'rgba(239, 68, 68, 0.15)',
                             color: '#EF4444',
                             display: 'inline-flex',
@@ -67,7 +67,7 @@ class ErrorBoundary extends React.Component {
                             We encountered a display initialization issue loading this portal view. You can reload the workspace or return to the main site.
                         </p>
                         {this.state.error && (
-                            <details style={{ textAlign: 'left', marginBottom: '1.5rem', backgroundColor: 'rgba(0,0,0,0.3)', borderRadius: '4px', padding: '0.75rem 1rem', border: '1px solid rgba(255,255,255,0.08)' }}>
+                            <details style={{ textAlign: 'left', marginBottom: '1.5rem', backgroundColor: 'rgba(0,0,0,0.3)', borderRadius: '0', padding: '0.75rem 1rem', border: '1px solid rgba(255,255,255,0.08)' }}>
                                 <summary style={{ cursor: 'pointer', color: '#CBD5E1', fontSize: '0.8rem', fontWeight: 600 }}>Diagnostic Details</summary>
                                 <pre style={{ marginTop: '0.5rem', color: '#F87171', fontSize: '0.75rem', whiteSpace: 'pre-wrap', wordBreak: 'break-all', maxHeight: '150px', overflowY: 'auto' }}>
                                     {this.state.error?.toString()}
@@ -82,7 +82,7 @@ class ErrorBoundary extends React.Component {
                                     backgroundColor: '#7355F7',
                                     color: '#FFFFFF',
                                     border: 'none',
-                                    borderRadius: '4px',
+                                    borderRadius: '0',
                                     padding: '0.75rem 1.5rem',
                                     fontWeight: 600,
                                     fontSize: '0.9rem',
@@ -97,7 +97,7 @@ class ErrorBoundary extends React.Component {
                                     backgroundColor: 'rgba(255,255,255,0.08)',
                                     color: '#E2E8F0',
                                     border: '1px solid rgba(255,255,255,0.2)',
-                                    borderRadius: '4px',
+                                    borderRadius: '0',
                                     padding: '0.75rem 1.5rem',
                                     fontWeight: 600,
                                     fontSize: '0.9rem',

@@ -105,8 +105,8 @@ const CreateTicketModal = ({
                 <Modal.Header closeButton className="border-0 px-4 pt-4 pb-2">
                     <div className="d-flex align-items-center gap-2">
                         <div 
-                            className="p-2 rounded-3 text-white d-flex align-items-center justify-content-center"
-                            style={{ backgroundColor: '#0672CB', width: '38px', height: '38px', borderRadius: '8px' }}
+                            className="p-2 text-white d-flex align-items-center justify-content-center"
+                            style={{ backgroundColor: '#0672CB', width: '38px', height: '38px', borderRadius: '0' }}
                         >
                             <FontAwesomeIcon icon={faPlus} />
                         </div>
@@ -139,10 +139,11 @@ const CreateTicketModal = ({
                                     key={item.id}
                                     type="button"
                                     onClick={() => handleTypeChange(item.id)}
-                                    className={`btn btn-sm rounded-pill px-3 py-1.5 fw-semibold d-inline-flex align-items-center gap-1.5 border-0 ${type === item.id ? 'text-white' : ''}`}
+                                    className={`btn btn-sm px-3 py-1.5 fw-semibold d-inline-flex align-items-center gap-1.5 border-0 ${type === item.id ? 'text-white' : ''}`}
                                     style={{
                                         backgroundColor: type === item.id ? item.color : 'var(--cp-card-subtle, #F1F5F9)',
-                                        color: type === item.id ? '#FFFFFF' : 'var(--cp-text-muted, #64748B)'
+                                        color: type === item.id ? '#FFFFFF' : 'var(--cp-text-muted, #64748B)',
+                                        borderRadius: '0'
                                     }}
                                 >
                                     <FontAwesomeIcon icon={item.icon} />
@@ -160,7 +161,7 @@ const CreateTicketModal = ({
                         <Form.Control
                             type="text"
                             className="cp-input"
-                            style={{ borderRadius: '12px', fontSize: '0.9rem', padding: '12px 16px' }}
+                            style={{ borderRadius: '0', fontSize: '0.9rem', padding: '12px 16px' }}
                             placeholder="e.g. ISO 8583 Adapter for Commercial Bank Switch"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
@@ -177,7 +178,7 @@ const CreateTicketModal = ({
                             as="textarea"
                             rows={3}
                             className="cp-input"
-                            style={{ borderRadius: '12px', fontSize: '0.88rem' }}
+                            style={{ borderRadius: '0', fontSize: '0.88rem' }}
                             placeholder="Describe technical requirements, expected behavior, or scope details..."
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
@@ -194,7 +195,7 @@ const CreateTicketModal = ({
                                 value={assigneeId}
                                 onChange={(e) => setAssigneeId(e.target.value)}
                                 className="cp-input"
-                                style={{ borderRadius: '12px', fontSize: '0.86rem' }}
+                                style={{ borderRadius: '0', fontSize: '0.86rem' }}
                             >
                                 <option value="">Select Developer / Assignee</option>
                                 {teamMembers.map(m => (
@@ -217,7 +218,7 @@ const CreateTicketModal = ({
                                 value={sprintId}
                                 onChange={(e) => setSprintId(e.target.value)}
                                 className="cp-input"
-                                style={{ borderRadius: '12px', fontSize: '0.86rem' }}
+                                style={{ borderRadius: '0', fontSize: '0.86rem' }}
                             >
                                 <option value="">Backlog (Unscheduled)</option>
                                 {sprints.map(sp => (
@@ -239,7 +240,7 @@ const CreateTicketModal = ({
                                 value={priority}
                                 onChange={(e) => setPriority(e.target.value)}
                                 className="cp-input"
-                                style={{ borderRadius: '12px', fontSize: '0.86rem' }}
+                                style={{ borderRadius: '0', fontSize: '0.86rem' }}
                             >
                                 <option value="Highest">Highest ⚡</option>
                                 <option value="High">High ↑</option>
@@ -257,7 +258,7 @@ const CreateTicketModal = ({
                                 value={storyPoints}
                                 onChange={(e) => setStoryPoints(e.target.value)}
                                 className="cp-input"
-                                style={{ borderRadius: '12px', fontSize: '0.86rem' }}
+                                style={{ borderRadius: '0', fontSize: '0.86rem' }}
                             >
                                 {[1, 2, 3, 5, 8, 13, 21].map(pt => (
                                     <option key={pt} value={pt}>{pt} points</option>
@@ -274,7 +275,7 @@ const CreateTicketModal = ({
                                 value={dueDate}
                                 onChange={(e) => setDueDate(e.target.value)}
                                 className="cp-input"
-                                style={{ borderRadius: '12px', fontSize: '0.86rem' }}
+                                style={{ borderRadius: '0', fontSize: '0.86rem' }}
                             />
                         </Col>
                     </Row>
@@ -287,7 +288,7 @@ const CreateTicketModal = ({
                         <Form.Control
                             type="text"
                             className="cp-input"
-                            style={{ borderRadius: '12px', fontSize: '0.86rem' }}
+                            style={{ borderRadius: '0', fontSize: '0.86rem' }}
                             placeholder="e.g. CoreBanking, Switch, MoMo, Security"
                             value={labelsInput}
                             onChange={(e) => setLabelsInput(e.target.value)}
@@ -295,7 +296,7 @@ const CreateTicketModal = ({
                     </div>
 
                     {/* Approval Workflow Toggle & Approver Picker */}
-                    <div className="p-3 rounded-3" style={{ backgroundColor: 'var(--cp-card-subtle, #F8FAFC)', border: '1px solid var(--cp-border-subtle, rgba(0,0,0,0.06))' }}>
+                    <div className="p-3" style={{ backgroundColor: 'var(--cp-card-subtle, #F8FAFC)', border: '1px solid var(--cp-border-subtle, rgba(0,0,0,0.06))', borderRadius: '0' }}>
                         <div className="d-flex align-items-center justify-content-between mb-2">
                             <div className="d-flex align-items-center gap-2">
                                 <FontAwesomeIcon icon={faShieldAlt} className="text-primary" />
@@ -321,7 +322,7 @@ const CreateTicketModal = ({
                                         value={approverRoleId}
                                         onChange={(e) => setApproverRoleId(e.target.value)}
                                         className="cp-input"
-                                        style={{ borderRadius: '10px', fontSize: '0.84rem' }}
+                                        style={{ borderRadius: '0', fontSize: '0.84rem' }}
                                     >
                                         <option value="role-pm">Project Manager (PM)</option>
                                         <option value="role-architect">Solution Architect</option>
@@ -337,7 +338,7 @@ const CreateTicketModal = ({
                     <Button 
                         variant="secondary" 
                         className="px-4 fw-semibold"
-                        style={{ borderRadius: '8px' }}
+                        style={{ borderRadius: '0' }}
                         onClick={onHide}
                     >
                         Cancel
@@ -346,7 +347,7 @@ const CreateTicketModal = ({
                         type="submit" 
                         variant="primary" 
                         className="px-4 fw-semibold d-inline-flex align-items-center gap-2"
-                        style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '8px' }}
+                        style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '0' }}
                     >
                         <FontAwesomeIcon icon={faPlus} /> Create Issue
                     </Button>

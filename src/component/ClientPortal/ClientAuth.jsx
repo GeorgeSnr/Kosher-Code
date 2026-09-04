@@ -679,7 +679,7 @@ const ClientAuth = ({ defaultPortal }) => {
                             type="button"
                             onClick={toggleTheme}
                             className="site-theme-btn d-flex align-items-center justify-content-center"
-                            style={{ width: '36px', height: '36px', borderRadius: '4px', cursor: 'pointer' }}
+                            style={{ width: '36px', height: '36px', borderRadius: '0', cursor: 'pointer' }}
                             title={`Switch to ${theme === 'light' ? 'Dark' : 'Light'} Mode`}
                         >
                             <FontAwesomeIcon icon={theme === 'dark' ? faSun : faMoon} />
@@ -701,7 +701,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                 className="p-4 p-sm-5"
                                 style={{
                                     backgroundColor: 'var(--site-card-bg, #FFFFFF)',
-                                    borderRadius: '8px',
+                                    borderRadius: '0',
                                     border: '1px solid var(--site-border, #E5E0FA)',
                                     boxShadow: 'var(--site-shadow-md, 0 8px 30px rgba(115, 85, 247, 0.07))'
                                 }}
@@ -713,7 +713,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                         style={{
                                             width: '54px',
                                             height: '54px',
-                                            borderRadius: '8px',
+                                            borderRadius: '0',
                                             backgroundColor: authRole === 'admin' ? 'rgba(139, 92, 246, 0.2)' : 'var(--site-primary-subtle, #F4F0FF)',
                                             color: 'var(--site-primary, #7355F7)',
                                             border: '1px solid var(--site-border, #E5E0FA)'
@@ -740,13 +740,13 @@ const ClientAuth = ({ defaultPortal }) => {
 
                                 {/* Mode Switcher Tabs (Sign In vs Sign Up) - Hidden during Forgot Password */}
                                 {authRole === 'client' && mode !== 'forgot' && (
-                                    <div className="d-flex gap-2 mb-4 p-1.5 rounded" style={{ backgroundColor: 'var(--site-card-subtle, #FAF8FF)', border: '1px solid var(--site-border, #E5E0FA)' }}>
+                                    <div className="d-flex gap-2 mb-4 p-1.5" style={{ backgroundColor: 'var(--site-card-subtle, #FAF8FF)', border: '1px solid var(--site-border, #E5E0FA)', borderRadius: '0' }}>
                                         <button
                                             type="button"
                                             onClick={() => handleSwitchMode('signin')}
                                             className="btn btn-sm flex-fill py-2 fw-semibold"
                                             style={{
-                                                borderRadius: '4px',
+                                                borderRadius: '0',
                                                 fontSize: '0.86rem',
                                                 backgroundColor: mode === 'signin' ? 'var(--site-primary, #7355F7)' : 'transparent',
                                                 color: mode === 'signin' ? '#FFFFFF' : 'var(--site-text-muted, #555555)',
@@ -761,7 +761,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                             onClick={() => handleSwitchMode('signup')}
                                             className="btn btn-sm flex-fill py-2 fw-semibold"
                                             style={{
-                                                borderRadius: '4px',
+                                                borderRadius: '0',
                                                 fontSize: '0.86rem',
                                                 backgroundColor: mode === 'signup' ? 'var(--site-primary, #7355F7)' : 'transparent',
                                                 color: mode === 'signup' ? '#FFFFFF' : 'var(--site-text-muted, #555555)',
@@ -777,9 +777,10 @@ const ClientAuth = ({ defaultPortal }) => {
                                 {/* SIGN IN ALERT BANNER */}
                                 {mode === 'signin' && signInAlert && (
                                     <div 
-                                        className="d-flex align-items-start gap-2.5 p-3 mb-3.5 rounded"
+                                        className="d-flex align-items-start gap-2.5 p-3 mb-3.5"
                                         style={{ 
                                             fontSize: '0.85rem',
+                                            borderRadius: '0',
                                             border: signInAlert.type === 'danger' 
                                                 ? '1px solid #FECDD3' 
                                                 : (signInAlert.type === 'warning' ? '1px solid #FED7AA' : '1px solid #BAE6FD'),
@@ -811,7 +812,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                     className="btn btn-sm mt-2 fw-semibold d-inline-flex align-items-center gap-1.5"
                                                     style={{ 
                                                         fontSize: '0.78rem', 
-                                                        borderRadius: '4px',
+                                                        borderRadius: '0',
                                                         backgroundColor: 'var(--site-primary, #7355F7)',
                                                         color: '#FFFFFF',
                                                         border: 'none'
@@ -834,9 +835,10 @@ const ClientAuth = ({ defaultPortal }) => {
                                 {/* SIGN UP ALERT BANNER */}
                                 {mode === 'signup' && signUpAlert && (
                                     <div 
-                                        className="d-flex align-items-start gap-2.5 p-3 mb-3.5 rounded"
+                                        className="d-flex align-items-start gap-2.5 p-3 mb-3.5"
                                         style={{ 
                                             fontSize: '0.85rem',
+                                            borderRadius: '0',
                                             border: signUpAlert.type === 'danger' 
                                                 ? '1px solid #FECDD3' 
                                                 : (signUpAlert.type === 'warning' ? '1px solid #FED7AA' : '1px solid #BAE6FD'),
@@ -868,7 +870,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                     className="btn btn-sm mt-2 fw-semibold d-inline-flex align-items-center gap-1.5"
                                                     style={{ 
                                                         fontSize: '0.78rem', 
-                                                        borderRadius: '4px',
+                                                        borderRadius: '0',
                                                         backgroundColor: 'var(--site-primary, #7355F7)',
                                                         color: '#FFFFFF',
                                                         border: 'none'
@@ -901,7 +903,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                     style={{ 
                                                         backgroundColor: 'var(--site-card-subtle)', 
                                                         borderColor: signInErrors.email ? '#EF4444' : 'var(--site-border)', 
-                                                        borderRadius: '4px 0 0 4px', 
+                                                        borderRadius: '0', 
                                                         color: signInErrors.email ? '#EF4444' : 'var(--site-text-muted)' 
                                                     }}
                                                 >
@@ -922,7 +924,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                         backgroundColor: 'var(--site-card-bg)', 
                                                         borderColor: signInErrors.email ? '#EF4444' : 'var(--site-border)', 
                                                         color: 'var(--site-text-main)', 
-                                                        borderRadius: '0 4px 4px 0', 
+                                                        borderRadius: '0', 
                                                         padding: '0.7rem 0.85rem' 
                                                     }}
                                                 />
@@ -960,7 +962,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                     style={{ 
                                                         backgroundColor: 'var(--site-card-subtle)', 
                                                         borderColor: signInErrors.password ? '#EF4444' : 'var(--site-border)', 
-                                                        borderRadius: '4px 0 0 4px', 
+                                                        borderRadius: '0', 
                                                         color: signInErrors.password ? '#EF4444' : 'var(--site-text-muted)' 
                                                     }}
                                                 >
@@ -981,7 +983,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                         backgroundColor: 'var(--site-card-bg)', 
                                                         borderColor: signInErrors.password ? '#EF4444' : 'var(--site-border)', 
                                                         color: 'var(--site-text-main)', 
-                                                        borderRadius: 0, 
+                                                        borderRadius: '0', 
                                                         padding: '0.7rem 0.85rem' 
                                                     }}
                                                 />
@@ -993,7 +995,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                         backgroundColor: 'var(--site-card-subtle)',
                                                         borderColor: signInErrors.password ? '#EF4444' : 'var(--site-border)',
                                                         color: showSignInPassword ? 'var(--site-primary, #7355F7)' : 'var(--site-text-muted)',
-                                                        borderRadius: '0 4px 4px 0',
+                                                        borderRadius: '0',
                                                         cursor: 'pointer',
                                                         padding: '0 0.85rem'
                                                     }}
@@ -1017,7 +1019,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                             style={{
                                                 backgroundColor: 'var(--site-primary, #7355F7)',
                                                 borderColor: 'var(--site-primary, #7355F7)',
-                                                borderRadius: '4px',
+                                                borderRadius: '0',
                                                 fontSize: '0.95rem',
                                                 boxShadow: '0 4px 14px rgba(115, 85, 247, 0.3)'
                                             }}
@@ -1040,7 +1042,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                 backgroundColor: 'var(--site-card-bg)',
                                                 borderColor: 'var(--site-border)',
                                                 color: 'var(--site-text-main)',
-                                                borderRadius: '6px',
+                                                borderRadius: '0',
                                                 fontSize: '0.9rem',
                                                 transition: 'all 0.2s ease',
                                                 boxShadow: '0 2px 6px rgba(0,0,0,0.04)'
@@ -1093,7 +1095,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                     style={{ 
                                                         backgroundColor: 'var(--site-card-subtle)', 
                                                         borderColor: signUpErrors.name ? '#EF4444' : 'var(--site-border)', 
-                                                        borderRadius: '4px 0 0 4px', 
+                                                        borderRadius: '0', 
                                                         color: signUpErrors.name ? '#EF4444' : 'var(--site-text-muted)' 
                                                     }}
                                                 >
@@ -1114,7 +1116,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                         backgroundColor: 'var(--site-card-bg)', 
                                                         borderColor: signUpErrors.name ? '#EF4444' : 'var(--site-border)', 
                                                         color: 'var(--site-text-main)', 
-                                                        borderRadius: '0 4px 4px 0', 
+                                                        borderRadius: '0', 
                                                         padding: '0.65rem 0.85rem' 
                                                     }}
                                                 />
@@ -1136,7 +1138,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                     style={{ 
                                                         backgroundColor: 'var(--site-card-subtle)', 
                                                         borderColor: 'var(--site-border)', 
-                                                        borderRadius: '4px 0 0 4px', 
+                                                        borderRadius: '0', 
                                                         color: 'var(--site-text-muted)' 
                                                     }}
                                                 >
@@ -1148,7 +1150,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                     value={signUpOrg}
                                                     onChange={(e) => setSignUpOrg(e.target.value)}
                                                     placeholder="e.g. Equatorial FinTech Ltd"
-                                                    style={{ backgroundColor: 'var(--site-card-bg)', borderColor: 'var(--site-border)', color: 'var(--site-text-main)', borderRadius: '0 4px 4px 0', padding: '0.65rem 0.85rem' }}
+                                                    style={{ backgroundColor: 'var(--site-card-bg)', borderColor: 'var(--site-border)', color: 'var(--site-text-main)', borderRadius: '0', padding: '0.65rem 0.85rem' }}
                                                 />
                                             </div>
                                         </Form.Group>
@@ -1163,7 +1165,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                     style={{ 
                                                         backgroundColor: 'var(--site-card-subtle)', 
                                                         borderColor: signUpErrors.email ? '#EF4444' : 'var(--site-border)', 
-                                                        borderRadius: '4px 0 0 4px', 
+                                                        borderRadius: '0', 
                                                         color: signUpErrors.email ? '#EF4444' : 'var(--site-text-muted)' 
                                                     }}
                                                 >
@@ -1184,7 +1186,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                         backgroundColor: 'var(--site-card-bg)', 
                                                         borderColor: signUpErrors.email ? '#EF4444' : 'var(--site-border)', 
                                                         color: 'var(--site-text-main)', 
-                                                        borderRadius: '0 4px 4px 0', 
+                                                        borderRadius: '0', 
                                                         padding: '0.65rem 0.85rem' 
                                                     }}
                                                 />
@@ -1206,7 +1208,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                     style={{ 
                                                         backgroundColor: 'var(--site-card-subtle)', 
                                                         borderColor: signUpErrors.password ? '#EF4444' : 'var(--site-border)', 
-                                                        borderRadius: '4px 0 0 4px', 
+                                                        borderRadius: '0', 
                                                         color: signUpErrors.password ? '#EF4444' : 'var(--site-text-muted)' 
                                                     }}
                                                 >
@@ -1240,7 +1242,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                         backgroundColor: 'var(--site-card-subtle)',
                                                         borderColor: signUpErrors.password ? '#EF4444' : 'var(--site-border)',
                                                         color: showSignUpPassword ? 'var(--site-primary, #7355F7)' : 'var(--site-text-muted)',
-                                                        borderRadius: '0 4px 4px 0',
+                                                        borderRadius: '0',
                                                         cursor: 'pointer',
                                                         padding: '0 0.85rem'
                                                     }}
@@ -1286,7 +1288,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                             style={{
                                                 backgroundColor: 'var(--site-primary, #7355F7)',
                                                 borderColor: 'var(--site-primary, #7355F7)',
-                                                borderRadius: '4px',
+                                                borderRadius: '0',
                                                 fontSize: '0.95rem',
                                                 boxShadow: '0 4px 14px rgba(115, 85, 247, 0.3)'
                                             }}
@@ -1309,7 +1311,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                 backgroundColor: 'var(--site-card-bg)',
                                                 borderColor: 'var(--site-border)',
                                                 color: 'var(--site-text-main)',
-                                                borderRadius: '6px',
+                                                borderRadius: '0',
                                                 fontSize: '0.9rem',
                                                 transition: 'all 0.2s ease',
                                                 boxShadow: '0 2px 6px rgba(0,0,0,0.04)'
@@ -1346,12 +1348,12 @@ const ClientAuth = ({ defaultPortal }) => {
                                         {forgotSuccess ? (
                                             /* Confirmation Sent View */
                                             <div className="text-center py-2">
-                                                <div 
+                                                 <div 
                                                     className="d-inline-flex align-items-center justify-content-center mb-3"
                                                     style={{
                                                         width: '64px',
                                                         height: '64px',
-                                                        borderRadius: '50%',
+                                                        borderRadius: '0',
                                                         backgroundColor: 'rgba(16, 185, 129, 0.12)',
                                                         color: '#10B981'
                                                     }}
@@ -1365,10 +1367,11 @@ const ClientAuth = ({ defaultPortal }) => {
                                                 </p>
 
                                                 <div 
-                                                    className="p-3 mb-4 rounded text-start" 
+                                                    className="p-3 mb-4 text-start" 
                                                     style={{ 
                                                         backgroundColor: 'var(--site-card-subtle)', 
                                                         border: '1px solid var(--site-border)', 
+                                                        borderRadius: '0',
                                                         fontSize: '0.82rem', 
                                                         color: 'var(--site-text-muted)' 
                                                     }}
@@ -1394,7 +1397,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                     style={{
                                                         backgroundColor: 'var(--site-primary, #7355F7)',
                                                         borderColor: 'var(--site-primary, #7355F7)',
-                                                        borderRadius: '4px',
+                                                        borderRadius: '0',
                                                         fontSize: '0.92rem'
                                                     }}
                                                 >
@@ -1416,9 +1419,10 @@ const ClientAuth = ({ defaultPortal }) => {
                                             <Form onSubmit={handleForgotSubmit} noValidate>
                                                 {forgotAlert && (
                                                     <div 
-                                                        className="d-flex align-items-start gap-2.5 p-3 mb-3.5 rounded"
+                                                        className="d-flex align-items-start gap-2.5 p-3 mb-3.5"
                                                         style={{ 
                                                             fontSize: '0.85rem',
+                                                            borderRadius: '0',
                                                             border: forgotAlert.type === 'danger' ? '1px solid #FECDD3' : '1px solid #FED7AA',
                                                             backgroundColor: forgotAlert.type === 'danger' ? 'rgba(239, 68, 68, 0.08)' : 'rgba(245, 158, 11, 0.1)',
                                                             color: forgotAlert.type === 'danger' ? '#991B1B' : '#9A3412'
@@ -1435,11 +1439,11 @@ const ClientAuth = ({ defaultPortal }) => {
                                                         </div>
                                                         <button
                                                             type="button"
-                                                            onClick={() => setForgotAlert(null)}
-                                                            className="btn-close ms-1"
-                                                            aria-label="Close"
-                                                            style={{ fontSize: '0.65rem', flexShrink: 0 }}
-                                                        />
+                                                             onClick={() => setForgotAlert(null)}
+                                                             className="btn-close ms-1"
+                                                             aria-label="Close"
+                                                             style={{ fontSize: '0.65rem', flexShrink: 0 }}
+                                                         />
                                                     </div>
                                                 )}
 
@@ -1453,7 +1457,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                             style={{ 
                                                                 backgroundColor: 'var(--site-card-subtle)', 
                                                                 borderColor: forgotError ? '#EF4444' : 'var(--site-border)', 
-                                                                borderRadius: '4px 0 0 4px', 
+                                                                borderRadius: '0', 
                                                                 color: forgotError ? '#EF4444' : 'var(--site-text-muted)' 
                                                             }}
                                                         >
@@ -1474,7 +1478,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                                 backgroundColor: 'var(--site-card-bg)', 
                                                                 borderColor: forgotError ? '#EF4444' : 'var(--site-border)', 
                                                                 color: 'var(--site-text-main)', 
-                                                                borderRadius: '0 4px 4px 0', 
+                                                                borderRadius: '0', 
                                                                 padding: '0.7rem 0.85rem' 
                                                             }}
                                                         />
@@ -1493,7 +1497,7 @@ const ClientAuth = ({ defaultPortal }) => {
                                                     style={{
                                                         backgroundColor: 'var(--site-primary, #7355F7)',
                                                         borderColor: 'var(--site-primary, #7355F7)',
-                                                        borderRadius: '4px',
+                                                        borderRadius: '0',
                                                         fontSize: '0.95rem',
                                                         boxShadow: '0 4px 14px rgba(115, 85, 247, 0.3)'
                                                     }}
@@ -1527,7 +1531,7 @@ const ClientAuth = ({ defaultPortal }) => {
                     centered 
                     backdrop="static"
                     contentClassName="border-0 shadow-lg"
-                    style={{ borderRadius: '16px' }}
+                    style={{ borderRadius: '0' }}
                 >
                     <Modal.Header closeButton style={{ borderBottom: '1px solid var(--site-border)', backgroundColor: 'var(--site-card-bg)' }}>
                         <Modal.Title className="d-flex align-items-center gap-2" style={{ fontSize: '1.05rem', color: 'var(--site-text-main)', fontWeight: 700 }}>
@@ -1538,10 +1542,11 @@ const ClientAuth = ({ defaultPortal }) => {
                     <Modal.Body style={{ backgroundColor: 'var(--site-card-bg)', color: 'var(--site-text-main)', padding: '24px' }}>
                         {googleModalNotice && (
                             <div 
-                                className="p-3 mb-3 rounded"
+                                className="p-3 mb-3"
                                 style={{ 
                                     backgroundColor: 'rgba(245, 158, 11, 0.08)', 
                                     border: '1px solid rgba(245, 158, 11, 0.25)', 
+                                    borderRadius: '0',
                                     fontSize: '0.82rem', 
                                     color: 'var(--site-text-main)' 
                                 }}

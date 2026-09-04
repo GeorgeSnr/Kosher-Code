@@ -28,13 +28,13 @@
     --site-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
     --site-card-hover-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
 
-    /* Clean Modular Border Radius */
-    --bs-border-radius: 8px;
-    --bs-border-radius-sm: 6px;
-    --bs-border-radius-lg: 12px;
-    --bs-border-radius-xl: 16px;
-    --bs-border-radius-2xl: 20px;
-    --bs-border-radius-pill: 9999px;
+    /* Dell Sharp Architecture - Zero Border Radius Tokens */
+    --bs-border-radius: 0 !important;
+    --bs-border-radius-sm: 0 !important;
+    --bs-border-radius-lg: 0 !important;
+    --bs-border-radius-xl: 0 !important;
+    --bs-border-radius-2xl: 0 !important;
+    --bs-border-radius-pill: 0 !important;
 }
 
 [data-theme="dark"], html[data-theme="dark"] body {
@@ -88,29 +88,48 @@ main {
 }
 
 /* =========================================================
-   DELL PRECISION COMPONENT GEOMETRY & TYPOGRAPHY
+   DELL SHARP ARCHITECTURAL GEOMETRY (NO ROUND CORNERS POLICY)
    ========================================================= */
 
-/* Cards & Modular Blocks */
+/* All Cards, Modular Boxes & Containers */
 .card, 
 .service-card, 
 .pricingCard, 
 .ourValueDetails, 
 .review,
-.ad-card {
-    border-radius: 12px !important;
+.ad-card,
+.cp-card,
+.cp-card-subtle,
+.jira-card,
+.jira-column,
+.ad-hero-banner,
+.jira-hero-banner,
+.dashBoardHeader,
+.ad-deployment-hub-box,
+.ad-stat-pill,
+.ad-chart-card,
+.ad-modal-card,
+.ad-modal-hero-strip,
+.ad-modal-status-strip,
+.comment-bubble,
+.subtask-item,
+.directChannelsContainer {
+    border-radius: 0 !important;
     border: 1px solid var(--site-border, #E2E8F0) !important;
 }
 
-/* Buttons */
+/* All Buttons */
 .btn, 
 button, 
 .bookingBtn, 
 .branBtn, 
 .loginBtn, 
 .pricingBtn,
-.site-theme-btn {
-    border-radius: 8px !important;
+.site-theme-btn,
+.swal-button,
+.jira-tab-btn,
+.jira-whatsapp-btn {
+    border-radius: 0 !important;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-weight: 600;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -123,7 +142,7 @@ textarea,
 .form-control, 
 .form-select,
 .cp-input {
-    border-radius: 8px !important;
+    border-radius: 0 !important;
     border: 1px solid var(--site-border, #CBD5E1);
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-size: 0.9rem;
@@ -148,25 +167,59 @@ textarea:focus,
 .popular-badge, 
 .filter-pill,
 .jira-tag-pill,
-.ad-hero-badge {
-    border-radius: 9999px !important;
+.jira-column-count,
+.ad-hero-badge,
+.jira-hero-badge,
+.rounded-pill {
+    border-radius: 0 !important;
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 600;
 }
 
 /* Modals & Dialogs */
 .modal-content, 
-.jira-modal-content {
-    border-radius: 16px !important;
+.jira-modal-content,
+.ad-modal-content,
+.swal-modal {
+    border-radius: 0 !important;
     border: 1px solid var(--site-border, #E2E8F0) !important;
     box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* Dropdown Menus */
-.dropdown-menu {
-    border-radius: 10px !important;
+.dropdown-menu,
+.dropdown-item {
+    border-radius: 0 !important;
     border: 1px solid var(--site-border, #E2E8F0) !important;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Blanket Policy on Bootstrap Rounded Utility Classes for buttons & boxes */
+.rounded,
+.rounded-1,
+.rounded-2,
+.rounded-3,
+.rounded-4,
+.rounded-5,
+.rounded-top,
+.rounded-bottom,
+.rounded-start,
+.rounded-end {
+    border-radius: 0 !important;
+}
+
+/* Preserve circular avatars and indicator dots */
+.rounded-circle,
+.jira-avatar-sm,
+.jira-avatar-md,
+.jira-avatar-lg,
+.ad-pulse-dot,
+.region-dot,
+.channelIcon,
+.checkIcon-modern,
+img.avatar,
+img.rounded-circle {
+    border-radius: 50% !important;
 }
 
 /* =========================================================
@@ -230,7 +283,7 @@ textarea:focus,
     background: var(--site-primary, #0672CB) !important;
     color: #FFFFFF !important;
     padding: 12px 28px !important;
-    border-radius: 8px !important;
+    border-radius: 0 !important;
     font-weight: 600 !important;
     box-shadow: 0 2px 8px rgba(6, 114, 203, 0.25) !important;
     display: inline-flex;
@@ -273,7 +326,7 @@ textarea:focus,
 .loginBtn {
     background: var(--site-primary, #0672CB) !important;
     color: #FFFFFF !important;
-    border-radius: 8px !important;
+    border-radius: 0 !important;
     font-weight: 600 !important;
     padding: 8px 20px !important;
     box-shadow: 0 2px 8px rgba(6, 114, 203, 0.25) !important;
@@ -285,7 +338,7 @@ textarea:focus,
 }
 
 .site-theme-btn {
-    border-radius: 8px !important;
+    border-radius: 0 !important;
     border: 1px solid var(--site-border, #CBD5E1) !important;
     background-color: var(--site-card-subtle, #F8FAFC) !important;
     color: var(--site-text-main, #0F172A) !important;
@@ -318,7 +371,7 @@ textarea:focus,
 .service-card {
     background-color: var(--site-card-bg, #FFFFFF) !important;
     border: 1px solid var(--site-border, #E2E8F0) !important;
-    border-radius: 12px !important;
+    border-radius: 0 !important;
     box-shadow: var(--site-card-shadow) !important;
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
 }
@@ -369,7 +422,7 @@ textarea:focus,
 .bookingBtn {
     background: var(--site-primary, #0672CB) !important;
     color: #FFFFFF !important;
-    border-radius: 8px !important;
+    border-radius: 0 !important;
     font-weight: 600 !important;
     padding: 8px 18px !important;
     font-size: 0.84rem !important;
@@ -382,7 +435,7 @@ textarea:focus,
 }
 
 .service-category-badge {
-    border-radius: 9999px !important;
+    border-radius: 0 !important;
     background-color: var(--site-primary-subtle, rgba(6, 114, 203, 0.08)) !important;
     color: var(--site-primary, #0672CB) !important;
     border: 1px solid var(--site-border, #E2E8F0) !important;
@@ -397,7 +450,7 @@ textarea:focus,
 }
 
 .service-region-badge {
-    border-radius: 9999px !important;
+    border-radius: 0 !important;
     font-size: 0.76rem !important;
     padding: 3px 10px !important;
 }
@@ -415,7 +468,7 @@ textarea:focus,
 }
 
 .pricingCard {
-    border-radius: 12px !important;
+    border-radius: 0 !important;
     border: 1px solid var(--site-border, #E2E8F0) !important;
     background-color: var(--site-card-bg, #FFFFFF) !important;
     box-shadow: var(--site-card-shadow) !important;
@@ -445,7 +498,7 @@ textarea:focus,
 }
 
 .popular-badge {
-    border-radius: 9999px !important;
+    border-radius: 0 !important;
     background: var(--site-primary, #0672CB) !important;
     color: #FFFFFF !important;
     font-size: 0.72rem !important;
@@ -453,7 +506,7 @@ textarea:focus,
 }
 
 .plan-tier-badge {
-    border-radius: 9999px !important;
+    border-radius: 0 !important;
     font-size: 0.72rem !important;
     padding: 3px 10px !important;
     background-color: var(--site-primary-subtle, rgba(6, 114, 203, 0.08)) !important;
@@ -477,22 +530,8 @@ textarea:focus,
     color: var(--site-primary, #38BDF8) !important;
 }
 
-.checkIcon-modern {
-    color: #10B981 !important;
-    background-color: rgba(16, 185, 129, 0.12) !important;
-    border-radius: 50% !important;
-    width: 20px;
-    height: 20px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    margin-right: 10px;
-    flex-shrink: 0;
-}
-
 .pricingBtn {
-    border-radius: 8px !important;
+    border-radius: 0 !important;
     padding: 10px 20px !important;
     font-weight: 600 !important;
     border: 1px solid var(--site-border, #CBD5E1) !important;
@@ -530,7 +569,7 @@ textarea:focus,
 }
 
 .ourValueDetails {
-    border-radius: 12px !important;
+    border-radius: 0 !important;
     border: 1px solid var(--site-border, #E2E8F0) !important;
     box-shadow: var(--site-card-shadow) !important;
 }
@@ -542,7 +581,7 @@ textarea:focus,
 }
 
 .valueIcon {
-    border-radius: 10px !important;
+    border-radius: 0 !important;
 }
 
 .ourValueNumber {
@@ -557,7 +596,7 @@ textarea:focus,
 
 /* 7. Testimonials Section */
 .review {
-    border-radius: 12px !important;
+    border-radius: 0 !important;
     border: 1px solid var(--site-border, #E2E8F0) !important;
     box-shadow: var(--site-card-shadow) !important;
 }
@@ -572,7 +611,7 @@ textarea:focus,
 .contactForm input,
 .contactForm textarea,
 .contactForm select {
-    border-radius: 8px !important;
+    border-radius: 0 !important;
     border: 1px solid var(--site-border, #CBD5E1) !important;
     background-color: var(--site-card-bg, #FFFFFF) !important;
     color: var(--site-text-main, #0F172A) !important;
@@ -635,7 +674,7 @@ p {
 .dell-card {
     background-color: var(--site-card-bg, #FFFFFF);
     border: 1px solid var(--site-border, #E2E8F0);
-    border-radius: 12px;
+    border-radius: 0 !important;
     padding: 1.5rem;
     box-shadow: var(--site-card-shadow);
     transition: all 0.2s ease;

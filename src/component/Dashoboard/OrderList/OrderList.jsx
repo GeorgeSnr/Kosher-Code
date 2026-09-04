@@ -101,22 +101,22 @@ const OrderList = () => {
                             subtitle: 'Kosher Code Executive Pipeline Desk • Live Cloud Database'
                         }}
                     />
-                    <span className="badge rounded-pill px-3.5 py-2 fw-semibold" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', border: '1px solid var(--cp-border-highlight)', fontSize: '0.82rem' }}>
+                    <span className="badge px-3.5 py-2 fw-semibold" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', border: '1px solid var(--cp-border-highlight)', borderRadius: '0', fontSize: '0.82rem' }}>
                         🛡️ Executive Control
                     </span>
                 </div>
             </div>
 
-            {/* Quick Metrics Cards (Rounded 24px + Circular Badges) */}
+            {/* Quick Metrics Cards (Square Sharp Dell Geometry) */}
             <Row className="g-3.5 mb-4">
                 <Col xs={6} md={3}>
-                    <div className="p-3 p-sm-4 admin-kpi-card h-100">
+                    <div className="p-3 p-sm-4 admin-kpi-card h-100" style={{ borderRadius: '0' }}>
                         <div className="admin-kpi-bar" style={{ backgroundColor: '#7355F7' }}></div>
                         <div className="d-flex justify-content-between align-items-start mb-3">
-                            <div className="d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)', fontSize: '1.15rem' }}>
+                            <div className="d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', borderRadius: '0', backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)', fontSize: '1.15rem' }}>
                                 <FontAwesomeIcon icon={faInbox} />
                             </div>
-                            <span className="badge rounded-pill px-3 py-1" style={{ backgroundColor: 'var(--cp-card-subtle)', color: 'var(--cp-text-muted)', border: '1px solid var(--cp-border)', fontSize: '0.74rem' }}>Total</span>
+                            <span className="badge px-3 py-1" style={{ backgroundColor: 'var(--cp-card-subtle)', color: 'var(--cp-text-muted)', border: '1px solid var(--cp-border)', borderRadius: '0', fontSize: '0.74rem' }}>Total</span>
                         </div>
                         <span className="admin-kpi-label">TOTAL REQUESTS</span>
                         <h3 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{orders.length}</h3>
@@ -124,13 +124,13 @@ const OrderList = () => {
                 </Col>
 
                 <Col xs={6} md={3}>
-                    <div className="p-3 p-sm-4 admin-kpi-card h-100">
+                    <div className="p-3 p-sm-4 admin-kpi-card h-100" style={{ borderRadius: '0' }}>
                         <div className="admin-kpi-bar" style={{ backgroundColor: '#F59E0B' }}></div>
                         <div className="d-flex justify-content-between align-items-start mb-3">
-                            <div className="d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'var(--status-pending-bg)', color: 'var(--status-pending-text)', fontSize: '1.15rem' }}>
+                            <div className="d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', borderRadius: '0', backgroundColor: 'var(--status-pending-bg)', color: 'var(--status-pending-text)', fontSize: '1.15rem' }}>
                                 <FontAwesomeIcon icon={faClock} />
                             </div>
-                            <span className="badge rounded-pill px-3 py-1 badge-status-pending" style={{ fontSize: '0.74rem' }}>Action Req.</span>
+                            <span className="badge px-3 py-1 badge-status-pending" style={{ fontSize: '0.74rem', borderRadius: '0' }}>Action Req.</span>
                         </div>
                         <span className="admin-kpi-label">PENDING REVIEW</span>
                         <h3 className="fw-bold mb-0" style={{ color: 'var(--status-pending-text)' }}>{pendingCount}</h3>
@@ -138,13 +138,13 @@ const OrderList = () => {
                 </Col>
 
                 <Col xs={6} md={3}>
-                    <div className="p-3 p-sm-4 admin-kpi-card h-100">
+                    <div className="p-3 p-sm-4 admin-kpi-card h-100" style={{ borderRadius: '0' }}>
                         <div className="admin-kpi-bar" style={{ backgroundColor: '#3B82F6' }}></div>
                         <div className="d-flex justify-content-between align-items-start mb-3">
-                            <div className="d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'var(--status-progress-bg)', color: 'var(--status-progress-text)', fontSize: '1.15rem' }}>
+                            <div className="d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', borderRadius: '0', backgroundColor: 'var(--status-progress-bg)', color: 'var(--status-progress-text)', fontSize: '1.15rem' }}>
                                 <FontAwesomeIcon icon={faSpinner} />
                             </div>
-                            <span className="badge rounded-pill px-3 py-1 badge-status-progress" style={{ fontSize: '0.74rem' }}>In Sprint</span>
+                            <span className="badge px-3 py-1 badge-status-progress" style={{ fontSize: '0.74rem', borderRadius: '0' }}>In Sprint</span>
                         </div>
                         <span className="admin-kpi-label">IN PROGRESS</span>
                         <h3 className="fw-bold mb-0" style={{ color: 'var(--status-progress-text)' }}>{progressCount}</h3>
@@ -152,13 +152,13 @@ const OrderList = () => {
                 </Col>
 
                 <Col xs={6} md={3}>
-                    <div className="p-3 p-sm-4 admin-kpi-card h-100">
+                    <div className="p-3 p-sm-4 admin-kpi-card h-100" style={{ borderRadius: '0' }}>
                         <div className="admin-kpi-bar" style={{ backgroundColor: '#10B981' }}></div>
                         <div className="d-flex justify-content-between align-items-start mb-3">
-                            <div className="d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'var(--status-done-bg)', color: 'var(--status-done-text)', fontSize: '1.15rem' }}>
+                            <div className="d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', borderRadius: '0', backgroundColor: 'var(--status-done-bg)', color: 'var(--status-done-text)', fontSize: '1.15rem' }}>
                                 <FontAwesomeIcon icon={faCheckDouble} />
                             </div>
-                            <span className="badge rounded-pill px-3 py-1 badge-status-done" style={{ fontSize: '0.74rem' }}>Fulfilled</span>
+                            <span className="badge px-3 py-1 badge-status-done" style={{ fontSize: '0.74rem', borderRadius: '0' }}>Fulfilled</span>
                         </div>
                         <span className="admin-kpi-label">COMPLETED DELIVERIES</span>
                         <h3 className="fw-bold mb-0" style={{ color: 'var(--status-done-text)' }}>{doneCount}</h3>
@@ -166,8 +166,8 @@ const OrderList = () => {
                 </Col>
             </Row>
 
-            {/* Filter & Search Bar with Checked Pill Spacing */}
-            <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4 cp-card p-3.5" style={{ borderRadius: '24px' }}>
+            {/* Filter & Search Bar */}
+            <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4 cp-card p-3.5" style={{ borderRadius: '0' }}>
                 <div className="d-flex flex-wrap gap-2">
                     {['All', 'Pending', 'In Review', 'In Progress', 'Done'].map(st => {
                         const isActive = filterStatus === st;
@@ -177,6 +177,7 @@ const OrderList = () => {
                                 key={st}
                                 type="button"
                                 className={`admin-filter-pill ${isActive ? 'active' : ''}`}
+                                style={{ borderRadius: '0' }}
                                 onClick={() => setFilterStatus(st)}
                             >
                                 {st} <span style={{ opacity: isActive ? 0.9 : 0.75, fontSize: '0.76rem', marginLeft: '4px' }}>({count})</span>
@@ -186,13 +187,13 @@ const OrderList = () => {
                 </div>
 
                 <div className="input-group" style={{ maxWidth: '320px' }}>
-                    <span className="input-group-text cp-input border-end-0 px-3" style={{ borderRadius: '9999px 0 0 9999px', color: 'var(--cp-text-muted)' }}>
+                    <span className="input-group-text cp-input border-end-0 px-3" style={{ borderRadius: '0', color: 'var(--cp-text-muted)' }}>
                         <FontAwesomeIcon icon={faSearch} style={{ fontSize: '0.85rem' }} />
                     </span>
                     <input
                         type="text"
                         className="form-control form-control-sm cp-input border-start-0 py-2"
-                        style={{ borderRadius: '0 9999px 9999px 0' }}
+                        style={{ borderRadius: '0' }}
                         placeholder="Search client, service, email..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
@@ -201,14 +202,14 @@ const OrderList = () => {
             </div>
 
             {/* Inbound Orders Table Container */}
-            <div className="cp-card p-4 p-md-4.5" style={{ borderRadius: '24px' }}>
+            <div className="cp-card p-4 p-md-4.5" style={{ borderRadius: '0' }}>
                 <div className="d-flex justify-content-between align-items-center mb-3.5">
                     <div>
                         <h5 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)', letterSpacing: '-0.01em' }}>Live Incoming Client Orders</h5>
                         <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.82rem' }}>Update statuses to trigger live client portal notifications</small>
                     </div>
                     {filteredOrders.length > 0 && (
-                        <span className="badge rounded-pill px-3 py-1.5" style={{ backgroundColor: 'var(--cp-card-subtle)', color: 'var(--cp-text-muted)', border: '1px solid var(--cp-border)', fontSize: '0.78rem' }}>
+                        <span className="badge px-3 py-1.5" style={{ backgroundColor: 'var(--cp-card-subtle)', color: 'var(--cp-text-muted)', border: '1px solid var(--cp-border)', borderRadius: '0', fontSize: '0.78rem' }}>
                             Showing {filteredOrders.length} {filteredOrders.length === 1 ? 'record' : 'records'}
                         </span>
                     )}
@@ -216,7 +217,7 @@ const OrderList = () => {
 
                 {filteredOrders.length === 0 ? (
                     <div className="text-center py-5">
-                        <div className="d-inline-flex align-items-center justify-content-center mb-3" style={{ width: '52px', height: '52px', borderRadius: '50%', backgroundColor: 'var(--cp-card-subtle)', color: 'var(--cp-text-muted)' }}>
+                        <div className="d-inline-flex align-items-center justify-content-center mb-3" style={{ width: '52px', height: '52px', borderRadius: '0', backgroundColor: 'var(--cp-card-subtle)', color: 'var(--cp-text-muted)' }}>
                             <FontAwesomeIcon icon={faInbox} style={{ fontSize: '1.35rem' }} />
                         </div>
                         <p className="fw-semibold mb-0" style={{ color: 'var(--cp-text-muted)' }}>No booking requests found matching your filter criteria.</p>

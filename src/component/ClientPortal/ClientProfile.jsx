@@ -57,11 +57,12 @@ const ClientProfile = () => {
                             </div>
                             <div className="mt-2.5 mb-2">
                                 <span 
-                                    className="badge rounded-pill px-3.5 py-1.5 fw-semibold"
+                                    className="badge px-3.5 py-1.5 fw-semibold"
                                     style={{
                                         backgroundColor: 'var(--cp-primary-subtle)',
                                         color: 'var(--cp-primary-text)',
                                         border: '1px solid var(--cp-border)',
+                                        borderRadius: '0',
                                         fontSize: '0.8rem'
                                     }}
                                 >
@@ -76,7 +77,7 @@ const ClientProfile = () => {
                         </div>
 
                         {/* Account & Telemetry Details */}
-                        <div className="p-4 mb-4 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                        <div className="p-4 mb-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0' }}>
                             <span className="admin-kpi-label mb-3">ACCOUNT TELEMETRY & SLA STATUS</span>
                             
                             <div className="d-flex justify-content-between align-items-center mb-2.5 pb-2 border-bottom" style={{ borderColor: 'var(--cp-border)' }}>
@@ -103,10 +104,10 @@ const ClientProfile = () => {
                         </div>
 
                         {/* Security Session Details */}
-                        <div className="p-3.5 mb-4 rounded-4 d-flex align-items-center gap-3" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                        <div className="p-3.5 mb-4 d-flex align-items-center gap-3" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0' }}>
                             <div 
                                 className="d-flex align-items-center justify-content-center flex-shrink-0"
-                                style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)' }}
+                                style={{ width: '40px', height: '40px', borderRadius: '0', backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)' }}
                             >
                                 <FontAwesomeIcon icon={faLock} />
                             </div>
@@ -118,16 +119,16 @@ const ClientProfile = () => {
 
                         {/* Action Buttons */}
                         <div className="d-grid gap-2.5">
-                            <Link to="/client/book" className="btn rounded-pill py-2.5 text-white fw-semibold" style={{ backgroundColor: '#121417', borderColor: '#121417', fontSize: '0.88rem', boxShadow: '0 4px 14px rgba(0, 0, 0, 0.25)' }}>
+                            <Link to="/client/book" className="btn py-2.5 text-white fw-semibold" style={{ backgroundColor: '#121417', borderColor: '#121417', borderRadius: '0', fontSize: '0.88rem', boxShadow: '0 4px 14px rgba(0, 0, 0, 0.25)' }}>
                                 <FontAwesomeIcon icon={faShoppingCart} className="me-2" /> Book New Solution
                             </Link>
-                            <Link to="/client/bookings" className="btn btn-outline-secondary rounded-pill py-2.5 fw-semibold" style={{ borderColor: 'var(--cp-border)', color: 'var(--cp-text-main)', fontSize: '0.88rem' }}>
+                            <Link to="/client/bookings" className="btn btn-outline-secondary py-2.5 fw-semibold" style={{ borderColor: 'var(--cp-border)', color: 'var(--cp-text-main)', borderRadius: '0', fontSize: '0.88rem' }}>
                                 <FontAwesomeIcon icon={faCalendarCheck} className="me-2" /> View My Engagements ({bookings.length})
                             </Link>
                             <button 
                                 onClick={signOut} 
-                                className="btn btn-outline-danger rounded-pill py-2.5 fw-semibold" 
-                                style={{ fontSize: '0.88rem' }}
+                                className="btn btn-outline-danger py-2.5 fw-semibold" 
+                                style={{ fontSize: '0.88rem', borderRadius: '0' }}
                             >
                                 <FontAwesomeIcon icon={faSignOutAlt} className="me-2" /> Exit Session & Log Out
                             </button>

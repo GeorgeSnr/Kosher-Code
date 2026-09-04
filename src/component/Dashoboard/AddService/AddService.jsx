@@ -57,10 +57,11 @@ const AddService = ({ edit, setEdit, services }) => {
                     <div>
                         <div className="d-flex align-items-center gap-2 mb-1.5">
                             <span 
-                                className="badge rounded-pill px-3 py-1"
+                                className="badge px-3 py-1"
                                 style={{ 
                                     backgroundColor: 'var(--cp-primary-subtle)', 
                                     color: 'var(--cp-primary-text)',
+                                    borderRadius: '0',
                                     fontSize: '0.74rem',
                                     fontWeight: 700,
                                     letterSpacing: '0.04em',
@@ -81,8 +82,8 @@ const AddService = ({ edit, setEdit, services }) => {
                     {edit && setEdit && (
                         <button 
                             type="button"
-                            className="btn btn-outline-secondary rounded-pill px-4 py-2 d-inline-flex align-items-center gap-2"
-                            style={{ fontSize: '0.84rem', fontWeight: 600 }}
+                            className="btn btn-outline-secondary px-4 py-2 d-inline-flex align-items-center gap-2"
+                            style={{ fontSize: '0.84rem', fontWeight: 600, borderRadius: '0' }}
                             onClick={() => setEdit(null)}
                         >
                             <FontAwesomeIcon icon={faArrowLeft} /> Back to Catalog
@@ -162,15 +163,16 @@ const AddService = ({ edit, setEdit, services }) => {
                                     <div className="d-flex align-items-center gap-2">
                                         <label 
                                             htmlFor="upload-input" 
-                                            className="btn btn-sm btn-outline-primary rounded-pill px-3 py-1.5 mb-0"
-                                            style={{ fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer' }}
+                                            className="btn btn-sm btn-outline-primary px-3 py-1.5 mb-0"
+                                            style={{ fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer', borderRadius: '0' }}
                                         >
                                             Change Graphic
                                         </label>
                                         {imgURL && (
                                             <button 
                                                 type="button" 
-                                                className="btn btn-sm btn-outline-danger rounded-pill px-2.5 py-1"
+                                                className="btn btn-sm btn-outline-danger px-2.5 py-1"
+                                                style={{ borderRadius: '0' }}
                                                 onClick={() => setImgURL(null)}
                                                 title="Reset uploaded graphic"
                                             >
@@ -207,8 +209,8 @@ const AddService = ({ edit, setEdit, services }) => {
                         {edit && setEdit && (
                             <button 
                                 type="button"
-                                className="btn btn-outline-secondary rounded-pill px-4 py-2.5"
-                                style={{ fontWeight: 600, fontSize: '0.88rem' }}
+                                className="btn btn-outline-secondary px-4 py-2.5"
+                                style={{ fontWeight: 600, fontSize: '0.88rem', borderRadius: '0' }}
                                 onClick={() => setEdit(null)}
                             >
                                 Discard Changes
@@ -216,12 +218,13 @@ const AddService = ({ edit, setEdit, services }) => {
                         )}
                         <Button 
                             type="submit" 
-                            className="rounded-pill px-5 py-2.5 text-white d-inline-flex align-items-center gap-2 border-0"
+                            className="px-5 py-2.5 text-white d-inline-flex align-items-center gap-2 border-0"
                             style={{ 
                                 backgroundColor: '#121417', 
                                 fontWeight: 600, 
                                 fontSize: '0.88rem',
-                                letterSpacing: '0.01em'
+                                letterSpacing: '0.01em',
+                                borderRadius: '0'
                             }}
                         >
                             <FontAwesomeIcon icon={edit ? faCheckCircle : faPlusCircle} /> 

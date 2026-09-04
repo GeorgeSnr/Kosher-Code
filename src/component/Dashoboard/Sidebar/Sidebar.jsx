@@ -43,7 +43,7 @@ const Sidebar = ({ setTitle, onNavClick }) => {
                 <div 
                     className="p-2 text-center small fw-semibold"
                     style={{
-                        borderRadius: '4px',
+                        borderRadius: '0',
                         backgroundColor: admin ? '#FAF8FF' : '#F4F0FF',
                         color: '#7355F7',
                         border: '1px solid #E5E0FA',

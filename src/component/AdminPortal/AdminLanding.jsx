@@ -393,7 +393,7 @@ const AdminLanding = () => {
             <div className="ad-hero-banner mb-4">
                 <Row className="align-items-center g-3">
                     <Col lg={8} md={7}>
-                        <div className="d-inline-flex align-items-center gap-2 px-3 py-1 mb-2.5 rounded-pill ad-hero-badge">
+                        <div className="d-inline-flex align-items-center gap-2 px-3 py-1 mb-2.5 ad-hero-badge" style={{ borderRadius: '0' }}>
                             <FontAwesomeIcon icon={faShieldAlt} /> Superadmin Operations • Kampala HQ Desk
                         </div>
                         <h3 className="fw-bold mb-1.5 ad-hero-title">Enterprise Systems & Telemetry</h3>
@@ -408,7 +408,7 @@ const AdminLanding = () => {
                                     <span className="ad-pulse-dot" />
                                     <span className="ad-hub-label">Deployment Hub</span>
                                 </div>
-                                <span className="badge rounded-pill ad-hub-status-pill">
+                                <span className="badge ad-hub-status-pill" style={{ borderRadius: '0' }}>
                                     ● 100% Operational
                                 </span>
                             </div>
@@ -428,7 +428,7 @@ const AdminLanding = () => {
                                     <FontAwesomeIcon icon={faCheckCircle} className="text-success" style={{ fontSize: '0.8rem' }} />
                                     <span>SLA: <strong>99.9% Uptime</strong></span>
                                 </span>
-                                <span className="badge rounded-pill ad-hub-pill-tag">
+                                <span className="badge ad-hub-pill-tag" style={{ borderRadius: '0' }}>
                                     Production Live
                                 </span>
                             </div>
@@ -660,15 +660,15 @@ const AdminLanding = () => {
                             <Col lg={7} md={12}>
                                 <div className="d-flex align-items-center gap-2 mb-2">
                                     <span 
-                                        className="badge rounded-pill px-3 py-1"
-                                        style={{ backgroundColor: 'rgba(6, 114, 203, 0.12)', color: '#0672CB', fontSize: '0.74rem', fontWeight: 700 }}
+                                        className="badge px-3 py-1"
+                                        style={{ backgroundColor: 'rgba(6, 114, 203, 0.12)', color: '#0672CB', fontSize: '0.74rem', fontWeight: 700, borderRadius: '0' }}
                                     >
                                         <FontAwesomeIcon icon={faBolt} className="me-1" /> Active Sprint Cycle
                                     </span>
                                     {pendingJiraApprovals > 0 && (
                                         <span 
-                                            className="badge rounded-pill px-2.5 py-1 text-white"
-                                            style={{ backgroundColor: '#EF4444', fontSize: '0.72rem' }}
+                                            className="badge px-2.5 py-1 text-white"
+                                            style={{ backgroundColor: '#EF4444', fontSize: '0.72rem', borderRadius: '0' }}
                                         >
                                             <FontAwesomeIcon icon={faClock} className="me-1" /> {pendingJiraApprovals} Awaiting Sign-off
                                         </span>
@@ -688,11 +688,11 @@ const AdminLanding = () => {
                                         <span className="small fw-semibold text-muted">Sprint Resolution Velocity</span>
                                         <span className="small fw-bold text-primary">{donePts} / {totalPts} story pts ({sprintPct}%)</span>
                                     </div>
-                                    <div className="progress" style={{ height: '8px', borderRadius: '9999px', backgroundColor: 'rgba(0,0,0,0.06)' }}>
+                                    <div className="progress" style={{ height: '8px', borderRadius: '0', backgroundColor: 'rgba(0,0,0,0.06)' }}>
                                         <div 
                                             className="progress-bar" 
                                             role="progressbar" 
-                                            style={{ width: `${sprintPct}%`, backgroundColor: '#0672CB', borderRadius: '9999px' }}
+                                            style={{ width: `${sprintPct}%`, backgroundColor: '#0672CB', borderRadius: '0' }}
                                             aria-valuenow={sprintPct} 
                                             aria-valuemin="0" 
                                             aria-valuemax="100"
@@ -704,15 +704,15 @@ const AdminLanding = () => {
                             {/* Right Col: Stats & Quick Jump Buttons */}
                             <Col lg={5} md={12}>
                                 <div className="d-flex flex-wrap gap-2 mb-3">
-                                    <div className="p-2.5 rounded-3 bg-white border flex-grow-1 text-center">
+                                    <div className="p-2.5 bg-white border flex-grow-1 text-center" style={{ borderRadius: '0' }}>
                                         <div className="fw-bold fs-5 text-primary">{jiraTickets.length}</div>
                                         <small className="text-muted" style={{ fontSize: '0.72rem' }}>Total Issues</small>
                                     </div>
-                                    <div className="p-2.5 rounded-3 bg-white border flex-grow-1 text-center">
+                                    <div className="p-2.5 bg-white border flex-grow-1 text-center" style={{ borderRadius: '0' }}>
                                         <div className="fw-bold fs-5 text-warning">{openJiraCount}</div>
                                         <small className="text-muted" style={{ fontSize: '0.72rem' }}>In Development</small>
                                     </div>
-                                    <div className="p-2.5 rounded-3 bg-white border flex-grow-1 text-center">
+                                    <div className="p-2.5 bg-white border flex-grow-1 text-center" style={{ borderRadius: '0' }}>
                                         <div className="fw-bold fs-5 text-info">{teamMembers.length}</div>
                                         <small className="text-muted" style={{ fontSize: '0.72rem' }}>Onboarded Team</small>
                                     </div>
@@ -723,7 +723,7 @@ const AdminLanding = () => {
                                         <Button 
                                             variant="primary" 
                                             className="w-100 py-2 fw-bold d-inline-flex align-items-center justify-content-center gap-1.5"
-                                            style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '8px', fontSize: '0.82rem' }}
+                                            style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '0', fontSize: '0.82rem' }}
                                         >
                                             <FontAwesomeIcon icon={faTasks} /> Launch Kanban Board
                                         </Button>
@@ -732,7 +732,7 @@ const AdminLanding = () => {
                                         <Button 
                                             variant="outline-secondary" 
                                             className="py-2 px-3 fw-semibold d-inline-flex align-items-center justify-content-center gap-1.5"
-                                            style={{ fontSize: '0.82rem', borderRadius: '8px' }}
+                                            style={{ fontSize: '0.82rem', borderRadius: '0' }}
                                             title="Onboard Developers & Configure RBAC"
                                         >
                                             <FontAwesomeIcon icon={faUserShield} /> RBAC Studio
@@ -772,13 +772,13 @@ const AdminLanding = () => {
                                 <span>Status {filterStatus !== 'All' ? `(${filterStatus})` : ''}</span>
                                 <FontAwesomeIcon icon={faChevronDown} style={{ fontSize: '10px' }} />
                             </Dropdown.Toggle>
-                            <Dropdown.Menu style={{ borderRadius: '16px', border: '1px solid var(--cp-border)', padding: '6px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)' }}>
+                            <Dropdown.Menu style={{ borderRadius: '0', border: '1px solid var(--cp-border)', padding: '6px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)' }}>
                                 {['All', 'Pending', 'Active', 'Expired', 'In Review'].map(st => (
                                     <Dropdown.Item 
                                         key={st}
                                         onClick={() => setFilterStatus(st)}
                                         active={filterStatus === st}
-                                        style={{ borderRadius: '10px', fontSize: '0.82rem', fontWeight: 500, padding: '6px 14px' }}
+                                        style={{ borderRadius: '0', fontSize: '0.82rem', fontWeight: 500, padding: '6px 14px' }}
                                     >
                                         {st}
                                     </Dropdown.Item>
@@ -902,28 +902,28 @@ const AdminLanding = () => {
                                                     <Dropdown.Toggle as="button" className="ad-btn-dots">
                                                         <FontAwesomeIcon icon={faEllipsisH} />
                                                     </Dropdown.Toggle>
-                                                    <Dropdown.Menu style={{ borderRadius: '14px', border: '1px solid var(--cp-border)', padding: '6px', boxShadow: '0 8px 20px rgba(0,0,0,0.1)' }}>
+                                                    <Dropdown.Menu style={{ borderRadius: '0', border: '1px solid var(--cp-border)', padding: '6px', boxShadow: '0 8px 20px rgba(0,0,0,0.1)' }}>
                                                         <Dropdown.Item 
                                                             onClick={() => openOrderDetails(order)}
-                                                            style={{ borderRadius: '8px', fontSize: '0.82rem', fontWeight: 500 }}
+                                                            style={{ borderRadius: '0', fontSize: '0.82rem', fontWeight: 500 }}
                                                         >
                                                             <FontAwesomeIcon icon={faEye} className="me-2 text-primary" /> View Details
                                                         </Dropdown.Item>
                                                         <Dropdown.Item 
                                                             onClick={() => handleAction(order._id, 'Pending')}
-                                                            style={{ borderRadius: '8px', fontSize: '0.82rem' }}
+                                                            style={{ borderRadius: '0', fontSize: '0.82rem' }}
                                                         >
                                                             ● Mark as Pending
                                                         </Dropdown.Item>
                                                         <Dropdown.Item 
                                                             onClick={() => handleAction(order._id, 'Active')}
-                                                            style={{ borderRadius: '8px', fontSize: '0.82rem' }}
+                                                            style={{ borderRadius: '0', fontSize: '0.82rem' }}
                                                         >
                                                             ● Mark as Active
                                                         </Dropdown.Item>
                                                         <Dropdown.Item 
                                                             onClick={() => handleAction(order._id, 'Expired')}
-                                                            style={{ borderRadius: '8px', fontSize: '0.82rem' }}
+                                                            style={{ borderRadius: '0', fontSize: '0.82rem' }}
                                                         >
                                                             ● Mark as Expired
                                                         </Dropdown.Item>
@@ -931,7 +931,7 @@ const AdminLanding = () => {
                                                         <Dropdown.Item 
                                                             onClick={() => handleDelete(order._id)}
                                                             className="text-danger"
-                                                            style={{ borderRadius: '8px', fontSize: '0.82rem' }}
+                                                            style={{ borderRadius: '0', fontSize: '0.82rem' }}
                                                         >
                                                             <FontAwesomeIcon icon={faTrashAlt} className="me-2" /> Archive
                                                         </Dropdown.Item>
@@ -1090,11 +1090,12 @@ const AdminLanding = () => {
                                         <span className="ad-modal-field-label">Licensing / Pricing Tier</span>
                                         <div className="ad-modal-field-value">
                                             <span 
-                                                className="badge rounded-pill fw-semibold"
+                                                className="badge fw-semibold"
                                                 style={{ 
                                                     backgroundColor: 'var(--cp-primary-subtle)', 
                                                     color: 'var(--cp-primary-text)',
                                                     border: '1px solid var(--cp-border-highlight)',
+                                                    borderRadius: '0',
                                                     fontSize: '0.75rem',
                                                     padding: '4px 10px'
                                                 }}

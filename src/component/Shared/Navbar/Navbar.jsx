@@ -39,7 +39,7 @@ const NavBar = () => {
         toast(nextTheme === 'dark' ? '🌙 Dark Mode Activated' : '☀️ Light Mode Activated', {
             icon: nextTheme === 'dark' ? '🌙' : '☀️',
             style: {
-                borderRadius: '4px',
+                borderRadius: '0',
                 background: nextTheme === 'dark' ? '#1E293B' : '#FFFFFF',
                 color: nextTheme === 'dark' ? '#F8FAFC' : '#0F172A',
                 border: '1px solid ' + (nextTheme === 'dark' ? '#334155' : '#E2E8F0'),

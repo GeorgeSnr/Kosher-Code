@@ -339,8 +339,8 @@ const TicketManagement = () => {
                     <div className="d-flex align-items-center gap-2">
                         <Button 
                             variant="outline-light" 
-                            className="rounded-pill px-3 py-2 fw-semibold d-inline-flex align-items-center gap-2"
-                            style={{ fontSize: '0.84rem' }}
+                            className="px-3 py-2 fw-semibold d-inline-flex align-items-center gap-2"
+                            style={{ fontSize: '0.84rem', borderRadius: '0' }}
                             onClick={() => navigate('/admin/team-roles')}
                         >
                             <FontAwesomeIcon icon={faUserShield} /> Team & Roles (RBAC)
@@ -348,8 +348,8 @@ const TicketManagement = () => {
 
                         <Button 
                             variant="light" 
-                            className="rounded-pill px-4 py-2 fw-bold d-inline-flex align-items-center gap-2"
-                            style={{ fontSize: '0.84rem' }}
+                            className="px-4 py-2 fw-bold d-inline-flex align-items-center gap-2"
+                            style={{ fontSize: '0.84rem', borderRadius: '0' }}
                             onClick={() => setShowCreateModal(true)}
                         >
                             <FontAwesomeIcon icon={faPlus} className="text-primary" /> Create Ticket
@@ -360,8 +360,8 @@ const TicketManagement = () => {
                 {/* Active Sprint Bar inside Banner */}
                 {activeSprint && (
                     <div 
-                        className="mt-4 p-3 rounded-3 d-flex flex-wrap align-items-center justify-content-between gap-3"
-                        style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', border: '1px solid rgba(255, 255, 255, 0.15)' }}
+                        className="mt-4 p-3 d-flex flex-wrap align-items-center justify-content-between gap-3"
+                        style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', border: '1px solid rgba(255, 255, 255, 0.15)', borderRadius: '0' }}
                     >
                         <div className="d-flex align-items-center gap-3">
                             <div className="jira-pulse-dot" style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10B981' }} />
@@ -376,15 +376,15 @@ const TicketManagement = () => {
                         <div className="d-flex align-items-center gap-4">
                             <div className="d-flex align-items-center gap-2">
                                 <span className="small text-white-50" style={{ fontSize: '0.75rem' }}>Velocity:</span>
-                                <span className="badge bg-light text-dark fw-bold" style={{ fontSize: '0.75rem' }}>
+                                <span className="badge bg-light text-dark fw-bold" style={{ fontSize: '0.75rem', borderRadius: '0' }}>
                                     {completedPoints} / {totalPoints} pts ({sprintProgress}%)
                                 </span>
                             </div>
 
                             {pendingApprovalsCount > 0 && (
                                 <span 
-                                    className="badge rounded-pill px-2.5 py-1 text-white d-inline-flex align-items-center gap-1"
-                                    style={{ backgroundColor: '#EF4444', fontSize: '0.72rem', cursor: 'pointer' }}
+                                    className="badge px-2.5 py-1 text-white d-inline-flex align-items-center gap-1"
+                                    style={{ backgroundColor: '#EF4444', fontSize: '0.72rem', cursor: 'pointer', borderRadius: '0' }}
                                     onClick={() => setFilterApproval('Pending')}
                                     title="Click to filter tickets awaiting approval"
                                 >
@@ -435,8 +435,8 @@ const TicketManagement = () => {
                     <Button
                         variant="outline-secondary"
                         size="sm"
-                        className="rounded-pill px-3 py-1.5 fw-semibold d-inline-flex align-items-center gap-1.5"
-                        style={{ fontSize: '0.82rem', borderColor: 'var(--cp-border)' }}
+                        className="px-3 py-1.5 fw-semibold d-inline-flex align-items-center gap-1.5"
+                        style={{ fontSize: '0.82rem', borderColor: 'var(--cp-border)', borderRadius: '0' }}
                         onClick={handleExportCSV}
                     >
                         <FontAwesomeIcon icon={faFileExport} /> Export CSV
@@ -459,7 +459,7 @@ const TicketManagement = () => {
                                 type="text"
                                 size="sm"
                                 className="cp-input"
-                                style={{ paddingLeft: '36px', borderRadius: '9999px', fontSize: '0.84rem' }}
+                                style={{ paddingLeft: '36px', borderRadius: '0', fontSize: '0.84rem' }}
                                 placeholder="Search Key, Title, Tag..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -471,8 +471,8 @@ const TicketManagement = () => {
                     <Col lg={2} md={3} xs={6}>
                         <Form.Select
                             size="sm"
-                            className="cp-input rounded-pill"
-                            style={{ fontSize: '0.82rem' }}
+                            className="cp-input"
+                            style={{ fontSize: '0.82rem', borderRadius: '0' }}
                             value={filterAssignee}
                             onChange={(e) => setFilterAssignee(e.target.value)}
                         >
@@ -487,8 +487,8 @@ const TicketManagement = () => {
                     <Col lg={2} md={3} xs={6}>
                         <Form.Select
                             size="sm"
-                            className="cp-input rounded-pill"
-                            style={{ fontSize: '0.82rem' }}
+                            className="cp-input"
+                            style={{ fontSize: '0.82rem', borderRadius: '0' }}
                             value={filterType}
                             onChange={(e) => setFilterType(e.target.value)}
                         >
@@ -505,8 +505,8 @@ const TicketManagement = () => {
                     <Col lg={2} md={3} xs={6}>
                         <Form.Select
                             size="sm"
-                            className="cp-input rounded-pill"
-                            style={{ fontSize: '0.82rem' }}
+                            className="cp-input"
+                            style={{ fontSize: '0.82rem', borderRadius: '0' }}
                             value={filterPriority}
                             onChange={(e) => setFilterPriority(e.target.value)}
                         >
@@ -522,8 +522,8 @@ const TicketManagement = () => {
                     <Col lg={2} md={3} xs={6}>
                         <Form.Select
                             size="sm"
-                            className="cp-input rounded-pill"
-                            style={{ fontSize: '0.82rem' }}
+                            className="cp-input"
+                            style={{ fontSize: '0.82rem', borderRadius: '0' }}
                             value={filterApproval}
                             onChange={(e) => setFilterApproval(e.target.value)}
                         >
@@ -660,11 +660,12 @@ const TicketManagement = () => {
                                             </td>
                                             <td className="py-3 px-3">
                                                 <span 
-                                                    className="badge rounded-pill px-2.5 py-1 small"
+                                                    className="badge px-2.5 py-1 small"
                                                     style={{ 
                                                         backgroundColor: 'var(--cp-card-subtle, #F1F5F9)', 
                                                         color: 'var(--cp-text-main, #0F172A)', 
-                                                        border: '1px solid var(--cp-border, #E2E8F0)' 
+                                                        border: '1px solid var(--cp-border, #E2E8F0)',
+                                                        borderRadius: '0'
                                                     }}
                                                 >
                                                     {ticket.status}
@@ -722,7 +723,7 @@ const TicketManagement = () => {
                         <Button 
                             variant="primary" 
                             className="px-4 fw-semibold"
-                            style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '8px', fontSize: '0.84rem' }}
+                            style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '0', fontSize: '0.84rem' }}
                             onClick={() => setShowSprintModal(true)}
                         >
                             <FontAwesomeIcon icon={faPlus} className="me-1" /> Create Sprint
@@ -737,15 +738,19 @@ const TicketManagement = () => {
                         return (
                             <div 
                                 key={sprint.id} 
-                                className="p-4 mb-4 rounded-4" 
+                                className="p-4 mb-4" 
                                 style={{ 
                                     backgroundColor: 'var(--cp-card-subtle, #F8FAFC)', 
-                                    border: '1px solid var(--cp-border, #E2E8F0)' 
+                                    border: '1px solid var(--cp-border, #E2E8F0)',
+                                    borderRadius: '0'
                                 }}
                             >
                                 <div className="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
                                     <div className="d-flex align-items-center gap-2">
-                                        <span className={`badge rounded-pill px-3 py-1 ${sprint.status === 'active' ? 'bg-success text-white' : 'bg-secondary text-white'}`}>
+                                        <span 
+                                            className={`badge px-3 py-1 ${sprint.status === 'active' ? 'bg-success text-white' : 'bg-secondary text-white'}`}
+                                            style={{ borderRadius: '0' }}
+                                        >
                                             {sprint.status === 'active' ? 'Active Sprint' : 'Planned Sprint'}
                                         </span>
                                         <h5 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>
@@ -761,7 +766,8 @@ const TicketManagement = () => {
                                             <Button 
                                                 variant="outline-success" 
                                                 size="sm" 
-                                                className="rounded-pill px-3 fw-bold"
+                                                className="px-3 fw-bold"
+                                                style={{ borderRadius: '0' }}
                                                 onClick={() => handleCompleteSprint(sprint.id)}
                                             >
                                                 <FontAwesomeIcon icon={faCheckDouble} /> Complete Sprint
@@ -770,7 +776,8 @@ const TicketManagement = () => {
                                             <Button 
                                                 variant="outline-primary" 
                                                 size="sm" 
-                                                className="rounded-pill px-3 fw-bold"
+                                                className="px-3 fw-bold"
+                                                style={{ borderRadius: '0' }}
                                                 onClick={() => {
                                                     updateSprint(sprint.id, { status: 'active' });
                                                     setSprints(getStoredSprints());
@@ -794,11 +801,12 @@ const TicketManagement = () => {
                                         return (
                                             <div 
                                                 key={t.id} 
-                                                className="d-flex align-items-center justify-content-between p-2.5 rounded-3 border"
+                                                className="d-flex align-items-center justify-content-between p-2.5 border"
                                                 style={{ 
                                                     cursor: 'pointer',
                                                     backgroundColor: 'var(--cp-card-bg, #FFFFFF)',
-                                                    borderColor: 'var(--cp-border, #E2E8F0)'
+                                                    borderColor: 'var(--cp-border, #E2E8F0)',
+                                                    borderRadius: '0'
                                                 }}
                                                 onClick={() => handleOpenTicket(t)}
                                             >
@@ -808,11 +816,12 @@ const TicketManagement = () => {
                                                 </div>
                                                 <div className="d-flex align-items-center gap-3">
                                                     <span 
-                                                        className="badge rounded-pill small"
+                                                        className="badge small"
                                                         style={{ 
                                                             backgroundColor: 'var(--cp-card-subtle, #F1F5F9)', 
                                                             color: 'var(--cp-text-main, #0F172A)', 
-                                                            border: '1px solid var(--cp-border, #E2E8F0)' 
+                                                            border: '1px solid var(--cp-border, #E2E8F0)',
+                                                            borderRadius: '0'
                                                         }}
                                                     >
                                                         {t.status}
@@ -857,8 +866,8 @@ const TicketManagement = () => {
                             return (
                                 <Col lg={6} key={member.id}>
                                     <div 
-                                        className="p-3.5 rounded-4" 
-                                        style={{ backgroundColor: 'var(--cp-card-subtle, #F8FAFC)', border: '1px solid var(--cp-border, #E2E8F0)' }}
+                                        className="p-3.5" 
+                                        style={{ backgroundColor: 'var(--cp-card-subtle, #F8FAFC)', border: '1px solid var(--cp-border, #E2E8F0)', borderRadius: '0' }}
                                     >
                                         <div className="d-flex align-items-center justify-content-between mb-2">
                                             <div className="d-flex align-items-center gap-2.5">
@@ -873,7 +882,7 @@ const TicketManagement = () => {
                                                 </div>
                                             </div>
                                             <div className="text-end">
-                                                <span className="badge rounded-pill bg-primary text-white small">
+                                                <span className="badge bg-primary text-white small" style={{ borderRadius: '0' }}>
                                                     {assignedPoints} story pts
                                                 </span>
                                                 <small className="text-muted d-block mt-0.5" style={{ fontSize: '0.72rem' }}>
@@ -885,7 +894,7 @@ const TicketManagement = () => {
                                         <ProgressBar 
                                             now={memberProgress} 
                                             variant={memberProgress === 100 ? 'success' : 'primary'} 
-                                            style={{ height: '6px', borderRadius: '9999px' }}
+                                            style={{ height: '6px', borderRadius: '0' }}
                                             className="mt-2 mb-1" 
                                         />
                                         <div className="d-flex justify-content-between text-muted small" style={{ fontSize: '0.72rem' }}>
@@ -966,14 +975,14 @@ const TicketManagement = () => {
                         </div>
                     </Modal.Body>
                     <Modal.Footer className="border-0 px-4 pb-4 pt-1">
-                        <Button variant="secondary" className="px-4" style={{ borderRadius: '8px' }} onClick={() => setShowSprintModal(false)}>
+                        <Button variant="secondary" className="px-4" style={{ borderRadius: '0' }} onClick={() => setShowSprintModal(false)}>
                             Cancel
                         </Button>
                         <Button 
                             type="submit" 
                             variant="primary" 
                             className="px-4 fw-bold"
-                            style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '8px' }}
+                            style={{ backgroundColor: '#0672CB', borderColor: '#0672CB', borderRadius: '0' }}
                         >
                             Create Sprint
                         </Button>

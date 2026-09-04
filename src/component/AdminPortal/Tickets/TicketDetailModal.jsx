@@ -213,8 +213,8 @@ const TicketDetailModal = ({
             <Modal.Header closeButton className="border-0 pb-0 px-4 pt-4">
                 <div className="d-flex align-items-center gap-2 flex-wrap">
                     <span 
-                        className="badge rounded-pill px-3 py-1.5 d-inline-flex align-items-center gap-1.5"
-                        style={{ backgroundColor: `${typeMeta.color}1A`, color: typeMeta.color, fontSize: '0.78rem', fontWeight: 700 }}
+                        className="badge px-3 py-1.5 d-inline-flex align-items-center gap-1.5"
+                        style={{ backgroundColor: `${typeMeta.color}1A`, color: typeMeta.color, fontSize: '0.78rem', fontWeight: 700, borderRadius: '0' }}
                     >
                         <FontAwesomeIcon icon={typeMeta.icon} />
                         {type}
@@ -256,7 +256,7 @@ const TicketDetailModal = ({
                                 as="textarea"
                                 rows={4}
                                 className="cp-input"
-                                style={{ borderRadius: '12px', fontSize: '0.88rem', lineHeight: 1.6 }}
+                                style={{ borderRadius: '0', fontSize: '0.88rem', lineHeight: 1.6 }}
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                                 onBlur={() => {
@@ -267,7 +267,7 @@ const TicketDetailModal = ({
                         </div>
 
                         {/* Subtasks / Checklist */}
-                        <div className="mb-4 p-3.5 rounded-3" style={{ backgroundColor: 'var(--cp-card-subtle, #F8FAFC)', border: '1px solid var(--cp-border-subtle, rgba(0,0,0,0.06))' }}>
+                        <div className="mb-4 p-3.5" style={{ backgroundColor: 'var(--cp-card-subtle, #F8FAFC)', border: '1px solid var(--cp-border-subtle, rgba(0,0,0,0.06))', borderRadius: '0' }}>
                             <div className="d-flex justify-content-between align-items-center mb-2">
                                 <span className="fw-bold small text-uppercase" style={{ color: 'var(--cp-text-main, #0F172A)' }}>
                                     Subtasks & Acceptance Criteria ({completedSubtasks}/{totalSubtasks})
@@ -280,7 +280,7 @@ const TicketDetailModal = ({
                                     now={progressPercent} 
                                     variant={progressPercent === 100 ? 'success' : 'primary'} 
                                     className="mb-3" 
-                                    style={{ height: '6px', borderRadius: '9999px' }} 
+                                    style={{ height: '6px', borderRadius: '0' }} 
                                 />
                             )}
 
@@ -320,7 +320,8 @@ const TicketDetailModal = ({
                                 <Form.Control
                                     type="text"
                                     size="sm"
-                                    className="cp-input rounded-pill"
+                                    className="cp-input"
+                                    style={{ borderRadius: '0' }}
                                     placeholder="+ Add a subtask / acceptance criterion..."
                                     value={newSubtaskTitle}
                                     onChange={(e) => setNewSubtaskTitle(e.target.value)}
@@ -329,7 +330,8 @@ const TicketDetailModal = ({
                                     type="submit" 
                                     size="sm" 
                                     variant="primary" 
-                                    className="rounded-pill px-3 fw-semibold"
+                                    className="px-3 fw-semibold"
+                                    style={{ borderRadius: '0' }}
                                     disabled={!newSubtaskTitle.trim()}
                                 >
                                     Add
@@ -342,14 +344,16 @@ const TicketDetailModal = ({
                             <div className="d-flex gap-2 mb-3 border-bottom pb-2">
                                 <button
                                     type="button"
-                                    className={`btn btn-sm rounded-pill px-3 fw-semibold border-0 ${activeTab === 'comments' ? 'btn-primary' : 'btn-light text-muted'}`}
+                                    className={`btn btn-sm px-3 fw-semibold border-0 ${activeTab === 'comments' ? 'btn-primary' : 'btn-light text-muted'}`}
+                                    style={{ borderRadius: '0' }}
                                     onClick={() => setActiveTab('comments')}
                                 >
                                     <FontAwesomeIcon icon={faCommentAlt} className="me-1.5" /> Comments ({ticket.comments?.length || 0})
                                 </button>
                                 <button
                                     type="button"
-                                    className={`btn btn-sm rounded-pill px-3 fw-semibold border-0 ${activeTab === 'activity' ? 'btn-primary' : 'btn-light text-muted'}`}
+                                    className={`btn btn-sm px-3 fw-semibold border-0 ${activeTab === 'activity' ? 'btn-primary' : 'btn-light text-muted'}`}
+                                    style={{ borderRadius: '0' }}
                                     onClick={() => setActiveTab('activity')}
                                 >
                                     <FontAwesomeIcon icon={faHistory} className="me-1.5" /> Activity History ({ticket.activity?.length || 0})
@@ -373,7 +377,7 @@ const TicketDetailModal = ({
                                                     as="textarea"
                                                     rows={2}
                                                     className="cp-input"
-                                                    style={{ borderRadius: '12px', fontSize: '0.85rem' }}
+                                                    style={{ borderRadius: '0', fontSize: '0.85rem' }}
                                                     placeholder="Write a comment, tag team members or add update..."
                                                     value={newCommentText}
                                                     onChange={(e) => setNewCommentText(e.target.value)}
@@ -383,7 +387,8 @@ const TicketDetailModal = ({
                                                         type="submit" 
                                                         size="sm" 
                                                         variant="primary" 
-                                                        className="rounded-pill px-3 fw-semibold d-inline-flex align-items-center gap-1.5"
+                                                        className="px-3 fw-semibold d-inline-flex align-items-center gap-1.5"
+                                                        style={{ borderRadius: '0' }}
                                                         disabled={!newCommentText.trim()}
                                                     >
                                                         <FontAwesomeIcon icon={faPaperPlane} /> Post Comment
@@ -405,8 +410,8 @@ const TicketDetailModal = ({
                                                             {cm.authorName}
                                                         </span>
                                                         <span 
-                                                            className="badge rounded-pill px-2 py-0.5" 
-                                                            style={{ backgroundColor: 'var(--cp-primary-subtle, rgba(6,114,203,0.1))', color: 'var(--cp-primary, #0672CB)', fontSize: '0.68rem' }}
+                                                            className="badge px-2 py-0.5" 
+                                                            style={{ backgroundColor: 'var(--cp-primary-subtle, rgba(6,114,203,0.1))', color: 'var(--cp-primary, #0672CB)', fontSize: '0.68rem', borderRadius: '0' }}
                                                         >
                                                             {cm.authorRole || 'Member'}
                                                         </span>
@@ -449,7 +454,7 @@ const TicketDetailModal = ({
 
                     {/* RIGHT COLUMN: Status, Approvals, Assignee, Sprint, Priority, Dates, Labels */}
                     <Col lg={4}>
-                        <div className="p-3.5 rounded-3" style={{ backgroundColor: 'var(--cp-card-subtle, #F8FAFC)', border: '1px solid var(--cp-border-subtle, rgba(0,0,0,0.06))' }}>
+                        <div className="p-3.5" style={{ backgroundColor: 'var(--cp-card-subtle, #F8FAFC)', border: '1px solid var(--cp-border-subtle, rgba(0,0,0,0.06))', borderRadius: '0' }}>
                             {/* Status Transition Selector */}
                             <div className="mb-3.5">
                                 <label className="fw-bold small text-muted text-uppercase mb-1.5 d-block">
@@ -459,7 +464,7 @@ const TicketDetailModal = ({
                                     value={status}
                                     onChange={(e) => handleStatusTransition(e.target.value)}
                                     className="cp-input fw-semibold"
-                                    style={{ borderRadius: '10px' }}
+                                    style={{ borderRadius: '0' }}
                                 >
                                     <option value="Backlog">Backlog</option>
                                     <option value="To Do">To Do</option>
@@ -471,7 +476,7 @@ const TicketDetailModal = ({
                             </div>
 
                             {/* APPROVAL WORKFLOW PANEL */}
-                            <div className="mb-4 p-3 rounded-3" style={{ backgroundColor: 'var(--cp-card-bg, #FFFFFF)', border: '1px solid var(--cp-border, #E2E8F0)' }}>
+                            <div className="mb-4 p-3" style={{ backgroundColor: 'var(--cp-card-bg, #FFFFFF)', border: '1px solid var(--cp-border, #E2E8F0)', borderRadius: '0' }}>
                                 <div className="d-flex align-items-center justify-content-between mb-2">
                                     <span className="fw-bold small text-uppercase d-flex align-items-center gap-1.5" style={{ color: 'var(--cp-text-main)' }}>
                                         <FontAwesomeIcon icon={faShieldAlt} className="text-primary" /> Approval Workflow
@@ -496,7 +501,7 @@ const TicketDetailModal = ({
                                         </div>
 
                                         {ticket.approvalWorkflow.status === 'Approved' && (
-                                            <div className="small text-success mb-2 p-2 rounded" style={{ backgroundColor: 'rgba(16,185,129,0.08)', fontSize: '0.76rem' }}>
+                                            <div className="small text-success mb-2 p-2" style={{ backgroundColor: 'rgba(16,185,129,0.08)', fontSize: '0.76rem', borderRadius: '0' }}>
                                                 <div>Signed off by <strong>{ticket.approvalWorkflow.approvedBy}</strong></div>
                                                 {ticket.approvalWorkflow.approvalNotes && <div className="mt-1 font-italic">"{ticket.approvalWorkflow.approvalNotes}"</div>}
                                             </div>
@@ -507,8 +512,8 @@ const TicketDetailModal = ({
                                             <Button
                                                 size="sm"
                                                 variant="success"
-                                                className="w-100 rounded-pill fw-semibold d-inline-flex align-items-center justify-content-center gap-1"
-                                                style={{ fontSize: '0.75rem' }}
+                                                className="w-100 fw-semibold d-inline-flex align-items-center justify-content-center gap-1"
+                                                style={{ fontSize: '0.75rem', borderRadius: '0' }}
                                                 onClick={() => handleApprovalAction('Approved')}
                                             >
                                                 <FontAwesomeIcon icon={faCheckCircle} /> Approve
@@ -516,8 +521,8 @@ const TicketDetailModal = ({
                                             <Button
                                                 size="sm"
                                                 variant="outline-danger"
-                                                className="w-100 rounded-pill fw-semibold d-inline-flex align-items-center justify-content-center gap-1"
-                                                style={{ fontSize: '0.75rem' }}
+                                                className="w-100 fw-semibold d-inline-flex align-items-center justify-content-center gap-1"
+                                                style={{ fontSize: '0.75rem', borderRadius: '0' }}
                                                 onClick={() => handleApprovalAction('Changes Requested')}
                                             >
                                                 <FontAwesomeIcon icon={faTimesCircle} /> Request Changes
@@ -539,7 +544,7 @@ const TicketDetailModal = ({
                                         handleSaveField('assigneeId', e.target.value);
                                     }}
                                     className="cp-input"
-                                    style={{ borderRadius: '10px', fontSize: '0.85rem' }}
+                                    style={{ borderRadius: '0', fontSize: '0.85rem' }}
                                 >
                                     <option value="">Unassigned</option>
                                     {teamMembers.map(m => (
@@ -551,7 +556,7 @@ const TicketDetailModal = ({
 
                                 {/* Assignee Notification Dispatch Card */}
                                 {currentAssignee && (
-                                    <div className="p-3 mt-2 rounded-3" style={{ backgroundColor: 'var(--cp-card-bg, #FFFFFF)', border: '1px solid var(--cp-border, #E2E8F0)' }}>
+                                    <div className="p-3 mt-2" style={{ backgroundColor: 'var(--cp-card-bg, #FFFFFF)', border: '1px solid var(--cp-border, #E2E8F0)', borderRadius: '0' }}>
                                         <div className="d-flex align-items-center gap-2.5 mb-2">
                                             <img 
                                                 src={currentAssignee.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80'} 
@@ -573,8 +578,8 @@ const TicketDetailModal = ({
                                             <Button
                                                 size="sm"
                                                 variant="outline-primary"
-                                                className="rounded-pill w-100 py-1 fw-semibold d-inline-flex align-items-center justify-content-center gap-1.5"
-                                                style={{ fontSize: '0.75rem' }}
+                                                className="w-100 py-1 fw-semibold d-inline-flex align-items-center justify-content-center gap-1.5"
+                                                style={{ fontSize: '0.75rem', borderRadius: '0' }}
                                                 onClick={handleSendAssignmentEmail}
                                                 title={`Send assignment notification email to ${currentAssignee.email}`}
                                             >
@@ -587,7 +592,7 @@ const TicketDetailModal = ({
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                     className="jira-whatsapp-btn w-100 justify-content-center py-1 text-center"
-                                                    style={{ fontSize: '0.75rem' }}
+                                                    style={{ fontSize: '0.75rem', borderRadius: '0' }}
                                                     title="Notify on WhatsApp"
                                                 >
                                                     <FontAwesomeIcon icon={faWhatsapp} /> Notify on WhatsApp
@@ -596,8 +601,8 @@ const TicketDetailModal = ({
                                                 <Button
                                                     size="sm"
                                                     variant="outline-secondary"
-                                                    className="rounded-pill w-100 py-1 fw-semibold d-inline-flex align-items-center justify-content-center gap-1.5"
-                                                    style={{ fontSize: '0.74rem' }}
+                                                    className="w-100 py-1 fw-semibold d-inline-flex align-items-center justify-content-center gap-1.5"
+                                                    style={{ fontSize: '0.74rem', borderRadius: '0' }}
                                                     onClick={() => {
                                                         const text = `*Kosher Code Jira Ticket Assignment*\nAssignee: ${currentAssignee.name}\nTicket: ${ticket.key} - ${ticket.title}\nPriority: ${ticket.priority}\nStatus: ${ticket.status}\nLink: ${window.location.origin}/admin/tickets`;
                                                         navigator.clipboard.writeText(text);
@@ -624,7 +629,7 @@ const TicketDetailModal = ({
                                         handleSaveField('reporterId', e.target.value);
                                     }}
                                     className="cp-input"
-                                    style={{ borderRadius: '10px', fontSize: '0.85rem' }}
+                                    style={{ borderRadius: '0', fontSize: '0.85rem' }}
                                 >
                                     {teamMembers.map(m => (
                                         <option key={m.id} value={m.id}>
@@ -646,7 +651,7 @@ const TicketDetailModal = ({
                                         handleSaveField('sprintId', e.target.value);
                                     }}
                                     className="cp-input"
-                                    style={{ borderRadius: '10px', fontSize: '0.85rem' }}
+                                    style={{ borderRadius: '0', fontSize: '0.85rem' }}
                                 >
                                     <option value="">Backlog (Unscheduled)</option>
                                     {sprints.map(sp => (
@@ -670,7 +675,7 @@ const TicketDetailModal = ({
                                             handleSaveField('priority', e.target.value);
                                         }}
                                         className="cp-input"
-                                        style={{ borderRadius: '10px', fontSize: '0.82rem' }}
+                                        style={{ borderRadius: '0', fontSize: '0.82rem' }}
                                     >
                                         <option value="Highest">Highest</option>
                                         <option value="High">High</option>
@@ -691,7 +696,7 @@ const TicketDetailModal = ({
                                             handleSaveField('storyPoints', pts);
                                         }}
                                         className="cp-input"
-                                        style={{ borderRadius: '10px', fontSize: '0.82rem' }}
+                                        style={{ borderRadius: '0', fontSize: '0.82rem' }}
                                     >
                                         {[1, 2, 3, 5, 8, 13, 21].map(pt => (
                                             <option key={pt} value={pt}>{pt} points</option>
@@ -713,7 +718,7 @@ const TicketDetailModal = ({
                                         handleSaveField('dueDate', e.target.value);
                                     }}
                                     className="cp-input"
-                                    style={{ borderRadius: '10px', fontSize: '0.85rem' }}
+                                    style={{ borderRadius: '0', fontSize: '0.85rem' }}
                                 />
                             </div>
 
@@ -741,7 +746,7 @@ const TicketDetailModal = ({
                                         type="text"
                                         size="sm"
                                         className="cp-input"
-                                        style={{ borderRadius: '8px' }}
+                                        style={{ borderRadius: '0' }}
                                         placeholder="Add tag and hit Enter..."
                                         value={newTag}
                                         onChange={(e) => setNewTag(e.target.value)}
@@ -754,7 +759,7 @@ const TicketDetailModal = ({
                                 variant="outline-danger"
                                 size="sm"
                                 className="w-100 fw-semibold d-inline-flex align-items-center justify-content-center gap-2"
-                                style={{ borderRadius: '8px' }}
+                                style={{ borderRadius: '0' }}
                                 onClick={handleDelete}
                             >
                                 <FontAwesomeIcon icon={faTrashAlt} /> Archive / Delete Ticket
@@ -768,7 +773,7 @@ const TicketDetailModal = ({
                 <Button 
                     variant="secondary" 
                     className="px-4 fw-semibold"
-                    style={{ borderRadius: '8px' }}
+                    style={{ borderRadius: '0' }}
                     onClick={onHide}
                 >
                     Close

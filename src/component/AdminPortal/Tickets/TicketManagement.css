@@ -11,7 +11,7 @@
 /* Header Banner */
 .jira-hero-banner {
     background: linear-gradient(135deg, #004B87 0%, #0672CB 60%, #0076CE 100%);
-    border-radius: 14px;
+    border-radius: 0 !important;
     padding: 24px 28px;
     color: #FFFFFF;
     box-shadow: 0 10px 25px -5px rgba(6, 114, 203, 0.25);
@@ -34,7 +34,7 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
     padding: 4px 12px;
-    border-radius: 9999px;
+    border-radius: 0 !important;
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -42,7 +42,7 @@
 
 /* Tab Navigation */
 .jira-tab-btn {
-    border-radius: 9999px;
+    border-radius: 0 !important;
     padding: 9px 20px;
     font-size: 0.84rem;
     font-weight: 600;
@@ -92,7 +92,7 @@
     min-width: 250px;
     background-color: var(--cp-card-subtle, #F8FAFC);
     border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.06));
-    border-radius: 12px;
+    border-radius: 0 !important;
     display: flex;
     flex-direction: column;
     max-height: 82vh;
@@ -130,7 +130,7 @@
     font-size: 0.75rem;
     font-weight: 700;
     padding: 2px 8px;
-    border-radius: 9999px;
+    border-radius: 0 !important;
     border: 1px solid var(--cp-border, #E2E8F0);
 }
 
@@ -154,7 +154,7 @@
 /* Kanban Ticket Card */
 .jira-card {
     background-color: var(--cp-card-bg, #FFFFFF);
-    border-radius: 10px;
+    border-radius: 0 !important;
     border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.07));
     padding: 14px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
@@ -189,8 +189,7 @@
     left: 0;
     bottom: 0;
     width: 4px;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-radius: 0;
 }
 
 .jira-card-header {
@@ -237,7 +236,7 @@
     font-size: 0.7rem;
     font-weight: 600;
     padding: 2px 8px;
-    border-radius: 9999px;
+    border-radius: 0 !important;
     background-color: var(--cp-card-subtle, #F1F5F9);
     color: var(--cp-text-muted, #64748B);
     border: 1px solid var(--cp-border, #E2E8F0);
@@ -264,7 +263,7 @@
     font-size: 0.72rem;
     font-weight: 700;
     padding: 2px 7px;
-    border-radius: 9999px;
+    border-radius: 0 !important;
     border: 1px solid var(--cp-border, #E2E8F0);
     display: inline-flex;
     align-items: center;
@@ -300,7 +299,7 @@
     font-size: 0.7rem;
     font-weight: 700;
     padding: 2px 8px;
-    border-radius: 9999px;
+    border-radius: 0 !important;
     display: inline-flex;
     align-items: center;
     gap: 4px;
@@ -313,7 +312,7 @@
     font-size: 0.7rem;
     font-weight: 700;
     padding: 2px 8px;
-    border-radius: 9999px;
+    border-radius: 0 !important;
     display: inline-flex;
     align-items: center;
     gap: 4px;
@@ -326,7 +325,7 @@
     font-size: 0.7rem;
     font-weight: 700;
     padding: 2px 8px;
-    border-radius: 9999px;
+    border-radius: 0 !important;
     display: inline-flex;
     align-items: center;
     gap: 4px;
@@ -364,7 +363,7 @@
 .jira-modal-content {
     background-color: var(--cp-card-bg, #FFFFFF);
     color: var(--cp-text-main, #0F172A);
-    border-radius: 16px;
+    border-radius: 0 !important;
     border: 1px solid var(--cp-border, #E2E8F0);
     overflow: hidden;
 }
@@ -413,7 +412,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px 14px;
-    border-radius: 8px;
+    border-radius: 0 !important;
     background-color: var(--cp-card-subtle, #F8FAFC);
     border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.05));
     transition: background-color 0.15s ease;
@@ -434,7 +433,7 @@
 /* Activity & Comments */
 .comment-bubble {
     background-color: var(--cp-card-subtle, #F8FAFC);
-    border-radius: 10px;
+    border-radius: 0 !important;
     padding: 12px 16px;
     border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.05));
     margin-bottom: 12px;
@@ -451,7 +450,7 @@
     font-size: 0.8rem;
     font-weight: 600;
     padding: 6px 14px;
-    border-radius: 9999px;
+    border-radius: 0 !important;
     border: 1px solid var(--cp-border, #CBD5E1);
     background-color: var(--cp-card-bg, #FFFFFF);
     color: var(--cp-text-muted, #64748B);
@@ -476,7 +475,7 @@
     font-size: 0.74rem;
     font-weight: 700;
     padding: 5px 12px;
-    border-radius: 9999px;
+    border-radius: 0 !important;
     border: none;
     display: inline-flex;
     align-items: center;

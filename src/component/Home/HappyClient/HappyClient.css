@@ -19,7 +19,7 @@
 
 .ourValueDetails {
     background-color: var(--site-card-bg, #FFFFFF);
-    border-radius: 12px;
+    border-radius: 0;
     border: 1px solid var(--site-border, #E2E8F0);
     box-shadow: var(--site-card-shadow, 0 1px 3px rgba(0, 0, 0, 0.04));
     padding: 2rem 1.5rem;
@@ -40,7 +40,7 @@
     justify-content: center;
     width: 50px;
     height: 50px;
-    border-radius: 10px;
+    border-radius: 0;
     background-color: var(--site-primary-subtle, rgba(6, 114, 203, 0.08));
     color: var(--site-primary, #0672CB);
     border: 1px solid var(--site-border, #E2E8F0);

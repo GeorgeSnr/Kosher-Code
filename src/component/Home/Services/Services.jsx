@@ -56,8 +56,9 @@ const Services = () => {
                     return (
                         <button
                             key={idx}
-                            className="btn btn-sm px-3.5 py-1.5 m-1 rounded-pill"
+                            className="btn btn-sm px-3.5 py-1.5 m-1"
                             style={{
+                                borderRadius: '0',
                                 fontWeight: 600,
                                 fontSize: '0.82rem',
                                 transition: 'all 0.18s ease',

@@ -22,7 +22,7 @@
     position: relative;
     height: 60px;
     width: 60px;
-    border-radius: 10px;
+    border-radius: 0;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     background-color: var(--site-card-subtle, #F8FAFC);
     border: 1px solid var(--site-border, #E2E8F0);
@@ -57,7 +57,7 @@
 .pricingCard {
     background-color: var(--site-card-bg, #FFFFFF);
     border: 1px solid var(--site-border, #E2E8F0);
-    border-radius: 12px;
+    border-radius: 0;
     padding: 2rem 1.75rem;
     box-shadow: var(--site-card-shadow, 0 1px 3px rgba(0, 0, 0, 0.04));
     transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
@@ -92,7 +92,7 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
     padding: 3px 12px;
-    border-radius: 9999px;
+    border-radius: 0;
     box-shadow: 0 2px 8px rgba(6, 114, 203, 0.3);
 }
 
@@ -105,7 +105,7 @@
 .plan-tier-badge {
     display: inline-block;
     padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
+    border-radius: 0;
     font-size: 0.72rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -201,7 +201,7 @@
 .pricingBtn {
     width: 100%;
     padding: 0.7rem 1.25rem;
-    border-radius: 8px;
+    border-radius: 0;
     font-weight: 600;
     font-size: 0.88rem;
     border: 1px solid var(--site-border, #CBD5E1);

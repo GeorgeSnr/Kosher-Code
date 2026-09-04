@@ -72,7 +72,7 @@ const PopOver = () => {
                         right: 0,
                         zIndex: 9999,
                         minWidth: '240px',
-                        borderRadius: '8px',
+                        borderRadius: '0',
                         border: '1px solid var(--cp-border, #E5E0FA)',
                         backgroundColor: 'var(--cp-card-bg, #FFFFFF)',
                         boxShadow: '0 12px 32px rgba(0, 0, 0, 0.15)',
@@ -99,6 +99,7 @@ const PopOver = () => {
                                     backgroundColor: 'var(--cp-primary-subtle, rgba(115, 85, 247, 0.12))', 
                                     color: 'var(--cp-primary-text, #7355F7)', 
                                     border: '1px solid var(--cp-border-highlight, rgba(115, 85, 247, 0.25))',
+                                    borderRadius: '0',
                                     fontSize: '0.72rem'
                                 }}
                             >
@@ -112,7 +113,7 @@ const PopOver = () => {
                                 to={admin ? "/admin" : "/client"} 
                                 onClick={() => setShow(false)}
                                 className="btn btn-sm btn-light text-start d-flex align-items-center justify-content-between fw-semibold py-1.5"
-                                style={{ fontSize: '0.82rem', borderRadius: '4px' }}
+                                style={{ fontSize: '0.82rem', borderRadius: '0' }}
                             >
                                 <span><FontAwesomeIcon icon={admin ? faShieldAlt : faUser} className="me-1.5" /> Workspace</span>
                                 <FontAwesomeIcon icon={faArrowRight} style={{ fontSize: '0.7rem' }} />
@@ -121,7 +122,7 @@ const PopOver = () => {
                                 variant="outline-danger" 
                                 size="sm" 
                                 className="w-100 d-flex align-items-center justify-content-center gap-1.5 py-1.5" 
-                                style={{ borderRadius: '4px', fontWeight: 600, fontSize: '0.82rem' }}
+                                style={{ borderRadius: '0', fontWeight: 600, fontSize: '0.82rem' }}
                                 onClick={signOut}
                             >
                                 <FontAwesomeIcon icon={faSignOutAlt} /> Sign Out

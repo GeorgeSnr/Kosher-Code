@@ -38,7 +38,7 @@ const AdminProfile = () => {
                         className="p-4 p-md-5"
                         style={{
                             backgroundColor: 'var(--cp-card-bg, #FFFFFF)',
-                            borderRadius: '28px',
+                            borderRadius: '0',
                             border: '1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.06))',
                             boxShadow: '0 4px 24px -2px rgba(15, 23, 42, 0.05)'
                         }}
@@ -57,13 +57,14 @@ const AdminProfile = () => {
                             </div>
                             <div className="mb-2">
                                 <span 
-                                    className="badge rounded-pill px-3.5 py-1.5 fw-semibold"
+                                    className="badge px-3.5 py-1.5 fw-semibold"
                                     style={{
                                         backgroundColor: 'var(--cp-primary-subtle)',
                                         color: 'var(--cp-primary-text)',
                                         border: '1px solid var(--cp-border-highlight)',
                                         fontSize: '0.8rem',
-                                        letterSpacing: '0.02em'
+                                        letterSpacing: '0.02em',
+                                        borderRadius: '0'
                                     }}
                                 >
                                     <FontAwesomeIcon icon={faShieldAlt} className="me-1.5" style={{ color: 'var(--status-pending-text)' }} />
@@ -82,7 +83,7 @@ const AdminProfile = () => {
                             className="p-4 mb-4" 
                             style={{ 
                                 backgroundColor: 'var(--cp-card-subtle)', 
-                                borderRadius: '20px',
+                                borderRadius: '0',
                                 border: '1px solid var(--cp-border)'
                             }}
                         >
@@ -112,43 +113,46 @@ const AdminProfile = () => {
                         <div className="d-grid gap-2.5">
                             <Link 
                                 to="/admin/orders" 
-                                className="btn text-white py-2.5 rounded-pill d-flex align-items-center justify-content-center gap-2 border-0" 
+                                className="btn text-white py-2.5 d-flex align-items-center justify-content-center gap-2 border-0" 
                                 style={{ 
                                     backgroundColor: '#121417', 
                                     fontWeight: 600, 
-                                    fontSize: '0.88rem' 
+                                    fontSize: '0.88rem',
+                                    borderRadius: '0'
                                 }}
                             >
                                 <FontAwesomeIcon icon={faList} /> Review Inbound Inquiries Table
                             </Link>
                             <Link 
                                 to="/admin/add-service" 
-                                className="btn btn-outline-secondary py-2.5 rounded-pill d-flex align-items-center justify-content-center gap-2" 
+                                className="btn btn-outline-secondary py-2.5 d-flex align-items-center justify-content-center gap-2" 
                                 style={{ 
                                     fontWeight: 600, 
                                     color: 'var(--cp-text-main)', 
                                     borderColor: 'var(--cp-border)',
-                                    fontSize: '0.88rem'
+                                    fontSize: '0.88rem',
+                                    borderRadius: '0'
                                 }}
                             >
                                 <FontAwesomeIcon icon={faPlus} /> Publish New Solution to Catalog
                             </Link>
                             <Link 
                                 to="/admin/team" 
-                                className="btn btn-outline-secondary py-2.5 rounded-pill d-flex align-items-center justify-content-center gap-2" 
+                                className="btn btn-outline-secondary py-2.5 d-flex align-items-center justify-content-center gap-2" 
                                 style={{ 
                                     fontWeight: 600, 
                                     color: 'var(--cp-text-main)', 
                                     borderColor: 'var(--cp-border)',
-                                    fontSize: '0.88rem'
+                                    fontSize: '0.88rem',
+                                    borderRadius: '0'
                                 }}
                             >
                                 <FontAwesomeIcon icon={faUserShield} /> Manage Administrator Privileges
                             </Link>
                             <Button 
                                 variant="outline-danger" 
-                                className="py-2.5 rounded-pill d-flex align-items-center justify-content-center gap-2 mt-1"
-                                style={{ fontWeight: 600, fontSize: '0.88rem' }}
+                                className="py-2.5 d-flex align-items-center justify-content-center gap-2 mt-1"
+                                style={{ fontWeight: 600, fontSize: '0.88rem', borderRadius: '0' }}
                                 onClick={signOut}
                             >
                                 <FontAwesomeIcon icon={faSignOutAlt} /> Sign Out of Admin Command Center

@@ -29,7 +29,7 @@
     left: 0;
     bottom: -2px;
     width: 60px;
-    border-radius: 9999px;
+    border-radius: 0;
     height: 3px;
     background: var(--site-primary, #0672CB);
 }
@@ -43,7 +43,7 @@
     width: 100%;
     margin: 0.5rem 0;
     padding: 0.75rem 1rem;
-    border-radius: 8px;
+    border-radius: 0;
     border: 1px solid var(--site-border, #CBD5E1);
     background-color: var(--site-card-bg, #FFFFFF);
     color: var(--site-text-main, #0F172A);
@@ -57,7 +57,7 @@
     width: 100%;
     margin: 0.5rem 0;
     padding: 0.75rem 2.75rem 0.75rem 1rem !important;
-    border-radius: 8px;
+    border-radius: 0;
     border: 1px solid var(--site-border, #CBD5E1);
     background-color: var(--site-card-bg, #FFFFFF) !important;
     color: var(--site-text-main, #0F172A) !important;
@@ -136,7 +136,7 @@
     background: #25D366;
     color: #FFFFFF !important;
     border: none;
-    border-radius: 8px;
+    border-radius: 0;
     padding: 0.7rem 1.4rem;
     font-weight: 600;
     font-size: 0.92rem;
@@ -155,7 +155,7 @@
 .directChannelsContainer {
     margin-top: 1.5rem;
     padding: 1.25rem;
-    border-radius: 12px;
+    border-radius: 0;
     background: var(--site-card-subtle, #F8FAFC);
     border: 1px solid var(--site-border, #E2E8F0);
 }
@@ -208,7 +208,7 @@
 .swal-button--whatsapp {
     background-color: #25D366 !important;
     color: #FFFFFF !important;
-    border-radius: 8px !important;
+    border-radius: 0 !important;
 }
 
 .swal-button--whatsapp:hover {

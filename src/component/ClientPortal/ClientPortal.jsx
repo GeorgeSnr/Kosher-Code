@@ -140,7 +140,7 @@ const ClientPortal = () => {
         toast(nextTheme === 'dark' ? '🌙 Dark Mode Activated' : '☀️ Light Mode Activated', {
             icon: nextTheme === 'dark' ? '🌙' : '☀️',
             style: {
-                borderRadius: '4px',
+                borderRadius: '0',
                 background: nextTheme === 'dark' ? '#1E293B' : '#FFFFFF',
                 color: nextTheme === 'dark' ? '#F8FAFC' : '#0F172A',
                 border: '1px solid ' + (nextTheme === 'dark' ? '#334155' : '#E2E8F0'),
@@ -612,10 +612,11 @@ const ClientPortal = () => {
                         <button 
                             type="button" 
                             onClick={toggleTheme}
-                            className="btn d-flex align-items-center gap-2 rounded-pill"
+                            className="btn d-flex align-items-center gap-2"
                             style={{ 
                                 backgroundColor: 'var(--cp-card-subtle)', 
                                 border: '1px solid var(--cp-border)',
+                                borderRadius: '0',
                                 color: 'var(--cp-text-main)',
                                 fontSize: '0.82rem',
                                 fontWeight: 500,
@@ -628,10 +629,11 @@ const ClientPortal = () => {
                         </button>
 
                         <div 
-                            className="d-none d-md-flex align-items-center gap-2 rounded-pill" 
+                            className="d-none d-md-flex align-items-center gap-2" 
                             style={{ 
                                 backgroundColor: 'var(--cp-card-subtle)', 
                                 border: '1px solid var(--cp-border)', 
+                                borderRadius: '0',
                                 fontSize: '0.8rem',
                                 padding: '7px 16px'
                             }}
@@ -640,11 +642,12 @@ const ClientPortal = () => {
                             <span className="fw-semibold" style={{ color: 'var(--cp-text-muted)' }}>Kampala HQ Desk</span>
                         </div>
                         <span 
-                            className="badge rounded-pill d-none d-sm-inline-flex align-items-center gap-1.5" 
+                            className="badge d-none d-sm-inline-flex align-items-center gap-1.5" 
                             style={{ 
                                 backgroundColor: 'var(--cp-primary-subtle)', 
                                 color: 'var(--cp-primary-text)', 
                                 border: '1px solid var(--cp-border-highlight)', 
+                                borderRadius: '0',
                                 fontSize: '0.8rem',
                                 padding: '7px 16px',
                                 fontWeight: 600
@@ -655,8 +658,8 @@ const ClientPortal = () => {
                         <button 
                             type="button" 
                             onClick={handleSignOut}
-                            className="btn btn-sm btn-outline-danger rounded-pill d-inline-flex align-items-center gap-2 px-3.5 py-1.5"
-                            style={{ fontSize: '0.82rem', fontWeight: 600 }}
+                            className="btn btn-sm btn-outline-danger d-inline-flex align-items-center gap-2 px-3.5 py-1.5"
+                            style={{ fontSize: '0.82rem', fontWeight: 600, borderRadius: '0' }}
                         >
                             <FontAwesomeIcon icon={faSignOutAlt} /> <span className="d-none d-sm-inline">Exit</span>
                         </button>

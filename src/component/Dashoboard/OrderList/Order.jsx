@@ -143,7 +143,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                                 backgroundColor: currentStyle.bg,
                                 color: currentStyle.text,
                                 borderColor: currentStyle.border,
-                                borderRadius: '9999px',
+                                borderRadius: '0',
                                 fontWeight: 600,
                                 fontSize: '0.78rem',
                                 padding: '5px 12px 5px 14px',
@@ -152,17 +152,17 @@ const Order = ({ order, handleAction, handleDelete }) => {
                         >
                             <span>● {status}</span>
                         </Dropdown.Toggle>
-                        <Dropdown.Menu style={{ borderRadius: '16px', backgroundColor: 'var(--cp-card-bg)', border: '1px solid var(--cp-border)', boxShadow: '0 10px 30px rgba(0,0,0,0.1)', padding: '6px' }}>
-                            <Dropdown.Item onClick={() => handleAction(_id, "Pending")} style={{ borderRadius: '10px', fontSize: '0.82rem', padding: '6px 14px' }}>
+                        <Dropdown.Menu style={{ borderRadius: '0', backgroundColor: 'var(--cp-card-bg)', border: '1px solid var(--cp-border)', boxShadow: '0 10px 30px rgba(0,0,0,0.1)', padding: '6px' }}>
+                            <Dropdown.Item onClick={() => handleAction(_id, "Pending")} style={{ borderRadius: '0', fontSize: '0.82rem', padding: '6px 14px' }}>
                                 <span style={{ color: 'var(--status-pending-text)', fontWeight: 700 }}>● Pending</span> <span className="small text-muted">(New)</span>
                             </Dropdown.Item>
-                            <Dropdown.Item onClick={() => handleAction(_id, "In Review")} style={{ borderRadius: '10px', fontSize: '0.82rem', padding: '6px 14px' }}>
+                            <Dropdown.Item onClick={() => handleAction(_id, "In Review")} style={{ borderRadius: '0', fontSize: '0.82rem', padding: '6px 14px' }}>
                                 <span style={{ color: 'var(--cp-primary)', fontWeight: 700 }}>● In Review</span> <span className="small text-muted">(Assessing)</span>
                             </Dropdown.Item>
-                            <Dropdown.Item onClick={() => handleAction(_id, "In Progress")} style={{ borderRadius: '10px', fontSize: '0.82rem', padding: '6px 14px' }}>
+                            <Dropdown.Item onClick={() => handleAction(_id, "In Progress")} style={{ borderRadius: '0', fontSize: '0.82rem', padding: '6px 14px' }}>
                                 <span style={{ color: 'var(--status-progress-text)', fontWeight: 700 }}>● In Progress</span> <span className="small text-muted">(Active)</span>
                             </Dropdown.Item>
-                            <Dropdown.Item onClick={() => handleAction(_id, "Done")} style={{ borderRadius: '10px', fontSize: '0.82rem', padding: '6px 14px' }}>
+                            <Dropdown.Item onClick={() => handleAction(_id, "Done")} style={{ borderRadius: '0', fontSize: '0.82rem', padding: '6px 14px' }}>
                                 <span style={{ color: 'var(--status-done-text)', fontWeight: 700 }}>● Done</span> <span className="small text-muted">(Completed)</span>
                             </Dropdown.Item>
                         </Dropdown.Menu>
@@ -177,7 +177,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                             style={{ 
                                 width: '32px',
                                 height: '32px',
-                                borderRadius: '50%',
+                                borderRadius: '0',
                                 backgroundColor: 'var(--cp-card-subtle)',
                                 border: '1px solid var(--cp-border)',
                                 color: 'var(--cp-primary)',
@@ -190,7 +190,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                         </button>
                         <button
                             className="btn btn-outline-danger btn-sm d-flex align-items-center justify-content-center"
-                            style={{ width: '32px', height: '32px', borderRadius: '50%', flexShrink: 0 }}
+                            style={{ width: '32px', height: '32px', borderRadius: '0', flexShrink: 0 }}
                             title="Delete / Archive Request"
                             onClick={() => handleDelete(_id)}
                         >
@@ -215,7 +215,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                             style={{
                                 width: '42px',
                                 height: '42px',
-                                borderRadius: '50%',
+                                borderRadius: '0',
                                 backgroundColor: 'var(--cp-primary-subtle)',
                                 color: 'var(--cp-primary)'
                             }}
@@ -235,7 +235,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
 
                 <Modal.Body className="p-4" style={{ backgroundColor: 'var(--cp-card-bg)', color: 'var(--cp-text-main)' }}>
                     {/* Header Client Snapshot */}
-                    <div className="d-flex flex-wrap align-items-center justify-content-between p-3 p-md-4 mb-4 rounded-4 gap-3" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                    <div className="d-flex flex-wrap align-items-center justify-content-between p-3 p-md-4 mb-4 gap-3" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0' }}>
                         <div className="d-flex align-items-center gap-3 overflow-hidden" style={{ minWidth: '220px', flex: '1 1 auto' }}>
                             <UserAvatar 
                                 name={name}
@@ -251,11 +251,12 @@ const Order = ({ order, handleAction, handleDelete }) => {
                         </div>
                         <div className="flex-shrink-0">
                             <span 
-                                className="badge rounded-pill px-3 py-1.5 fw-semibold d-inline-flex align-items-center gap-1.5"
+                                className="badge px-3 py-1.5 fw-semibold d-inline-flex align-items-center gap-1.5"
                                 style={{
                                     backgroundColor: currentStyle.bg,
                                     color: currentStyle.text,
                                     border: `1px solid ${currentStyle.border}`,
+                                    borderRadius: '0',
                                     fontSize: '0.82rem'
                                 }}
                             >
@@ -268,7 +269,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                     {/* Information Grid */}
                     <Row className="g-3 mb-4">
                         <Col md={6}>
-                            <div className="p-3 p-md-4 h-100 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                            <div className="p-3 p-md-4 h-100" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0' }}>
                                 <h6 className="fw-bold mb-3 small text-uppercase" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
                                     <FontAwesomeIcon icon={faEnvelope} className="me-1.5" style={{ color: 'var(--cp-primary)' }} /> Contact Channels
                                 </h6>
@@ -295,7 +296,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                         </Col>
 
                         <Col md={6}>
-                            <div className="p-3 p-md-4 h-100 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                            <div className="p-3 p-md-4 h-100" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0' }}>
                                 <h6 className="fw-bold mb-3 small text-uppercase" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
                                     <FontAwesomeIcon icon={faDollarSign} className="me-1.5" style={{ color: 'var(--status-done-text)' }} /> Scope & Commercial Tier
                                 </h6>
@@ -319,7 +320,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                     </Row>
 
                     {/* Client RFP / Scope Description */}
-                    <div className="p-3 p-md-4 mb-4 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                    <div className="p-3 p-md-4 mb-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0' }}>
                         <h6 className="fw-bold mb-2 small text-uppercase" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
                             Client Requirements & Scope Description
                         </h6>
@@ -329,7 +330,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                     </div>
 
                     {/* Live Status Management Strip */}
-                    <div className="p-3 p-md-4 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                    <div className="p-3 p-md-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)', borderRadius: '0' }}>
                         <small className="fw-bold text-uppercase d-block mb-3" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
                             Update Live Project Status:
                         </small>
@@ -340,11 +341,12 @@ const Order = ({ order, handleAction, handleDelete }) => {
                                     <button
                                         key={st}
                                         type="button"
-                                        className={`btn btn-sm rounded-pill px-3 py-1.5 fw-semibold ${isCurrent ? 'btn-dark' : 'btn-outline-secondary'}`}
+                                        className={`btn btn-sm px-3 py-1.5 fw-semibold ${isCurrent ? 'btn-dark' : 'btn-outline-secondary'}`}
                                         style={{
                                             backgroundColor: isCurrent ? '#121417' : 'transparent',
                                             borderColor: isCurrent ? '#121417' : 'var(--cp-border)',
                                             color: isCurrent ? '#FFFFFF' : 'var(--cp-text-main)',
+                                            borderRadius: '0',
                                             fontSize: '0.78rem'
                                         }}
                                         onClick={() => {
@@ -363,8 +365,8 @@ const Order = ({ order, handleAction, handleDelete }) => {
                     <div className="d-flex flex-wrap justify-content-between align-items-center w-100 gap-2">
                         <button 
                             type="button"
-                            className="btn btn-outline-danger btn-sm d-flex align-items-center gap-2 rounded-pill px-3 py-1.5"
-                            style={{ fontSize: '0.82rem', fontWeight: 600 }}
+                            className="btn btn-outline-danger btn-sm d-flex align-items-center gap-2 px-3 py-1.5"
+                            style={{ fontSize: '0.82rem', fontWeight: 600, borderRadius: '0' }}
                             onClick={() => {
                                 setShowDetails(false);
                                 handleDelete(_id);
@@ -375,8 +377,8 @@ const Order = ({ order, handleAction, handleDelete }) => {
 
                         <button 
                             type="button"
-                            className="btn btn-secondary btn-sm rounded-pill px-4 py-1.5"
-                            style={{ backgroundColor: 'var(--cp-card-hover)', color: 'var(--cp-text-main)', border: '1px solid var(--cp-border)', fontSize: '0.82rem', fontWeight: 600 }}
+                            className="btn btn-secondary btn-sm px-4 py-1.5"
+                            style={{ backgroundColor: 'var(--cp-card-hover)', color: 'var(--cp-text-main)', border: '1px solid var(--cp-border)', fontSize: '0.82rem', fontWeight: 600, borderRadius: '0' }}
                             onClick={() => setShowDetails(false)}
                         >
                             Close
