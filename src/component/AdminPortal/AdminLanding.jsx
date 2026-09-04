@@ -26,7 +26,9 @@ import {
     faMapMarkerAlt,
     faDollarSign,
     faCar,
-    faServer
+    faServer,
+    faCalendarAlt,
+    faExternalLinkAlt
 } from '@fortawesome/free-solid-svg-icons';
 import { 
     faGoogle, 
@@ -680,7 +682,7 @@ const AdminLanding = () => {
             </div>
 
             {/* =========================================================
-               ORDER / JOB DETAILS MODAL (Matching Theme & High Polish)
+               ORDER / JOB DETAILS MODAL (High-End Dribbble Modern Outlook)
                ========================================================= */}
             {selectedOrder && (
                 <Modal 
@@ -688,103 +690,212 @@ const AdminLanding = () => {
                     onHide={() => setShowModal(false)}
                     centered 
                     size="lg"
-                    dialogClassName="admin-modal"
-                    contentClassName="ad-card border-0 shadow-lg"
+                    dialogClassName="ad-modal-dialog"
+                    contentClassName="ad-modal-content border-0 shadow-lg"
                     style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
                 >
-                    <Modal.Header closeButton style={{ borderBottom: '1px solid var(--cp-border)', padding: '20px 26px' }}>
+                    <Modal.Header closeButton className="ad-modal-header">
                         <div className="d-flex align-items-center gap-3 overflow-hidden" style={{ minWidth: 0, flex: '1 1 auto' }}>
-                            <div className="ad-pending-logo-box" style={{ width: '42px', height: '42px', flexShrink: 0 }}>
+                            <div className="ad-modal-header-icon">
                                 {renderCompanyIcon(selectedOrder.institution || selectedOrder.name, selectedOrder.companyIcon)}
                             </div>
                             <div className="overflow-hidden" style={{ minWidth: 0, flex: '1 1 auto' }}>
-                                <Modal.Title className="fs-5 fw-bold mb-0 text-truncate" style={{ color: 'var(--cp-text-main)' }}>
+                                <Modal.Title className="ad-modal-title text-truncate">
                                     {selectedOrder.title || selectedOrder.serviceName || 'Request Details'}
                                 </Modal.Title>
-                                <small className="text-truncate d-block" style={{ color: 'var(--cp-text-light)', fontSize: '0.8rem' }}>
-                                    {selectedOrder.institution || selectedOrder.name} &bull; {selectedOrder.postedDate || selectedOrder.date}
-                                </small>
+                                <div className="ad-modal-meta">
+                                    <span className="fw-semibold text-truncate" style={{ maxWidth: '180px' }}>
+                                        <FontAwesomeIcon icon={faBuilding} className="me-1 text-primary" style={{ fontSize: '0.75rem' }} />
+                                        {selectedOrder.institution || selectedOrder.name}
+                                    </span>
+                                    <span>&bull;</span>
+                                    <span>
+                                        <FontAwesomeIcon icon={faCalendarAlt} className="me-1 text-muted" style={{ fontSize: '0.75rem' }} />
+                                        {selectedOrder.postedDate || `${selectedOrder.date || 'Recent'} 03:20 GMT`}
+                                    </span>
+                                    <span>&bull;</span>
+                                    <span className="ad-modal-ref-tag">
+                                        REF-{selectedOrder._id ? selectedOrder._id.substring(0, 8).toUpperCase() : 'JOB-2026'}
+                                    </span>
+                                </div>
                             </div>
+                        </div>
+                        <div className="d-none d-sm-block me-3 flex-shrink-0">
+                            {renderStatusBadge(selectedOrder.status)}
                         </div>
                     </Modal.Header>
 
-                    <Modal.Body className="p-4" style={{ color: 'var(--cp-text-main)', maxHeight: '78vh', overflowY: 'auto' }}>
+                    <Modal.Body className="ad-modal-body">
+                        {/* Executive Snapshot Metric Strip */}
+                        <div className="ad-modal-hero-strip">
+                            <div className="ad-modal-hero-item">
+                                <span className="ad-modal-hero-label">Representative</span>
+                                <span className="ad-modal-hero-val" title={selectedOrder.name}>
+                                    {selectedOrder.name || 'Enterprise Lead'}
+                                </span>
+                            </div>
+                            <div className="ad-modal-hero-item">
+                                <span className="ad-modal-hero-label">Deployment Node</span>
+                                <span className="ad-modal-hero-val" title={selectedOrder.location || selectedOrder.region || 'Kampala HQ'}>
+                                    {selectedOrder.location || selectedOrder.region || 'Kampala Hub'}
+                                </span>
+                            </div>
+                            <div className="ad-modal-hero-item">
+                                <span className="ad-modal-hero-label">Valuation</span>
+                                <span className="ad-modal-hero-val text-success">
+                                    ${selectedOrder.price || '4,500'} <small className="text-muted fw-normal" style={{ fontSize: '0.75rem' }}>USD</small>
+                                </span>
+                            </div>
+                            <div className="ad-modal-hero-item">
+                                <span className="ad-modal-hero-label">Infrastructure SLA</span>
+                                <span className="ad-modal-hero-val d-flex align-items-center gap-1.5" style={{ color: '#10B981', fontSize: '0.85rem' }}>
+                                    <FontAwesomeIcon icon={faCheckCircle} style={{ fontSize: '0.8rem' }} />
+                                    99.9% Uptime
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* 2-Column Detail Cards */}
                         <Row className="g-3 mb-4">
+                            {/* Left Card: Client & Organization */}
                             <Col md={6}>
-                                <div className="p-3.5 rounded-4 h-100" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
-                                    <h6 className="fw-bold mb-2.5 small text-uppercase" style={{ color: 'var(--cp-text-light)', letterSpacing: '0.04em' }}>
-                                        Contact & Organization
-                                    </h6>
-                                    <div className="mb-2">
-                                        <small className="d-block fw-semibold text-muted" style={{ fontSize: '0.74rem' }}>Client Representative</small>
-                                        <span className="fw-semibold text-truncate d-block">{selectedOrder.name}</span>
+                                <div className="ad-modal-card">
+                                    <div className="ad-modal-card-header">
+                                        <div className="ad-modal-card-icon-pill">
+                                            <FontAwesomeIcon icon={faUsers} />
+                                        </div>
+                                        <h6 className="ad-modal-card-title">Client & Stakeholder</h6>
                                     </div>
-                                    <div className="mb-2">
-                                        <small className="d-block fw-semibold text-muted" style={{ fontSize: '0.74rem' }}>Email Address</small>
-                                        <a 
-                                            href={`mailto:${selectedOrder.email}`} 
-                                            className="fw-semibold text-decoration-none d-block" 
-                                            style={{ color: 'var(--cp-primary)', wordBreak: 'break-all', overflowWrap: 'anywhere', fontSize: '0.86rem' }}
-                                        >
-                                            {selectedOrder.email}
-                                        </a>
+                                    <div className="ad-modal-field">
+                                        <span className="ad-modal-field-label">Representative Name</span>
+                                        <div className="ad-modal-field-value text-truncate">{selectedOrder.name}</div>
+                                    </div>
+                                    <div className="ad-modal-field">
+                                        <span className="ad-modal-field-label">Corporate Email</span>
+                                        <div className="ad-modal-field-value text-truncate">
+                                            <a 
+                                                href={`mailto:${selectedOrder.email}`} 
+                                                className="d-inline-flex align-items-center gap-1.5"
+                                                title={selectedOrder.email}
+                                            >
+                                                <FontAwesomeIcon icon={faEnvelope} style={{ fontSize: '0.75rem' }} />
+                                                <span>{selectedOrder.email}</span>
+                                                <FontAwesomeIcon icon={faExternalLinkAlt} style={{ fontSize: '9px', opacity: 0.7 }} />
+                                            </a>
+                                        </div>
                                     </div>
                                     {selectedOrder.phone && (
-                                        <div>
-                                            <small className="d-block fw-semibold text-muted" style={{ fontSize: '0.74rem' }}>Phone</small>
-                                            <span className="fw-semibold text-truncate d-block">{selectedOrder.phone}</span>
+                                        <div className="ad-modal-field">
+                                            <span className="ad-modal-field-label">Direct Line / Phone</span>
+                                            <div className="ad-modal-field-value text-truncate">
+                                                <a href={`tel:${selectedOrder.phone}`} className="text-decoration-none" style={{ color: 'var(--cp-text-main)' }}>
+                                                    <FontAwesomeIcon icon={faPhone} className="me-1.5 text-muted" style={{ fontSize: '0.75rem' }} />
+                                                    {selectedOrder.phone}
+                                                </a>
+                                            </div>
                                         </div>
                                     )}
+                                    <div className="ad-modal-field">
+                                        <span className="ad-modal-field-label">Institution / Entity</span>
+                                        <div className="ad-modal-field-value text-truncate">
+                                            <FontAwesomeIcon icon={faBuilding} className="me-1.5 text-muted" style={{ fontSize: '0.75rem' }} />
+                                            {selectedOrder.institution || selectedOrder.name}
+                                        </div>
+                                    </div>
                                 </div>
                             </Col>
 
+                            {/* Right Card: Solution Scope & Financials */}
                             <Col md={6}>
-                                <div className="p-3.5 rounded-4 h-100" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
-                                    <h6 className="fw-bold mb-2.5 small text-uppercase" style={{ color: 'var(--cp-text-light)', letterSpacing: '0.04em' }}>
-                                        Scope & Commercials
-                                    </h6>
-                                    <div className="mb-2">
-                                        <small className="d-block fw-semibold text-muted" style={{ fontSize: '0.74rem' }}>Location / Region</small>
-                                        <span className="fw-semibold text-truncate d-block">{selectedOrder.location || selectedOrder.region || 'Global'}</span>
+                                <div className="ad-modal-card">
+                                    <div className="ad-modal-card-header">
+                                        <div className="ad-modal-card-icon-pill" style={{ backgroundColor: 'rgba(16, 185, 129, 0.12)', color: '#10B981' }}>
+                                            <FontAwesomeIcon icon={faBriefcase} />
+                                        </div>
+                                        <h6 className="ad-modal-card-title">Scope & Financials</h6>
                                     </div>
-                                    <div className="mb-2">
-                                        <small className="d-block fw-semibold text-muted" style={{ fontSize: '0.74rem' }}>Plan / Tier</small>
-                                        <span className="fw-semibold text-truncate d-block" style={{ color: 'var(--cp-primary)' }}>{selectedOrder.pricingType || 'Enterprise Tier'}</span>
+                                    <div className="ad-modal-field">
+                                        <span className="ad-modal-field-label">Target Solution</span>
+                                        <div className="ad-modal-field-value text-truncate fw-bold">
+                                            {selectedOrder.title || selectedOrder.serviceName || 'Core Enterprise Deployment'}
+                                        </div>
                                     </div>
-                                    <div>
-                                        <small className="d-block fw-semibold text-muted" style={{ fontSize: '0.74rem' }}>Project Budget / Price</small>
-                                        <span className="fw-bold fs-5 text-success">${selectedOrder.price || '4,500'}</span>
+                                    <div className="ad-modal-field">
+                                        <span className="ad-modal-field-label">Licensing / Pricing Tier</span>
+                                        <div className="ad-modal-field-value">
+                                            <span 
+                                                className="badge rounded-pill fw-semibold"
+                                                style={{ 
+                                                    backgroundColor: 'var(--cp-primary-subtle)', 
+                                                    color: 'var(--cp-primary-text)',
+                                                    border: '1px solid var(--cp-border-highlight)',
+                                                    fontSize: '0.75rem',
+                                                    padding: '4px 10px'
+                                                }}
+                                            >
+                                                {selectedOrder.pricingType || 'Enterprise Dedicated Tier'}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="ad-modal-field">
+                                        <span className="ad-modal-field-label">Deployment Region</span>
+                                        <div className="ad-modal-field-value text-truncate">
+                                            <FontAwesomeIcon icon={faMapMarkerAlt} className="me-1.5 text-danger" style={{ fontSize: '0.75rem' }} />
+                                            {selectedOrder.location || selectedOrder.region || 'Kampala, Uganda (Global CDN)'}
+                                        </div>
+                                    </div>
+                                    <div className="ad-modal-field">
+                                        <span className="ad-modal-field-label">Contract Budget / Valuation</span>
+                                        <div className="ad-modal-field-value">
+                                            <span className="fw-bold fs-5 text-success">
+                                                ${selectedOrder.price || '4,500'}
+                                            </span>
+                                            <span className="small text-muted ms-1">USD (Fixed Milestone)</span>
+                                        </div>
                                     </div>
                                 </div>
                             </Col>
                         </Row>
 
-                        <div className="p-3.5 rounded-4 mb-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
-                            <h6 className="fw-bold mb-2 small text-uppercase" style={{ color: 'var(--cp-text-light)', letterSpacing: '0.04em' }}>
-                                Requirements Description
-                            </h6>
-                            <p className="mb-0 small" style={{ lineHeight: 1.6, wordBreak: 'break-word', overflowWrap: 'anywhere', whiteSpace: 'pre-line' }}>
+                        {/* Full Width Requirements Box */}
+                        <div className="ad-modal-card mb-4">
+                            <div className="ad-modal-card-header">
+                                <div className="ad-modal-card-icon-pill" style={{ backgroundColor: 'rgba(59, 130, 246, 0.12)', color: '#3B82F6' }}>
+                                    <FontAwesomeIcon icon={faFileAlt} />
+                                </div>
+                                <h6 className="ad-modal-card-title">Scope & Technical Specifications</h6>
+                            </div>
+                            <div className="ad-modal-desc-box">
                                 {selectedOrder.description || 'Full solution deployment requested with custom institutional workflows, security compliance protocols, and technical staff onboarding support.'}
-                            </p>
+                            </div>
                         </div>
 
-                        {/* Status Change Strip */}
-                        <div className="p-3.5 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
-                            <small className="fw-bold text-uppercase d-block mb-2.5 text-muted" style={{ letterSpacing: '0.04em', fontSize: '0.72rem' }}>
-                                Quick Status Update:
-                            </small>
-                            <div className="d-flex flex-wrap gap-2.5">
+                        {/* Interactive Status Switcher Strip */}
+                        <div className="ad-modal-status-strip">
+                            <div className="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
+                                <div className="d-flex align-items-center gap-2">
+                                    <FontAwesomeIcon icon={faClock} style={{ color: 'var(--cp-primary)', fontSize: '0.85rem' }} />
+                                    <span className="ad-modal-hero-label mb-0" style={{ fontSize: '0.74rem' }}>
+                                        Operational Lifecycle State:
+                                    </span>
+                                </div>
+                                <span className="small text-muted" style={{ fontSize: '0.75rem' }}>
+                                    Click a pill to instantly transition status
+                                </span>
+                            </div>
+                            <div className="ad-modal-status-buttons">
                                 {['Pending', 'Active', 'Expired', 'Done'].map(st => {
                                     const isCurrent = selectedOrder.status === st;
                                     return (
                                         <button
                                             key={st}
                                             type="button"
-                                            className={isCurrent ? "ad-btn-pill-dark" : "ad-btn-pill-filter"}
-                                            style={{ padding: '6px 18px', fontSize: '0.78rem' }}
+                                            className={`ad-modal-status-btn ${isCurrent ? 'active' : ''}`}
                                             onClick={() => handleAction(selectedOrder._id, st)}
                                         >
-                                            ● {st}
+                                            <span>●</span>
+                                            <span>{st}</span>
+                                            {isCurrent && <FontAwesomeIcon icon={faCheckCircle} style={{ fontSize: '0.75rem', marginLeft: '4px' }} />}
                                         </button>
                                     );
                                 })}
@@ -792,21 +903,22 @@ const AdminLanding = () => {
                         </div>
                     </Modal.Body>
 
-                    <Modal.Footer style={{ borderTop: '1px solid var(--cp-border)', padding: '16px 26px' }}>
-                        <div className="d-flex flex-wrap justify-content-between align-items-center w-100 gap-2">
+                    <Modal.Footer className="ad-modal-footer">
+                        <button
+                            type="button"
+                            className="ad-modal-btn-archive"
+                            onClick={() => handleDelete(selectedOrder._id)}
+                        >
+                            <FontAwesomeIcon icon={faTrashAlt} />
+                            <span>Archive Request</span>
+                        </button>
+                        <div className="d-flex align-items-center gap-2">
                             <button
                                 type="button"
-                                className="btn btn-sm btn-outline-danger d-inline-flex align-items-center gap-2 rounded-pill px-3.5 py-1.5"
-                                onClick={() => handleDelete(selectedOrder._id)}
-                            >
-                                <FontAwesomeIcon icon={faTrashAlt} /> Archive
-                            </button>
-                            <button
-                                type="button"
-                                className="ad-btn-pill-filter"
+                                className="ad-modal-btn-close"
                                 onClick={() => setShowModal(false)}
                             >
-                                Close
+                                Close Details
                             </button>
                         </div>
                     </Modal.Footer>

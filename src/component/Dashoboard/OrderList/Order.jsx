@@ -235,7 +235,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
 
                 <Modal.Body className="p-4" style={{ backgroundColor: 'var(--cp-card-bg)', color: 'var(--cp-text-main)' }}>
                     {/* Header Client Snapshot */}
-                    <div className="d-flex flex-wrap align-items-center justify-content-between p-3.5 mb-4 rounded-4 gap-3" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                    <div className="d-flex flex-wrap align-items-center justify-content-between p-3 p-md-4 mb-4 rounded-4 gap-3" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
                         <div className="d-flex align-items-center gap-3 overflow-hidden" style={{ minWidth: '220px', flex: '1 1 auto' }}>
                             <UserAvatar 
                                 name={name}
@@ -251,7 +251,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                         </div>
                         <div className="flex-shrink-0">
                             <span 
-                                className="badge rounded-pill px-3.5 py-1.5 fw-semibold d-inline-flex align-items-center gap-1.5"
+                                className="badge rounded-pill px-3 py-1.5 fw-semibold d-inline-flex align-items-center gap-1.5"
                                 style={{
                                     backgroundColor: currentStyle.bg,
                                     color: currentStyle.text,
@@ -268,11 +268,11 @@ const Order = ({ order, handleAction, handleDelete }) => {
                     {/* Information Grid */}
                     <Row className="g-3 mb-4">
                         <Col md={6}>
-                            <div className="p-3.5 h-100 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                            <div className="p-3 p-md-4 h-100 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
                                 <h6 className="fw-bold mb-3 small text-uppercase" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
                                     <FontAwesomeIcon icon={faEnvelope} className="me-1.5" style={{ color: 'var(--cp-primary)' }} /> Contact Channels
                                 </h6>
-                                <div className="mb-2.5 overflow-hidden">
+                                <div className="mb-3 overflow-hidden">
                                     <small className="d-block fw-semibold" style={{ color: 'var(--cp-text-muted)', fontSize: '0.75rem' }}>Corporate Email</small>
                                     <a href={`mailto:${email}`} className="fw-semibold text-decoration-none d-inline-flex align-items-center gap-1.5 text-truncate" style={{ color: 'var(--cp-primary)', maxWidth: '100%', wordBreak: 'break-all' }}>
                                         <span className="text-truncate">{email}</span> 
@@ -280,7 +280,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                                     </a>
                                 </div>
                                 {phone && (
-                                    <div className="mb-2.5 overflow-hidden">
+                                    <div className="mb-3 overflow-hidden">
                                         <small className="d-block fw-semibold" style={{ color: 'var(--cp-text-muted)', fontSize: '0.75rem' }}>Phone / Direct Line</small>
                                         <a href={`tel:${phone}`} className="fw-semibold text-decoration-none text-truncate d-block" style={{ color: 'var(--status-done-text)', fontSize: '0.9rem' }}>
                                             {phone}
@@ -295,18 +295,18 @@ const Order = ({ order, handleAction, handleDelete }) => {
                         </Col>
 
                         <Col md={6}>
-                            <div className="p-3.5 h-100 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                            <div className="p-3 p-md-4 h-100 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
                                 <h6 className="fw-bold mb-3 small text-uppercase" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
                                     <FontAwesomeIcon icon={faDollarSign} className="me-1.5" style={{ color: 'var(--status-done-text)' }} /> Scope & Commercial Tier
                                 </h6>
-                                <div className="mb-2.5 d-flex align-items-center gap-2 overflow-hidden">
+                                <div className="mb-3 d-flex align-items-center gap-2 overflow-hidden">
                                     {img && <img src={img} alt="" style={{ width: '28px', height: '28px', objectFit: 'contain', flexShrink: 0 }} />}
                                     <div className="overflow-hidden">
                                         <small className="d-block fw-semibold" style={{ color: 'var(--cp-text-muted)', fontSize: '0.75rem' }}>Target Solution</small>
                                         <span className="fw-bold text-truncate d-block" style={{ color: 'var(--cp-text-main)' }}>{serviceName}</span>
                                     </div>
                                 </div>
-                                <div className="mb-2.5 overflow-hidden">
+                                <div className="mb-3 overflow-hidden">
                                     <small className="d-block fw-semibold" style={{ color: 'var(--cp-text-muted)', fontSize: '0.75rem' }}>Pricing Tier / Plan</small>
                                     <span className="fw-semibold text-truncate d-block" style={{ color: 'var(--cp-primary)' }}>{pricingType || 'Enterprise Tier'}</span>
                                 </div>
@@ -319,7 +319,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                     </Row>
 
                     {/* Client RFP / Scope Description */}
-                    <div className="p-3.5 mb-4 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                    <div className="p-3 p-md-4 mb-4 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
                         <h6 className="fw-bold mb-2 small text-uppercase" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
                             Client Requirements & Scope Description
                         </h6>
@@ -329,8 +329,8 @@ const Order = ({ order, handleAction, handleDelete }) => {
                     </div>
 
                     {/* Live Status Management Strip */}
-                    <div className="p-3.5 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
-                        <small className="fw-bold text-uppercase d-block mb-2.5" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
+                    <div className="p-3 p-md-4 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                        <small className="fw-bold text-uppercase d-block mb-3" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
                             Update Live Project Status:
                         </small>
                         <div className="d-flex flex-wrap gap-2">
@@ -363,7 +363,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                     <div className="d-flex flex-wrap justify-content-between align-items-center w-100 gap-2">
                         <button 
                             type="button"
-                            className="btn btn-outline-danger btn-sm d-flex align-items-center gap-2 rounded-pill px-3.5 py-1.5"
+                            className="btn btn-outline-danger btn-sm d-flex align-items-center gap-2 rounded-pill px-3 py-1.5"
                             style={{ fontSize: '0.82rem', fontWeight: 600 }}
                             onClick={() => {
                                 setShowDetails(false);

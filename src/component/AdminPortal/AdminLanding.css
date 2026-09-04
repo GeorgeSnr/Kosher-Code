@@ -988,3 +988,405 @@
         flex-wrap: wrap;
     }
 }
+
+/* =========================================================
+   ADMIN JOB DETAILS MODAL (High-End Dribbble Modern Outlook)
+   ========================================================= */
+.ad-modal-dialog {
+    max-width: 780px !important;
+}
+
+.ad-modal-content {
+    border-radius: 24px !important;
+    border: 1px solid var(--cp-border, rgba(0, 0, 0, 0.08)) !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.16) !important;
+    background-color: var(--cp-card-bg, #FFFFFF) !important;
+    color: var(--cp-text-main, #111827) !important;
+    overflow: hidden;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+[data-theme="dark"] .ad-modal-content,
+.theme-dark .ad-modal-content {
+    background-color: #141C2E !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45) !important;
+    color: #F8FAFC !important;
+}
+
+/* Modal Header */
+.ad-modal-header {
+    padding: 22px 28px !important;
+    border-bottom: 1px solid var(--cp-border, #E2E8F0) !important;
+    background: var(--cp-card-bg, #FFFFFF) !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+[data-theme="dark"] .ad-modal-header,
+.theme-dark .ad-modal-header {
+    background: #141C2E !important;
+    border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.ad-modal-header-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--cp-primary-subtle, #F4F0FF);
+    color: var(--cp-primary, #7355F7);
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba(115, 85, 247, 0.12);
+}
+
+[data-theme="dark"] .ad-modal-header-icon,
+.theme-dark .ad-modal-header-icon {
+    background-color: rgba(115, 85, 247, 0.18);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.ad-modal-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--cp-text-main, #0F172A);
+    margin-bottom: 4px;
+    line-height: 1.25;
+}
+
+.ad-modal-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--cp-text-muted, #64748B);
+}
+
+.ad-modal-ref-tag {
+    background-color: var(--cp-card-subtle, #F8FAFC);
+    border: 1px solid var(--cp-border, #E2E8F0);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-family: monospace;
+    font-weight: 600;
+    color: var(--cp-text-muted, #475569);
+}
+
+[data-theme="dark"] .ad-modal-ref-tag,
+.theme-dark .ad-modal-ref-tag {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #94A3B8;
+}
+
+/* Modal Body */
+.ad-modal-body {
+    padding: 24px 28px !important;
+    background-color: var(--cp-card-bg, #FFFFFF);
+    color: var(--cp-text-main, #0F172A);
+    max-height: 78vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+[data-theme="dark"] .ad-modal-body,
+.theme-dark .ad-modal-body {
+    background-color: #141C2E;
+    color: #F8FAFC;
+}
+
+/* Executive Snapshot Hero Strip */
+.ad-modal-hero-strip {
+    background-color: var(--cp-card-subtle, #F8FAFC);
+    border: 1px solid var(--cp-border, #E2E8F0);
+    border-radius: 20px;
+    padding: 18px 22px;
+    margin-bottom: 22px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 16px;
+    align-items: center;
+}
+
+[data-theme="dark"] .ad-modal-hero-strip,
+.theme-dark .ad-modal-hero-strip {
+    background-color: #1A243B;
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.ad-modal-hero-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.ad-modal-hero-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--cp-text-light, #64748B);
+}
+
+.ad-modal-hero-val {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--cp-text-main, #0F172A);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Modal Detail Cards */
+.ad-modal-card {
+    background-color: var(--cp-card-subtle, #F8FAFC);
+    border: 1px solid var(--cp-border, #E2E8F0);
+    border-radius: 20px;
+    padding: 20px 22px;
+    height: 100%;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-theme="dark"] .ad-modal-card,
+.theme-dark .ad-modal-card {
+    background-color: #1A243B;
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.ad-modal-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.05));
+}
+
+[data-theme="dark"] .ad-modal-card-header,
+.theme-dark .ad-modal-card-header {
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.ad-modal-card-icon-pill {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    background-color: var(--cp-primary-subtle, #F4F0FF);
+    color: var(--cp-primary, #7355F7);
+    flex-shrink: 0;
+}
+
+[data-theme="dark"] .ad-modal-card-icon-pill,
+.theme-dark .ad-modal-card-icon-pill {
+    background-color: rgba(115, 85, 247, 0.16);
+}
+
+.ad-modal-card-title {
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--cp-text-main, #0F172A);
+    margin: 0;
+}
+
+/* Modal Info Fields */
+.ad-modal-field {
+    margin-bottom: 14px;
+}
+
+.ad-modal-field:last-child {
+    margin-bottom: 0;
+}
+
+.ad-modal-field-label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--cp-text-muted, #64748B);
+    margin-bottom: 3px;
+    letter-spacing: 0.01em;
+}
+
+.ad-modal-field-value {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--cp-text-main, #0F172A);
+    line-height: 1.45;
+    word-break: break-word;
+}
+
+.ad-modal-field-value a {
+    color: var(--cp-primary, #7355F7);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.15s ease;
+}
+
+.ad-modal-field-value a:hover {
+    color: var(--cp-primary-hover, #5B3CE6);
+    text-decoration: underline;
+}
+
+/* Description Text Box */
+.ad-modal-desc-box {
+    background-color: var(--cp-card-bg, #FFFFFF);
+    border: 1px solid var(--cp-border, #E2E8F0);
+    border-radius: 14px;
+    padding: 16px 18px;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--cp-text-main, #0F172A);
+    word-break: break-word;
+}
+
+[data-theme="dark"] .ad-modal-desc-box,
+.theme-dark .ad-modal-desc-box {
+    background-color: #141C2E;
+    border-color: rgba(255, 255, 255, 0.07);
+    color: #F8FAFC;
+}
+
+/* Interactive Status Switcher Strip */
+.ad-modal-status-strip {
+    background-color: var(--cp-card-subtle, #F8FAFC);
+    border: 1px solid var(--cp-border, #E2E8F0);
+    border-radius: 20px;
+    padding: 18px 22px;
+}
+
+[data-theme="dark"] .ad-modal-status-strip,
+.theme-dark .ad-modal-status-strip {
+    background-color: #1A243B;
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.ad-modal-status-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.ad-modal-status-btn {
+    border-radius: 9999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 7px 18px;
+    border: 1px solid var(--cp-border, #E2E8F0);
+    background-color: var(--cp-card-bg, #FFFFFF);
+    color: var(--cp-text-main, #0F172A);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+[data-theme="dark"] .ad-modal-status-btn,
+.theme-dark .ad-modal-status-btn {
+    background-color: #141C2E;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #E2E8F0;
+}
+
+.ad-modal-status-btn:hover {
+    border-color: var(--cp-primary, #7355F7);
+    background-color: var(--cp-card-hover, #F1F5F9);
+}
+
+[data-theme="dark"] .ad-modal-status-btn:hover,
+.theme-dark .ad-modal-status-btn:hover {
+    background-color: #222F4A;
+}
+
+.ad-modal-status-btn.active {
+    background-color: #121417;
+    color: #FFFFFF;
+    border-color: #121417;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .ad-modal-status-btn.active,
+.theme-dark .ad-modal-status-btn.active {
+    background-color: #7355F7;
+    border-color: #7355F7;
+    color: #FFFFFF;
+    box-shadow: 0 4px 14px rgba(115, 85, 247, 0.35);
+}
+
+/* Modal Footer */
+.ad-modal-footer {
+    padding: 18px 28px !important;
+    border-top: 1px solid var(--cp-border, #E2E8F0) !important;
+    background-color: var(--cp-card-bg, #FFFFFF) !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+[data-theme="dark"] .ad-modal-footer,
+.theme-dark .ad-modal-footer {
+    background-color: #141C2E !important;
+    border-top-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.ad-modal-btn-archive {
+    border: 1px solid rgba(239, 68, 68, 0.3) !important;
+    background-color: rgba(239, 68, 68, 0.06) !important;
+    color: #EF4444 !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    border-radius: 9999px !important;
+    padding: 8px 20px !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.ad-modal-btn-archive:hover {
+    background-color: #EF4444 !important;
+    color: #FFFFFF !important;
+    border-color: #EF4444 !important;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
+
+.ad-modal-btn-close {
+    border-radius: 9999px !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    padding: 8px 24px !important;
+    border: 1px solid var(--cp-border, #E2E8F0) !important;
+    background-color: var(--cp-card-bg, #FFFFFF) !important;
+    color: var(--cp-text-main, #0F172A) !important;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+[data-theme="dark"] .ad-modal-btn-close,
+.theme-dark .ad-modal-btn-close {
+    background-color: #1A243B !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: #E2E8F0 !important;
+}
+
+.ad-modal-btn-close:hover {
+    background-color: var(--cp-card-hover, #F1F5F9) !important;
+    border-color: var(--cp-border-highlight, #CBD5E1) !important;
+}
+
