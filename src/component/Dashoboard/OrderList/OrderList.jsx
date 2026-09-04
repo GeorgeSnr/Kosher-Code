@@ -79,80 +79,106 @@ const OrderList = () => {
     const progressCount = orders.filter(o => o.status === 'In Progress').length;
     const doneCount = orders.filter(o => o.status === 'Done' || o.status === 'Completed').length;
 
+    const handleExport = () => {
+        const jsonString = `data:text/json;charset=utf-8,${encodeURIComponent(
+            JSON.stringify(orders, null, 2)
+        )}`;
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.setAttribute('href', jsonString);
+        downloadAnchor.setAttribute('download', `kosher_inbound_requests_${Date.now()}.json`);
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+        toast.success('Exporting inquiries report...');
+    };
+
     return (
-        <div className="p-1 p-sm-2">
-            {/* Header */}
-            <div className="d-flex flex-wrap align-items-center justify-content-between pb-3 mb-4 border-bottom gap-2" style={{ borderColor: 'var(--cp-border)' }}>
+        <div className="p-1 p-sm-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            {/* Header with Clean Action Controls */}
+            <div className="d-flex flex-wrap align-items-center justify-content-between pb-3 mb-4 border-bottom gap-3" style={{ borderColor: 'var(--cp-border-subtle, var(--cp-border))' }}>
                 <div>
-                    <h4 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)' }}>Incoming Solution Requests & Engagements</h4>
-                    <p className="text-muted mb-0 small">Admin Control Panel: Review client booking inquiries, adjust project statuses, and manage contracts.</p>
+                    <h4 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)', letterSpacing: '-0.01em' }}>
+                        Inbound Solution Requests & Pipeline
+                    </h4>
+                    <p className="text-muted mb-0 small">Review incoming client requests, update execution statuses, and inspect scopes.</p>
                 </div>
-                <div className="d-flex align-items-center gap-2">
-                    <span className="badge px-3 py-2" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', border: '1px solid var(--cp-border-highlight)', fontSize: '0.85rem' }}>
-                        🛡️ Administrator Mode
+                <div className="d-flex align-items-center gap-2.5">
+                    <button 
+                        type="button" 
+                        className="btn btn-dark btn-sm rounded-pill px-3.5 py-2 fw-semibold d-inline-flex align-items-center gap-2"
+                        onClick={handleExport}
+                        style={{ backgroundColor: '#121417', borderColor: '#121417', fontSize: '0.82rem' }}
+                    >
+                        <span>Export</span>
+                    </button>
+                    <span className="badge rounded-pill px-3.5 py-2 fw-semibold" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', border: '1px solid var(--cp-border-highlight)', fontSize: '0.82rem' }}>
+                        🛡️ Executive Control
                     </span>
                 </div>
             </div>
 
-            {/* Quick Metrics Cards */}
+            {/* Quick Metrics Cards (Rounded 24px + Circular Badges) */}
             <Row className="g-3.5 mb-4">
                 <Col xs={6} md={3}>
                     <div className="p-4 admin-kpi-card h-100">
                         <div className="admin-kpi-bar" style={{ backgroundColor: '#7355F7' }}></div>
                         <div className="d-flex justify-content-between align-items-start mb-3">
-                            <div className="d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', borderRadius: '8px', backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)', fontSize: '1.15rem' }}>
+                            <div className="d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)', fontSize: '1.15rem' }}>
                                 <FontAwesomeIcon icon={faInbox} />
                             </div>
-                            <span className="badge px-2.5 py-1" style={{ backgroundColor: 'var(--cp-card-subtle)', color: 'var(--cp-text-muted)', border: '1px solid var(--cp-border)', fontSize: '0.72rem' }}>Total</span>
+                            <span className="badge rounded-pill px-3 py-1" style={{ backgroundColor: 'var(--cp-card-subtle)', color: 'var(--cp-text-muted)', border: '1px solid var(--cp-border)', fontSize: '0.74rem' }}>Total</span>
                         </div>
                         <span className="admin-kpi-label">TOTAL REQUESTS</span>
                         <h3 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{orders.length}</h3>
                     </div>
                 </Col>
+
                 <Col xs={6} md={3}>
                     <div className="p-4 admin-kpi-card h-100">
                         <div className="admin-kpi-bar" style={{ backgroundColor: '#F59E0B' }}></div>
                         <div className="d-flex justify-content-between align-items-start mb-3">
-                            <div className="d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', borderRadius: '8px', backgroundColor: 'var(--status-pending-bg)', color: 'var(--status-pending-text)', fontSize: '1.15rem' }}>
+                            <div className="d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'var(--status-pending-bg)', color: 'var(--status-pending-text)', fontSize: '1.15rem' }}>
                                 <FontAwesomeIcon icon={faClock} />
                             </div>
-                            <span className="badge px-2.5 py-1 badge-status-pending" style={{ fontSize: '0.72rem' }}>Action Req.</span>
+                            <span className="badge rounded-pill px-3 py-1 badge-status-pending" style={{ fontSize: '0.74rem' }}>Action Req.</span>
                         </div>
                         <span className="admin-kpi-label">PENDING REVIEW</span>
                         <h3 className="fw-bold mb-0" style={{ color: 'var(--status-pending-text)' }}>{pendingCount}</h3>
                     </div>
                 </Col>
+
                 <Col xs={6} md={3}>
                     <div className="p-4 admin-kpi-card h-100">
                         <div className="admin-kpi-bar" style={{ backgroundColor: '#3B82F6' }}></div>
                         <div className="d-flex justify-content-between align-items-start mb-3">
-                            <div className="d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', borderRadius: '8px', backgroundColor: 'var(--status-progress-bg)', color: 'var(--status-progress-text)', fontSize: '1.15rem' }}>
+                            <div className="d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'var(--status-progress-bg)', color: 'var(--status-progress-text)', fontSize: '1.15rem' }}>
                                 <FontAwesomeIcon icon={faSpinner} />
                             </div>
-                            <span className="badge px-2.5 py-1 badge-status-progress" style={{ fontSize: '0.72rem' }}>In Sprint</span>
+                            <span className="badge rounded-pill px-3 py-1 badge-status-progress" style={{ fontSize: '0.74rem' }}>In Sprint</span>
                         </div>
                         <span className="admin-kpi-label">IN PROGRESS</span>
                         <h3 className="fw-bold mb-0" style={{ color: 'var(--status-progress-text)' }}>{progressCount}</h3>
                     </div>
                 </Col>
+
                 <Col xs={6} md={3}>
                     <div className="p-4 admin-kpi-card h-100">
                         <div className="admin-kpi-bar" style={{ backgroundColor: '#10B981' }}></div>
                         <div className="d-flex justify-content-between align-items-start mb-3">
-                            <div className="d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', borderRadius: '8px', backgroundColor: 'var(--status-done-bg)', color: 'var(--status-done-text)', fontSize: '1.15rem' }}>
+                            <div className="d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'var(--status-done-bg)', color: 'var(--status-done-text)', fontSize: '1.15rem' }}>
                                 <FontAwesomeIcon icon={faCheckDouble} />
                             </div>
-                            <span className="badge px-2.5 py-1 badge-status-done" style={{ fontSize: '0.72rem' }}>Fulfilled</span>
+                            <span className="badge rounded-pill px-3 py-1 badge-status-done" style={{ fontSize: '0.74rem' }}>Fulfilled</span>
                         </div>
-                        <span className="admin-kpi-label">COMPLETED / DONE</span>
+                        <span className="admin-kpi-label">COMPLETED DELIVERIES</span>
                         <h3 className="fw-bold mb-0" style={{ color: 'var(--status-done-text)' }}>{doneCount}</h3>
                     </div>
                 </Col>
             </Row>
 
-            {/* Filter & Search Bar */}
-            <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4 cp-card p-3.5">
-                <div className="d-flex flex-wrap gap-2.5 gap-sm-3">
+            {/* Filter & Search Bar with Checked Pill Spacing */}
+            <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4 cp-card p-3.5" style={{ borderRadius: '24px' }}>
+                <div className="d-flex flex-wrap gap-2">
                     {['All', 'Pending', 'In Review', 'In Progress', 'Done'].map(st => {
                         const isActive = filterStatus === st;
                         const count = st === 'All' ? orders.length : orders.filter(o => o.status === st).length;
@@ -170,13 +196,13 @@ const OrderList = () => {
                 </div>
 
                 <div className="input-group" style={{ maxWidth: '320px' }}>
-                    <span className="input-group-text cp-input border-end-0 px-3" style={{ borderRadius: '6px 0 0 6px', color: 'var(--cp-text-muted)' }}>
+                    <span className="input-group-text cp-input border-end-0 px-3" style={{ borderRadius: '9999px 0 0 9999px', color: 'var(--cp-text-muted)' }}>
                         <FontAwesomeIcon icon={faSearch} style={{ fontSize: '0.85rem' }} />
                     </span>
                     <input
                         type="text"
                         className="form-control form-control-sm cp-input border-start-0 py-2"
-                        style={{ borderRadius: '0 6px 6px 0' }}
+                        style={{ borderRadius: '0 9999px 9999px 0' }}
                         placeholder="Search client, service, email..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
@@ -184,15 +210,15 @@ const OrderList = () => {
                 </div>
             </div>
 
-            {/* Orders Table */}
-            <div className="cp-card p-4" style={{ borderRadius: '8px' }}>
+            {/* Inbound Orders Table Container */}
+            <div className="cp-card p-4 p-md-4.5" style={{ borderRadius: '24px' }}>
                 <div className="d-flex justify-content-between align-items-center mb-3.5">
                     <div>
-                        <h5 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>Pipeline & Inquiries List</h5>
-                        <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.82rem' }}>Detailed breakdown of incoming commercial proposals and status workflows</small>
+                        <h5 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)', letterSpacing: '-0.01em' }}>Live Incoming Client Orders</h5>
+                        <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.82rem' }}>Update statuses to trigger live client portal notifications</small>
                     </div>
                     {filteredOrders.length > 0 && (
-                        <span className="badge px-2.5 py-1" style={{ backgroundColor: 'var(--cp-card-subtle)', color: 'var(--cp-text-muted)', border: '1px solid var(--cp-border)' }}>
+                        <span className="badge rounded-pill px-3 py-1.5" style={{ backgroundColor: 'var(--cp-card-subtle)', color: 'var(--cp-text-muted)', border: '1px solid var(--cp-border)', fontSize: '0.78rem' }}>
                             Showing {filteredOrders.length} {filteredOrders.length === 1 ? 'record' : 'records'}
                         </span>
                     )}
@@ -200,21 +226,21 @@ const OrderList = () => {
 
                 {filteredOrders.length === 0 ? (
                     <div className="text-center py-5">
-                        <div className="d-inline-flex align-items-center justify-content-center mb-3" style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: 'var(--cp-card-subtle)', color: 'var(--cp-text-muted)' }}>
-                            <FontAwesomeIcon icon={faInbox} style={{ fontSize: '1.25rem' }} />
+                        <div className="d-inline-flex align-items-center justify-content-center mb-3" style={{ width: '52px', height: '52px', borderRadius: '50%', backgroundColor: 'var(--cp-card-subtle)', color: 'var(--cp-text-muted)' }}>
+                            <FontAwesomeIcon icon={faInbox} style={{ fontSize: '1.35rem' }} />
                         </div>
-                        <p className="fw-semibold mb-0" style={{ color: 'var(--cp-text-muted)' }}>No booking requests match the selected filter.</p>
+                        <p className="fw-semibold mb-0" style={{ color: 'var(--cp-text-muted)' }}>No booking requests found matching your filter criteria.</p>
                     </div>
                 ) : (
                     <div className="table-responsive">
                         <Table hover className="align-middle mb-0 cp-table">
                             <thead>
                                 <tr>
-                                    <th className="py-3 text-uppercase small fw-bold" style={{ letterSpacing: '0.04em' }}>Client & Institution</th>
-                                    <th className="py-3 text-uppercase small fw-bold" style={{ letterSpacing: '0.04em' }}>Contact Info</th>
+                                    <th className="py-3 text-uppercase small fw-bold" style={{ letterSpacing: '0.04em' }}>Client & Organization</th>
+                                    <th className="py-3 text-uppercase small fw-bold" style={{ letterSpacing: '0.04em' }}>Contact Details</th>
                                     <th className="py-3 text-uppercase small fw-bold" style={{ letterSpacing: '0.04em' }}>Solution & Region</th>
-                                    <th className="py-3 text-uppercase small fw-bold" style={{ letterSpacing: '0.04em' }}>Budget / Model</th>
-                                    <th className="py-3 text-uppercase small fw-bold" style={{ letterSpacing: '0.04em' }}>Live Status</th>
+                                    <th className="py-3 text-uppercase small fw-bold" style={{ letterSpacing: '0.04em' }}>Pricing Model</th>
+                                    <th className="py-3 text-uppercase small fw-bold" style={{ letterSpacing: '0.04em' }}>Status Update</th>
                                     <th className="py-3 text-uppercase small fw-bold text-end" style={{ letterSpacing: '0.04em' }}>Action</th>
                                 </tr>
                             </thead>

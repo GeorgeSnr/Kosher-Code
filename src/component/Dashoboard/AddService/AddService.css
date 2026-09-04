@@ -5,24 +5,77 @@
     color: var(--cp-text-main, #0F172A);
 }
 
-.uploadBtn {
-    color: var(--cp-primary, #7355F7);
-    border: 1px dashed var(--cp-primary, #7355F7);
-    background-color: var(--cp-card-subtle, #FAF8FF);
-    padding: 8px 20px;
-    border-radius: 4px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    outline: 0;
-    transition: 0.25s ease;
+.add-service-card {
+    border-radius: 24px !important;
+    background-color: var(--cp-card-bg, #FFFFFF) !important;
+    border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.06)) !important;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04) !important;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
 }
 
-.uploadBtn:hover {
-    color: var(--cp-primary-hover, #4B24F5);
-    background-color: var(--cp-primary-subtle, rgba(115, 85, 247, 0.15));
+.upload-dropzone {
+    border: 2px dashed var(--cp-border, #E2E8F0);
+    border-radius: 18px;
+    background-color: var(--cp-card-subtle, #F8FAFC);
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.upload-dropzone:hover {
+    border-color: var(--cp-primary, #7355F7);
+    background-color: var(--cp-primary-subtle, rgba(115, 85, 247, 0.06));
+}
+
+.upload-icon-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--cp-card-bg, #FFFFFF);
+    color: var(--cp-primary, #7355F7);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.upload-preview-box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 18px;
+    background-color: var(--cp-card-subtle, #F8FAFC);
+    border: 1px solid var(--cp-border, #E2E8F0);
+    border-radius: 16px;
+}
+
+.upload-preview-img {
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+    object-fit: contain;
+    background-color: #FFFFFF;
+    padding: 6px;
+    border: 1px solid var(--cp-border, #E2E8F0);
 }
 
 .form-label {
     margin-bottom: 0.5rem !important;
     color: var(--cp-text-main, #0F172A) !important;
+    font-size: 0.86rem !important;
+    font-weight: 600 !important;
 }
+
+.form-control, .form-select {
+    border-radius: 14px !important;
+    font-size: 0.88rem !important;
+    padding: 12px 18px !important;
+}
+

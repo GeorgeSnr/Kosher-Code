@@ -100,59 +100,108 @@ const MakeAdmin = () => {
     };
 
     return (
-        <div className="p-1 p-sm-2">
+        <div className="p-1 p-sm-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
             {/* Top Navigation Tabs */}
-            <div className="d-flex flex-wrap gap-2.5 gap-sm-3 mb-4">
+            <div className="d-flex flex-wrap gap-2 gap-sm-3 mb-4">
                 <button
                     type="button"
-                    className={`btn btn-sm px-3 py-2 fw-semibold d-inline-flex align-items-center gap-2 ${activeTab === 'admins' ? 'btn-primary' : 'btn-outline-secondary'}`}
-                    style={{ borderRadius: '4px', fontSize: '0.85rem' }}
+                    className={`btn rounded-pill px-4 py-2 fw-semibold d-inline-flex align-items-center gap-2 border-0 ${activeTab === 'admins' ? 'text-white' : ''}`}
+                    style={{ 
+                        backgroundColor: activeTab === 'admins' ? '#121417' : 'var(--cp-card-subtle)', 
+                        color: activeTab === 'admins' ? '#FFFFFF' : 'var(--cp-text-muted)',
+                        fontSize: '0.84rem' 
+                    }}
                     onClick={() => setActiveTab('admins')}
                 >
-                    <FontAwesomeIcon icon={faUserShield} /> Admin Team ({admins.length})
+                    <FontAwesomeIcon icon={faUserShield} style={{ color: activeTab === 'admins' ? 'var(--cp-primary)' : 'inherit' }} /> 
+                    Admin Team ({admins.length})
                 </button>
                 <button
                     type="button"
-                    className={`btn btn-sm px-3 py-2 fw-semibold d-inline-flex align-items-center gap-2 ${activeTab === 'users' ? 'btn-primary' : 'btn-outline-secondary'}`}
-                    style={{ borderRadius: '4px', fontSize: '0.85rem' }}
+                    className={`btn rounded-pill px-4 py-2 fw-semibold d-inline-flex align-items-center gap-2 border-0 ${activeTab === 'users' ? 'text-white' : ''}`}
+                    style={{ 
+                        backgroundColor: activeTab === 'users' ? '#121417' : 'var(--cp-card-subtle)', 
+                        color: activeTab === 'users' ? '#FFFFFF' : 'var(--cp-text-muted)',
+                        fontSize: '0.84rem' 
+                    }}
                     onClick={() => setActiveTab('users')}
                 >
-                    <FontAwesomeIcon icon={faUsers} /> Firestore Users ({users.length})
+                    <FontAwesomeIcon icon={faUsers} style={{ color: activeTab === 'users' ? '#3B82F6' : 'inherit' }} /> 
+                    Firestore Users ({users.length})
                 </button>
                 <button
                     type="button"
-                    className={`btn btn-sm px-3 py-2 fw-semibold d-inline-flex align-items-center gap-2 ${activeTab === 'contacts' ? 'btn-primary' : 'btn-outline-secondary'}`}
-                    style={{ borderRadius: '4px', fontSize: '0.85rem' }}
+                    className={`btn rounded-pill px-4 py-2 fw-semibold d-inline-flex align-items-center gap-2 border-0 ${activeTab === 'contacts' ? 'text-white' : ''}`}
+                    style={{ 
+                        backgroundColor: activeTab === 'contacts' ? '#121417' : 'var(--cp-card-subtle)', 
+                        color: activeTab === 'contacts' ? '#FFFFFF' : 'var(--cp-text-muted)',
+                        fontSize: '0.84rem' 
+                    }}
                     onClick={() => setActiveTab('contacts')}
                 >
-                    <FontAwesomeIcon icon={faEnvelopeOpenText} /> Inbound Inquiries ({contacts.length})
+                    <FontAwesomeIcon icon={faEnvelopeOpenText} style={{ color: activeTab === 'contacts' ? '#EC4899' : 'inherit' }} /> 
+                    Inquiries ({contacts.length})
                 </button>
                 <button
                     type="button"
-                    className={`btn btn-sm px-3 py-2 fw-semibold d-inline-flex align-items-center gap-2 ${activeTab === 'database' ? 'btn-primary' : 'btn-outline-secondary'}`}
-                    style={{ borderRadius: '4px', fontSize: '0.85rem' }}
+                    className={`btn rounded-pill px-4 py-2 fw-semibold d-inline-flex align-items-center gap-2 border-0 ${activeTab === 'database' ? 'text-white' : ''}`}
+                    style={{ 
+                        backgroundColor: activeTab === 'database' ? '#121417' : 'var(--cp-card-subtle)', 
+                        color: activeTab === 'database' ? '#FFFFFF' : 'var(--cp-text-muted)',
+                        fontSize: '0.84rem' 
+                    }}
                     onClick={() => setActiveTab('database')}
                 >
-                    <FontAwesomeIcon icon={faDatabase} /> Firebase Database & Sync
+                    <FontAwesomeIcon icon={faDatabase} style={{ color: activeTab === 'database' ? '#10B981' : 'inherit' }} /> 
+                    Firebase Cloud Sync
                 </button>
             </div>
 
             {/* TAB 1: Admins Management */}
             {activeTab === 'admins' && (
                 <>
-                    <div className="cp-card p-4 p-md-5 mb-4" style={{ borderRadius: '8px' }}>
-                        <h5 className="fw-bold mb-1.5" style={{ color: 'var(--cp-text-main)' }}>Add Platform Administrator</h5>
-                        <p className="small mb-4" style={{ color: 'var(--cp-text-muted)' }}>Grant executive & technical privileges to manage incoming solution orders and configure enterprise settings.</p>
+                    <div 
+                        className="p-4 p-md-5 mb-4"
+                        style={{
+                            backgroundColor: 'var(--cp-card-bg, #FFFFFF)',
+                            borderRadius: '24px',
+                            border: '1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.06))',
+                            boxShadow: '0 4px 20px -2px rgba(15, 23, 42, 0.04)'
+                        }}
+                    >
+                        <div className="d-flex align-items-center gap-2 mb-1.5">
+                            <span 
+                                className="badge rounded-pill px-3 py-1"
+                                style={{ 
+                                    backgroundColor: 'var(--cp-primary-subtle)', 
+                                    color: 'var(--cp-primary-text)',
+                                    fontSize: '0.74rem',
+                                    fontWeight: 700,
+                                    letterSpacing: '0.04em',
+                                    textTransform: 'uppercase'
+                                }}
+                            >
+                                Privilege Escalation
+                            </span>
+                        </div>
+                        <h4 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)', letterSpacing: '-0.02em' }}>
+                            Add Platform Administrator
+                        </h4>
+                        <p className="small mb-4" style={{ color: 'var(--cp-text-muted)' }}>
+                            Grant executive & technical privileges to manage incoming solution orders and configure enterprise settings.
+                        </p>
 
                         <Form onSubmit={handleSubmit(onSubmit)}>
                             <Row className="align-items-end g-3">
                                 <Col md={8}>
                                     <Form.Group>
-                                        <Form.Label className="fw-semibold mb-2" style={{ color: 'var(--cp-text-main)', fontSize: '0.9rem' }}>Administrator Email Address *</Form.Label>
+                                        <Form.Label className="fw-semibold mb-2" style={{ color: 'var(--cp-text-main)', fontSize: '0.86rem' }}>
+                                            Administrator Email Address *
+                                        </Form.Label>
                                         <Form.Control
                                             type="email"
                                             className="cp-input"
-                                            style={{ padding: '0.85rem 1rem', borderRadius: '6px' }}
+                                            style={{ borderRadius: '14px', padding: '12px 18px', fontSize: '0.88rem' }}
                                             {...register("email", { required: true })}
                                             placeholder="e.g. director@koshercode.ug"
                                         />
@@ -162,43 +211,91 @@ const MakeAdmin = () => {
                                 <Col md={4}>
                                     <button 
                                         type="submit" 
-                                        className="btn w-100 text-white" 
-                                        style={{ backgroundColor: 'var(--cp-primary)', borderRadius: '6px', fontWeight: 600, padding: '0.85rem 1rem', border: 'none' }}
+                                        className="btn w-100 text-white rounded-pill d-inline-flex align-items-center justify-content-center gap-2" 
+                                        style={{ 
+                                            backgroundColor: '#121417', 
+                                            fontWeight: 600, 
+                                            padding: '12px 18px', 
+                                            border: 'none',
+                                            fontSize: '0.88rem'
+                                        }}
                                     >
-                                        Grant Admin Role
+                                        <FontAwesomeIcon icon={faUserShield} /> Grant Admin Privileges
                                     </button>
                                 </Col>
                             </Row>
                         </Form>
                     </div>
 
-                    <div className="cp-card p-4 p-md-5" style={{ borderRadius: '8px' }}>
-                        <h6 className="fw-bold mb-3.5" style={{ color: 'var(--cp-text-main)' }}>Active Administrators ({admins.length})</h6>
+                    <div 
+                        className="p-4 p-md-5"
+                        style={{
+                            backgroundColor: 'var(--cp-card-bg, #FFFFFF)',
+                            borderRadius: '24px',
+                            border: '1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.06))',
+                            boxShadow: '0 4px 20px -2px rgba(15, 23, 42, 0.04)'
+                        }}
+                    >
+                        <div className="d-flex justify-content-between align-items-center mb-3">
+                            <h5 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)', letterSpacing: '-0.01em' }}>
+                                Active Superadministrators ({admins.length})
+                            </h5>
+                            <span 
+                                className="badge rounded-pill px-3 py-1"
+                                style={{
+                                    backgroundColor: 'var(--cp-card-subtle)',
+                                    color: 'var(--cp-text-muted)',
+                                    fontSize: '0.75rem',
+                                    fontWeight: 600
+                                }}
+                            >
+                                Executive Access Only
+                            </span>
+                        </div>
                         <div className="table-responsive">
                             <Table hover className="align-middle mb-0 cp-table">
                                 <thead>
                                     <tr>
-                                        <th className="py-3 px-3">Admin Email</th>
-                                        <th className="py-3 px-3">Role Level</th>
-                                        <th className="py-3 px-3 text-end">Status</th>
+                                        <th className="py-3 px-3" style={{ borderTop: 'none' }}>Admin Account</th>
+                                        <th className="py-3 px-3" style={{ borderTop: 'none' }}>Role Clearance</th>
+                                        <th className="py-3 px-3 text-end" style={{ borderTop: 'none' }}>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {admins.map((adm, i) => (
                                         <tr key={i}>
                                             <td className="fw-semibold py-3 px-3" style={{ color: 'var(--cp-text-main)' }}>
-                                                <div className="d-flex align-items-center gap-2.5">
+                                                <div className="d-flex align-items-center gap-3">
                                                     <UserAvatar 
                                                         name={adm}
                                                         role="admin"
                                                         size="xs"
                                                         ring={false}
                                                     />
-                                                    <span>{adm}</span>
+                                                    <span style={{ fontSize: '0.9rem' }}>{adm}</span>
                                                 </div>
                                             </td>
-                                            <td className="py-3 px-3"><span className="badge px-2.5 py-1 badge-status-review">Full Superadmin</span></td>
-                                            <td className="py-3 px-3 text-end"><span className="badge px-2.5 py-1 badge-status-done">● Active</span></td>
+                                            <td className="py-3 px-3">
+                                                <span 
+                                                    className="badge rounded-pill px-3 py-1.5"
+                                                    style={{
+                                                        backgroundColor: 'var(--cp-primary-subtle)',
+                                                        color: 'var(--cp-primary-text)',
+                                                        fontSize: '0.76rem',
+                                                        fontWeight: 600
+                                                    }}
+                                                >
+                                                    Executive Superadmin
+                                                </span>
+                                            </td>
+                                            <td className="py-3 px-3 text-end">
+                                                <span 
+                                                    className="badge rounded-pill px-3 py-1.5 badge-status-done"
+                                                    style={{ fontSize: '0.76rem', fontWeight: 600 }}
+                                                >
+                                                    ● Active
+                                                </span>
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -210,17 +307,51 @@ const MakeAdmin = () => {
 
             {/* TAB 2: Firestore Users */}
             {activeTab === 'users' && (
-                <div className="cp-card p-4 p-md-5" style={{ borderRadius: '8px' }}>
-                    <div className="d-flex justify-content-between align-items-center mb-4">
+                <div 
+                    className="p-4 p-md-5"
+                    style={{
+                        backgroundColor: 'var(--cp-card-bg, #FFFFFF)',
+                        borderRadius: '24px',
+                        border: '1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.06))',
+                        boxShadow: '0 4px 20px -2px rgba(15, 23, 42, 0.04)'
+                    }}
+                >
+                    <div className="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
                         <div>
-                            <h5 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)' }}>Cloud Firestore Registered Users</h5>
-                            <p className="small mb-0" style={{ color: 'var(--cp-text-muted)' }}>Profiles synchronized in real-time across Firebase Authentication and Firestore 'users' collection.</p>
+                            <div className="d-flex align-items-center gap-2 mb-1.5">
+                                <span 
+                                    className="badge rounded-pill px-3 py-1"
+                                    style={{ 
+                                        backgroundColor: 'var(--cp-primary-subtle)', 
+                                        color: 'var(--cp-primary-text)',
+                                        fontSize: '0.74rem',
+                                        fontWeight: 700,
+                                        letterSpacing: '0.04em',
+                                        textTransform: 'uppercase'
+                                    }}
+                                >
+                                    Directory
+                                </span>
+                            </div>
+                            <h4 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)', letterSpacing: '-0.02em' }}>
+                                Cloud Firestore Registered Users ({users.length})
+                            </h4>
+                            <p className="small mb-0" style={{ color: 'var(--cp-text-muted)' }}>
+                                Profiles synchronized in real-time across Firebase Authentication and Firestore 'users' collection.
+                            </p>
                         </div>
-                        <Button size="sm" variant="outline-primary" onClick={loadData}>Refresh</Button>
+                        <Button 
+                            className="btn-sm rounded-pill px-3.5 py-1.5 d-inline-flex align-items-center gap-1.5"
+                            variant="outline-secondary" 
+                            style={{ fontSize: '0.82rem', fontWeight: 600, borderColor: 'var(--cp-border)' }}
+                            onClick={loadData}
+                        >
+                            <FontAwesomeIcon icon={faSyncAlt} /> Refresh List
+                        </Button>
                     </div>
 
                     {users.length === 0 ? (
-                        <div className="text-center py-4">
+                        <div className="text-center py-5">
                             <FontAwesomeIcon icon={faUsers} style={{ fontSize: '2.5rem', color: 'var(--cp-text-muted)' }} className="mb-2" />
                             <p className="fw-semibold mb-0" style={{ color: 'var(--cp-text-muted)' }}>No external users recorded yet. Create an account in the Portal Login to register.</p>
                         </div>
@@ -229,27 +360,30 @@ const MakeAdmin = () => {
                             <Table hover className="align-middle mb-0 cp-table">
                                 <thead>
                                     <tr>
-                                        <th className="py-3 px-3">User & Name</th>
-                                        <th className="py-3 px-3">Institution / Org</th>
-                                        <th className="py-3 px-3">Role</th>
-                                        <th className="py-3 px-3 text-end">Action</th>
+                                        <th className="py-3 px-3" style={{ borderTop: 'none' }}>User & Identity</th>
+                                        <th className="py-3 px-3" style={{ borderTop: 'none' }}>Institution / Org</th>
+                                        <th className="py-3 px-3" style={{ borderTop: 'none' }}>Platform Role</th>
+                                        <th className="py-3 px-3 text-end" style={{ borderTop: 'none' }}>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {users.map((u, idx) => (
                                         <tr key={u.id || idx}>
                                             <td className="fw-semibold py-3 px-3" style={{ color: 'var(--cp-text-main)' }}>
-                                                <div className="d-flex align-items-center gap-2">
+                                                <div className="d-flex align-items-center gap-2.5">
                                                     <UserAvatar name={u.name || u.email} role={u.role} size="xs" />
                                                     <div>
-                                                        <div>{u.name || u.email.split('@')[0]}</div>
-                                                        <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.75rem' }}>{u.email}</small>
+                                                        <div style={{ fontSize: '0.88rem' }}>{u.name || u.email.split('@')[0]}</div>
+                                                        <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.74rem' }}>{u.email}</small>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td className="py-3 px-3 small">{u.institution || '—'}</td>
+                                            <td className="py-3 px-3 small" style={{ color: 'var(--cp-text-muted)' }}>{u.institution || '—'}</td>
                                             <td className="py-3 px-3">
-                                                <span className={`badge px-2.5 py-1 ${u.role === 'admin' ? 'badge-status-review' : 'badge-status-progress'}`}>
+                                                <span 
+                                                    className={`badge rounded-pill px-3 py-1.5 ${u.role === 'admin' ? 'badge-status-review' : 'badge-status-progress'}`}
+                                                    style={{ fontSize: '0.76rem', fontWeight: 600 }}
+                                                >
                                                     {u.role || 'client'}
                                                 </span>
                                             </td>
@@ -258,7 +392,8 @@ const MakeAdmin = () => {
                                                     <Button 
                                                         size="sm" 
                                                         variant="outline-primary"
-                                                        style={{ fontSize: '0.75rem' }}
+                                                        className="rounded-pill px-3 py-1"
+                                                        style={{ fontSize: '0.78rem', fontWeight: 600 }}
                                                         onClick={() => handlePromoteUser(u.email)}
                                                     >
                                                         Promote to Admin
@@ -276,17 +411,51 @@ const MakeAdmin = () => {
 
             {/* TAB 3: Contact Inquiries */}
             {activeTab === 'contacts' && (
-                <div className="cp-card p-4 p-md-5" style={{ borderRadius: '8px' }}>
-                    <div className="d-flex justify-content-between align-items-center mb-4">
+                <div 
+                    className="p-4 p-md-5"
+                    style={{
+                        backgroundColor: 'var(--cp-card-bg, #FFFFFF)',
+                        borderRadius: '24px',
+                        border: '1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.06))',
+                        boxShadow: '0 4px 20px -2px rgba(15, 23, 42, 0.04)'
+                    }}
+                >
+                    <div className="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
                         <div>
-                            <h5 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)' }}>Inbound Enterprise Consultation Requests</h5>
-                            <p className="small mb-0" style={{ color: 'var(--cp-text-muted)' }}>Demo requests and enterprise inquiries submitted through the website Contact form.</p>
+                            <div className="d-flex align-items-center gap-2 mb-1.5">
+                                <span 
+                                    className="badge rounded-pill px-3 py-1"
+                                    style={{ 
+                                        backgroundColor: 'rgba(236, 72, 153, 0.12)', 
+                                        color: '#EC4899',
+                                        fontSize: '0.74rem',
+                                        fontWeight: 700,
+                                        letterSpacing: '0.04em',
+                                        textTransform: 'uppercase'
+                                    }}
+                                >
+                                    Inbound Pipeline
+                                </span>
+                            </div>
+                            <h4 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)', letterSpacing: '-0.02em' }}>
+                                Enterprise Consultation Requests ({contacts.length})
+                            </h4>
+                            <p className="small mb-0" style={{ color: 'var(--cp-text-muted)' }}>
+                                Demo requests and enterprise inquiries submitted through the website Contact form.
+                            </p>
                         </div>
-                        <Button size="sm" variant="outline-primary" onClick={loadData}>Refresh</Button>
+                        <Button 
+                            className="btn-sm rounded-pill px-3.5 py-1.5 d-inline-flex align-items-center gap-1.5"
+                            variant="outline-secondary" 
+                            style={{ fontSize: '0.82rem', fontWeight: 600, borderColor: 'var(--cp-border)' }}
+                            onClick={loadData}
+                        >
+                            <FontAwesomeIcon icon={faSyncAlt} /> Refresh Inquiries
+                        </Button>
                     </div>
 
                     {contacts.length === 0 ? (
-                        <div className="text-center py-4">
+                        <div className="text-center py-5">
                             <FontAwesomeIcon icon={faEnvelopeOpenText} style={{ fontSize: '2.5rem', color: 'var(--cp-text-muted)' }} className="mb-2" />
                             <p className="fw-semibold mb-0" style={{ color: 'var(--cp-text-muted)' }}>No contact inquiries logged yet.</p>
                         </div>
@@ -295,25 +464,25 @@ const MakeAdmin = () => {
                             <Table hover className="align-middle mb-0 cp-table">
                                 <thead>
                                     <tr>
-                                        <th className="py-3 px-3">Contact</th>
-                                        <th className="py-3 px-3">Institution & Region</th>
-                                        <th className="py-3 px-3">Subject & Scope</th>
-                                        <th className="py-3 px-3 text-end">Date</th>
+                                        <th className="py-3 px-3" style={{ borderTop: 'none' }}>Client Contact</th>
+                                        <th className="py-3 px-3" style={{ borderTop: 'none' }}>Institution & Region</th>
+                                        <th className="py-3 px-3" style={{ borderTop: 'none' }}>Subject & Scope</th>
+                                        <th className="py-3 px-3 text-end" style={{ borderTop: 'none' }}>Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {contacts.map((c, idx) => (
                                         <tr key={c._id || idx}>
                                             <td className="fw-semibold py-3 px-3" style={{ color: 'var(--cp-text-main)' }}>
-                                                <div>{c.name}</div>
-                                                <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.75rem' }}>{c.email}</small>
+                                                <div style={{ fontSize: '0.88rem' }}>{c.name}</div>
+                                                <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.74rem' }}>{c.email}</small>
                                             </td>
                                             <td className="py-3 px-3 small">
-                                                <div>{c.institution || 'General'}</div>
+                                                <div style={{ color: 'var(--cp-text-main)', fontWeight: 600 }}>{c.institution || 'General'}</div>
                                                 <small style={{ color: 'var(--cp-text-muted)' }}>{c.region}</small>
                                             </td>
                                             <td className="py-3 px-3 small">
-                                                <div className="fw-semibold">{c.subject}</div>
+                                                <div className="fw-semibold" style={{ color: 'var(--cp-text-main)' }}>{c.subject}</div>
                                                 <small style={{ color: 'var(--cp-text-muted)' }}>{c.description?.substring(0, 60)}...</small>
                                             </td>
                                             <td className="py-3 px-3 text-end small" style={{ color: 'var(--cp-text-muted)' }}>
@@ -330,25 +499,53 @@ const MakeAdmin = () => {
 
             {/* TAB 4: Firebase Database Management & Sync Tool */}
             {activeTab === 'database' && (
-                <div className="cp-card p-4 p-md-5" style={{ borderRadius: '8px' }}>
-                    <div className="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+                <div 
+                    className="p-4 p-md-5"
+                    style={{
+                        backgroundColor: 'var(--cp-card-bg, #FFFFFF)',
+                        borderRadius: '24px',
+                        border: '1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.06))',
+                        boxShadow: '0 4px 20px -2px rgba(15, 23, 42, 0.04)'
+                    }}
+                >
+                    <div className="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
                         <div>
-                            <h5 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)' }}>Cloud Firestore Database Management</h5>
-                            <p className="small mb-0" style={{ color: 'var(--cp-text-muted)' }}>Real-time database health, document collections, and cloud seeding controls.</p>
+                            <div className="d-flex align-items-center gap-2 mb-1.5">
+                                <span 
+                                    className="badge rounded-pill px-3 py-1"
+                                    style={{ 
+                                        backgroundColor: 'rgba(16, 185, 129, 0.12)', 
+                                        color: '#10B981',
+                                        fontSize: '0.74rem',
+                                        fontWeight: 700,
+                                        letterSpacing: '0.04em',
+                                        textTransform: 'uppercase'
+                                    }}
+                                >
+                                    Cloud Architecture
+                                </span>
+                            </div>
+                            <h4 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)', letterSpacing: '-0.02em' }}>
+                                Cloud Firestore Database Infrastructure
+                            </h4>
+                            <p className="small mb-0" style={{ color: 'var(--cp-text-muted)' }}>
+                                Real-time database health, document collections, and cloud seeding controls.
+                            </p>
                         </div>
-                        <div className="d-flex flex-wrap gap-2.5 gap-sm-3">
+                        <div className="d-flex flex-wrap gap-2.5">
                             <Button 
                                 size="sm" 
-                                variant="outline-primary"
+                                variant="outline-secondary"
                                 onClick={loadData}
-                                className="d-flex align-items-center gap-1.5 px-3 py-1.5"
+                                className="rounded-pill px-3.5 py-2 d-flex align-items-center gap-2 border-0"
+                                style={{ backgroundColor: 'var(--cp-card-subtle)', color: 'var(--cp-text-main)', fontWeight: 600, fontSize: '0.82rem' }}
                             >
                                 <FontAwesomeIcon icon={faSyncAlt} /> Refresh Status
                             </Button>
                             <Button 
                                 size="sm" 
-                                className="text-white d-flex align-items-center gap-1.5 px-3 py-1.5"
-                                style={{ backgroundColor: 'var(--cp-primary)', border: 'none' }}
+                                className="rounded-pill px-4 py-2 text-white d-flex align-items-center gap-2 border-0"
+                                style={{ backgroundColor: '#121417', fontWeight: 600, fontSize: '0.82rem' }}
                                 disabled={isSeeding}
                                 onClick={() => handleSeedDatabase(false)}
                             >
@@ -358,22 +555,42 @@ const MakeAdmin = () => {
                     </div>
 
                     {/* Connectivity & Health Status */}
-                    <div className="p-3.5 rounded mb-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                    <div 
+                        className="p-4 mb-4" 
+                        style={{ 
+                            backgroundColor: 'var(--cp-card-subtle)', 
+                            border: '1px solid var(--cp-border)',
+                            borderRadius: '20px'
+                        }}
+                    >
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div className="d-flex align-items-center gap-3">
-                                <div className="p-2.5 rounded d-flex align-items-center justify-content-center" style={{ width: '40px', height: '40px', backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)' }}>
+                                <div 
+                                    className="d-flex align-items-center justify-content-center rounded-circle" 
+                                    style={{ 
+                                        width: '44px', 
+                                        height: '44px', 
+                                        backgroundColor: 'var(--cp-card-bg)', 
+                                        color: 'var(--cp-primary)',
+                                        boxShadow: '0 2px 8px rgba(0,0,0,0.05)'
+                                    }}
+                                >
                                     <FontAwesomeIcon icon={faServer} style={{ fontSize: '1.2rem' }} />
                                 </div>
                                 <div>
-                                    <h6 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>Firebase Project: {connCheck.projectId || 'kosher-code-consulting'}</h6>
-                                    <small style={{ color: 'var(--cp-text-muted)' }}>Status: {connCheck.firestore ? '● Online & Synchronized' : 'Connecting to Firestore...'}</small>
+                                    <h6 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>
+                                        Firebase Project: {connCheck.projectId || 'kosher-code-consulting'}
+                                    </h6>
+                                    <small style={{ color: 'var(--cp-text-muted)' }}>
+                                        Status: {connCheck.firestore ? '● Online & Synchronized' : 'Connecting to Firestore...'}
+                                    </small>
                                 </div>
                             </div>
                             <div className="d-flex gap-2">
-                                <span className="badge px-3 py-2 bg-success bg-opacity-10 text-success d-flex align-items-center gap-1">
+                                <span className="badge rounded-pill px-3 py-2 bg-success bg-opacity-10 text-success d-flex align-items-center gap-1.5 fw-semibold" style={{ fontSize: '0.78rem' }}>
                                     <FontAwesomeIcon icon={faCheckCircle} /> Auth Ready
                                 </span>
-                                <span className="badge px-3 py-2 bg-success bg-opacity-10 text-success d-flex align-items-center gap-1">
+                                <span className="badge rounded-pill px-3 py-2 bg-success bg-opacity-10 text-success d-flex align-items-center gap-1.5 fw-semibold" style={{ fontSize: '0.78rem' }}>
                                     <FontAwesomeIcon icon={faCheckCircle} /> Firestore Connected
                                 </span>
                             </div>
@@ -381,84 +598,130 @@ const MakeAdmin = () => {
                     </div>
 
                     {/* Collection Stats Cards */}
-                    <h6 className="fw-bold mb-3" style={{ color: 'var(--cp-text-main)' }}>Firestore Live Collection Documents</h6>
+                    <h6 className="fw-bold mb-3" style={{ color: 'var(--cp-text-main)' }}>
+                        Firestore Live Collection Documents
+                    </h6>
                     <Row className="g-3 mb-4">
                         <Col xs={6} md={4} lg={2}>
-                            <Card className="h-100 p-3 border text-center" style={{ backgroundColor: 'var(--cp-card-bg)', borderColor: 'var(--cp-border)' }}>
-                                <div className="d-inline-flex align-items-center justify-content-center mb-2 mx-auto" style={{ width: '36px', height: '36px', borderRadius: '6px', backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)' }}>
+                            <Card 
+                                className="h-100 p-3.5 border-0 text-center" 
+                                style={{ 
+                                    backgroundColor: 'var(--cp-card-subtle)', 
+                                    borderRadius: '20px'
+                                }}
+                            >
+                                <div className="d-inline-flex align-items-center justify-content-center mb-2 mx-auto rounded-circle" style={{ width: '40px', height: '40px', backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary)' }}>
                                     <FontAwesomeIcon icon={faLayerGroup} />
                                 </div>
-                                <small className="text-muted fw-bold d-block" style={{ fontSize: '0.72rem' }}>SERVICES</small>
-                                <h4 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{dbStats.services}</h4>
+                                <small className="text-muted fw-bold d-block" style={{ fontSize: '0.72rem', letterSpacing: '0.04em' }}>SERVICES</small>
+                                <h3 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{dbStats.services}</h3>
                                 <small className="text-muted" style={{ fontSize: '0.7rem' }}>collection: services</small>
                             </Card>
                         </Col>
                         <Col xs={6} md={4} lg={2}>
-                            <Card className="h-100 p-3 border text-center" style={{ backgroundColor: 'var(--cp-card-bg)', borderColor: 'var(--cp-border)' }}>
-                                <div className="d-inline-flex align-items-center justify-content-center mb-2 mx-auto" style={{ width: '36px', height: '36px', borderRadius: '6px', backgroundColor: 'rgba(59, 130, 246, 0.12)', color: '#3B82F6' }}>
+                            <Card 
+                                className="h-100 p-3.5 border-0 text-center" 
+                                style={{ 
+                                    backgroundColor: 'var(--cp-card-subtle)', 
+                                    borderRadius: '20px'
+                                }}
+                            >
+                                <div className="d-inline-flex align-items-center justify-content-center mb-2 mx-auto rounded-circle" style={{ width: '40px', height: '40px', backgroundColor: 'rgba(59, 130, 246, 0.12)', color: '#3B82F6' }}>
                                     <FontAwesomeIcon icon={faTags} />
                                 </div>
-                                <small className="text-muted fw-bold d-block" style={{ fontSize: '0.72rem' }}>PRICING</small>
-                                <h4 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{dbStats.pricing}</h4>
+                                <small className="text-muted fw-bold d-block" style={{ fontSize: '0.72rem', letterSpacing: '0.04em' }}>PRICING</small>
+                                <h3 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{dbStats.pricing}</h3>
                                 <small className="text-muted" style={{ fontSize: '0.7rem' }}>collection: pricing</small>
                             </Card>
                         </Col>
                         <Col xs={6} md={4} lg={2}>
-                            <Card className="h-100 p-3 border text-center" style={{ backgroundColor: 'var(--cp-card-bg)', borderColor: 'var(--cp-border)' }}>
-                                <div className="d-inline-flex align-items-center justify-content-center mb-2 mx-auto" style={{ width: '36px', height: '36px', borderRadius: '6px', backgroundColor: 'rgba(16, 185, 129, 0.12)', color: '#10B981' }}>
+                            <Card 
+                                className="h-100 p-3.5 border-0 text-center" 
+                                style={{ 
+                                    backgroundColor: 'var(--cp-card-subtle)', 
+                                    borderRadius: '20px'
+                                }}
+                            >
+                                <div className="d-inline-flex align-items-center justify-content-center mb-2 mx-auto rounded-circle" style={{ width: '40px', height: '40px', backgroundColor: 'rgba(16, 185, 129, 0.12)', color: '#10B981' }}>
                                     <FontAwesomeIcon icon={faComments} />
                                 </div>
-                                <small className="text-muted fw-bold d-block" style={{ fontSize: '0.72rem' }}>REVIEWS</small>
-                                <h4 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{dbStats.reviews}</h4>
+                                <small className="text-muted fw-bold d-block" style={{ fontSize: '0.72rem', letterSpacing: '0.04em' }}>REVIEWS</small>
+                                <h3 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{dbStats.reviews}</h3>
                                 <small className="text-muted" style={{ fontSize: '0.7rem' }}>collection: reviews</small>
                             </Card>
                         </Col>
                         <Col xs={6} md={4} lg={2}>
-                            <Card className="h-100 p-3 border text-center" style={{ backgroundColor: 'var(--cp-card-bg)', borderColor: 'var(--cp-border)' }}>
-                                <div className="d-inline-flex align-items-center justify-content-center mb-2 mx-auto" style={{ width: '36px', height: '36px', borderRadius: '6px', backgroundColor: 'rgba(245, 158, 11, 0.12)', color: '#F59E0B' }}>
+                            <Card 
+                                className="h-100 p-3.5 border-0 text-center" 
+                                style={{ 
+                                    backgroundColor: 'var(--cp-card-subtle)', 
+                                    borderRadius: '20px'
+                                }}
+                            >
+                                <div className="d-inline-flex align-items-center justify-content-center mb-2 mx-auto rounded-circle" style={{ width: '40px', height: '40px', backgroundColor: 'rgba(245, 158, 11, 0.12)', color: '#F59E0B' }}>
                                     <FontAwesomeIcon icon={faShoppingCart} />
                                 </div>
-                                <small className="text-muted fw-bold d-block" style={{ fontSize: '0.72rem' }}>ORDERS</small>
-                                <h4 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{dbStats.orders}</h4>
+                                <small className="text-muted fw-bold d-block" style={{ fontSize: '0.72rem', letterSpacing: '0.04em' }}>ORDERS</small>
+                                <h3 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{dbStats.orders}</h3>
                                 <small className="text-muted" style={{ fontSize: '0.7rem' }}>collection: orders</small>
                             </Card>
                         </Col>
                         <Col xs={6} md={4} lg={2}>
-                            <Card className="h-100 p-3 border text-center" style={{ backgroundColor: 'var(--cp-card-bg)', borderColor: 'var(--cp-border)' }}>
-                                <div className="d-inline-flex align-items-center justify-content-center mb-2 mx-auto" style={{ width: '36px', height: '36px', borderRadius: '6px', backgroundColor: 'rgba(139, 92, 246, 0.12)', color: '#8B5CF6' }}>
+                            <Card 
+                                className="h-100 p-3.5 border-0 text-center" 
+                                style={{ 
+                                    backgroundColor: 'var(--cp-card-subtle)', 
+                                    borderRadius: '20px'
+                                }}
+                            >
+                                <div className="d-inline-flex align-items-center justify-content-center mb-2 mx-auto rounded-circle" style={{ width: '40px', height: '40px', backgroundColor: 'rgba(139, 92, 246, 0.12)', color: '#8B5CF6' }}>
                                     <FontAwesomeIcon icon={faUsers} />
                                 </div>
-                                <small className="text-muted fw-bold d-block" style={{ fontSize: '0.72rem' }}>USERS</small>
-                                <h4 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{dbStats.users}</h4>
+                                <small className="text-muted fw-bold d-block" style={{ fontSize: '0.72rem', letterSpacing: '0.04em' }}>USERS</small>
+                                <h3 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{dbStats.users}</h3>
                                 <small className="text-muted" style={{ fontSize: '0.7rem' }}>collection: users</small>
                             </Card>
                         </Col>
                         <Col xs={6} md={4} lg={2}>
-                            <Card className="h-100 p-3 border text-center" style={{ backgroundColor: 'var(--cp-card-bg)', borderColor: 'var(--cp-border)' }}>
-                                <div className="d-inline-flex align-items-center justify-content-center mb-2 mx-auto" style={{ width: '36px', height: '36px', borderRadius: '6px', backgroundColor: 'rgba(236, 72, 153, 0.12)', color: '#EC4899' }}>
+                            <Card 
+                                className="h-100 p-3.5 border-0 text-center" 
+                                style={{ 
+                                    backgroundColor: 'var(--cp-card-subtle)', 
+                                    borderRadius: '20px'
+                                }}
+                            >
+                                <div className="d-inline-flex align-items-center justify-content-center mb-2 mx-auto rounded-circle" style={{ width: '40px', height: '40px', backgroundColor: 'rgba(236, 72, 153, 0.12)', color: '#EC4899' }}>
                                     <FontAwesomeIcon icon={faEnvelopeOpenText} />
                                 </div>
-                                <small className="text-muted fw-bold d-block" style={{ fontSize: '0.72rem' }}>INQUIRIES</small>
-                                <h4 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{dbStats.contacts}</h4>
+                                <small className="text-muted fw-bold d-block" style={{ fontSize: '0.72rem', letterSpacing: '0.04em' }}>INQUIRIES</small>
+                                <h3 className="fw-bold mb-0" style={{ color: 'var(--cp-text-main)' }}>{dbStats.contacts}</h3>
                                 <small className="text-muted" style={{ fontSize: '0.7rem' }}>collection: contacts</small>
                             </Card>
                         </Col>
                     </Row>
 
                     {/* Actions Box */}
-                    <div className="p-3.5 rounded" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
-                        <h6 className="fw-bold mb-2" style={{ color: 'var(--cp-text-main)' }}>Database Actions & Diagnostics</h6>
-                        <p className="small text-muted mb-3">
+                    <div 
+                        className="p-4" 
+                        style={{ 
+                            backgroundColor: 'var(--cp-card-subtle)', 
+                            border: '1px solid var(--cp-border)',
+                            borderRadius: '20px'
+                        }}
+                    >
+                        <h6 className="fw-bold mb-2" style={{ color: 'var(--cp-text-main)' }}>
+                            Database Actions & Diagnostic Operations
+                        </h6>
+                        <p className="small text-muted mb-3.5">
                             The application reads and writes directly to Cloud Firestore. If you want to populate all catalog collections with the latest comprehensive datasets, click below:
                         </p>
                         <div className="d-flex flex-wrap gap-3">
                             <Button 
-                                variant="primary" 
                                 size="sm" 
                                 disabled={isSeeding}
                                 onClick={() => handleSeedDatabase(false)}
-                                className="px-3.5 py-2 fw-semibold"
-                                style={{ borderRadius: '4px' }}
+                                className="rounded-pill px-4 py-2 text-white border-0 fw-semibold"
+                                style={{ backgroundColor: '#121417', fontSize: '0.84rem' }}
                             >
                                 Populate Missing Firestore Documents
                             </Button>
@@ -466,7 +729,8 @@ const MakeAdmin = () => {
                                 variant="outline-warning" 
                                 size="sm" 
                                 disabled={isSeeding}
-                                className="px-3.5 py-2 fw-semibold"
+                                className="rounded-pill px-4 py-2 fw-semibold"
+                                style={{ fontSize: '0.84rem' }}
                                 onClick={() => {
                                     swal({
                                         title: "Overwrite / Re-seed Database?",
@@ -478,7 +742,6 @@ const MakeAdmin = () => {
                                         if (confirm) handleSeedDatabase(true);
                                     });
                                 }}
-                                style={{ borderRadius: '4px' }}
                             >
                                 Overwrite / Re-seed Catalog
                             </Button>

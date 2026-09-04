@@ -31,10 +31,18 @@ const AdminProfile = () => {
     const displayImg = user?.img || userimg;
 
     return (
-        <div className="p-1 p-sm-2">
+        <div className="p-1 p-sm-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
             <div className="row justify-content-center">
                 <Col md={9} lg={8} xl={7} className="my-2">
-                    <div className="cp-card p-4 p-md-5" style={{ borderRadius: '8px' }}>
+                    <div 
+                        className="p-4 p-md-5"
+                        style={{
+                            backgroundColor: 'var(--cp-card-bg, #FFFFFF)',
+                            borderRadius: '28px',
+                            border: '1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.06))',
+                            boxShadow: '0 4px 24px -2px rgba(15, 23, 42, 0.05)'
+                        }}
+                    >
                         <div className="text-center mb-4 pb-2">
                             <div className="d-flex justify-content-center mb-3">
                                 <UserAvatar 
@@ -49,60 +57,98 @@ const AdminProfile = () => {
                             </div>
                             <div className="mb-2">
                                 <span 
-                                    className="badge px-3 py-1.5 fw-semibold"
+                                    className="badge rounded-pill px-3.5 py-1.5 fw-semibold"
                                     style={{
                                         backgroundColor: 'var(--cp-primary-subtle)',
                                         color: 'var(--cp-primary-text)',
                                         border: '1px solid var(--cp-border-highlight)',
-                                        fontSize: '0.82rem'
+                                        fontSize: '0.8rem',
+                                        letterSpacing: '0.02em'
                                     }}
                                 >
                                     <FontAwesomeIcon icon={faShieldAlt} className="me-1.5" style={{ color: 'var(--status-pending-text)' }} />
                                     Executive Superadministrator
                                 </span>
                             </div>
-                            <h4 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)' }}>{displayName}</h4>
+                            <h3 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)', letterSpacing: '-0.02em' }}>
+                                {displayName}
+                            </h3>
                             <p className="small mb-0 d-flex align-items-center justify-content-center gap-1.5" style={{ color: 'var(--cp-text-muted)' }}>
                                 <FontAwesomeIcon icon={faEnvelope} /> {displayEmail}
                             </p>
                         </div>
 
-                        <div className="p-3.5 p-md-4 mb-4 cp-card-subtle" style={{ borderRadius: '8px' }}>
-                            <h6 className="fw-bold mb-3.5 small text-uppercase" style={{ color: 'var(--cp-text-main)', letterSpacing: '0.05em' }}>System & Infrastructure Telemetry</h6>
+                        <div 
+                            className="p-4 mb-4" 
+                            style={{ 
+                                backgroundColor: 'var(--cp-card-subtle)', 
+                                borderRadius: '20px',
+                                border: '1px solid var(--cp-border)'
+                            }}
+                        >
+                            <h6 className="fw-bold mb-3.5 small text-uppercase" style={{ color: 'var(--cp-text-main)', letterSpacing: '0.05em' }}>
+                                System & Infrastructure Telemetry
+                            </h6>
                             <div className="d-flex justify-content-between align-items-center mb-2.5 pb-2 border-bottom" style={{ borderColor: 'var(--cp-border)' }}>
-                                <span className="small fw-semibold" style={{ color: 'var(--cp-text-muted)' }}>Platform Role</span>
-                                <span className="small fw-bold" style={{ color: 'var(--cp-text-main)' }}>Executive Operations Admin</span>
+                                <span className="small fw-semibold" style={{ color: 'var(--cp-text-muted)' }}>Platform Clearance</span>
+                                <span className="small fw-bold" style={{ color: 'var(--cp-text-main)' }}>Full Superuser Clearance</span>
                             </div>
                             <div className="d-flex justify-content-between align-items-center mb-2.5 pb-2 border-bottom" style={{ borderColor: 'var(--cp-border)' }}>
                                 <span className="small fw-semibold" style={{ color: 'var(--cp-text-muted)' }}>Active Inbound Pipeline</span>
-                                <span className="small fw-bold" style={{ color: 'var(--cp-primary)' }}>{orders.length} Requests Active</span>
+                                <span className="small fw-bold" style={{ color: 'var(--cp-primary)' }}>{orders.length} Requests Logged</span>
                             </div>
                             <div className="d-flex justify-content-between align-items-center mb-2.5 pb-2 border-bottom" style={{ borderColor: 'var(--cp-border)' }}>
                                 <span className="small fw-semibold" style={{ color: 'var(--cp-text-muted)' }}>Admin Team Size</span>
-                                <span className="small fw-bold" style={{ color: 'var(--cp-text-main)' }}>{admins.length} Superusers</span>
+                                <span className="small fw-bold" style={{ color: 'var(--cp-text-main)' }}>{admins.length} Active Admins</span>
                             </div>
                             <div className="d-flex justify-content-between align-items-center pt-0.5">
-                                <span className="small fw-semibold" style={{ color: 'var(--cp-text-muted)' }}>Data Engine</span>
+                                <span className="small fw-semibold" style={{ color: 'var(--cp-text-muted)' }}>Data Infrastructure</span>
                                 <span className="small fw-bold d-flex align-items-center gap-1.5" style={{ color: 'var(--status-done-text)' }}>
-                                    <FontAwesomeIcon icon={faServer} /> Local Storage Engine (100% Operational)
+                                    <FontAwesomeIcon icon={faServer} /> Cloud Sync & Storage (100% Operational)
                                 </span>
                             </div>
                         </div>
 
-                        <div className="d-grid gap-3">
-                            <Link to="/admin/orders" className="btn text-white py-2.5" style={{ backgroundColor: 'var(--cp-primary)', borderRadius: '6px', fontWeight: 600 }}>
-                                <FontAwesomeIcon icon={faList} className="me-2" /> Inbound Inquiries Table
+                        <div className="d-grid gap-2.5">
+                            <Link 
+                                to="/admin/orders" 
+                                className="btn text-white py-2.5 rounded-pill d-flex align-items-center justify-content-center gap-2 border-0" 
+                                style={{ 
+                                    backgroundColor: '#121417', 
+                                    fontWeight: 600, 
+                                    fontSize: '0.88rem' 
+                                }}
+                            >
+                                <FontAwesomeIcon icon={faList} /> Review Inbound Inquiries Table
                             </Link>
-                            <Link to="/admin/add-service" className="btn btn-outline-secondary py-2.5" style={{ borderRadius: '6px', fontWeight: 600, color: 'var(--cp-text-main)', borderColor: 'var(--cp-border)' }}>
-                                <FontAwesomeIcon icon={faPlus} className="me-2" /> Publish Solution
+                            <Link 
+                                to="/admin/add-service" 
+                                className="btn btn-outline-secondary py-2.5 rounded-pill d-flex align-items-center justify-content-center gap-2" 
+                                style={{ 
+                                    fontWeight: 600, 
+                                    color: 'var(--cp-text-main)', 
+                                    borderColor: 'var(--cp-border)',
+                                    fontSize: '0.88rem'
+                                }}
+                            >
+                                <FontAwesomeIcon icon={faPlus} /> Publish New Solution to Catalog
                             </Link>
-                            <Link to="/admin/team" className="btn btn-outline-secondary py-2.5" style={{ borderRadius: '6px', fontWeight: 600, color: 'var(--cp-text-main)', borderColor: 'var(--cp-border)' }}>
-                                <FontAwesomeIcon icon={faUserShield} className="me-2" /> Administrator Privileges
+                            <Link 
+                                to="/admin/team" 
+                                className="btn btn-outline-secondary py-2.5 rounded-pill d-flex align-items-center justify-content-center gap-2" 
+                                style={{ 
+                                    fontWeight: 600, 
+                                    color: 'var(--cp-text-main)', 
+                                    borderColor: 'var(--cp-border)',
+                                    fontSize: '0.88rem'
+                                }}
+                            >
+                                <FontAwesomeIcon icon={faUserShield} /> Manage Administrator Privileges
                             </Link>
                             <Button 
                                 variant="outline-danger" 
-                                className="py-2.5 d-flex align-items-center justify-content-center gap-2"
-                                style={{ borderRadius: '6px', fontWeight: 600 }}
+                                className="py-2.5 rounded-pill d-flex align-items-center justify-content-center gap-2 mt-1"
+                                style={{ fontWeight: 600, fontSize: '0.88rem' }}
                                 onClick={signOut}
                             >
                                 <FontAwesomeIcon icon={faSignOutAlt} /> Sign Out of Admin Command Center

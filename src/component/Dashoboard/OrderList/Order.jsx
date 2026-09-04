@@ -143,25 +143,25 @@ const Order = ({ order, handleAction, handleDelete }) => {
                                 backgroundColor: currentStyle.bg,
                                 color: currentStyle.text,
                                 borderColor: currentStyle.border,
-                                borderRadius: '4px',
+                                borderRadius: '9999px',
                                 fontWeight: 600,
-                                fontSize: '0.82rem',
-                                padding: '4px 10px'
+                                fontSize: '0.78rem',
+                                padding: '5px 14px'
                             }}
                         >
                             ● {status}
                         </Dropdown.Toggle>
-                        <Dropdown.Menu style={{ borderRadius: '6px', backgroundColor: 'var(--cp-card-bg)', border: '1px solid var(--cp-border)', boxShadow: 'var(--cp-shadow-md)' }}>
-                            <Dropdown.Item onClick={() => handleAction(_id, "Pending")}>
+                        <Dropdown.Menu style={{ borderRadius: '16px', backgroundColor: 'var(--cp-card-bg)', border: '1px solid var(--cp-border)', boxShadow: '0 10px 30px rgba(0,0,0,0.1)', padding: '6px' }}>
+                            <Dropdown.Item onClick={() => handleAction(_id, "Pending")} style={{ borderRadius: '10px', fontSize: '0.82rem', padding: '6px 14px' }}>
                                 <span style={{ color: 'var(--status-pending-text)', fontWeight: 700 }}>● Pending</span> <span className="small text-muted">(New)</span>
                             </Dropdown.Item>
-                            <Dropdown.Item onClick={() => handleAction(_id, "In Review")}>
+                            <Dropdown.Item onClick={() => handleAction(_id, "In Review")} style={{ borderRadius: '10px', fontSize: '0.82rem', padding: '6px 14px' }}>
                                 <span style={{ color: 'var(--cp-primary)', fontWeight: 700 }}>● In Review</span> <span className="small text-muted">(Assessing)</span>
                             </Dropdown.Item>
-                            <Dropdown.Item onClick={() => handleAction(_id, "In Progress")}>
+                            <Dropdown.Item onClick={() => handleAction(_id, "In Progress")} style={{ borderRadius: '10px', fontSize: '0.82rem', padding: '6px 14px' }}>
                                 <span style={{ color: 'var(--status-progress-text)', fontWeight: 700 }}>● In Progress</span> <span className="small text-muted">(Active)</span>
                             </Dropdown.Item>
-                            <Dropdown.Item onClick={() => handleAction(_id, "Done")}>
+                            <Dropdown.Item onClick={() => handleAction(_id, "Done")} style={{ borderRadius: '10px', fontSize: '0.82rem', padding: '6px 14px' }}>
                                 <span style={{ color: 'var(--status-done-text)', fontWeight: 700 }}>● Done</span> <span className="small text-muted">(Completed)</span>
                             </Dropdown.Item>
                         </Dropdown.Menu>
@@ -170,11 +170,13 @@ const Order = ({ order, handleAction, handleDelete }) => {
 
                 {/* Actions */}
                 <td className="align-middle text-end">
-                    <div className="d-inline-flex align-items-center gap-2.5">
+                    <div className="d-inline-flex align-items-center gap-2">
                         <button
-                            className="btn btn-sm px-2.5 py-1.5"
+                            className="btn btn-sm d-flex align-items-center justify-content-center"
                             style={{ 
-                                borderRadius: '4px',
+                                width: '32px',
+                                height: '32px',
+                                borderRadius: '50%',
                                 backgroundColor: 'var(--cp-card-subtle)',
                                 border: '1px solid var(--cp-border)',
                                 color: 'var(--cp-primary)'
@@ -185,8 +187,8 @@ const Order = ({ order, handleAction, handleDelete }) => {
                             <FontAwesomeIcon icon={faEye} />
                         </button>
                         <button
-                            className="btn btn-outline-danger btn-sm px-2.5 py-1.5"
-                            style={{ borderRadius: '4px' }}
+                            className="btn btn-outline-danger btn-sm d-flex align-items-center justify-content-center"
+                            style={{ width: '32px', height: '32px', borderRadius: '50%' }}
                             title="Delete / Archive Request"
                             onClick={() => handleDelete(_id)}
                         >
@@ -196,7 +198,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                 </td>
             </tr>
 
-            {/* INBOUND REQUEST DETAILS MODAL (100% Theme Synchronized) */}
+            {/* INBOUND REQUEST DETAILS MODAL (100% Theme Synchronized & Soft Minimal) */}
             <Modal 
                 show={showDetails} 
                 onHide={() => setShowDetails(false)} 
@@ -204,14 +206,14 @@ const Order = ({ order, handleAction, handleDelete }) => {
                 size="lg"
                 className="order-details-modal"
             >
-                <Modal.Header closeButton style={{ backgroundColor: 'var(--cp-card-subtle)', borderBottom: '1px solid var(--cp-border)' }}>
-                    <div className="d-flex align-items-center gap-2.5">
+                <Modal.Header closeButton style={{ padding: '22px 28px' }}>
+                    <div className="d-flex align-items-center gap-3">
                         <div 
                             className="d-flex align-items-center justify-content-center"
                             style={{
-                                width: '38px',
-                                height: '38px',
-                                borderRadius: '6px',
+                                width: '42px',
+                                height: '42px',
+                                borderRadius: '50%',
                                 backgroundColor: 'var(--cp-primary-subtle)',
                                 color: 'var(--cp-primary)'
                             }}
@@ -229,7 +231,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
 
                 <Modal.Body className="p-4" style={{ backgroundColor: 'var(--cp-card-bg)', color: 'var(--cp-text-main)' }}>
                     {/* Header Client Snapshot */}
-                    <div className="d-flex flex-wrap align-items-center justify-content-between p-3.5 mb-4 rounded" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                    <div className="d-flex flex-wrap align-items-center justify-content-between p-3.5 mb-4 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
                         <div className="d-flex align-items-center gap-3">
                             <UserAvatar 
                                 name={name}
@@ -245,12 +247,12 @@ const Order = ({ order, handleAction, handleDelete }) => {
                         </div>
                         <div className="mt-2 mt-sm-0">
                             <span 
-                                className="badge px-3 py-2 fw-semibold d-inline-flex align-items-center gap-1.5"
+                                className="badge rounded-pill px-3 py-1.5 fw-semibold d-inline-flex align-items-center gap-1.5"
                                 style={{
                                     backgroundColor: currentStyle.bg,
                                     color: currentStyle.text,
                                     border: `1px solid ${currentStyle.border}`,
-                                    fontSize: '0.85rem'
+                                    fontSize: '0.82rem'
                                 }}
                             >
                                 <FontAwesomeIcon icon={currentStyle.icon} />
@@ -262,7 +264,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                     {/* Information Grid */}
                     <Row className="g-3 mb-4">
                         <Col md={6}>
-                            <div className="p-3.5 h-100 rounded" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                            <div className="p-3.5 h-100 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
                                 <h6 className="fw-bold mb-3 small text-uppercase" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
                                     <FontAwesomeIcon icon={faEnvelope} className="me-1.5" style={{ color: 'var(--cp-primary)' }} /> Contact Channels
                                 </h6>
@@ -288,7 +290,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                         </Col>
 
                         <Col md={6}>
-                            <div className="p-3.5 h-100 rounded" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                            <div className="p-3.5 h-100 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
                                 <h6 className="fw-bold mb-3 small text-uppercase" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
                                     <FontAwesomeIcon icon={faDollarSign} className="me-1.5" style={{ color: 'var(--status-done-text)' }} /> Scope & Commercial Tier
                                 </h6>
@@ -312,7 +314,7 @@ const Order = ({ order, handleAction, handleDelete }) => {
                     </Row>
 
                     {/* Client RFP / Scope Description */}
-                    <div className="p-3.5 mb-4 rounded" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                    <div className="p-3.5 mb-4 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
                         <h6 className="fw-bold mb-2 small text-uppercase" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
                             Client Requirements & Scope Description
                         </h6>
@@ -322,60 +324,58 @@ const Order = ({ order, handleAction, handleDelete }) => {
                     </div>
 
                     {/* Live Status Management Strip */}
-                    <div className="p-3.5 rounded" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
+                    <div className="p-3.5 rounded-4" style={{ backgroundColor: 'var(--cp-card-subtle)', border: '1px solid var(--cp-border)' }}>
                         <small className="fw-bold text-uppercase d-block mb-2.5" style={{ color: 'var(--cp-text-muted)', letterSpacing: '0.04em' }}>
                             Update Live Project Status:
                         </small>
-                        <div className="d-flex flex-wrap gap-2.5 gap-sm-3">
+                        <div className="d-flex flex-wrap gap-2.5">
                             {['Pending', 'In Review', 'In Progress', 'Done'].map(st => {
                                 const isCurrent = status === st;
                                 return (
-                                    <Button
+                                    <button
                                         key={st}
-                                        size="sm"
-                                        variant={isCurrent ? "primary" : "outline-secondary"}
-                                        className="px-3 py-1.5 fw-semibold"
+                                        type="button"
+                                        className={`btn btn-sm rounded-pill px-3 py-1.5 fw-semibold ${isCurrent ? 'btn-dark' : 'btn-outline-secondary'}`}
                                         style={{
-                                            borderRadius: '4px',
-                                            backgroundColor: isCurrent ? 'var(--cp-primary)' : 'transparent',
-                                            borderColor: isCurrent ? 'var(--cp-primary)' : 'var(--cp-border)',
-                                            color: isCurrent ? '#FFFFFF' : 'var(--cp-text-main)'
+                                            backgroundColor: isCurrent ? '#121417' : 'transparent',
+                                            borderColor: isCurrent ? '#121417' : 'var(--cp-border)',
+                                            color: isCurrent ? '#FFFFFF' : 'var(--cp-text-main)',
+                                            fontSize: '0.8rem'
                                         }}
                                         onClick={() => {
                                             handleAction(_id, st);
                                         }}
                                     >
                                         ● {st}
-                                    </Button>
+                                    </button>
                                 );
                             })}
                         </div>
                     </div>
                 </Modal.Body>
 
-                <Modal.Footer style={{ backgroundColor: 'var(--cp-card-subtle)', borderTop: '1px solid var(--cp-border)' }}>
+                <Modal.Footer style={{ padding: '18px 28px' }}>
                     <div className="d-flex justify-content-between align-items-center w-100 gap-3">
-                        <Button 
-                            variant="outline-danger" 
-                            size="sm"
-                            className="d-flex align-items-center gap-1.5"
-                            style={{ borderRadius: '4px' }}
+                        <button 
+                            type="button"
+                            className="btn btn-outline-danger btn-sm d-flex align-items-center gap-2 rounded-pill px-3.5 py-2"
+                            style={{ fontSize: '0.82rem', fontWeight: 600 }}
                             onClick={() => {
                                 setShowDetails(false);
                                 handleDelete(_id);
                             }}
                         >
                             <FontAwesomeIcon icon={faTrashAlt} /> Archive Request
-                        </Button>
+                        </button>
 
-                        <Button 
-                            variant="secondary" 
-                            size="sm"
-                            style={{ borderRadius: '4px', backgroundColor: 'var(--cp-card-hover)', color: 'var(--cp-text-main)', border: '1px solid var(--cp-border)' }}
+                        <button 
+                            type="button"
+                            className="btn btn-secondary btn-sm rounded-pill px-4 py-2"
+                            style={{ backgroundColor: 'var(--cp-card-hover)', color: 'var(--cp-text-main)', border: '1px solid var(--cp-border)', fontSize: '0.82rem', fontWeight: 600 }}
                             onClick={() => setShowDetails(false)}
                         >
                             Close Details
-                        </Button>
+                        </button>
                     </div>
                 </Modal.Footer>
             </Modal>

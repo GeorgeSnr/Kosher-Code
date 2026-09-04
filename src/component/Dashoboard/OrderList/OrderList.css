@@ -1,9 +1,9 @@
 .orderList {
     background: var(--cp-card-bg, #FFFFFF);
-    border: 1px solid var(--cp-border, #E5E0FA);
-    padding: 1.5rem;
-    border-radius: 4px;
-    box-shadow: var(--cp-card-shadow, 0 2px 8px rgba(0, 0, 0, 0.02));
+    border: 1px solid var(--cp-border-subtle, rgba(0, 0, 0, 0.04));
+    padding: 26px 28px;
+    border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.025);
     color: var(--cp-text-main, #0F172A);
 }
 
