@@ -52,6 +52,7 @@ import {
     fetchContactInquiries,
     subscribeToContacts
 } from '../../services/storageService';
+import ExportDropdown from '../Shared/ExportButton/ExportDropdown';
 import './AdminLanding.css';
 
 const AdminLanding = () => {
@@ -273,19 +274,6 @@ const AdminLanding = () => {
     const openOrderDetails = (order) => {
         setSelectedOrder(order);
         setShowModal(true);
-    };
-
-    const handleExport = () => {
-        const jsonString = `data:text/json;charset=utf-8,${encodeURIComponent(
-            JSON.stringify(orders, null, 2)
-        )}`;
-        const downloadAnchor = document.createElement('a');
-        downloadAnchor.setAttribute('href', jsonString);
-        downloadAnchor.setAttribute('download', `kosher_inbound_requests_${Date.now()}.json`);
-        document.body.appendChild(downloadAnchor);
-        downloadAnchor.click();
-        downloadAnchor.remove();
-        toast.success('Exporting inquiries report...');
     };
 
     // Filtered orders for table
@@ -676,16 +664,16 @@ const AdminLanding = () => {
                             </Dropdown.Menu>
                         </Dropdown>
 
-                        {/* Dark Solid Action Button ("Export" in Dribbble) */}
-                        <button 
-                            type="button" 
-                            className="ad-btn-pill-dark"
-                            onClick={handleExport}
-                            title="Export Inquiries"
-                        >
-                            <span>Export</span>
-                            <FontAwesomeIcon icon={faFileDownload} style={{ fontSize: '11px' }} />
-                        </button>
+                        {/* Active Export Dropdown (Excel Default & PDF Option) */}
+                        <ExportDropdown 
+                            data={filteredOrders.length > 0 ? filteredOrders : orders} 
+                            variant="dark"
+                            buttonText="Export"
+                            options={{
+                                title: 'Kosher Code Inbound Inquiries & Telemetry Report',
+                                subtitle: 'Kampala HQ Superadmin Desk • Live Platform Telemetry'
+                            }}
+                        />
 
                         {/* Publish Solution Shortcut */}
                         <Link to="/admin/add-service" className="text-decoration-none">

@@ -1,0 +1,252 @@
+/* Universal Kosher Code Export Dropdown & Button Styles */
+.kosher-export-dropdown {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+.kosher-export-btn-group {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    height: 38px;
+    padding: 0;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Variant Dark (Default Admin Pill matching Dribbble) */
+.kosher-export-btn-group.variant-dark {
+    background-color: var(--cp-btn-dark-bg, #121417);
+    border: 1px solid var(--cp-border, rgba(0, 0, 0, 0.12));
+}
+
+.kosher-export-btn-group.variant-dark:hover {
+    background-color: #272A30;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+/* Variant Light / Outline */
+.kosher-export-btn-group.variant-light {
+    background-color: var(--cp-card-bg, #FFFFFF);
+    border: 1px solid var(--cp-border, #E2E8F0);
+}
+
+.kosher-export-btn-group.variant-light:hover {
+    background-color: var(--cp-card-subtle, #F8FAFC);
+    border-color: var(--cp-primary, #7355F7);
+}
+
+/* Main Action Button */
+.kosher-export-main-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 100%;
+    padding: 0 12px 0 16px;
+    background: transparent;
+    border: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-top-left-radius: 999px;
+    border-bottom-left-radius: 999px;
+    transition: background-color 0.15s ease;
+    outline: none;
+    white-space: nowrap;
+}
+
+.variant-dark .kosher-export-main-btn {
+    color: #FFFFFF;
+}
+
+.variant-light .kosher-export-main-btn {
+    color: var(--cp-text-main, #0F172A);
+}
+
+/* Toggle Chevron Button */
+.kosher-export-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 32px;
+    background: transparent;
+    border: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    border-top-right-radius: 999px;
+    border-bottom-right-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    outline: none;
+    padding: 0;
+}
+
+.variant-light .kosher-export-toggle-btn {
+    border-left-color: var(--cp-border, #E2E8F0);
+    color: var(--cp-text-muted, #64748B);
+}
+
+.variant-dark .kosher-export-toggle-btn {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.kosher-export-toggle-btn:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.variant-light .kosher-export-toggle-btn:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* Format Icon Colors */
+.kosher-export-type-icon.excel-color {
+    color: #10B981;
+}
+
+.kosher-export-type-icon.pdf-color {
+    color: #EF4444;
+}
+
+/* Pill badge on main button */
+.kosher-export-badge-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.variant-dark .kosher-export-badge-tag {
+    background-color: rgba(255, 255, 255, 0.16);
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.variant-light .kosher-export-badge-tag {
+    background-color: var(--cp-primary-subtle, #EEF2FF);
+    color: var(--cp-primary, #7355F7);
+}
+
+/* Dropdown Menu */
+.kosher-export-menu {
+    min-width: 290px;
+    border-radius: 18px !important;
+    padding: 8px !important;
+    background-color: var(--cp-card-bg, #FFFFFF) !important;
+    border: 1px solid var(--cp-border, rgba(0, 0, 0, 0.1)) !important;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.14) !important;
+    margin-top: 6px !important;
+    z-index: 1050;
+}
+
+.kosher-export-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 12px 10px;
+    border-bottom: 1px solid var(--cp-border, #F1F5F9);
+    margin-bottom: 4px;
+}
+
+.kosher-export-menu-header span {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    color: var(--cp-text-muted, #94A3B8);
+}
+
+.kosher-export-menu-header small {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #10B981;
+}
+
+/* Menu Items */
+.kosher-export-item {
+    border-radius: 12px !important;
+    padding: 9px 12px !important;
+    transition: all 0.15s ease !important;
+    margin-bottom: 3px;
+    background: transparent;
+}
+
+.kosher-export-item:hover {
+    background-color: var(--cp-card-subtle, #F8FAFC) !important;
+}
+
+.kosher-export-item.is-selected {
+    background-color: var(--cp-primary-subtle, rgba(115, 85, 247, 0.08)) !important;
+    border: 1px solid rgba(115, 85, 247, 0.22) !important;
+}
+
+.kosher-export-icon-box {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+}
+
+.kosher-export-icon-box.excel {
+    background-color: rgba(16, 185, 129, 0.14);
+    color: #10B981;
+}
+
+.kosher-export-icon-box.pdf {
+    background-color: rgba(239, 68, 68, 0.14);
+    color: #EF4444;
+}
+
+.kosher-export-item-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--cp-text-main, #0F172A);
+    line-height: 1.25;
+    display: flex;
+    align-items: center;
+}
+
+.kosher-default-pill {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 999px;
+    background-color: rgba(16, 185, 129, 0.15);
+    color: #059669;
+    margin-left: 6px;
+    letter-spacing: 0.02em;
+}
+
+.kosher-export-item-desc {
+    font-size: 0.72rem;
+    color: var(--cp-text-muted, #64748B);
+    margin-top: 2px;
+}
+
+.kosher-active-pill {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background-color: #10B981;
+    color: #FFFFFF;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+}
+
+.kosher-active-pill.pdf {
+    background-color: var(--cp-primary, #7355F7);
+}
+
+.kosher-switch-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--cp-text-muted, #94A3B8);
+    opacity: 0.8;
+}

@@ -21,6 +21,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useAppContext } from '../../../../context';
 import { getUserOrders, deleteStoredOrder, subscribeToUserOrders, getUserOrdersAsync } from '../../../../services/storageService';
+import ExportDropdown from '../../../Shared/ExportButton/ExportDropdown';
 
 const BookList = () => {
     const { state: { user } } = useAppContext();
@@ -99,7 +100,18 @@ const BookList = () => {
                     <h4 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)' }}>Active Engagements & Bookings</h4>
                     <p className="mb-0 small" style={{ color: 'var(--cp-text-muted)' }}>Track the real-time engineering and review status of your enterprise software requests.</p>
                 </div>
-                <div>
+                <div className="d-flex align-items-center gap-2.5">
+                    {bookings.length > 0 && (
+                        <ExportDropdown 
+                            data={bookings}
+                            variant="light"
+                            buttonText="Export"
+                            options={{
+                                title: 'Client Engagements & Deliverables Report',
+                                subtitle: `${user?.name || 'Enterprise Client'} • Kosher Code Client Portal`
+                            }}
+                        />
+                    )}
                     <Link to="/client/book">
                         <Button 
                             className="rounded-pill d-flex align-items-center gap-2 fw-semibold px-4 py-2.5 text-white"

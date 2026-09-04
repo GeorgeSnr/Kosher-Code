@@ -13,6 +13,7 @@ import {
     subscribeToOrders, 
     fetchOrdersAsync 
 } from '../../../services/storageService';
+import ExportDropdown from '../../Shared/ExportButton/ExportDropdown';
 
 const OrderList = () => {
     const [orders, setOrders] = useState(() => getStoredOrders());
@@ -79,19 +80,6 @@ const OrderList = () => {
     const progressCount = orders.filter(o => o.status === 'In Progress').length;
     const doneCount = orders.filter(o => o.status === 'Done' || o.status === 'Completed').length;
 
-    const handleExport = () => {
-        const jsonString = `data:text/json;charset=utf-8,${encodeURIComponent(
-            JSON.stringify(orders, null, 2)
-        )}`;
-        const downloadAnchor = document.createElement('a');
-        downloadAnchor.setAttribute('href', jsonString);
-        downloadAnchor.setAttribute('download', `kosher_inbound_requests_${Date.now()}.json`);
-        document.body.appendChild(downloadAnchor);
-        downloadAnchor.click();
-        downloadAnchor.remove();
-        toast.success('Exporting inquiries report...');
-    };
-
     return (
         <div className="p-1 p-sm-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
             {/* Header with Clean Action Controls */}
@@ -103,14 +91,16 @@ const OrderList = () => {
                     <p className="text-muted mb-0 small">Review incoming client requests, update execution statuses, and inspect scopes.</p>
                 </div>
                 <div className="d-flex align-items-center gap-2.5">
-                    <button 
-                        type="button" 
-                        className="btn btn-dark btn-sm rounded-pill px-3.5 py-2 fw-semibold d-inline-flex align-items-center gap-2"
-                        onClick={handleExport}
-                        style={{ backgroundColor: '#121417', borderColor: '#121417', fontSize: '0.82rem' }}
-                    >
-                        <span>Export</span>
-                    </button>
+                    {/* Active Export Dropdown (Excel Default & PDF Option) */}
+                    <ExportDropdown 
+                        data={filteredOrders.length > 0 ? filteredOrders : orders} 
+                        variant="dark"
+                        buttonText="Export"
+                        options={{
+                            title: 'Inbound Solution Requests & Pipeline Report',
+                            subtitle: 'Kosher Code Executive Pipeline Desk • Live Cloud Database'
+                        }}
+                    />
                     <span className="badge rounded-pill px-3.5 py-2 fw-semibold" style={{ backgroundColor: 'var(--cp-primary-subtle)', color: 'var(--cp-primary-text)', border: '1px solid var(--cp-border-highlight)', fontSize: '0.82rem' }}>
                         🛡️ Executive Control
                     </span>

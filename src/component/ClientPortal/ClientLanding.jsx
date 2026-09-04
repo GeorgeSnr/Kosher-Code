@@ -29,6 +29,7 @@ import {
     fetchServicesAsync,
     subscribeToServices
 } from '../../services/storageService';
+import ExportDropdown from '../Shared/ExportButton/ExportDropdown';
 
 const ClientLanding = () => {
     const { state: { user }, dispatch } = useAppContext();
@@ -306,14 +307,27 @@ const ClientLanding = () => {
                         <h5 className="fw-bold mb-1" style={{ color: 'var(--cp-text-main)', fontSize: '1.12rem' }}>Live Project Engagements</h5>
                         <small style={{ color: 'var(--cp-text-muted)', fontSize: '0.8rem' }}>Real-time implementation milestones from the Kosher Code engineering team.</small>
                     </div>
-                    <Link to="/client/book">
-                        <Button 
-                            className="rounded-pill d-flex align-items-center gap-2 fw-semibold text-white px-3.5 py-2 mt-2 mt-sm-0"
-                            style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', fontSize: '0.82rem' }}
-                        >
-                            <FontAwesomeIcon icon={faPlus} /> Request Solution
-                        </Button>
-                    </Link>
+                    <div className="d-flex align-items-center gap-2 mt-2 mt-sm-0">
+                        {bookings.length > 0 && (
+                            <ExportDropdown 
+                                data={bookings}
+                                variant="light"
+                                buttonText="Export"
+                                options={{
+                                    title: 'Live Client Engagements Report',
+                                    subtitle: `${displayName} • Kosher Code Client Portal`
+                                }}
+                            />
+                        )}
+                        <Link to="/client/book">
+                            <Button 
+                                className="rounded-pill d-flex align-items-center gap-2 fw-semibold text-white px-3.5 py-2"
+                                style={{ backgroundColor: 'var(--cp-primary)', borderColor: 'var(--cp-primary)', fontSize: '0.82rem' }}
+                            >
+                                <FontAwesomeIcon icon={faPlus} /> Request Solution
+                            </Button>
+                        </Link>
+                    </div>
                 </div>
 
                 {bookings.length === 0 ? (
