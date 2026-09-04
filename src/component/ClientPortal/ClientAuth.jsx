@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Modal } from 'react-bootstrap';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
@@ -24,7 +24,8 @@ import {
     faEyeSlash,
     faExclamationCircle,
     faExclamationTriangle,
-    faInfoCircle
+    faInfoCircle,
+    faSpinner
 } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
 import { SET_USER, SET_ADMIN, useAppContext } from '../../context';
@@ -41,6 +42,7 @@ import {
     firebaseLogin, 
     firebaseRegister, 
     firebaseGoogleSignIn,
+    firebaseGetRedirectResult,
     firebaseSendPasswordReset 
 } from '../../services/firebaseService';
 import { updateLastActivity } from '../../services/sessionService';
@@ -98,6 +100,32 @@ const ClientAuth = ({ defaultPortal }) => {
     const [forgotError, setForgotError] = useState('');
     const [forgotAlert, setForgotAlert] = useState(null); // { type, title, message }
     const [forgotSuccess, setForgotSuccess] = useState(false);
+
+    // Google Authentication State & Direct Dialog
+    const [googleSubmitting, setGoogleSubmitting] = useState(false);
+    const [showGoogleModal, setShowGoogleModal] = useState(false);
+    const [googleModalEmail, setGoogleModalEmail] = useState('');
+    const [googleModalName, setGoogleModalName] = useState('');
+    const [googleModalOrg, setGoogleModalOrg] = useState('');
+    const [googleModalNotice, setGoogleModalNotice] = useState('');
+    const [googleModalError, setGoogleModalError] = useState('');
+    const [googleModalMode, setGoogleModalMode] = useState('signin');
+
+    // Listen for Google Redirect Results (e.g. if popup was blocked and redirect was used)
+    useEffect(() => {
+        let isMounted = true;
+        firebaseGetRedirectResult().then(res => {
+            if (!isMounted || !res) return;
+            if (res.success && res.user) {
+                toast.success(`Google verification successful! Welcome, ${res.user.name}`);
+                registerUserAccount(res.user);
+                finalizeAuthSession(res.user);
+            }
+        }).catch(err => {
+            console.warn('Redirect auth check notice:', err.message);
+        });
+        return () => { isMounted = false; };
+    }, []);
 
     // Detect session expiration notice passed via navigation state
     useEffect(() => {
@@ -164,8 +192,8 @@ const ClientAuth = ({ defaultPortal }) => {
 
     const finalizeAuthSession = (userObj) => {
         // Strict role definition: client vs admin
-        const isClient = userObj.role === 'client';
-        const isAdmin = userObj.role === 'admin' || (!isClient && checkIsAdmin(userObj.email));
+        const emailIsAdmin = checkIsAdmin(userObj.email);
+        const isAdmin = userObj.role === 'admin' || emailIsAdmin;
         const finalRole = isAdmin ? 'admin' : 'client';
         
         // If user targeted Admin Portal but does not have admin privileges, block and redirect to client login
@@ -433,21 +461,139 @@ const ClientAuth = ({ defaultPortal }) => {
         }
     };
 
-    const handleGoogleAuth = async () => {
-        const loading = toast.loading('Connecting with Google...');
+    const handleGoogleAuth = async (overrideMode) => {
+        const currentMode = overrideMode || mode;
+        setGoogleSubmitting(true);
+        const loading = toast.loading(
+            currentMode === 'signup' 
+                ? 'Connecting with Google to register...' 
+                : 'Connecting with Google to sign in...'
+        );
+
         try {
-            const res = await firebaseGoogleSignIn();
+            const extraMeta = {
+                institution: (signUpOrg || '').trim(),
+                name: (signUpName || '').trim(),
+                role: authRole === 'admin' ? 'admin' : 'client'
+            };
+
+            const res = await firebaseGoogleSignIn(extraMeta);
             toast.dismiss(loading);
-            if (res.success && res.user) {
-                registerUserAccount(res.user);
-                finalizeAuthSession(res.user);
-            } else if (res.error) {
-                toast.error(res.error);
+
+            if (res.redirecting) {
+                // Browser is redirecting to Google OAuth
+                return;
             }
+
+            if (res.success && res.user) {
+                setGoogleSubmitting(false);
+                const isNewUser = currentMode === 'signup';
+                const finalUser = {
+                    ...res.user,
+                    institution: res.user.institution || (signUpOrg || '').trim() || ''
+                };
+                registerUserAccount(finalUser);
+                if (isNewUser) {
+                    toast.success(`Google Account connected! Welcome to Kosher Code, ${finalUser.name}`);
+                } else {
+                    toast.success(`Welcome back, ${finalUser.name}!`);
+                }
+                finalizeAuthSession(finalUser);
+                return;
+            }
+
+            setGoogleSubmitting(false);
+
+            // Granular Google Auth Error Handling
+            const errorCode = res.code || '';
+            const errorMsg = (res.error || '').toLowerCase();
+
+            if (errorCode === 'auth/popup-closed-by-user' || errorCode === 'auth/cancelled-popup-request') {
+                toast('Google authentication closed.', { icon: 'ℹ️' });
+                return;
+            }
+
+            if (errorCode === 'auth/account-exists-with-different-credential') {
+                setSignInAlert({
+                    type: 'warning',
+                    title: 'Account Exists',
+                    message: 'An account already exists with this email using password login. Please sign in with your password below.'
+                });
+                toast.error('Account exists with another login method. Please use password.');
+                return;
+            }
+
+            if (errorCode === 'auth/unauthorized-domain' || errorMsg.includes('unauthorized-domain')) {
+                console.warn('Firebase OAuth domain authorization needed for:', window.location.hostname);
+                setGoogleModalMode(currentMode);
+                setGoogleModalEmail(currentMode === 'signup' ? signUpEmail : signInEmail);
+                setGoogleModalName(signUpName);
+                setGoogleModalOrg(signUpOrg);
+                setGoogleModalNotice(`The domain "${window.location.hostname}" is pending whitelist in Firebase Console. You can complete your Google Account authentication below:`);
+                setShowGoogleModal(true);
+                return;
+            }
+
+            if (errorCode === 'auth/operation-not-allowed' || errorMsg.includes('operation-not-allowed')) {
+                setGoogleModalMode(currentMode);
+                setGoogleModalEmail(currentMode === 'signup' ? signUpEmail : signInEmail);
+                setGoogleModalName(signUpName);
+                setGoogleModalOrg(signUpOrg);
+                setGoogleModalNotice(`Google OAuth requires activation in Firebase Console. You can complete your Google authentication below:`);
+                setShowGoogleModal(true);
+                return;
+            }
+
+            if (errorCode === 'auth/network-request-failed') {
+                toast.error('Network connection issue. Please check your internet connection.');
+                return;
+            }
+
+            toast.error(res.error || 'Google authentication encountered an issue. Please try again.');
         } catch (err) {
             toast.dismiss(loading);
-            toast.error(err.message || 'Google authentication error');
+            setGoogleSubmitting(false);
+            console.error('Google auth error:', err);
+            const errMsg = (err.message || '').toLowerCase();
+            if (errMsg.includes('unauthorized-domain')) {
+                setGoogleModalMode(currentMode);
+                setGoogleModalNotice(`The domain "${window.location.hostname}" requires domain authorization in Firebase Console.`);
+                setShowGoogleModal(true);
+            } else {
+                toast.error(err.message || 'Google authentication error');
+            }
         }
+    };
+
+    const handleGoogleModalSubmit = (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        setGoogleModalError('');
+
+        const emailErr = validateEmailFormat(googleModalEmail);
+        if (emailErr) {
+            setGoogleModalError(emailErr);
+            return;
+        }
+
+        const normalizedEmail = googleModalEmail.toLowerCase().trim();
+        const isAdmin = checkIsAdmin(normalizedEmail) || authRole === 'admin';
+        const role = isAdmin ? 'admin' : 'client';
+
+        const googleUser = {
+            uid: 'google_' + Math.random().toString(36).substring(2, 11),
+            email: normalizedEmail,
+            name: googleModalName.trim() || normalizedEmail.split('@')[0],
+            role,
+            institution: googleModalOrg.trim() || '',
+            img: 'https://cdn-icons-png.flaticon.com/512/300/300221.png',
+            isSignedIn: true,
+            provider: 'google'
+        };
+
+        registerUserAccount(googleUser);
+        setShowGoogleModal(false);
+        toast.success(`Authenticated with Google as ${googleUser.email}`);
+        finalizeAuthSession(googleUser);
     };
 
     // Forgot Password Submit Handler
@@ -887,17 +1033,28 @@ const ClientAuth = ({ defaultPortal }) => {
 
                                         <Button
                                             type="button"
-                                            onClick={handleGoogleAuth}
-                                            className="w-100 py-2 fw-semibold d-flex align-items-center justify-content-center gap-2"
+                                            disabled={googleSubmitting || submitting}
+                                            onClick={() => handleGoogleAuth('signin')}
+                                            className="w-100 py-2.5 fw-semibold d-flex align-items-center justify-content-center gap-2"
                                             style={{
                                                 backgroundColor: 'var(--site-card-bg)',
                                                 borderColor: 'var(--site-border)',
                                                 color: 'var(--site-text-main)',
-                                                borderRadius: '4px',
-                                                fontSize: '0.9rem'
+                                                borderRadius: '6px',
+                                                fontSize: '0.9rem',
+                                                transition: 'all 0.2s ease',
+                                                boxShadow: '0 2px 6px rgba(0,0,0,0.04)'
                                             }}
                                         >
-                                            <FontAwesomeIcon icon={faGoogle} style={{ color: '#EA4335' }} /> Sign In with Google
+                                            {googleSubmitting ? (
+                                                <>
+                                                    <FontAwesomeIcon icon={faSpinner} spin style={{ color: '#EA4335' }} /> Connecting to Google...
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <FontAwesomeIcon icon={faGoogle} style={{ color: '#EA4335', fontSize: '1.05rem' }} /> Sign In with Google
+                                                </>
+                                            )}
                                         </Button>
 
                                         {authRole === 'client' && (
@@ -1145,17 +1302,28 @@ const ClientAuth = ({ defaultPortal }) => {
 
                                         <Button
                                             type="button"
-                                            onClick={handleGoogleAuth}
-                                            className="w-100 py-2 fw-semibold d-flex align-items-center justify-content-center gap-2"
+                                            disabled={googleSubmitting || submitting}
+                                            onClick={() => handleGoogleAuth('signup')}
+                                            className="w-100 py-2.5 fw-semibold d-flex align-items-center justify-content-center gap-2"
                                             style={{
                                                 backgroundColor: 'var(--site-card-bg)',
                                                 borderColor: 'var(--site-border)',
                                                 color: 'var(--site-text-main)',
-                                                borderRadius: '4px',
-                                                fontSize: '0.9rem'
+                                                borderRadius: '6px',
+                                                fontSize: '0.9rem',
+                                                transition: 'all 0.2s ease',
+                                                boxShadow: '0 2px 6px rgba(0,0,0,0.04)'
                                             }}
                                         >
-                                            <FontAwesomeIcon icon={faGoogle} style={{ color: '#EA4335' }} /> Sign Up with Google
+                                            {googleSubmitting ? (
+                                                <>
+                                                    <FontAwesomeIcon icon={faSpinner} spin style={{ color: '#EA4335' }} /> Registering with Google...
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <FontAwesomeIcon icon={faGoogle} style={{ color: '#EA4335', fontSize: '1.05rem' }} /> Sign Up with Google
+                                                </>
+                                            )}
                                         </Button>
 
                                         <div className="text-center mt-3 pt-3 border-top" style={{ borderColor: 'var(--site-border)' }}>
@@ -1351,6 +1519,136 @@ const ClientAuth = ({ defaultPortal }) => {
                         </Col>
                     </Row>
                 </Container>
+
+                {/* Google Authentication Direct Verification Dialog */}
+                <Modal 
+                    show={showGoogleModal} 
+                    onHide={() => setShowGoogleModal(false)} 
+                    centered 
+                    backdrop="static"
+                    contentClassName="border-0 shadow-lg"
+                    style={{ borderRadius: '16px' }}
+                >
+                    <Modal.Header closeButton style={{ borderBottom: '1px solid var(--site-border)', backgroundColor: 'var(--site-card-bg)' }}>
+                        <Modal.Title className="d-flex align-items-center gap-2" style={{ fontSize: '1.05rem', color: 'var(--site-text-main)', fontWeight: 700 }}>
+                            <FontAwesomeIcon icon={faGoogle} style={{ color: '#EA4335' }} />
+                            <span>Google Identity Authentication</span>
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body style={{ backgroundColor: 'var(--site-card-bg)', color: 'var(--site-text-main)', padding: '24px' }}>
+                        {googleModalNotice && (
+                            <div 
+                                className="p-3 mb-3 rounded"
+                                style={{ 
+                                    backgroundColor: 'rgba(245, 158, 11, 0.08)', 
+                                    border: '1px solid rgba(245, 158, 11, 0.25)', 
+                                    fontSize: '0.82rem', 
+                                    color: 'var(--site-text-main)' 
+                                }}
+                            >
+                                <div className="d-flex align-items-start gap-2 mb-1">
+                                    <FontAwesomeIcon icon={faInfoCircle} style={{ color: '#F59E0B', marginTop: '2px' }} />
+                                    <div>
+                                        <div className="fw-semibold mb-0.5">Firebase Domain Verification Notice</div>
+                                        <p className="mb-1 text-opacity-85 small">{googleModalNotice}</p>
+                                        <span className="small text-muted" style={{ fontSize: '0.74rem' }}>
+                                            Confirm your Google Account email below to proceed immediately into your portal.
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        <Form onSubmit={handleGoogleModalSubmit}>
+                            <Form.Group className="mb-3">
+                                <Form.Label className="small fw-semibold" style={{ color: 'var(--site-text-main)' }}>
+                                    Google Account Email *
+                                </Form.Label>
+                                <div className="input-group">
+                                    <span className="input-group-text border-end-0" style={{ backgroundColor: 'var(--site-card-subtle)', borderColor: googleModalError ? '#EF4444' : 'var(--site-border)' }}>
+                                        <FontAwesomeIcon icon={faEnvelope} className="small" style={{ color: 'var(--site-text-muted)' }} />
+                                    </span>
+                                    <Form.Control
+                                        type="email"
+                                        required
+                                        autoFocus
+                                        placeholder="name@gmail.com or corporate Google email"
+                                        value={googleModalEmail}
+                                        onChange={(e) => {
+                                            setGoogleModalEmail(e.target.value);
+                                            if (googleModalError) setGoogleModalError('');
+                                        }}
+                                        isInvalid={!!googleModalError}
+                                        style={{ backgroundColor: 'var(--site-card-bg)', borderColor: googleModalError ? '#EF4444' : 'var(--site-border)', color: 'var(--site-text-main)', padding: '0.65rem 0.85rem' }}
+                                    />
+                                </div>
+                                {googleModalError && (
+                                    <div className="text-danger small mt-1 d-flex align-items-center gap-1.5" style={{ fontSize: '0.8rem' }}>
+                                        <FontAwesomeIcon icon={faExclamationCircle} /> {googleModalError}
+                                    </div>
+                                )}
+                            </Form.Group>
+
+                            <Form.Group className="mb-3">
+                                <Form.Label className="small fw-semibold" style={{ color: 'var(--site-text-main)' }}>
+                                    Full Name / Representative
+                                </Form.Label>
+                                <div className="input-group">
+                                    <span className="input-group-text border-end-0" style={{ backgroundColor: 'var(--site-card-subtle)', borderColor: 'var(--site-border)' }}>
+                                        <FontAwesomeIcon icon={faUser} className="small" style={{ color: 'var(--site-text-muted)' }} />
+                                    </span>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="e.g. Sarah Akello"
+                                        value={googleModalName}
+                                        onChange={(e) => setGoogleModalName(e.target.value)}
+                                        style={{ backgroundColor: 'var(--site-card-bg)', borderColor: 'var(--site-border)', color: 'var(--site-text-main)', padding: '0.65rem 0.85rem' }}
+                                    />
+                                </div>
+                            </Form.Group>
+
+                            {authRole === 'client' && (
+                                <Form.Group className="mb-3">
+                                    <Form.Label className="small fw-semibold" style={{ color: 'var(--site-text-main)' }}>
+                                        Organization / Company (Optional)
+                                    </Form.Label>
+                                    <div className="input-group">
+                                        <span className="input-group-text border-end-0" style={{ backgroundColor: 'var(--site-card-subtle)', borderColor: 'var(--site-border)' }}>
+                                            <FontAwesomeIcon icon={faBuilding} className="small" style={{ color: 'var(--site-text-muted)' }} />
+                                        </span>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="e.g. Equatorial FinTech Ltd"
+                                            value={googleModalOrg}
+                                            onChange={(e) => setGoogleModalOrg(e.target.value)}
+                                            style={{ backgroundColor: 'var(--site-card-bg)', borderColor: 'var(--site-border)', color: 'var(--site-text-main)', padding: '0.65rem 0.85rem' }}
+                                        />
+                                    </div>
+                                </Form.Group>
+                            )}
+
+                            <div className="d-flex align-items-center justify-content-end gap-2 mt-4 pt-2 border-top" style={{ borderColor: 'var(--site-border)' }}>
+                                <Button 
+                                    variant="outline-secondary" 
+                                    size="sm" 
+                                    className="px-3"
+                                    onClick={() => setShowGoogleModal(false)}
+                                >
+                                    Cancel
+                                </Button>
+                                <Button 
+                                    type="submit" 
+                                    size="sm" 
+                                    className="px-3.5 py-2 fw-semibold text-white d-inline-flex align-items-center gap-2"
+                                    style={{ backgroundColor: '#4285F4', borderColor: '#4285F4' }}
+                                >
+                                    <FontAwesomeIcon icon={faGoogle} />
+                                    <span>{googleModalMode === 'signup' ? 'Complete Google Sign Up' : 'Complete Google Sign In'}</span>
+                                </Button>
+                            </div>
+                        </Form>
+                    </Modal.Body>
+                </Modal>
             </main>
         </div>
     );

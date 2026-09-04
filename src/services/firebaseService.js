@@ -96,13 +96,60 @@ export const firebaseLogin = async (email, password) => {
 };
 
 /**
- * Sign in with Google Popup
+ * Sign in or Sign up with Google Popup / Redirect fallback
  */
-export const firebaseGoogleSignIn = async () => {
+export const firebaseGoogleSignIn = async (extraMetadata = {}) => {
     try {
         const provider = new firebase.auth.GoogleAuthProvider();
-        const userCredential = await auth.signInWithPopup(provider);
+        provider.addScope('profile');
+        provider.addScope('email');
+        provider.setCustomParameters({ prompt: 'select_account' });
+
+        let userCredential;
+        try {
+            userCredential = await auth.signInWithPopup(provider);
+        } catch (popupErr) {
+            if (popupErr.code === 'auth/popup-blocked') {
+                console.warn('Google popup blocked by browser, falling back to signInWithRedirect...');
+                await auth.signInWithRedirect(provider);
+                return { redirecting: true };
+            }
+            throw popupErr;
+        }
+
         const user = userCredential.user;
+
+        let profile = await getUserFromFirestore(user.email);
+        const isAdmin = profile?.role === 'admin' || extraMetadata.role === 'admin';
+
+        const userProfile = {
+            uid: user.uid,
+            email: user.email.toLowerCase(),
+            name: user.displayName || extraMetadata.name || user.email.split('@')[0],
+            role: isAdmin ? 'admin' : (profile?.role || extraMetadata.role || 'client'),
+            institution: profile?.institution || extraMetadata.institution || '',
+            phone: user.phoneNumber || profile?.phone || '',
+            img: user.photoURL || profile?.img || 'https://assets.maccarianagency.com/svg/illustrations/designer.svg',
+            isSignedIn: true,
+            provider: 'google'
+        };
+
+        await saveUserToFirestore(userProfile);
+        return { success: true, user: userProfile };
+    } catch (error) {
+        console.warn('Firebase Google sign-in error:', error.message);
+        return { success: false, error: error.message, code: error.code };
+    }
+};
+
+/**
+ * Handle Google Redirect Result upon page mount/reload
+ */
+export const firebaseGetRedirectResult = async () => {
+    try {
+        const result = await auth.getRedirectResult();
+        if (!result || !result.user) return null;
+        const user = result.user;
 
         let profile = await getUserFromFirestore(user.email);
         const isAdmin = profile?.role === 'admin';
@@ -115,13 +162,14 @@ export const firebaseGoogleSignIn = async () => {
             institution: profile?.institution || '',
             phone: user.phoneNumber || profile?.phone || '',
             img: user.photoURL || profile?.img || 'https://assets.maccarianagency.com/svg/illustrations/designer.svg',
-            isSignedIn: true
+            isSignedIn: true,
+            provider: 'google'
         };
 
         await saveUserToFirestore(userProfile);
         return { success: true, user: userProfile };
     } catch (error) {
-        console.warn('Firebase Google sign-in error:', error.message);
+        console.warn('Firebase redirect result error:', error.message);
         return { success: false, error: error.message, code: error.code };
     }
 };
